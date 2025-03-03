@@ -23,7 +23,7 @@ const makes = [
 export default function MakesModels() {
   return (
     <div className="border-white bg-white p-5 drop-shadow-md rounded-lg">
-      <FilterHeader filterTitle="Makes and Models" />
+      <FilterHeader filterTitle="Make and model" />
       <div className="flex flex-col gap-3 mt-5">
         {makes.map(({ make, models, logo }) => (
           <div key={make} className="border-black border-2 rounded-lg">
@@ -36,8 +36,8 @@ export default function MakesModels() {
                   alt={make.charAt(0) + make.slice(1) + " Logo"}
                 />
                 <div className="max-w-[150px]">
-                  <div className="text-lg font-medium">{make}</div>
-                  <p className="text-[#bcbcbc] truncate ">
+                  <h2>{make}</h2>
+                  <p className="text-[#bcbcbc] text-sm truncate ">
                     {models.join(", ")}
                   </p>
                 </div>
@@ -48,11 +48,11 @@ export default function MakesModels() {
             </div>
           </div>
         ))}
-        <Button className="w-full">
+        <Button className="w-full font-light">
           <span>
             <Plus />
           </span>
-          Add Model
+          Add model
         </Button>
       </div>
     </div>

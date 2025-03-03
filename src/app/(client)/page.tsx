@@ -1,13 +1,12 @@
 import CarTypes from "@/components/Filters/CarTypes";
 import MakesModels from "@/components/Filters/MakesModels";
-import Link from "next/link";
+import Price from "@/components/Filters/Price";
 
 export default function Home({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const type = searchParams.type || "Sedan";
   return (
     <div className="w-full flex flex-col gap-10 px-10 pt-8">
       <div className="flex items-center justify-between">
@@ -18,15 +17,16 @@ export default function Home({
           </div>
         </div>
         <div className="flex items-center space-x-2">
-          <CarTypes type={type as string} />
+          <CarTypes />
         </div>
       </div>
       <div
         className="grid w-full gap-10"
         style={{ gridTemplateColumns: "0.3fr 1fr" }}
       >
-        <div>
+        <div className="flex flex-col gap-5">
           <MakesModels />
+          <Price />
         </div>
         <div className="border border-black">a</div>
       </div>
