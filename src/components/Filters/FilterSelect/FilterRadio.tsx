@@ -26,7 +26,7 @@ const FilterRadio = ({
     <div className="flex gap-2 flex-wrap">
       {selections.map((selection) => (
         <button
-          className={`px-3 py-2 border-black border rounded-md ${selectedValues.includes(selection) ? "bg-transparent" : "bg-border cursor-pointer transition-all ease-in-out duration-300"}`}
+          className={`px-3 py-2 border-black border rounded-md ${selectedValues.includes(selection) ? "bg-transparent" : "bg-neutral cursor-pointer transition-all ease-in-out duration-300"}`}
           key={selection}
           onClick={handleClick}
           value={selection}

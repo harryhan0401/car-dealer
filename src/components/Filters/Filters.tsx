@@ -6,12 +6,16 @@ import FilterFuel from "@/components/Filters/FilterSelect/FilterFuel";
 import FilterDrive from "@/components/Filters/FilterSelect/FilterDrive";
 import FilterYear from "@/components/Filters/FilterRange/FilterYear";
 import { useRadioQueryParams, useRangeQueryParams } from "@/lib/hooks";
-import { cars } from "@/lib/db";
 import { useMemo } from "react";
-import { DriveSelects, FuelSelects } from "@/lib/constants";
+import {
+  DriveSelects,
+  FuelSelects,
+  TransmissionSelects,
+} from "@/lib/constants";
 import { Button } from "../ui/button";
+import FilterTransmission from "./FilterSelect/FilterTransmission";
 
-const Filters = () => {
+const Filters = ({ cars }: { cars: CarType[] }) => {
   //Filter Price
   const [minPrice, maxPrice] = useMemo(() => {
     const amounts = cars.map((car) => car.price);
@@ -22,6 +26,7 @@ const Filters = () => {
     minPrice,
     maxPrice
   );
+
   //Filter Mileage
   const [minMileage, maxMileage] = useMemo(() => {
     const amounts = cars.map((car) => car.mileage);
@@ -29,13 +34,17 @@ const Filters = () => {
   }, []);
   const { query: mileageRange, setQuery: setMileageRange } =
     useRangeQueryParams("mileage_range", minMileage, maxMileage);
-  //Filter Fuel
 
+  //Filter Fuel
   const { query: fuel, setQuery: setFuel } = useRadioQueryParams(
     "fuel",
     "",
     FuelSelects
   );
+
+  //Filter Transmission
+  const { query: transmission, setQuery: setTransmission } =
+    useRadioQueryParams("transmission", "", TransmissionSelects);
 
   //Filter Drive
   const { query: drive, setQuery: setDrive } = useRadioQueryParams(
@@ -43,6 +52,7 @@ const Filters = () => {
     "",
     DriveSelects
   );
+
   //Filter Year
   const [minYear, maxYear] = useMemo(() => {
     const amounts = cars.map((car) => car.year);
@@ -54,10 +64,12 @@ const Filters = () => {
     maxYear
   );
 
+  //Check if any filter is applied. If not disable Reset All button. Else enable Reset All button
   const isFiltered =
     priceRange !== `${minPrice}-${maxPrice}` ||
     mileageRange !== `${minMileage}-${maxMileage}` ||
     fuel ||
+    transmission ||
     drive ||
     yearRange !== `${minYear}-${maxYear}`;
 
@@ -79,6 +91,11 @@ const Filters = () => {
         setRange={setMileageRange}
       />
       <FilterFuel query={fuel} selections={FuelSelects} setValue={setFuel} />
+      <FilterTransmission
+        query={transmission}
+        selections={TransmissionSelects}
+        setValue={setTransmission}
+      />
       <FilterDrive
         query={drive}
         selections={DriveSelects}

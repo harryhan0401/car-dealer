@@ -6,12 +6,21 @@ type NotificationListItem = {
     read: boolean;
 }
 
-type Car = {
+type CarType = {
+    id: number;
+    title: string;
     make: string;
     model: string;
     year: number;
     price: number;
     mileage: number;
+    fuel: string,
+    transmission: string,
+    horsePower: number,
+    drive: string,
+    location: string,
+    description: string,
+    image: string,
 }
 
 type FilterSelect = {

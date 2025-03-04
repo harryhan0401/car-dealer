@@ -62,7 +62,7 @@ export default function FilterAmount({
 
   return (
     <div>
-      {hasChart && (
+      {hasChart && data && (
         <FilterBarChart data={data} localMin={localMin} localMax={localMax} />
       )}
 

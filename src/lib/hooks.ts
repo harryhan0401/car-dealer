@@ -44,3 +44,24 @@ export const useRadioQueryParams = (queryParam: string, defaultValue: string, va
 
     return { query, setQuery }
 }
+
+export const useAmountRangeParam = (queryParam: string): [number, number] | [undefined, undefined] => {
+    const [amountRange] = useQueryState(queryParam);
+
+    if (typeof amountRange === "string" && amountRange) {
+        const [minValue, maxValue] = amountRange.split("-").map(Number);
+        return [minValue, maxValue];
+    }
+
+    return [undefined, undefined];
+};
+
+export const useSelectParam = (queryParam: string): "" | string[] => {
+    const [select] = useQueryState(queryParam);
+
+    if (typeof select === "string" && select) {
+        return select.trim().split(",")
+    }
+
+    return "";
+}

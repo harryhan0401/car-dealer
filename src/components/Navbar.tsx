@@ -13,7 +13,7 @@ const Navbar = () => {
     { label: "Reviews", path: "/reviews" },
   ];
   return (
-    <header className="sticky top-0 z-[100] w-full px-5 py-3 bg-white shadow-sm">
+    <header className="sticky top-0 z-[100] w-full px-5 py-3 bg-neutral shadow-sm">
       <nav className="flex justify-between items-center">
         <div className="flex justify-between items-center gap-15">
           <Link className="flex items-center gap-2" href={"/"}>
