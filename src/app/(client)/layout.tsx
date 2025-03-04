@@ -4,7 +4,7 @@ export default function Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="text-secondary bg-neutral h-screen">
+    <main className="text-secondary bg-neutral">
       <Navbar />
       {children}
     </main>

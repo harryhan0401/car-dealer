@@ -5,3 +5,17 @@ type NotificationListItem = {
     message: string;
     read: boolean;
 }
+
+type Car = {
+    make: string;
+    model: string;
+    year: number;
+    price: number;
+    mileage: number;
+}
+
+type FilterSelect = {
+    query: string;
+    selections: string[];
+    setValue: (value: string | null) => void;
+}

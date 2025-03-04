@@ -2,6 +2,7 @@ import { Plus, X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import FilterHeader from "./FilterHeader";
+import FilterLayout from "./FilterLayout";
 
 const makes = [
   {
@@ -22,7 +23,7 @@ const makes = [
 ];
 export default function MakesModels() {
   return (
-    <div className="border-white bg-white p-5 drop-shadow-md rounded-lg">
+    <FilterLayout>
       <FilterHeader filterTitle="Make and model" />
       <div className="flex flex-col gap-3 mt-5">
         {makes.map(({ make, models, logo }) => (
@@ -55,6 +56,6 @@ export default function MakesModels() {
           Add model
         </Button>
       </div>
-    </div>
+    </FilterLayout>
   );
 }

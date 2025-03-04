@@ -1,15 +1,14 @@
-import Link from "next/link";
-
 interface FilterHeaderProps {
   filterTitle: string;
+  handleResetClick?: () => void;
 }
-const FilterHeader = ({ filterTitle }: FilterHeaderProps) => {
+const FilterHeader = ({ filterTitle, handleResetClick }: FilterHeaderProps) => {
   return (
     <div className="flex justify-between items-center">
       <div className="text-xl">{filterTitle}</div>
-      <Link className="text-primary" href={"?"} scroll={false}>
+      <button className="text-primary hover:text-primary/90 cursor-pointer" onClick={handleResetClick}>
         Reset
-      </Link>
+      </button>
     </div>
   );
 };
