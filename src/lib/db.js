@@ -13,7 +13,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Berlin, DE",
-    description: "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package."
+    description:
+      "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package.",
+    type: "Hatchback",
   },
   {
     id: 2,
@@ -29,7 +31,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Munich, DE",
-    description: "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving."
+    description:
+      "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving.",
+    type: "Sedan",
   },
   {
     id: 3,
@@ -45,7 +49,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Hamburg, DE",
-    description: "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel."
+    description:
+      "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel.",
+    type: "Sedan",
   },
   {
     id: 4,
@@ -61,7 +67,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Stuttgart, DE",
-    description: "The epitome of luxury and performance. This flagship model offers unparalleled comfort, advanced technology, and a powerful engine. Perfect for those who demand the best."
+    description:
+      "The epitome of luxury and performance. This flagship model offers unparalleled comfort, advanced technology, and a powerful engine. Perfect for those who demand the best.",
+    type: "Sedan",
   },
   {
     id: 5,
@@ -77,7 +85,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Frankfurt, DE",
-    description: "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency."
+    description:
+      "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency.",
+    type: "Hatchback",
   },
   {
     id: 6,
@@ -93,7 +103,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Cologne, DE",
-    description: "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips."
+    description:
+      "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips.",
+    type: "Sedan",
   },
   {
     id: 7,
@@ -109,7 +121,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Dusseldorf, DE",
-    description: "A premium sedan with a powerful diesel engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort."
+    description:
+      "A premium sedan with a powerful diesel engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort.",
+    type: "Sedan",
   },
   {
     id: 8,
@@ -125,7 +139,9 @@ export const cars = [
     transmission: "Automatic",
     image: "mercedes.jpg",
     location: "Berlin, DE",
-    description: "The ultimate luxury sedan with a powerful engine and advanced features. It offers unparalleled comfort and a premium driving experience. Perfect for those who demand the best."
+    description:
+      "The ultimate luxury sedan with a powerful engine and advanced features. It offers unparalleled comfort and a premium driving experience. Perfect for those who demand the best.",
+    type: "Sedan",
   },
   {
     id: 9,
@@ -141,7 +157,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Munich, DE",
-    description: "A compact and sporty car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and performance."
+    description:
+      "A compact and sporty car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and performance.",
+    type: "Hatchback",
   },
   {
     id: 10,
@@ -157,7 +175,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Hamburg, DE",
-    description: "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving."
+    description:
+      "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving.",
+    type: "Sedan",
   },
   {
     id: 11,
@@ -173,7 +193,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Stuttgart, DE",
-    description: "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel."
+    description:
+      "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel.",
+    type: "Sedan",
   },
   {
     id: 12,
@@ -189,7 +211,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Frankfurt, DE",
-    description: "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package."
+    description:
+      "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package.",
+    type: "Hatchback",
   },
   {
     id: 13,
@@ -205,7 +229,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Cologne, DE",
-    description: "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips."
+    description:
+      "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips.",
+    type: "Sedan",
   },
   {
     id: 14,
@@ -221,7 +247,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Dusseldorf, DE",
-    description: "A premium sedan with a powerful petrol engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort."
+    description:
+      "A premium sedan with a powerful petrol engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort.",
+    type: "Sedan",
   },
   {
     id: 15,
@@ -237,7 +265,9 @@ export const cars = [
     transmission: "Automatic",
     image: "bmw.jpg",
     location: "Berlin, DE",
-    description: "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency."
+    description:
+      "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency.",
+    type: "Hatchback",
   },
   {
     id: 16,
@@ -253,7 +283,9 @@ export const cars = [
     transmission: "Variator",
     image: "bmw.jpg",
     location: "Munich, DE",
-    description: "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving."
+    description:
+      "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving.",
+    type: "Sedan",
   },
   {
     id: 17,
@@ -269,7 +301,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "bmw.jpg",
     location: "Hamburg, DE",
-    description: "A luxurious sedan with a powerful diesel engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel."
+    description:
+      "A luxurious sedan with a powerful diesel engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel.",
+    type: "Sedan",
   },
   {
     id: 18,
@@ -285,7 +319,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Stuttgart, DE",
-    description: "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package."
+    description:
+      "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package.",
+    type: "Hatchback",
   },
   {
     id: 19,
@@ -301,7 +337,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Frankfurt, DE",
-    description: "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving."
+    description:
+      "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving.",
+    type: "Sedan",
   },
   {
     id: 20,
@@ -317,7 +355,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Cologne, DE",
-    description: "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel."
+    description:
+      "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel.",
+    type: "Sedan",
   },
   {
     id: 21,
@@ -333,7 +373,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Dusseldorf, DE",
-    description: "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency."
+    description:
+      "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency.",
+    type: "Hatchback",
   },
   {
     id: 22,
@@ -349,7 +391,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Berlin, DE",
-    description: "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips."
+    description:
+      "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips.",
+    type: "Sedan",
   },
   {
     id: 23,
@@ -365,7 +409,9 @@ export const cars = [
     transmission: "Variator",
     image: "audi.jpg",
     location: "Munich, DE",
-    description: "A premium sedan with a powerful diesel engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort."
+    description:
+      "A premium sedan with a powerful diesel engine and smooth handling. It offers a luxurious interior and advanced technology. Ideal for those who value performance and comfort.",
+    type: "Sedan",
   },
   {
     id: 24,
@@ -381,7 +427,9 @@ export const cars = [
     transmission: "Variator",
     image: "audi.jpg",
     location: "Hamburg, DE",
-    description: "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package."
+    description:
+      "A stylish and compact car perfect for city driving. It offers a comfortable ride with advanced safety features. Ideal for those who value luxury and performance in a smaller package.",
+    type: "Hatchback",
   },
   {
     id: 25,
@@ -397,7 +445,9 @@ export const cars = [
     transmission: "Variator",
     image: "audi.jpg",
     location: "Stuttgart, DE",
-    description: "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving."
+    description:
+      "A mid-sized sedan that combines elegance with power. It features a spacious interior and cutting-edge technology. Perfect for both city and highway driving.",
+    type: "Sedan",
   },
   {
     id: 26,
@@ -413,7 +463,9 @@ export const cars = [
     transmission: "Variator",
     image: "audi.jpg",
     location: "Frankfurt, DE",
-    description: "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel."
+    description:
+      "A luxurious sedan with a powerful engine and smooth handling. It offers a premium driving experience with top-notch comfort and safety features. Ideal for long-distance travel.",
+    type: "Sedan",
   },
   {
     id: 27,
@@ -429,7 +481,9 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Cologne, DE",
-    description: "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency."
+    description:
+      "A compact and efficient car with a sleek design. It offers a smooth ride and excellent fuel economy. Ideal for urban commuters who value style and efficiency.",
+    type: "Hatchback",
   },
   {
     id: 28,
@@ -445,7 +499,9 @@ export const cars = [
     transmission: "Automatic",
     image: "audi.jpg",
     location: "Dusseldorf, DE",
-    description: "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips."
+    description:
+      "A refined sedan with a powerful engine and elegant design. It features a comfortable interior and advanced safety features. Perfect for both daily driving and long trips.",
+    type: "Sedan",
   },
   {
     id: 29,
@@ -461,6 +517,8 @@ export const cars = [
     transmission: "Mechanical",
     image: "audi.jpg",
     location: "Berlin, DE",
-    description: "The ultimate luxury sedan with a powerful engine and advanced features. It offers unparalleled comfort and a premium driving experience. Perfect for those who demand the best."
-  }
+    description:
+      "The ultimate luxury sedan with a powerful engine and advanced features. It offers unparalleled comfort and a premium driving experience. Perfect for those who demand the best.",
+    type: "Coupe",
+  },
 ];

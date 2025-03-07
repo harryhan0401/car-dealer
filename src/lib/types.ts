@@ -9,6 +9,7 @@ type NotificationListItem = {
 type CarType = {
     id: number;
     title: string;
+    type: string;
     make: string;
     model: string;
     year: number;

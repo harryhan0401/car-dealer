@@ -1,6 +1,5 @@
-import CarDetails from "@/components/CarDetails";
-import VerticalCarCard from "@/components/Cards/VerticalCarCard";
-import CarTypes from "@/components/Filters/CarTypes";
+import CarsList from "@/components/CarsList";
+import CarTypes from "@/components/Filters/FilterType";
 import Filters from "@/components/Filters/Filters";
 import { cars } from "@/lib/db";
 
@@ -23,7 +22,7 @@ export default function Home() {
           <Filters cars={cars} />
         </div>
         <div className="flex-3/4">
-          <CarDetails cars={cars} />
+          <CarsList cars={cars} />
         </div>
       </div>
     </div>

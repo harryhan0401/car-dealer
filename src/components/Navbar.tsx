@@ -1,25 +1,21 @@
 import { MapPin } from "lucide-react";
-import Link from "next/link";
 import Notification from "./Notification";
 import Favourite from "./Favourite";
 import Image from "next/image";
 import NavLink from "./NavLink";
+import CompanyLogo from "./CompanyLogo";
 
 const Navbar = () => {
   const navLinks = [
     { label: "Buy", path: "/" },
     { label: "Sell", path: "/sell" },
-    { label: "About", path: "/about" },
-    { label: "Reviews", path: "/reviews" },
+    { label: "Reviews", path: "/reviews/" },
   ];
   return (
     <header className="sticky top-0 z-[100] w-full px-5 py-3 bg-neutral shadow-sm">
       <nav className="flex justify-between items-center">
         <div className="flex justify-between items-center gap-15">
-          <Link className="flex items-center gap-2" href={"/"}>
-            <div className="striped-circle size-6 rounded-full"></div>
-            <span className="font-bold text-xl">CarDealings</span>
-          </Link>
+          <CompanyLogo />
           <div className="flex items-center gap-1">
             <MapPin className="size-5" />
             <div>Melbourne</div>

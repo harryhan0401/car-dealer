@@ -14,8 +14,11 @@ import {
 } from "@/lib/constants";
 import { Button } from "../ui/button";
 import FilterTransmission from "./FilterSelect/FilterTransmission";
+import { useQueryState } from "nuqs";
 
 const Filters = ({ cars }: { cars: CarType[] }) => {
+  //Filter Type
+  const [type, setType] = useQueryState("type");
   //Filter Price
   const [minPrice, maxPrice] = useMemo(() => {
     const amounts = cars.map((car) => car.price);
@@ -66,6 +69,7 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
 
   //Check if any filter is applied. If not disable Reset All button. Else enable Reset All button
   const isFiltered =
+    type ||
     priceRange !== `${minPrice}-${maxPrice}` ||
     mileageRange !== `${minMileage}-${maxMileage}` ||
     fuel ||
@@ -111,10 +115,12 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
         className={`${isFiltered ? "bg-primary" : "bg-transparent text-primary border-primary border-2"} ${isFiltered ? "" : "pointer-events-none"} transition-all ease-in-out duration-300`}
         disabled={!isFiltered}
         onClick={() => {
+          if (type) setType(null);
           if (priceRange !== `${minPrice}-${maxPrice}`) setPriceRange(null);
           if (mileageRange !== `${minMileage}-${maxMileage}`)
             setMileageRange(null);
           if (fuel) setFuel(null);
+          if (transmission) setTransmission(null);
           if (drive) setDrive(null);
           if (yearRange !== `${minYear}-${maxYear}`) setYearRange(null);
         }}
