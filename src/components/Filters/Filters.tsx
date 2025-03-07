@@ -1,5 +1,5 @@
 "use client";
-import MakesModels from "@/components/Filters/MakesModels";
+import MakesModels from "@/components/Filters/FilterMakeModel/MakesModels";
 import FilterPrice from "@/components/Filters/FilterRange/FilterPrice";
 import FilterMileage from "@/components/Filters/FilterRange/FilterMileage";
 import FilterFuel from "@/components/Filters/FilterSelect/FilterFuel";
@@ -19,6 +19,9 @@ import { useQueryState } from "nuqs";
 const Filters = ({ cars }: { cars: CarType[] }) => {
   //Filter Type
   const [type, setType] = useQueryState("type");
+  //Filter Make and Model
+  const [makeModels, setMakeModels] = useQueryState("makeModels");
+
   //Filter Price
   const [minPrice, maxPrice] = useMemo(() => {
     const amounts = cars.map((car) => car.price);
@@ -70,6 +73,7 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
   //Check if any filter is applied. If not disable Reset All button. Else enable Reset All button
   const isFiltered =
     type ||
+    makeModels ||
     priceRange !== `${minPrice}-${maxPrice}` ||
     mileageRange !== `${minMileage}-${maxMileage}` ||
     fuel ||
@@ -79,7 +83,7 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
 
   return (
     <>
-      <MakesModels />
+      <MakesModels makeModels={makeModels} setMakeModels={setMakeModels} />
       <FilterPrice
         cars={cars}
         range={priceRange}
@@ -116,6 +120,7 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
         disabled={!isFiltered}
         onClick={() => {
           if (type) setType(null);
+          if (makeModels) setMakeModels(null);
           if (priceRange !== `${minPrice}-${maxPrice}`) setPriceRange(null);
           if (mileageRange !== `${minMileage}-${maxMileage}`)
             setMileageRange(null);

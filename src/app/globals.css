@@ -219,4 +219,8 @@ input[type=number] {
   body {
     @apply bg-background text-foreground h-screen;
   }
+
+  .card{
+    @apply border-white bg-white p-5 drop-shadow-md rounded-lg
+  }
 }

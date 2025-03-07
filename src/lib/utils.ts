@@ -41,3 +41,21 @@ export const getHistogramData = (numBins: number, data: number[]) => {
   return bins;
 };
 
+export function getMakeImage(make: string): string {
+  if (make == "Mercedes-Benz") return "/mercedes-logo.svg"
+  else if (make == "BMW") return "/bmw-logo.svg"
+  else if (make == "Audi") return "/audi-logo.svg"
+  else return ""
+}
+
+export function parseFilterMakeModels(makeModelsQueryString: string): FilterMakesModels[] {
+  const parsedData: FilterMakesModels[] = makeModelsQueryString
+    .split(";") //Split between makes
+    .map((makeModel) => {
+      const [make, models] = makeModel.split(":"); //For each make, split make and models by ":"
+      return { make, models: models ? models.split(",") : [] }; //Return the parsedData following FilterMakesModels[] type
+    });
+
+  return parsedData;
+}
+

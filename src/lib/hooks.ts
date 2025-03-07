@@ -1,4 +1,5 @@
 import { useQueryState } from "nuqs";
+import { parseFilterMakeModels } from "./utils";
 
 export const useRangeQueryParams = (queryParam: string, minAmount: number, maxAmount: number) => {
     const [query, setQuery] = useQueryState(queryParam, {
@@ -64,4 +65,18 @@ export const useSelectParam = (queryParam: string): "" | string[] => {
     }
 
     return "";
+}
+
+export const useMakeModelsParam = (queryParam: string): [string[], string[]] => {
+    const [makeModels] = useQueryState("makeModels");
+    if (makeModels) {
+        const filteredMakeModels: FilterMakesModels[] = parseFilterMakeModels(makeModels);
+        const makes = Array.from(filteredMakeModels.map((makeModel) => makeModel.make));
+        const models = Array.from(filteredMakeModels.map((makeModel) => makeModel.models));
+        const allModels = models.flat();
+        return [makes, allModels];
+
+    }
+    return [[], []]
+
 }

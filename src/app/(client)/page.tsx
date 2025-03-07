@@ -1,16 +1,19 @@
+"use client"
 import CarsList from "@/components/CarsList";
 import CarTypes from "@/components/Filters/FilterType";
 import Filters from "@/components/Filters/Filters";
 import { cars } from "@/lib/db";
+import { useState } from "react";
 
 export default function Home() {
+  const [noOfCars, setNoOfCars] = useState(cars.length);
   return (
     <div className="w-full flex flex-col gap-10 px-10 py-8">
       <div className="flex items-center justify-between">
         <div className="flex items-start gap-5">
           <div className="text-6xl">Buy a car</div>
           <div className="w-[75px] mt-2 max-w-fit py-2 px-3 bg-primary text-white font-light rounded-lg text-sm">
-            {cars.length}
+            {noOfCars}
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -22,7 +25,7 @@ export default function Home() {
           <Filters cars={cars} />
         </div>
         <div className="flex-3/4">
-          <CarsList cars={cars} />
+          <CarsList cars={cars} setNoOfCars={setNoOfCars} />
         </div>
       </div>
     </div>

@@ -1,19 +1,26 @@
 "use client";
-import { useAmountRangeParam, useSelectParam } from "@/lib/hooks";
+import {
+  useAmountRangeParam,
+  useMakeModelsParam,
+  useSelectParam,
+} from "@/lib/hooks";
 import VerticalCarCard from "./Cards/VerticalCarCard";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import ProductPagination from "./Pagination";
 import { useQueryState } from "nuqs";
 
 const CarsList = ({
   cars,
+  setNoOfCars,
   itemsPerPage = 6, //If don't pass nay value to itemsPerPage prop, its default value is 6
 }: {
   cars: CarType[];
+  setNoOfCars: (n: number) => void;
   itemsPerPage?: number;
 }) => {
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
+  const [makes, models] = useMakeModelsParam("makeModels");
   const [minPrice, maxPrice] = useAmountRangeParam("amount_range");
   const [minMileage, maxMileage] = useAmountRangeParam("mileage_range");
   const fuel = useSelectParam("fuel");
@@ -21,6 +28,7 @@ const CarsList = ({
   const drive = useSelectParam("drive");
   const [minYear, maxYear] = useAmountRangeParam("year");
   const [currentPage] = useQueryState("page");
+  //
 
   //Calculate the next range of cars to be displayed
   const startIndex = currentPage ? (Number(currentPage) - 1) * itemsPerPage : 0;
@@ -34,6 +42,8 @@ const CarsList = ({
     return cars.filter(
       (car) =>
         (!type || car.type.toLowerCase() === type.toLowerCase()) &&
+        (!makes.length || makes.includes(car.make)) &&
+        (!models.length || models.includes(car.model)) &&
         (!minPrice || car.price >= Number(minPrice)) &&
         (!maxPrice || car.price <= Number(maxPrice)) &&
         (!minMileage || car.mileage >= Number(minMileage)) &&
@@ -47,6 +57,8 @@ const CarsList = ({
     );
   }, [
     type,
+    makes,
+    models,
     minPrice,
     maxPrice,
     minMileage,
@@ -56,9 +68,10 @@ const CarsList = ({
     drive,
     minYear,
     maxYear,
-    currentPage,
   ]);
-
+  useEffect(() => {
+    setNoOfCars(filteredCars.length);
+  }, [filteredCars]);
   return (
     <>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">

@@ -29,3 +29,8 @@ type FilterSelect = {
     selections: string[];
     setValue: (value: string | null) => void;
 }
+
+type FilterMakesModels = {
+    make: string,
+    models: string[]
+}
