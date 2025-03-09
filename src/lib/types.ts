@@ -34,3 +34,8 @@ type FilterMakesModels = {
     make: string,
     models: string[]
 }
+
+type StepType = {
+    selectedMakesModels: FilterMakesModels[]
+    setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
+}

@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { cars } from "@/lib/db"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -53,9 +54,29 @@ export function parseFilterMakeModels(makeModelsQueryString: string): FilterMake
     .split(";") //Split between makes
     .map((makeModel) => {
       const [make, models] = makeModel.split(":"); //For each make, split make and models by ":"
-      return { make, models: models ? models.split(",") : [] }; //Return the parsedData following FilterMakesModels[] type
+      return { make, models: models ? models.split(",") : getUniqueModelsByMake(cars, make) }; //Return the parsedData following FilterMakesModels[] type
     });
 
   return parsedData;
+}
+
+
+export function convertToMakeModelsString(selectedMakesModels: FilterMakesModels[]): string {
+  const queryString = selectedMakesModels
+    .map(
+      ({ make, models }) =>
+        models.length == 0 ? `${make}` : `${make}:${models.join(",")}` //If no models are selected return only format "make" else return format "make:model,model,..."
+    )
+    .join(";");
+  return queryString;
+}
+
+export function getUniqueModelsByMake(cars: CarType[], make: string): string[] {
+  const modelOptions = Array.from(
+    new Set(
+      cars.filter((car) => car.make === make).map((car) => car.model)
+    )
+  );
+  return modelOptions;
 }
 

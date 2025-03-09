@@ -1,34 +1,35 @@
 "use client";
+import { useMemo } from "react";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import FilterAmount from "./FilterAmount";
-
-interface FilterYearProps {
-  minAmount: number;
-  maxAmount: number;
-  range: string;
-  setRange: (value: string | null) => void;
-}
-const FilterYear = ({
-  minAmount,
-  maxAmount,
-  range,
-  setRange,
-}: FilterYearProps) => {
+import { FilterRangeProps } from "./FilterPrice";
+import { useRangeQueryParams } from "@/lib/hooks";
+const FilterYear = ({ cars }: FilterRangeProps) => {
+  //Filter Year
+  const [minYear, maxYear] = useMemo(() => {
+    const amounts = cars.map((car) => car.year);
+    return [Math.min(...amounts), Math.max(...amounts)];
+  }, [cars]);
+  const { query: yearRange, setQuery: setYearRange } = useRangeQueryParams(
+    "year",
+    minYear,
+    maxYear
+  );
   return (
     <FilterLayout>
       <FilterHeader
         filterTitle="Vehicle year"
         handleResetClick={() => {
-          if (range !== `${minAmount}-${maxAmount}`) setRange(null);
+          if (yearRange !== `${minYear}-${maxYear}`) setYearRange(null);
         }}
       />
       <div className="mt-5">
         <FilterAmount
-          minAmount={minAmount}
-          maxAmount={maxAmount}
-          range={range}
-          setRange={setRange}
+          minAmount={minYear}
+          maxAmount={maxYear}
+          range={yearRange}
+          setRange={setYearRange}
           inputName={"year-input"}
           hasSlider={false}
           hasChart={false}

@@ -1,15 +1,28 @@
 "use client";
 
-import { ArrowRight, ChevronRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
 
 const Subscribe = () => {
   const [email, setEmail] = useState("");
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    const res = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+    if (res.ok) {
+      console.log("Subscribed to newsletter successfully");
+    } else {
+      console.log("Unable to subscribe to newsletter");
+    }
   };
   return (
     <form onSubmit={handleSubmit}>

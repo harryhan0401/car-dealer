@@ -1,10 +1,19 @@
 "use client";
+import { useRadioQueryParams } from "@/lib/hooks";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import FilterRadio from "./FilterRadio";
+import { FuelSelects } from "@/lib/constants";
 
-const FilterFuel = ({ query, selections, setValue: setFuel }: FilterSelect) => {
-  const selectedFuels = query.trim() === "" ? [] : query.trim().split(",");
+const FilterFuel = () => {
+  //Filter Fuel
+  const { query: fuel, setQuery: setFuel } = useRadioQueryParams(
+    "fuel",
+    "",
+    FuelSelects
+  );
+
+  const selectedFuels = fuel.trim() === "" ? [] : fuel.trim().split(",");
   return (
     <FilterLayout>
       <FilterHeader
@@ -16,7 +25,7 @@ const FilterFuel = ({ query, selections, setValue: setFuel }: FilterSelect) => {
       <div className="mt-5">
         <FilterRadio
           selectedValues={selectedFuels}
-          selections={selections}
+          selections={FuelSelects}
           setValue={setFuel}
         />
       </div>

@@ -21,7 +21,7 @@ const CarsList = ({
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
   const [makes, models] = useMakeModelsParam("makeModels");
-  const [minPrice, maxPrice] = useAmountRangeParam("amount_range");
+  const [minPrice, maxPrice] = useAmountRangeParam("price_range");
   const [minMileage, maxMileage] = useAmountRangeParam("mileage_range");
   const fuel = useSelectParam("fuel");
   const transmission = useSelectParam("transmission");
@@ -68,6 +68,7 @@ const CarsList = ({
     drive,
     minYear,
     maxYear,
+    cars,
   ]);
   useEffect(() => {
     setNoOfCars(filteredCars.length);

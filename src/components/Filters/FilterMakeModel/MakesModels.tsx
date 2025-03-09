@@ -5,58 +5,37 @@ import { Button } from "../../ui/button";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import Modal from "./Modal";
-import { useEffect, useState } from "react";
-import { getMakeImage, parseFilterMakeModels } from "@/lib/utils";
+import {
+  convertToMakeModelsString,
+  getMakeImage,
+  parseFilterMakeModels,
+} from "@/lib/utils";
+import { useQueryState } from "nuqs";
 
-export default function MakesModels({
-  makeModels,
-  setMakeModels,
-}: {
-  makeModels: string | null;
-  setMakeModels: (makesModels: string | null) => void;
-}) {
-  const [selectedMakesModels, setSelectedMakesModels] = useState<
-    FilterMakesModels[]
-  >([]);
+export default function MakesModels() {
+  //Filter Make and Model
+  const [makeModels, setMakeModels] = useQueryState("makeModels", {
+    defaultValue: "",
+  });
 
-  useEffect(() => {
-    if (selectedMakesModels.length === 0) {
-      setMakeModels(null);
-      return;
-    }
+  let filteredMakesModels = makeModels ? parseFilterMakeModels(makeModels) : [];
 
-    // Convert `selectedMakesModels` to query string format
-    const queryString = selectedMakesModels
-      .map(
-        ({ make, models }) =>
-          models.length == 0 ? `${make}` : `${make}:${models.join(",")}` //If no models are selected return only format "make" else return format "make:model,model,..."
-      )
-      .join(";");
-
-    setMakeModels(queryString);
-  }, [selectedMakesModels, setMakeModels]);
-
-  // Function to parse query string into state
-  //Query Param: {make:model,model,model;make:model,model,model } e.q. BMW:X series, 5 series;Mercedes-Benz:A Class, S Class
-  useEffect(() => {
-    if (makeModels) {
-      const parsedData = parseFilterMakeModels(makeModels);
-      setSelectedMakesModels(parsedData);
-    } else {
-      setSelectedMakesModels([]);
-    }
-  }, [makeModels]);
-
+  const removeFilteredMake = (make: string) => {
+    const updatedMakesModels = filteredMakesModels.filter(
+      (o) => o.make !== make
+    );
+    setMakeModels(convertToMakeModelsString(updatedMakesModels));
+  };
   return (
     <FilterLayout>
       <FilterHeader
         filterTitle="Make and model"
         handleResetClick={() => {
-          if (selectedMakesModels.length != 0) setSelectedMakesModels([]);
+          if (filteredMakesModels.length != 0) setMakeModels(null);
         }}
       />
       <div className="flex flex-col gap-3 mt-5">
-        {selectedMakesModels.map(({ make, models }) => (
+        {filteredMakesModels.map(({ make, models }) => (
           <div key={make} className="border-black border-2 rounded-lg">
             <div className="flex w-full items-center px-4 py-1">
               <div className="me-auto flex items-center gap-4">
@@ -75,21 +54,14 @@ export default function MakesModels({
               </div>
               <button
                 className="bg-black text-white rounded-full p-1 cursor-pointer active:scale-95 transition-transform duration-300 ease-in-out"
-                onClick={() =>
-                  setSelectedMakesModels(
-                    selectedMakesModels.filter((o) => o.make !== make)
-                  )
-                }
+                onClick={() => removeFilteredMake(make)}
               >
                 <X className="size-3" />
               </button>
             </div>
           </div>
         ))}
-        <Modal
-          selectedMakesModels={selectedMakesModels}
-          setSelectedMakesModels={setSelectedMakesModels}
-        >
+        <Modal filteredMakesModels={filteredMakesModels}>
           <Button className="w-full font-light">
             <span>
               <Plus />

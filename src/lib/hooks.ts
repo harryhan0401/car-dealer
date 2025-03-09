@@ -68,7 +68,7 @@ export const useSelectParam = (queryParam: string): "" | string[] => {
 }
 
 export const useMakeModelsParam = (queryParam: string): [string[], string[]] => {
-    const [makeModels] = useQueryState("makeModels");
+    const [makeModels] = useQueryState(queryParam);
     if (makeModels) {
         const filteredMakeModels: FilterMakesModels[] = parseFilterMakeModels(makeModels);
         const makes = Array.from(filteredMakeModels.map((makeModel) => makeModel.make));

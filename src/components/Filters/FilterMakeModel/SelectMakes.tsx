@@ -1,12 +1,12 @@
 "use client";
 import { cars } from "@/lib/db";
 import { MouseEvent } from "react";
-import { MakesProps } from "./Modal";
+import { getUniqueModelsByMake } from "@/lib/utils";
 
 const SelectMakes = ({
   selectedMakesModels,
   setSelectedMakesModels,
-}: MakesProps) => {
+}: StepType) => {
   const uniqueMakes = Array.from(new Set(cars.map((car) => car.make)));
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     const value = (event.target as HTMLButtonElement).getAttribute("value");
@@ -16,9 +16,10 @@ const SelectMakes = ({
           selectedMakesModels.filter((makeModel) => makeModel.make !== value)
         );
       } else {
+        const modelOptions = getUniqueModelsByMake(cars, value);
         setSelectedMakesModels([
           ...selectedMakesModels,
-          { make: value, models: [] },
+          { make: value, models: modelOptions },
         ]);
       }
     }

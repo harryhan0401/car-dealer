@@ -11,27 +11,24 @@ import {
 } from "@/components/ui/dialog";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
-import SelectMakes from "./SelectMakes";
-import SelectModels from "./SelectModels";
+import Steps from "./Steps";
 
-export interface MakesProps {
-  selectedMakesModels: FilterMakesModels[];
-  setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
-}
-
-interface ModalProps extends MakesProps {
+export interface ModalProps {
   children: React.ReactNode;
+  filteredMakesModels: FilterMakesModels[];
 }
-export default function Modal({
-  children,
-  selectedMakesModels,
-  setSelectedMakesModels,
-}: ModalProps) {
+export default function Modal({ children, filteredMakesModels }: ModalProps) {
   const [step, setStep] = useState(1);
-  const nextStep = () => setStep((prev) => prev + 1);
-  const prevStep = () => setStep((prev) => prev - 1);
+  const [open, setOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) setStep(1);
+        setOpen(isOpen);
+      }}
+    >
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="container h-[80%] flex flex-col overflow-y-scroll sm:overflow-y-hidden">
         <DialogHeader>
@@ -40,35 +37,12 @@ export default function Modal({
           </DialogTitle>
         </DialogHeader>
         <div className="flex-grow grid gap-4 py-4">
-          {step === 1 && (
-            <SelectMakes
-              selectedMakesModels={selectedMakesModels}
-              setSelectedMakesModels={setSelectedMakesModels}
-            />
-          )}
-          {step === 2 && (
-            <SelectModels
-              selectedMakesModels={selectedMakesModels}
-              setSelectedMakesModels={setSelectedMakesModels}
-            />
-          )}
+          <Steps
+            step={step}
+            setStep={setStep}
+            filteredMakesModels={filteredMakesModels}
+          />
         </div>
-        <DialogFooter>
-          {step > 1 ? (
-            <Button variant={"outline"} onClick={prevStep}>
-              Back
-            </Button>
-          ) : (
-            <DialogClose asChild>
-              <Button variant={"outline"}>Cancel</Button>
-            </DialogClose>
-          )}
-          {step < 2 ? (
-            <Button onClick={nextStep}>Next</Button>
-          ) : (
-            <Button>Apply changes</Button>
-          )}
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

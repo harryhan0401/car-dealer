@@ -1,9 +1,10 @@
-"use client"
+"use client";
 import CarsList from "@/components/CarsList";
 import CarTypes from "@/components/Filters/FilterType";
 import Filters from "@/components/Filters/Filters";
 import { cars } from "@/lib/db";
 import { useState } from "react";
+import { memo } from "react";
 
 export default function Home() {
   const [noOfCars, setNoOfCars] = useState(cars.length);

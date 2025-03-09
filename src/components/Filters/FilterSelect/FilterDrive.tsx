@@ -1,14 +1,18 @@
 "use client";
+import { useRadioQueryParams } from "@/lib/hooks";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import FilterRadio from "./FilterRadio";
+import { DriveSelects } from "@/lib/constants";
 
-const FilterDrive = ({
-  query,
-  selections,
-  setValue: setDrive,
-}: FilterSelect) => {
-  const selectedDrives = query.trim() === "" ? [] : query.trim().split(",");
+const FilterDrive = () => {
+  //Filter Drive
+  const { query: drive, setQuery: setDrive } = useRadioQueryParams(
+    "drive",
+    "",
+    DriveSelects
+  );
+  const selectedDrives = drive.trim() === "" ? [] : drive.trim().split(",");
   return (
     <FilterLayout>
       <FilterHeader
@@ -20,7 +24,7 @@ const FilterDrive = ({
       <div className="mt-5">
         <FilterRadio
           selectedValues={selectedDrives}
-          selections={selections}
+          selections={DriveSelects}
           setValue={setDrive}
         />
       </div>

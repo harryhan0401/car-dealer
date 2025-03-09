@@ -1,15 +1,16 @@
 "use client";
+import { useRadioQueryParams } from "@/lib/hooks";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import FilterRadio from "./FilterRadio";
+import { TransmissionSelects } from "@/lib/constants";
 
-const FilterTransmission = ({
-  query,
-  selections,
-  setValue: setTransmission,
-}: FilterSelect) => {
+const FilterTransmission = () => {
+  //Filter Transmission
+  const { query: transmission, setQuery: setTransmission } =
+    useRadioQueryParams("transmission", "", TransmissionSelects);
   const selectedTransmission =
-    query.trim() === "" ? [] : query.trim().split(",");
+    transmission.trim() === "" ? [] : transmission.trim().split(",");
   return (
     <FilterLayout>
       <FilterHeader
@@ -21,7 +22,7 @@ const FilterTransmission = ({
       <div className="mt-5">
         <FilterRadio
           selectedValues={selectedTransmission}
-          selections={selections}
+          selections={TransmissionSelects}
           setValue={setTransmission}
         />
       </div>
