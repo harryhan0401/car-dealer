@@ -39,3 +39,8 @@ type StepType = {
     selectedMakesModels: FilterMakesModels[]
     setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
 }
+
+type TNavLink = {
+    label: string;
+    path: string;
+}

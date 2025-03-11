@@ -79,4 +79,3 @@ export function getUniqueModelsByMake(cars: CarType[], make: string): string[] {
   );
   return modelOptions;
 }
-

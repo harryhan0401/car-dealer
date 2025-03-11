@@ -9,7 +9,7 @@ import ResetAll from "./ResetAll";
 
 const Filters = ({ cars }: { cars: CarType[] }) => {
   return (
-    <>
+    <div className="flex flex-col gap-5">
       <MakesModels />
       <FilterPrice cars={cars} />
       <FilterMileage cars={cars} />
@@ -18,7 +18,7 @@ const Filters = ({ cars }: { cars: CarType[] }) => {
       <FilterDrive />
       <FilterYear cars={cars} />
       <ResetAll />
-    </>
+    </div>
   );
 };
 export default Filters;

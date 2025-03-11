@@ -23,23 +23,23 @@ const VerticalCarCard = ({
         src={`/${image}`}
         height={250}
         width={500}
-        className="object-cover object-center rounded-2xl"
+        className="w-full object-cover object-center rounded-2xl"
         alt="Car"
       />
       <div className="py-3 px-4 flex flex-col gap-3">
         <section
           id="car-title"
-          className="flex justify-between items-center text-lg"
+          className="flex flex-wrap justify-between items-center text-lg"
         >
           <p>{title}</p>
           <p>${price}</p>
         </section>
-        <section id="car-statistics" className="flex gap-5">
-          <div className="flex-1 border rounded-lg p-2 bg-neutral">
+        <section id="car-statistics" className="grid grid-cols-2 xl:grid-cols-4 max-w-[500px] gap-5 text-sm sm:text-base">
+          <div className="border rounded-lg p-2 bg-neutral">
             <IoSpeedometerOutline size={24} />
             <p>{mileage} km</p>
           </div>
-          <div className="flex-1 border rounded-lg p-2 bg-neutral">
+          <div className="border rounded-lg p-2 bg-neutral">
             {fuel.toLowerCase() === "petrol" ||
             fuel.toLowerCase() === "diesel" ? (
               <p>
@@ -53,11 +53,11 @@ const VerticalCarCard = ({
               </p>
             )}
           </div>
-          <div className="flex-1 border rounded-lg p-2 bg-neutral">
+          <div className="border rounded-lg p-2 bg-neutral">
             <PiEngineLight size={24} />
             <p>{horsePower} kW</p>
           </div>
-          <div className="flex-1 border rounded-lg p-2 bg-neutral">
+          <div className="border rounded-lg p-2 bg-neutral">
             <GiStoneWheel size={24} />
             <p>{drive}</p>
           </div>

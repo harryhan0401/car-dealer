@@ -10,22 +10,22 @@ export default function Home() {
   const [noOfCars, setNoOfCars] = useState(cars.length);
   return (
     <div className="w-full flex flex-col gap-10 px-10 py-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-start gap-5">
-          <div className="text-6xl">Buy a car</div>
-          <div className="w-[75px] mt-2 max-w-fit py-2 px-3 bg-primary text-white font-light rounded-lg text-sm">
+      <div className="lg:flex lg:items-center lg:justify-between">
+        <div className="flex lg:flex-start items-center lg:items-start gap-5">
+          <div className="me-auto lg:me-0 text-6xl">Buy a car</div>
+          <div className="min-w-[50px] w-[100px] lg:min-w-0 text-center lg:max-w-fit lg:mt-2 py-2 px-3 bg-primary text-white font-light rounded-lg text-2xl lg:text-sm">
             {noOfCars}
           </div>
         </div>
-        <div className="flex items-center space-x-2">
+        <div className="hidden lg:flex lg:items-center lg:space-x-2">
           <CarTypes />
         </div>
       </div>
-      <div className="flex gap-10">
-        <div className="flex-1/4 flex flex-col gap-5">
+      <div className="lg:flex lg:gap-10">
+        <div className="hidden lg:block lg:flex-1/3 xl:flex-1/4">
           <Filters cars={cars} />
         </div>
-        <div className="flex-3/4">
+        <div className="lg:flex-2/3 xl:flex-3/4">
           <CarsList cars={cars} setNoOfCars={setNoOfCars} />
         </div>
       </div>

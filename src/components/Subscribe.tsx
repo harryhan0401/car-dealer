@@ -30,10 +30,12 @@ const Subscribe = () => {
         <Input
           type="email"
           name="email"
+          id="email"
           placeholder="E-mail"
           alt="Email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          autoComplete="off"
           className="cursor-default"
         />
         <Button

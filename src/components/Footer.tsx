@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="flex">
             <section
               id="left-footer-section"
-              className="flex-1 grid grid-cols-3 gap-10"
+              className="flex-1 grid md:grid-cols-3 gap-10"
             >
               <div>
                 <p className="text-[#9f9f9f]">Buy</p>
