@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import localFont from "next/font/local";
+import Providers from "./providers";
 const sfProDisplay = localFont({
   src: [
     {
@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${sfProDisplay.className} antialiased`}>
-        <NuqsAdapter>{children}</NuqsAdapter>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
