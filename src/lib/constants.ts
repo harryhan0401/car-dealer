@@ -7,23 +7,19 @@ export const FooterCompanyNavLinks = [
 export const CarTypes = [
   {
     name: "Sedan",
-    image: "https://placehold.co/80x50",
+    image: "/car-body-type/sedan.png",
   },
   {
     name: "SUV",
-    image: "https://placehold.co/80x50",
+    image: "/car-body-type/suv.png",
   },
   {
     name: "Hatchback",
-    image: "https://placehold.co/80x50",
+    image: "/car-body-type/hatchback.png",
   },
   {
     name: "Coupe",
-    image: "https://placehold.co/80x50",
-  },
-  {
-    name: "Sport cars",
-    image: "https://placehold.co/80x50",
+    image: "/car-body-type/coupe.png",
   },
 ];
 export const FuelSelects = ["petrol", "diesel", "electric", "hybrid"];

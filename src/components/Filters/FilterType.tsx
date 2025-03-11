@@ -37,9 +37,9 @@ export default function FilterType() {
           <Image
             src={image}
             height={50}
-            width={80}
+            width={100}
             alt={name}
-            className="pointer-events-none"
+            className="pointer-events-none h-[50px] object-contain object-center"
           />
           <div className="text-sm pointer-events-none">{name}</div>
         </button>
