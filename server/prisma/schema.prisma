@@ -1,14 +1,176 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [postgis]
+}
+
+enum Fuel {
+  Petrol
+  Diesel
+  Hybrid
+  Electric
+  Ethanol
+  Unleaded
+  E10
+  PremiumUnleaded95
+  PremiumUnleaded98
+  Biofuels
+  E85
+  Hydrogen
+  NaturalGas
+  Biodiesel
+  LPG
+}
+
+enum Drive {
+  FWD
+  AWD
+  RWD
+  FourWD
+}
+
+enum Transmission {
+  Manual
+  Automatic
+  SemiAutomatic
+  CVT
+  DualClutch
+  Tiptronic
+  STronic
+  SevenSpeedAutomatic
+  SixSpeedAutomatic
+  EightSpeedAutomatic
+}
+
+enum OrderStatus {
+  Pending
+  Denied
+  Confirmed
+  Paid
+}
+
+enum PaymentMethod {
+  Cash
+  CreditCard
+  DebitCard
+  Paypal
+  BankTransfer
+  Bitcoin
+  ApplePay
+  GooglePay
+}
+
+enum PaymentStatus {
+  Pending
+  Paid
+  Denied
+}
+
+model Users {
+  id              Int      @id @default(autoincrement())
+  cognitoId       String   @unique
+  locationId      Int
+  firstName       String
+  lastName        String
+  email           String
+  phone           String
+  dateTimeCreated DateTime @default(now())
+  dateTimeUpdated DateTime @default(now()) @updatedAt
+
+  favourites SaleCars[] @relation("UserFavourites")
+  carSales   SaleCars[]
+  orders     Orders[]
+  reviews    Reviews[]  @relation("UserReviews")
+  reviewer   Reviews[]  @relation("ReviewerReviews")
+  address    Location   @relation(fields: [locationId], references: [id])
+}
+
+model Location {
+  id              Int      @id @default(autoincrement())
+  address         String
+  city            String
+  state           String
+  country         String
+  postalCode      String
+  dateTimeCreated DateTime @default(now())
+  dateTimeUpdated DateTime @default(now()) @updatedAt
+
+  coordinates Unsupported("geography(Point, 4326)")
+  Users       Users[]
+}
+
+model Cars {
+  id              Int          @id @default(autoincrement())
+  make            String
+  model           String
+  year            Int
+  fuel            Fuel
+  horsePower      Int
+  drive           Drive
+  transmission    Transmission
+  dateTimeCreated DateTime     @default(now())
+  dateTimeUpdated DateTime     @default(now()) @updatedAt
+
+  carSales SaleCars[]
+}
+
+model SaleCars {
+  id              Int      @id @default(autoincrement())
+  vin             String   @unique
+  sellerCognitoId String
+  carId           Int
+  mileage         Int
+  price           Float
+  photoUrls       String[]
+  dateTimeCreated DateTime @default(now())
+  dateTimeUpdated DateTime @default(now()) @updatedAt
+
+  order        Orders?
+  favouritedBy Users[] @relation("UserFavourites")
+  seller       Users   @relation(fields: [sellerCognitoId], references: [cognitoId])
+  car          Cars    @relation(fields: [carId], references: [id])
+}
+
+model Orders {
+  id              Int         @id @default(autoincrement())
+  saleCarId       Int         @unique
+  buyerCognitoId  String
+  totalAmount     Float
+  status          OrderStatus
+  dateTimeCreated DateTime    @default(now())
+  dateTimeUpdated DateTime    @default(now()) @updatedAt
+
+  saleCar SaleCars  @relation(fields: [saleCarId], references: [id])
+  buyer   Users     @relation(fields: [buyerCognitoId], references: [cognitoId])
+  payment Payments?
+}
+
+model Payments {
+  id              Int           @id @default(autoincrement())
+  orderId         Int           @unique
+  paymentMethod   PaymentMethod
+  paymentStatus   PaymentStatus
+  amount          Float
+  dateTimeCreated DateTime      @default(now())
+  dateTimeUpdated DateTime      @default(now()) @updatedAt
+
+  order Orders @relation(fields: [orderId], references: [id])
+}
+
+model Reviews {
+  id                Int      @id @default(autoincrement())
+  userCognitoId     String
+  reviewerCognitoId String
+  rating            Int      @default(0)
+  comment           String
+  dateTimeCreated   DateTime @default(now())
+  dateTimeUpdated   DateTime @default(now()) @updatedAt
+
+  user     Users @relation("UserReviews", fields: [userCognitoId], references: [cognitoId])
+  reviewer Users @relation("ReviewerReviews", fields: [reviewerCognitoId], references: [cognitoId])
 }
