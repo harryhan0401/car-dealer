@@ -1,12 +1,13 @@
 import { Menu } from "lucide-react";
 import Notification from "./Notification";
 import Favourite from "./Favourite";
-import Image from "next/image";
 import NavLink from "./NavLink";
 import CompanyLogo from "./CompanyLogo";
 import NavbarMobile from "./NavbarMobile";
 import Location from "./Location";
 import Profile from "./Profile";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 const Navbar = () => {
   const navLinks: TNavLink[] = [
@@ -34,9 +35,19 @@ const Navbar = () => {
           </NavbarMobile>
         </div>
         <div className="hidden lg:flex lg:items-center lg:gap-4">
-          <Notification />
+          <Button variant={"signIn"} asChild>
+            <Link className="text-[16px]" href={"/signin"}>
+              Sign in
+            </Link>
+          </Button>
+          <Button asChild>
+            <Link className="text-[16px]" href={"/signup"}>
+              Sign up
+            </Link>
+          </Button>
+          {/* <Notification />
           <Favourite />
-          <Profile />
+          <Profile /> */}
         </div>
       </nav>
     </header>

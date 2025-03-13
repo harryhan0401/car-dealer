@@ -18,7 +18,7 @@ const VerticalCarCard = ({
   description,
 }: CarType) => {
   return (
-    <div className="border-white bg-white p-5 drop-shadow-md rounded-2xl">
+    <div className="card rounded-2xl">
       <Image
         src={`/${image}`}
         height={250}
@@ -34,7 +34,10 @@ const VerticalCarCard = ({
           <p>{title}</p>
           <p>${price}</p>
         </section>
-        <section id="car-statistics" className="grid grid-cols-2 xl:grid-cols-4 max-w-[500px] gap-5 text-sm sm:text-base">
+        <section
+          id="car-statistics"
+          className="grid grid-cols-2 xl:grid-cols-4 max-w-[500px] gap-5 text-sm sm:text-base"
+        >
           <div className="border rounded-lg p-2 bg-neutral">
             <IoSpeedometerOutline size={24} />
             <p>{mileage} km</p>
