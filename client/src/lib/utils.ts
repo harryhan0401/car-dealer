@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { cars } from "@/lib/db"
+import { AuthUser, SignUpOutput } from "aws-amplify/auth";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -78,4 +79,28 @@ export function getUniqueModelsByMake(cars: CarType[], make: string): string[] {
     )
   );
   return modelOptions;
+}
+
+export async function createNewUserInDatabase(user: AuthUser, userEmail: string, userRole: string, fetchWithBQ: any) {
+  const createEndpoint =
+    userRole.toLocaleLowerCase() === "user" ? "/users" : "/admins";
+
+  const createUserResponse = await fetchWithBQ({
+    url: createEndpoint,
+    method: "POST",
+    body: {
+      cognitoId: user.userId,
+      locationId: null,
+      email: userEmail,
+      firstName: "",
+      lastName: "",
+      phone: "",
+    }
+  })
+
+  if (createUserResponse.error) {
+    throw new Error("Failed to create user record");
+  }
+
+  return createUserResponse;
 }

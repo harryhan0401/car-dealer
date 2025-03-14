@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import NotificationListItem from "./NotificationListItem";
-const Favourite = () => {
+const Favourite = ({ noOfFavourites }: { noOfFavourites: number }) => {
   const notificationListItem: NotificationListItem[] = [
     {
       id: 1,
@@ -34,16 +34,17 @@ const Favourite = () => {
   ];
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger disabled={noOfFavourites == 0}>
         <div className="relative rounded px-[0.6rem] py-2 bg-border cursor-pointer">
           <Heart className="size-6" />
           <span className="absolute top-[-0.5rem] right-[-0.5rem] size-5 text-red-500 bg-primary border px-2 rounded-full z-1">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[0.65rem] text-white">
-              3
+              {noOfFavourites}
             </div>
           </span>
         </div>
       </DropdownMenuTrigger>
+
       <DropdownMenuContent>
         <DropdownMenuLabel>Messages</DropdownMenuLabel>
         <DropdownMenuSeparator />

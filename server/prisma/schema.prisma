@@ -71,10 +71,10 @@ enum PaymentStatus {
   Denied
 }
 
-model Users {
+model User {
   id              Int      @id @default(autoincrement())
   cognitoId       String   @unique
-  locationId      Int
+  locationId      Int?
   firstName       String
   lastName        String
   email           String
@@ -82,12 +82,12 @@ model Users {
   dateTimeCreated DateTime @default(now())
   dateTimeUpdated DateTime @default(now()) @updatedAt
 
-  favourites SaleCars[] @relation("UserFavourites")
-  carSales   SaleCars[]
-  orders     Orders[]
-  reviews    Reviews[]  @relation("UserReviews")
-  reviewer   Reviews[]  @relation("ReviewerReviews")
-  address    Location   @relation(fields: [locationId], references: [id])
+  favourites SaleCar[] @relation("UserFavourites")
+  carSales   SaleCar[]
+  orders     Order[]
+  reviews    Review[]  @relation("UserReview")
+  reviewer   Review[]  @relation("ReviewerReview")
+  address    Location?   @relation(fields: [locationId], references: [id])
 }
 
 model Location {
@@ -101,10 +101,10 @@ model Location {
   dateTimeUpdated DateTime @default(now()) @updatedAt
 
   coordinates Unsupported("geography(Point, 4326)")
-  Users       Users[]
+  Users       User[]
 }
 
-model Cars {
+model Car {
   id              Int          @id @default(autoincrement())
   make            String
   model           String
@@ -116,10 +116,10 @@ model Cars {
   dateTimeCreated DateTime     @default(now())
   dateTimeUpdated DateTime     @default(now()) @updatedAt
 
-  carSales SaleCars[]
+  carSales SaleCar[]
 }
 
-model SaleCars {
+model SaleCar {
   id              Int      @id @default(autoincrement())
   vin             String   @unique
   sellerCognitoId String
@@ -130,13 +130,13 @@ model SaleCars {
   dateTimeCreated DateTime @default(now())
   dateTimeUpdated DateTime @default(now()) @updatedAt
 
-  order        Orders?
-  favouritedBy Users[] @relation("UserFavourites")
-  seller       Users   @relation(fields: [sellerCognitoId], references: [cognitoId])
-  car          Cars    @relation(fields: [carId], references: [id])
+  order        Order?
+  favouritedBy User[] @relation("UserFavourites")
+  seller       User   @relation(fields: [sellerCognitoId], references: [cognitoId])
+  car          Car    @relation(fields: [carId], references: [id])
 }
 
-model Orders {
+model Order {
   id              Int         @id @default(autoincrement())
   saleCarId       Int         @unique
   buyerCognitoId  String
@@ -145,12 +145,12 @@ model Orders {
   dateTimeCreated DateTime    @default(now())
   dateTimeUpdated DateTime    @default(now()) @updatedAt
 
-  saleCar SaleCars  @relation(fields: [saleCarId], references: [id])
-  buyer   Users     @relation(fields: [buyerCognitoId], references: [cognitoId])
-  payment Payments?
+  saleCar SaleCar  @relation(fields: [saleCarId], references: [id])
+  buyer   User     @relation(fields: [buyerCognitoId], references: [cognitoId])
+  payment Payment?
 }
 
-model Payments {
+model Payment {
   id              Int           @id @default(autoincrement())
   orderId         Int           @unique
   paymentMethod   PaymentMethod
@@ -159,10 +159,10 @@ model Payments {
   dateTimeCreated DateTime      @default(now())
   dateTimeUpdated DateTime      @default(now()) @updatedAt
 
-  order Orders @relation(fields: [orderId], references: [id])
+  order Order @relation(fields: [orderId], references: [id])
 }
 
-model Reviews {
+model Review {
   id                Int      @id @default(autoincrement())
   userCognitoId     String
   reviewerCognitoId String
@@ -171,6 +171,6 @@ model Reviews {
   dateTimeCreated   DateTime @default(now())
   dateTimeUpdated   DateTime @default(now()) @updatedAt
 
-  user     Users @relation("UserReviews", fields: [userCognitoId], references: [cognitoId])
-  reviewer Users @relation("ReviewerReviews", fields: [reviewerCognitoId], references: [cognitoId])
+  user     User @relation("UserReview", fields: [userCognitoId], references: [cognitoId])
+  reviewer User @relation("ReviewerReview", fields: [reviewerCognitoId], references: [cognitoId])
 }
