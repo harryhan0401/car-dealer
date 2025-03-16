@@ -32,7 +32,6 @@ export const authMiddleware = (allowedRoles: string[]) => {
                 id: decoded.sub,
                 role: userRole
             }
-
             const hasAccess = allowedRoles.includes(userRole.toLowerCase());
             if (!hasAccess) {
                 res.status(403).json({ message: "Access Denied" });

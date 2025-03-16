@@ -53,7 +53,30 @@ export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
  * Enums
  */
 export namespace $Enums {
-  export const Fuel: {
+  export const CarType: {
+  Sedan: 'Sedan',
+  Coupe: 'Coupe',
+  Hatchback: 'Hatchback',
+  Suv: 'Suv',
+  Truck: 'Truck',
+  Convertible: 'Convertible',
+  Wagon: 'Wagon',
+  Minivan: 'Minivan',
+  Sportscar: 'Sportscar',
+  Crossover: 'Crossover',
+  Roadster: 'Roadster',
+  Luxury: 'Luxury',
+  Electric: 'Electric',
+  Hybrid: 'Hybrid',
+  Diesel: 'Diesel',
+  CrossoverSuv: 'CrossoverSuv',
+  Van: 'Van'
+};
+
+export type CarType = (typeof CarType)[keyof typeof CarType]
+
+
+export const Fuel: {
   Petrol: 'Petrol',
   Diesel: 'Diesel',
   Hybrid: 'Hybrid',
@@ -133,6 +156,10 @@ export const PaymentStatus: {
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 }
+
+export type CarType = $Enums.CarType
+
+export const CarType: typeof $Enums.CarType
 
 export type Fuel = $Enums.Fuel
 
@@ -1906,7 +1933,7 @@ export namespace Prisma {
     orders?: boolean | User$ordersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     reviewer?: boolean | User$reviewerArgs<ExtArgs>
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1920,7 +1947,7 @@ export namespace Prisma {
     phone?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1933,7 +1960,7 @@ export namespace Prisma {
     phone?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1955,14 +1982,14 @@ export namespace Prisma {
     orders?: boolean | User$ordersArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     reviewer?: boolean | User$reviewerArgs<ExtArgs>
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
   }
   export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    address?: boolean | User$addressArgs<ExtArgs>
+    location?: boolean | User$locationArgs<ExtArgs>
   }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1973,7 +2000,7 @@ export namespace Prisma {
       orders: Prisma.$OrderPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       reviewer: Prisma.$ReviewPayload<ExtArgs>[]
-      address: Prisma.$LocationPayload<ExtArgs> | null
+      location: Prisma.$LocationPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2384,7 +2411,7 @@ export namespace Prisma {
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewer<T extends User$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    address<T extends User$addressArgs<ExtArgs> = {}>(args?: Subset<T, User$addressArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    location<T extends User$locationArgs<ExtArgs> = {}>(args?: Subset<T, User$locationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2939,9 +2966,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.address
+   * User.location
    */
-  export type User$addressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$locationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Location
      */
@@ -3984,6 +4011,7 @@ export namespace Prisma {
     make: string | null
     model: string | null
     year: number | null
+    type: string | null
     fuel: $Enums.Fuel | null
     horsePower: number | null
     drive: $Enums.Drive | null
@@ -3997,6 +4025,7 @@ export namespace Prisma {
     make: string | null
     model: string | null
     year: number | null
+    type: string | null
     fuel: $Enums.Fuel | null
     horsePower: number | null
     drive: $Enums.Drive | null
@@ -4010,6 +4039,7 @@ export namespace Prisma {
     make: number
     model: number
     year: number
+    type: number
     fuel: number
     horsePower: number
     drive: number
@@ -4037,6 +4067,7 @@ export namespace Prisma {
     make?: true
     model?: true
     year?: true
+    type?: true
     fuel?: true
     horsePower?: true
     drive?: true
@@ -4050,6 +4081,7 @@ export namespace Prisma {
     make?: true
     model?: true
     year?: true
+    type?: true
     fuel?: true
     horsePower?: true
     drive?: true
@@ -4063,6 +4095,7 @@ export namespace Prisma {
     make?: true
     model?: true
     year?: true
+    type?: true
     fuel?: true
     horsePower?: true
     drive?: true
@@ -4163,6 +4196,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -4195,6 +4229,7 @@ export namespace Prisma {
     make?: boolean
     model?: boolean
     year?: boolean
+    type?: boolean
     fuel?: boolean
     horsePower?: boolean
     drive?: boolean
@@ -4210,6 +4245,7 @@ export namespace Prisma {
     make?: boolean
     model?: boolean
     year?: boolean
+    type?: boolean
     fuel?: boolean
     horsePower?: boolean
     drive?: boolean
@@ -4223,6 +4259,7 @@ export namespace Prisma {
     make?: boolean
     model?: boolean
     year?: boolean
+    type?: boolean
     fuel?: boolean
     horsePower?: boolean
     drive?: boolean
@@ -4236,6 +4273,7 @@ export namespace Prisma {
     make?: boolean
     model?: boolean
     year?: boolean
+    type?: boolean
     fuel?: boolean
     horsePower?: boolean
     drive?: boolean
@@ -4244,7 +4282,7 @@ export namespace Prisma {
     dateTimeUpdated?: boolean
   }
 
-  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "make" | "model" | "year" | "fuel" | "horsePower" | "drive" | "transmission" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["car"]>
+  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "make" | "model" | "year" | "type" | "fuel" | "horsePower" | "drive" | "transmission" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["car"]>
   export type CarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carSales?: boolean | Car$carSalesArgs<ExtArgs>
     _count?: boolean | CarCountOutputTypeDefaultArgs<ExtArgs>
@@ -4262,6 +4300,7 @@ export namespace Prisma {
       make: string
       model: string
       year: number
+      type: string
       fuel: $Enums.Fuel
       horsePower: number
       drive: $Enums.Drive
@@ -4696,6 +4735,7 @@ export namespace Prisma {
     readonly make: FieldRef<"Car", 'String'>
     readonly model: FieldRef<"Car", 'String'>
     readonly year: FieldRef<"Car", 'Int'>
+    readonly type: FieldRef<"Car", 'String'>
     readonly fuel: FieldRef<"Car", 'Fuel'>
     readonly horsePower: FieldRef<"Car", 'Int'>
     readonly drive: FieldRef<"Car", 'Drive'>
@@ -5165,6 +5205,7 @@ export namespace Prisma {
     carId: number | null
     mileage: number | null
     price: number | null
+    description: string | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -5176,6 +5217,7 @@ export namespace Prisma {
     carId: number | null
     mileage: number | null
     price: number | null
+    description: string | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -5188,6 +5230,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls: number
+    description: number
     dateTimeCreated: number
     dateTimeUpdated: number
     _all: number
@@ -5215,6 +5258,7 @@ export namespace Prisma {
     carId?: true
     mileage?: true
     price?: true
+    description?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -5226,6 +5270,7 @@ export namespace Prisma {
     carId?: true
     mileage?: true
     price?: true
+    description?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -5238,6 +5283,7 @@ export namespace Prisma {
     mileage?: true
     price?: true
     photoUrls?: true
+    description?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
     _all?: true
@@ -5337,6 +5383,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls: string[]
+    description: string
     dateTimeCreated: Date
     dateTimeUpdated: Date
     _count: SaleCarCountAggregateOutputType | null
@@ -5368,6 +5415,7 @@ export namespace Prisma {
     mileage?: boolean
     price?: boolean
     photoUrls?: boolean
+    description?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     order?: boolean | SaleCar$orderArgs<ExtArgs>
@@ -5385,6 +5433,7 @@ export namespace Prisma {
     mileage?: boolean
     price?: boolean
     photoUrls?: boolean
+    description?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     seller?: boolean | UserDefaultArgs<ExtArgs>
@@ -5399,6 +5448,7 @@ export namespace Prisma {
     mileage?: boolean
     price?: boolean
     photoUrls?: boolean
+    description?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     seller?: boolean | UserDefaultArgs<ExtArgs>
@@ -5413,11 +5463,12 @@ export namespace Prisma {
     mileage?: boolean
     price?: boolean
     photoUrls?: boolean
+    description?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
   }
 
-  export type SaleCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["saleCar"]>
+  export type SaleCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "description" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["saleCar"]>
   export type SaleCarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | SaleCar$orderArgs<ExtArgs>
     favouritedBy?: boolean | SaleCar$favouritedByArgs<ExtArgs>
@@ -5450,6 +5501,7 @@ export namespace Prisma {
       mileage: number
       price: number
       photoUrls: string[]
+      description: string
       dateTimeCreated: Date
       dateTimeUpdated: Date
     }, ExtArgs["result"]["saleCar"]>
@@ -5886,6 +5938,7 @@ export namespace Prisma {
     readonly mileage: FieldRef<"SaleCar", 'Int'>
     readonly price: FieldRef<"SaleCar", 'Float'>
     readonly photoUrls: FieldRef<"SaleCar", 'String[]'>
+    readonly description: FieldRef<"SaleCar", 'String'>
     readonly dateTimeCreated: FieldRef<"SaleCar", 'DateTime'>
     readonly dateTimeUpdated: FieldRef<"SaleCar", 'DateTime'>
   }
@@ -9806,6 +9859,7 @@ export namespace Prisma {
     make: 'make',
     model: 'model',
     year: 'year',
+    type: 'type',
     fuel: 'fuel',
     horsePower: 'horsePower',
     drive: 'drive',
@@ -9825,6 +9879,7 @@ export namespace Prisma {
     mileage: 'mileage',
     price: 'price',
     photoUrls: 'photoUrls',
+    description: 'description',
     dateTimeCreated: 'dateTimeCreated',
     dateTimeUpdated: 'dateTimeUpdated'
   };
@@ -10061,7 +10116,7 @@ export namespace Prisma {
     orders?: OrderListRelationFilter
     reviews?: ReviewListRelationFilter
     reviewer?: ReviewListRelationFilter
-    address?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
+    location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10079,7 +10134,7 @@ export namespace Prisma {
     orders?: OrderOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     reviewer?: ReviewOrderByRelationAggregateInput
-    address?: LocationOrderByWithRelationInput
+    location?: LocationOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10100,7 +10155,7 @@ export namespace Prisma {
     orders?: OrderListRelationFilter
     reviews?: ReviewListRelationFilter
     reviewer?: ReviewListRelationFilter
-    address?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
+    location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
   }, "id" | "cognitoId">
 
   export type UserOrderByWithAggregationInput = {
@@ -10215,6 +10270,7 @@ export namespace Prisma {
     make?: StringFilter<"Car"> | string
     model?: StringFilter<"Car"> | string
     year?: IntFilter<"Car"> | number
+    type?: StringFilter<"Car"> | string
     fuel?: EnumFuelFilter<"Car"> | $Enums.Fuel
     horsePower?: IntFilter<"Car"> | number
     drive?: EnumDriveFilter<"Car"> | $Enums.Drive
@@ -10229,6 +10285,7 @@ export namespace Prisma {
     make?: SortOrder
     model?: SortOrder
     year?: SortOrder
+    type?: SortOrder
     fuel?: SortOrder
     horsePower?: SortOrder
     drive?: SortOrder
@@ -10246,6 +10303,7 @@ export namespace Prisma {
     make?: StringFilter<"Car"> | string
     model?: StringFilter<"Car"> | string
     year?: IntFilter<"Car"> | number
+    type?: StringFilter<"Car"> | string
     fuel?: EnumFuelFilter<"Car"> | $Enums.Fuel
     horsePower?: IntFilter<"Car"> | number
     drive?: EnumDriveFilter<"Car"> | $Enums.Drive
@@ -10260,6 +10318,7 @@ export namespace Prisma {
     make?: SortOrder
     model?: SortOrder
     year?: SortOrder
+    type?: SortOrder
     fuel?: SortOrder
     horsePower?: SortOrder
     drive?: SortOrder
@@ -10281,6 +10340,7 @@ export namespace Prisma {
     make?: StringWithAggregatesFilter<"Car"> | string
     model?: StringWithAggregatesFilter<"Car"> | string
     year?: IntWithAggregatesFilter<"Car"> | number
+    type?: StringWithAggregatesFilter<"Car"> | string
     fuel?: EnumFuelWithAggregatesFilter<"Car"> | $Enums.Fuel
     horsePower?: IntWithAggregatesFilter<"Car"> | number
     drive?: EnumDriveWithAggregatesFilter<"Car"> | $Enums.Drive
@@ -10300,6 +10360,7 @@ export namespace Prisma {
     mileage?: IntFilter<"SaleCar"> | number
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
+    description?: StringFilter<"SaleCar"> | string
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
@@ -10316,6 +10377,7 @@ export namespace Prisma {
     mileage?: SortOrder
     price?: SortOrder
     photoUrls?: SortOrder
+    description?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -10335,6 +10397,7 @@ export namespace Prisma {
     mileage?: IntFilter<"SaleCar"> | number
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
+    description?: StringFilter<"SaleCar"> | string
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
@@ -10351,6 +10414,7 @@ export namespace Prisma {
     mileage?: SortOrder
     price?: SortOrder
     photoUrls?: SortOrder
+    description?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     _count?: SaleCarCountOrderByAggregateInput
@@ -10371,6 +10435,7 @@ export namespace Prisma {
     mileage?: IntWithAggregatesFilter<"SaleCar"> | number
     price?: FloatWithAggregatesFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
+    description?: StringWithAggregatesFilter<"SaleCar"> | string
     dateTimeCreated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
   }
@@ -10598,7 +10663,7 @@ export namespace Prisma {
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10631,7 +10696,7 @@ export namespace Prisma {
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10693,7 +10758,7 @@ export namespace Prisma {
     postalCode?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    Users?: UserUpdateManyWithoutAddressNestedInput
+    Users?: UserUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationUncheckedUpdateInput = {
@@ -10705,7 +10770,7 @@ export namespace Prisma {
     postalCode?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    Users?: UserUncheckedUpdateManyWithoutAddressNestedInput
+    Users?: UserUncheckedUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationUpdateManyMutationInput = {
@@ -10733,6 +10798,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -10747,6 +10813,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -10760,6 +10827,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -10774,6 +10842,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -10788,6 +10857,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -10800,6 +10870,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -10813,6 +10884,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -10826,6 +10898,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -10842,6 +10915,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -10853,6 +10927,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -10869,6 +10944,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -10883,6 +10959,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -10892,6 +10969,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10904,6 +10982,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11383,6 +11462,7 @@ export namespace Prisma {
     make?: SortOrder
     model?: SortOrder
     year?: SortOrder
+    type?: SortOrder
     fuel?: SortOrder
     horsePower?: SortOrder
     drive?: SortOrder
@@ -11402,6 +11482,7 @@ export namespace Prisma {
     make?: SortOrder
     model?: SortOrder
     year?: SortOrder
+    type?: SortOrder
     fuel?: SortOrder
     horsePower?: SortOrder
     drive?: SortOrder
@@ -11415,6 +11496,7 @@ export namespace Prisma {
     make?: SortOrder
     model?: SortOrder
     year?: SortOrder
+    type?: SortOrder
     fuel?: SortOrder
     horsePower?: SortOrder
     drive?: SortOrder
@@ -11501,6 +11583,7 @@ export namespace Prisma {
     mileage?: SortOrder
     price?: SortOrder
     photoUrls?: SortOrder
+    description?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11519,6 +11602,7 @@ export namespace Prisma {
     carId?: SortOrder
     mileage?: SortOrder
     price?: SortOrder
+    description?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11530,6 +11614,7 @@ export namespace Prisma {
     carId?: SortOrder
     mileage?: SortOrder
     price?: SortOrder
+    description?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11988,31 +12073,31 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
-  export type UserUpdateManyWithoutAddressNestedInput = {
-    create?: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput> | UserCreateWithoutAddressInput[] | UserUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAddressInput | UserCreateOrConnectWithoutAddressInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAddressInput | UserUpsertWithWhereUniqueWithoutAddressInput[]
-    createMany?: UserCreateManyAddressInputEnvelope
+  export type UserUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<UserCreateWithoutLocationInput, UserUncheckedCreateWithoutLocationInput> | UserCreateWithoutLocationInput[] | UserUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLocationInput | UserCreateOrConnectWithoutLocationInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutLocationInput | UserUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: UserCreateManyLocationInputEnvelope
     set?: UserWhereUniqueInput | UserWhereUniqueInput[]
     disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
     delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAddressInput | UserUpdateWithWhereUniqueWithoutAddressInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAddressInput | UserUpdateManyWithWhereWithoutAddressInput[]
+    update?: UserUpdateWithWhereUniqueWithoutLocationInput | UserUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutLocationInput | UserUpdateManyWithWhereWithoutLocationInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type UserUncheckedUpdateManyWithoutAddressNestedInput = {
-    create?: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput> | UserCreateWithoutAddressInput[] | UserUncheckedCreateWithoutAddressInput[]
-    connectOrCreate?: UserCreateOrConnectWithoutAddressInput | UserCreateOrConnectWithoutAddressInput[]
-    upsert?: UserUpsertWithWhereUniqueWithoutAddressInput | UserUpsertWithWhereUniqueWithoutAddressInput[]
-    createMany?: UserCreateManyAddressInputEnvelope
+  export type UserUncheckedUpdateManyWithoutLocationNestedInput = {
+    create?: XOR<UserCreateWithoutLocationInput, UserUncheckedCreateWithoutLocationInput> | UserCreateWithoutLocationInput[] | UserUncheckedCreateWithoutLocationInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutLocationInput | UserCreateOrConnectWithoutLocationInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutLocationInput | UserUpsertWithWhereUniqueWithoutLocationInput[]
+    createMany?: UserCreateManyLocationInputEnvelope
     set?: UserWhereUniqueInput | UserWhereUniqueInput[]
     disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
     delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
-    update?: UserUpdateWithWhereUniqueWithoutAddressInput | UserUpdateWithWhereUniqueWithoutAddressInput[]
-    updateMany?: UserUpdateManyWithWhereWithoutAddressInput | UserUpdateManyWithWhereWithoutAddressInput[]
+    update?: UserUpdateWithWhereUniqueWithoutLocationInput | UserUpdateWithWhereUniqueWithoutLocationInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutLocationInput | UserUpdateManyWithWhereWithoutLocationInput[]
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
@@ -12554,6 +12639,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -12569,6 +12655,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -12584,6 +12671,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -12598,6 +12686,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -12724,6 +12813,7 @@ export namespace Prisma {
     mileage?: IntFilter<"SaleCar"> | number
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
+    description?: StringFilter<"SaleCar"> | string
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
   }
@@ -12844,7 +12934,7 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserCreateWithoutAddressInput = {
+  export type UserCreateWithoutLocationInput = {
     cognitoId: string
     firstName: string
     lastName: string
@@ -12859,7 +12949,7 @@ export namespace Prisma {
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
   }
 
-  export type UserUncheckedCreateWithoutAddressInput = {
+  export type UserUncheckedCreateWithoutLocationInput = {
     id?: number
     cognitoId: string
     firstName: string
@@ -12875,30 +12965,30 @@ export namespace Prisma {
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
   }
 
-  export type UserCreateOrConnectWithoutAddressInput = {
+  export type UserCreateOrConnectWithoutLocationInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
+    create: XOR<UserCreateWithoutLocationInput, UserUncheckedCreateWithoutLocationInput>
   }
 
-  export type UserUpsertWithWhereUniqueWithoutAddressInput = {
+  export type UserUpsertWithWhereUniqueWithoutLocationInput = {
     where: UserWhereUniqueInput
-    update: XOR<UserUpdateWithoutAddressInput, UserUncheckedUpdateWithoutAddressInput>
-    create: XOR<UserCreateWithoutAddressInput, UserUncheckedCreateWithoutAddressInput>
+    update: XOR<UserUpdateWithoutLocationInput, UserUncheckedUpdateWithoutLocationInput>
+    create: XOR<UserCreateWithoutLocationInput, UserUncheckedCreateWithoutLocationInput>
   }
 
-  export type UserCreateManyAddressInputEnvelope = {
-    data: UserCreateManyAddressInput | UserCreateManyAddressInput[]
+  export type UserCreateManyLocationInputEnvelope = {
+    data: UserCreateManyLocationInput | UserCreateManyLocationInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserUpdateWithWhereUniqueWithoutAddressInput = {
+  export type UserUpdateWithWhereUniqueWithoutLocationInput = {
     where: UserWhereUniqueInput
-    data: XOR<UserUpdateWithoutAddressInput, UserUncheckedUpdateWithoutAddressInput>
+    data: XOR<UserUpdateWithoutLocationInput, UserUncheckedUpdateWithoutLocationInput>
   }
 
-  export type UserUpdateManyWithWhereWithoutAddressInput = {
+  export type UserUpdateManyWithWhereWithoutLocationInput = {
     where: UserScalarWhereInput
-    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutAddressInput>
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutLocationInput>
   }
 
   export type UserScalarWhereInput = {
@@ -12921,6 +13011,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -12935,6 +13026,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -13003,7 +13095,7 @@ export namespace Prisma {
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutFavouritesInput = {
@@ -13039,7 +13131,7 @@ export namespace Prisma {
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutCarSalesInput = {
@@ -13067,6 +13159,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -13080,6 +13173,7 @@ export namespace Prisma {
     make: string
     model: string
     year: number
+    type: string
     fuel: $Enums.Fuel
     horsePower: number
     drive: $Enums.Drive
@@ -13162,7 +13256,7 @@ export namespace Prisma {
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCarSalesInput = {
@@ -13196,6 +13290,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -13209,6 +13304,7 @@ export namespace Prisma {
     make?: StringFieldUpdateOperationsInput | string
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
+    type?: StringFieldUpdateOperationsInput | string
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
     horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
@@ -13222,6 +13318,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
@@ -13237,6 +13334,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
@@ -13259,7 +13357,7 @@ export namespace Prisma {
     carSales?: SaleCarCreateNestedManyWithoutSellerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -13321,6 +13419,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
@@ -13336,6 +13435,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
@@ -13364,7 +13464,7 @@ export namespace Prisma {
     carSales?: SaleCarUpdateManyWithoutSellerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -13477,7 +13577,7 @@ export namespace Prisma {
     carSales?: SaleCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -13513,7 +13613,7 @@ export namespace Prisma {
     carSales?: SaleCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
-    address?: LocationCreateNestedOneWithoutUsersInput
+    location?: LocationCreateNestedOneWithoutUsersInput
   }
 
   export type UserUncheckedCreateWithoutReviewerInput = {
@@ -13560,7 +13660,7 @@ export namespace Prisma {
     carSales?: SaleCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -13602,7 +13702,7 @@ export namespace Prisma {
     carSales?: SaleCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewerInput = {
@@ -13628,6 +13728,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -13664,6 +13765,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -13679,6 +13781,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -13692,6 +13795,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13701,6 +13805,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -13715,6 +13820,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -13728,6 +13834,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13812,7 +13919,7 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type UserUpdateWithoutAddressInput = {
+  export type UserUpdateWithoutLocationInput = {
     cognitoId?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
@@ -13827,7 +13934,7 @@ export namespace Prisma {
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutAddressInput = {
+  export type UserUncheckedUpdateWithoutLocationInput = {
     id?: IntFieldUpdateOperationsInput | number
     cognitoId?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -13843,7 +13950,7 @@ export namespace Prisma {
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
   }
 
-  export type UserCreateManyAddressInput = {
+  export type UserCreateManyLocationInput = {
     id?: number
     cognitoId: string
     firstName: string
@@ -13854,7 +13961,7 @@ export namespace Prisma {
     dateTimeUpdated?: Date | string
   }
 
-  export type UserUncheckedUpdateManyWithoutAddressInput = {
+  export type UserUncheckedUpdateManyWithoutLocationInput = {
     id?: IntFieldUpdateOperationsInput | number
     cognitoId?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -13872,6 +13979,7 @@ export namespace Prisma {
     mileage: number
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    description: string
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -13881,6 +13989,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -13895,6 +14004,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -13908,6 +14018,7 @@ export namespace Prisma {
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13924,7 +14035,7 @@ export namespace Prisma {
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
-    address?: LocationUpdateOneWithoutUsersNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavouritesInput = {

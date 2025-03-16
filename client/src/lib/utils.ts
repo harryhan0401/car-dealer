@@ -104,3 +104,17 @@ export async function createNewUserInDatabase(user: AuthUser, userEmail: string,
 
   return createUserResponse;
 }
+
+/*
+To create pagination that displays 5 pages at a time and shifts by 
+showing the previous 2 and next 2 pages around the current page 
+*/
+export function getPageNumbers(currentPage: number, totalPages: number) {
+  if (currentPage <= 3) {
+    return [1, 2, 3, 4, 5].filter(page => page <= totalPages);
+  } else if (currentPage >= totalPages - 2) {
+    return [totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages].filter(page => page > 0);
+  } else {
+    return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
+  }
+};

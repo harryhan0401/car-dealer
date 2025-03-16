@@ -24,4 +24,4 @@ export const CarTypes = [
 ];
 export const FuelSelects = ["petrol", "diesel", "electric", "hybrid"];
 export const TransmissionSelects = ["automatic", "mechanical", "variator"];
-export const DriveSelects = ["FWD", "FourWD", "AWD", "RWD"];
+export const DriveSelects = ["FWD", "4WD", "AWD", "RWD"];

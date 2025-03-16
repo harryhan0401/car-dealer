@@ -9,6 +9,26 @@ datasource db {
   extensions = [postgis]
 }
 
+enum CarType {
+  Sedan
+  Coupe
+  Hatchback
+  Suv
+  Truck
+  Convertible
+  Wagon
+  Minivan
+  Sportscar
+  Crossover
+  Roadster
+  Luxury
+  Electric
+  Hybrid
+  Diesel
+  CrossoverSuv
+  Van
+}
+
 enum Fuel {
   Petrol
   Diesel
@@ -87,7 +107,7 @@ model User {
   orders     Order[]
   reviews    Review[]  @relation("UserReview")
   reviewer   Review[]  @relation("ReviewerReview")
-  address    Location?   @relation(fields: [locationId], references: [id])
+  location   Location? @relation(fields: [locationId], references: [id])
 }
 
 model Location {
@@ -109,6 +129,7 @@ model Car {
   make            String
   model           String
   year            Int
+  type            String
   fuel            Fuel
   horsePower      Int
   drive           Drive
@@ -127,6 +148,7 @@ model SaleCar {
   mileage         Int
   price           Float
   photoUrls       String[]
+  description     String
   dateTimeCreated DateTime @default(now())
   dateTimeUpdated DateTime @default(now()) @updatedAt
 

@@ -5,22 +5,23 @@ import { getHistogramData, getValuesForKey } from "@/lib/utils";
 import FilterLayout from "../FilterLayout";
 import { useMemo } from "react";
 import { useRangeQueryParams } from "@/lib/hooks";
+import { SaleCar } from "@/types/prismaTypes";
 
 export interface FilterRangeProps {
-  cars: CarType[];
+  saleCars: SaleCar[];
 }
-const FilterPrice = ({ cars }: FilterRangeProps) => {
+const FilterPrice = ({ saleCars }: FilterRangeProps) => {
   //Filter Price
   const [minPrice, maxPrice] = useMemo(() => {
-    const amounts = cars.map((car) => car.price);
+    const amounts = saleCars.map((car) => car.price);
     return [Math.floor(Math.min(...amounts)), Math.ceil(Math.max(...amounts))];
-  }, [cars]);
+  }, [saleCars]);
   const { query: priceRange, setQuery: setPriceRange } = useRangeQueryParams(
     "price_range",
     minPrice,
     maxPrice
   );
-  const data = getValuesForKey(cars, "price");
+  const data = getValuesForKey(saleCars, "price");
   const distributionData = getHistogramData(15, data);
 
   return (

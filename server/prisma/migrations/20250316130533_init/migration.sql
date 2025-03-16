@@ -2,6 +2,9 @@
 CREATE EXTENSION IF NOT EXISTS "postgis";
 
 -- CreateEnum
+CREATE TYPE "CarType" AS ENUM ('Sedan', 'Coupe', 'Hatchback', 'Suv', 'Truck', 'Convertible', 'Wagon', 'Minivan', 'Sportscar', 'Crossover', 'Roadster', 'Luxury', 'Electric', 'Hybrid', 'Diesel', 'CrossoverSuv', 'Van');
+
+-- CreateEnum
 CREATE TYPE "Fuel" AS ENUM ('Petrol', 'Diesel', 'Hybrid', 'Electric', 'Ethanol', 'Unleaded', 'E10', 'PremiumUnleaded95', 'PremiumUnleaded98', 'Biofuels', 'E85', 'Hydrogen', 'NaturalGas', 'Biodiesel', 'LPG');
 
 -- CreateEnum
@@ -55,6 +58,7 @@ CREATE TABLE "Car" (
     "make" TEXT NOT NULL,
     "model" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
+    "type" TEXT NOT NULL,
     "fuel" "Fuel" NOT NULL,
     "horsePower" INTEGER NOT NULL,
     "drive" "Drive" NOT NULL,
@@ -74,6 +78,7 @@ CREATE TABLE "SaleCar" (
     "mileage" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "photoUrls" TEXT[],
+    "description" TEXT NOT NULL,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

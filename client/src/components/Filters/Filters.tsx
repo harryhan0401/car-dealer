@@ -6,19 +6,26 @@ import FilterDrive from "@/components/Filters/FilterSelect/FilterDrive";
 import FilterYear from "@/components/Filters/FilterRange/FilterYear";
 import FilterTransmission from "./FilterSelect/FilterTransmission";
 import ResetAll from "./ResetAll";
+import { SaleCar } from "@/types/prismaTypes";
+import { useGetAllSaleCarsQuery } from "@/state/api";
 
-const Filters = ({ cars }: { cars: CarType[] }) => {
+const Filters = () => {
+  const { data: saleCars, isFetching: carFetching } = useGetAllSaleCarsQuery();
   return (
-    <div className="flex flex-col gap-5">
-      <MakesModels />
-      <FilterPrice cars={cars} />
-      <FilterMileage cars={cars} />
-      <FilterFuel />
-      <FilterTransmission />
-      <FilterDrive />
-      <FilterYear cars={cars} />
-      <ResetAll />
-    </div>
+    <>
+      {!carFetching && saleCars && (
+        <div className="flex flex-col gap-5">
+          <MakesModels />
+          <FilterPrice saleCars={saleCars} />
+          <FilterMileage saleCars={saleCars} />
+          <FilterFuel />
+          <FilterTransmission />
+          <FilterDrive />
+          <FilterYear saleCars={saleCars} />
+          <ResetAll />
+        </div>
+      )}
+    </>
   );
 };
 export default Filters;

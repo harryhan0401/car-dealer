@@ -11,7 +11,7 @@ const ResetAll = () => {
   const [fuel, setFuel] = useQueryState("fuel");
   const [transmission, setTransmission] = useQueryState("transmission");
   const [drive, setDrive] = useQueryState("drive");
-  const [yearRange, setYearRange] = useQueryState("yearRange");
+  const [yearRange, setYearRange] = useQueryState("year");
   const isFiltered =
     type ||
     makeModels ||

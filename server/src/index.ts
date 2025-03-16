@@ -8,6 +8,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 
 /* ROUTE IMPORT */
 import userRoutes from "./routes/userRoutes";
+import publicSaleCarRoutes from "./routes/publicSaleCarRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 
 app.use("/users", authMiddleware(["user"]), userRoutes);
 app.use("/admins", authMiddleware(["admin"]), userRoutes);
+app.use("/saleCars", publicSaleCarRoutes);
 
 /* SERVER */
 const port = process.env.PORT || 3002;

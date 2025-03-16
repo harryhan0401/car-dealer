@@ -1,7 +1,9 @@
 "use client";
 
+import { getPageNumbers } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useQueryState } from "nuqs";
+import { useEffect } from "react";
 
 const ProductPagination = ({
   numOfItems,
@@ -10,7 +12,8 @@ const ProductPagination = ({
   numOfItems: number;
   itemsPerPage: number;
 }) => {
-  const totalPages = Math.round(numOfItems / itemsPerPage);
+  const totalPages = Math.ceil(numOfItems / itemsPerPage);
+
   const [currentPage, setCurrentPage] = useQueryState("page", {
     defaultValue: 1,
     parse: (value) => {
@@ -22,7 +25,7 @@ const ProductPagination = ({
         if (parsedValue > 0 && parsedValue <= totalPages) {
           return parsedValue;
         } else {
-          throw new Error("Page value out of range");
+          return 1;
         }
       } catch (error) {
         console.error(`Error parsing page:`, error);
@@ -31,6 +34,10 @@ const ProductPagination = ({
     },
     serialize: (value) => String(value),
   });
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [totalPages]);
 
   return (
     <div className="flex w-full justify-end">
@@ -41,13 +48,14 @@ const ProductPagination = ({
       >
         <ChevronLeft size={20} /> Previous
       </button>
-      {[...Array(totalPages)].map((_, index) => (
+
+      {getPageNumbers(currentPage, totalPages).map((page) => (
         <button
-          key={index}
-          className={`px-3 py-2 border-2 cursor-pointer ${currentPage == index + 1 ? "bg-primary text-white" : "bg-transparent"}`}
-          onClick={() => setCurrentPage(index + 1)}
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          className={`px-3 py-1 border rounded ${currentPage === page ? "bg-primary text-white" : "bg-transparent"}`}
         >
-          {index + 1}
+          {page}
         </button>
       ))}
       <button
