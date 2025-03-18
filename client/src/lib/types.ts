@@ -1,6 +1,6 @@
 import { SaleCar } from "@/types/prismaTypes";
 
-export type NotificationListItem = {
+export type NotificationListItemProps = {
     id: number;
     avatar: string;
     title: string;

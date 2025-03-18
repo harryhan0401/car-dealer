@@ -38,6 +38,7 @@ const ProductPagination = ({
     serialize: (value) => String(value),
   });
 
+  /*Reset Page param to 1 if the total pages after filtering is changed  */
   useEffect(() => {
     setCurrentPage(1);
   }, [totalPages]);
@@ -51,6 +52,7 @@ const ProductPagination = ({
         }}
         disabled={currentPage - 1 == 0}
         className={`border-2 rounded-l-sm px-2 flex items-center gap-1 cursor-pointer ${currentPage - 1 == 0 && "opacity-50 pointer-events-none"}`}
+        aria-label={`Go to page ${currentPage - 1}`}
       >
         <ChevronLeft size={20} /> Previous
       </button>
@@ -63,6 +65,7 @@ const ProductPagination = ({
             scrollToTop();
           }}
           className={`px-3 py-1 border rounded ${currentPage === page ? "bg-primary text-white" : "bg-transparent"}`}
+          aria-label={`Go to page ${page}`}
         >
           {page}
         </button>
@@ -74,6 +77,7 @@ const ProductPagination = ({
         }}
         disabled={currentPage + 1 > totalPages}
         className={`border-2 rounded-r-sm px-2 flex items-center gap-1 cursor-pointer ${currentPage + 1 > totalPages && "opacity-50 pointer-events-none"}`}
+        aria-label={`Go to page ${currentPage + 1}`}
       >
         Next <ChevronRight size={20} />
       </button>

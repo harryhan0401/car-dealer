@@ -61,6 +61,7 @@ const FavouriteForm = ({
       className={`flex justify-center items-center border w-[40px] h-full ${isFavourite ? "bg-primary" : "border-primary"} rounded-sm `}
       disabled={isLoading}
       onClick={handleClick}
+      aria-label={isFavourite ? "Remove from favourites" : "Add to favourites"}
     >
       <HeartIcon
         className={`${isFavourite ? " text-white" : "text-primary"}`}

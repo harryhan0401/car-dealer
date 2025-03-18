@@ -4,11 +4,17 @@ import { PiEngineLight } from "react-icons/pi";
 import { GiStoneWheel } from "react-icons/gi";
 import { Bolt, Fuel, MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
-import { SaleCar } from "@/types/prismaTypes";
+import { SaleCar, User } from "@/types/prismaTypes";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 
 type CarCardProps = {
+  id: number;
+  mileage: number;
+  price: number;
+  description: string;
+  car: SaleCar;
+  seller: User;
   index: number;
   isHighlight: boolean;
 };
@@ -22,14 +28,14 @@ const CarCard = ({
   seller,
   index,
   isHighlight,
-}: SaleCar & CarCardProps) => {
+}: CarCardProps) => {
   const { make, model, year, fuel, horsePower, drive } = car;
   const { city } = seller.location;
   const { data: authUser } = useGetAuthUserQuery();
-
+  const title = make + " " + model + " " + year;
   return (
-    <div className={`card rounded-2xl ${isHighlight && "lg:col-span-2"}`}>
-      <div className={`grid ${isHighlight && "lg:grid-cols-2 lg:gap-10"}`}>
+    <div className={`card rounded-2xl ${isHighlight ? "lg:col-span-2" : ""}`}>
+      <div className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10" : ""}`}>
         <Image
           // src={`/${photoUrls[0]}`}
           src={
@@ -45,14 +51,15 @@ const CarCard = ({
           width={500}
           className="w-full object-cover object-center rounded-2xl"
           alt="Car"
-          priority={index % 2 == 0 || index % 2 == 1}
+          quality={[0, 1, 2, 3, 4].includes(index) ? 0 : 100}
+          priority={[0, 1, 2, 3, 4].includes(index)}
         />
         <div className="py-3 px-4 flex flex-col gap-3">
           <section
             id="car-title"
             className="flex flex-wrap justify-between items-center text-lg"
           >
-            <p>{make + " " + model + " " + year}</p>
+            <p>{title}</p>
             <p>${price}</p>
           </section>
           <section
@@ -109,7 +116,7 @@ const CarCard = ({
             id="car-interaction-group"
             className={`flex ${authUser ? "gap-5" : ""}`}
           >
-            <Button className="flex-1">
+            <Button className="flex-1" aria-label={`Buy ${title}`}>
               <span>
                 <ShoppingCart />
               </span>
