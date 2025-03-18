@@ -18,6 +18,7 @@ const FilterFuel = () => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Fuel"
+        isDisabled={selectedFuels.length === 0}
         handleResetClick={() => {
           if (selectedFuels.length > 0) setFuel(null);
         }}

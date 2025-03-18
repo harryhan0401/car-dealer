@@ -2,11 +2,12 @@ import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { PiEngineLight } from "react-icons/pi";
 import { GiStoneWheel } from "react-icons/gi";
-import { Bolt, Fuel, MapPin, ShoppingCart } from "lucide-react";
+import { Bolt, Flame, Fuel, MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { SaleCar, User } from "@/types/prismaTypes";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
+import { formatNumber } from "@/lib/utils";
 
 type CarCardProps = {
   id: number;
@@ -34,7 +35,7 @@ const CarCard = ({
   const { data: authUser } = useGetAuthUserQuery();
   const title = make + " " + model + " " + year;
   return (
-    <div className={`card rounded-2xl ${isHighlight ? "lg:col-span-2" : ""}`}>
+    <div className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}>
       <div className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10" : ""}`}>
         <Image
           // src={`/${photoUrls[0]}`}
@@ -60,7 +61,16 @@ const CarCard = ({
             className="flex flex-wrap justify-between items-center text-lg"
           >
             <p>{title}</p>
-            <p>${price}</p>
+            <p
+              className={`${isHighlight ? "text-neutral bg-primary px-2 py-1 rounded-md flex items-center gap-1" : ""}`}
+            >
+              {isHighlight && (
+                <span>
+                  <Flame size={18} />
+                </span>
+              )}
+              ${formatNumber(price)}
+            </p>
           </section>
           <section
             id="car-statistics"

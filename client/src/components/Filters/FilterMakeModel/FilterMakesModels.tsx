@@ -44,8 +44,9 @@ export default function FilterMakesModels({ saleCars }: { saleCars: SaleCar[] })
     <FilterLayout>
       <FilterHeader
         filterTitle="Make and model"
+        isDisabled={filteredMakesModels.length === 0}
         handleResetClick={() => {
-          if (filteredMakesModels.length != 0) setMakeModels(null);
+          if (filteredMakesModels.length !== 0) setMakeModels(null);
         }}
       />
       <div className="flex flex-col gap-3 mt-5">

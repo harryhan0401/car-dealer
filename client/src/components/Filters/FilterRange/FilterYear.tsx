@@ -20,6 +20,7 @@ const FilterYear = ({ saleCars }: FilterRangeProps) => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Vehicle year"
+        isDisabled={yearRange === `${minYear}-${maxYear}`}
         handleResetClick={() => {
           if (yearRange !== `${minYear}-${maxYear}`) setYearRange(null);
         }}

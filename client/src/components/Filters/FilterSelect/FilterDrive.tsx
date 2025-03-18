@@ -17,6 +17,7 @@ const FilterDrive = () => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Drive"
+        isDisabled={selectedDrives.length === 0}
         handleResetClick={() => {
           if (selectedDrives.length > 0) setDrive(null);
         }}

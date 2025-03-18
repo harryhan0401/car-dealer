@@ -104,7 +104,12 @@ const CarsList = ({
             {filteredCars
               ?.slice(startIndex, endIndex)
               .map((car, index) => (
-                <CarCard key={car.id} {...car} index={index} />
+                <CarCard
+                  key={car.id}
+                  {...car}
+                  index={index}
+                  isHighlight={index === 2 ? true : false}
+                />
               ))}
           </div>
           <div className="mt-5 me-2">

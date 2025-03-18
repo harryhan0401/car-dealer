@@ -28,6 +28,7 @@ const FilterPrice = ({ saleCars }: FilterRangeProps) => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Price"
+        isDisabled={priceRange === `${minPrice}-${maxPrice}`}
         handleResetClick={() => {
           if (priceRange !== `${minPrice}-${maxPrice}`) setPriceRange(null);
         }}

@@ -15,6 +15,7 @@ const FilterTransmission = () => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Transmission"
+        isDisabled={selectedTransmission.length === 0}
         handleResetClick={() => {
           if (selectedTransmission.length > 0) setTransmission(null);
         }}

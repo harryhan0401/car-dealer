@@ -21,6 +21,7 @@ const FilterMileage = ({ saleCars }: FilterRangeProps) => {
     <FilterLayout>
       <FilterHeader
         filterTitle="Mileage"
+        isDisabled={mileageRange === `${minMileage}-${maxMileage}`}
         handleResetClick={() => {
           if (mileageRange !== `${minMileage}-${maxMileage}`)
             setMileageRange(null);
