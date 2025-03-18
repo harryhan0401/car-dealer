@@ -10,12 +10,19 @@ import {
 import { useState } from "react";
 import Steps from "./Steps";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { FilterMakesModels } from "@/lib/types";
+import { SaleCar } from "@/types/prismaTypes";
 
 export interface ModalProps {
   children: React.ReactNode;
+  saleCars: SaleCar[];
   filteredMakesModels: FilterMakesModels[];
 }
-export default function Modal({ children, filteredMakesModels }: ModalProps) {
+export default function Modal({
+  children,
+  saleCars,
+  filteredMakesModels,
+}: ModalProps) {
   const [step, setStep] = useState(1);
   const [open, setOpen] = useState(false);
 
@@ -42,6 +49,7 @@ export default function Modal({ children, filteredMakesModels }: ModalProps) {
           <Steps
             step={step}
             setStep={setStep}
+            saleCars={saleCars}
             filteredMakesModels={filteredMakesModels}
           />
         </div>

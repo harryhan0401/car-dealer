@@ -1,13 +1,15 @@
 "use client";
-import { cars } from "@/lib/db";
 import { MouseEvent } from "react";
+import { useAppSelector } from "@/state/redux";
 import { getUniqueModelsByMake } from "@/lib/utils";
+import { StepType } from "@/lib/types";
 
 const SelectMakes = ({
   selectedMakesModels,
   setSelectedMakesModels,
+  saleCars
 }: StepType) => {
-  const uniqueMakes = Array.from(new Set(cars.map((car) => car.make)));
+  const uniqueMakes = useAppSelector(({global}) => global.uniqueMakes);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     const value = (event.target as HTMLButtonElement).getAttribute("value");
     if (value) {
@@ -16,7 +18,7 @@ const SelectMakes = ({
           selectedMakesModels.filter((makeModel) => makeModel.make !== value)
         );
       } else {
-        const modelOptions = getUniqueModelsByMake(cars, value);
+        const modelOptions = getUniqueModelsByMake(saleCars, value);
         setSelectedMakesModels([
           ...selectedMakesModels,
           { make: value, models: modelOptions },

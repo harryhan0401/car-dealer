@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import SelectMakes from "./SelectMakes";
 import { SelectModels } from "./SelectModels";
@@ -6,13 +7,21 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useQueryState } from "nuqs";
 import { convertToMakeModelsString } from "@/lib/utils";
+import { FilterMakesModels } from "@/lib/types";
+import { SaleCar } from "@/types/prismaTypes";
 
 interface StepsProps {
   step: number;
   setStep: (step: number) => void;
+  saleCars: SaleCar[];
   filteredMakesModels: FilterMakesModels[];
 }
-const Steps = ({ step, setStep, filteredMakesModels }: StepsProps) => {
+const Steps = ({
+  step,
+  setStep,
+  saleCars,
+  filteredMakesModels,
+}: StepsProps) => {
   const [selectedMakesModels, setSelectedMakesModels] =
     useState<FilterMakesModels[]>(filteredMakesModels);
 
@@ -26,12 +35,14 @@ const Steps = ({ step, setStep, filteredMakesModels }: StepsProps) => {
         <SelectMakes
           selectedMakesModels={selectedMakesModels}
           setSelectedMakesModels={setSelectedMakesModels}
+          saleCars={saleCars}
         />
       )}
       {step === 2 && (
         <SelectModels
           selectedMakesModels={selectedMakesModels}
           setSelectedMakesModels={setSelectedMakesModels}
+          saleCars={saleCars}
         />
       )}
       <DialogFooter>

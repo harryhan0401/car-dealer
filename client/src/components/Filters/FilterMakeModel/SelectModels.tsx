@@ -4,13 +4,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { StepType } from "@/lib/types";
 import { getUniqueModelsByMake } from "@/lib/utils";
-import { cars } from "@/lib/db";
 import { ChangeEvent } from "react";
 
 export function SelectModels({
   selectedMakesModels,
   setSelectedMakesModels,
+  saleCars
 }: StepType) {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     const make = e.target.getAttribute("name")!;
@@ -51,7 +52,7 @@ export function SelectModels({
   return (
     <Accordion type="single" collapsible className="w-full">
       {selectedMakesModels.map((makeModels) => {
-        const modelOptions = getUniqueModelsByMake(cars, makeModels.make);
+        const modelOptions = getUniqueModelsByMake(saleCars, makeModels.make);
         return (
           <AccordionItem
             value={makeModels.make}

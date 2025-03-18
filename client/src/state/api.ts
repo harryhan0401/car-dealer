@@ -62,9 +62,6 @@ export const api = createApi({
       query: () => "/saleCars/all",
 
     }),
-    getSaleCarsCount: build.query<number, void>({
-      query: () => "/saleCars/count",
-    }),
     updateUserSettings: build.mutation<User, { cognitoId: string } & Partial<User>>({
       query: ({ cognitoId, ...updatedUser }) => ({
         url: `/users/${cognitoId}`,
@@ -84,4 +81,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useGetSaleCarsCountQuery, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;
+export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;

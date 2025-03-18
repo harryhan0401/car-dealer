@@ -1,4 +1,6 @@
-type NotificationListItem = {
+import { SaleCar } from "@/types/prismaTypes";
+
+export type NotificationListItem = {
     id: number;
     avatar: string;
     title: string;
@@ -6,7 +8,7 @@ type NotificationListItem = {
     read: boolean;
 }
 
-type CarType = {
+export type CarType = {
     id: number;
     title: string;
     type: string;
@@ -24,23 +26,24 @@ type CarType = {
     image: string,
 }
 
-type FilterSelect = {
+export type FilterSelect = {
     query: string;
     selections: string[];
     setValue: (value: string | null) => void;
 }
 
-type FilterMakesModels = {
-    make: string,
+export type FilterMakesModels = {
+    make: string;
     models: string[]
 }
 
-type StepType = {
-    selectedMakesModels: FilterMakesModels[]
+export type StepType = {
+    selectedMakesModels: FilterMakesModels[];
     setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
+    saleCars: SaleCar[];
 }
 
-type TNavLink = {
+export type TNavLink = {
     label: string;
     path: string;
 }

@@ -4,21 +4,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-export const getSaleCarsCount = async (_req: Request, res: Response): Promise<void> => {
-    try {
-        const noOfSaleCars = await prisma.saleCar.count();
-
-        if (noOfSaleCars > 0) {
-            res.json(noOfSaleCars);
-        } else {
-            res.status(404).json({ message: "There is no available sale car" });
-        }
-    } catch (error: any) {
-        console.error("Error retrieving number of sale cars:", error);
-        res.status(500).json({ message: `Error retrieving number of sale cars: ${error.message}` });
-    }
-}
-
 export const getAllSaleCars = async (_req: Request, res: Response): Promise<void> => {
     try {
         const saleCars = await prisma.saleCar.findMany({

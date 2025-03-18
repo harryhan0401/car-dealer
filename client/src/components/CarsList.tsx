@@ -5,11 +5,14 @@ import {
   useSelectParam,
 } from "@/lib/hooks";
 import CarCard from "./Cards/CarCard";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import ProductPagination from "./Pagination";
 import { useQueryState } from "nuqs";
-import { useGetAllSaleCarsQuery, useGetSaleCarsCountQuery } from "@/state/api";
+import { useGetAllSaleCarsQuery } from "@/state/api";
 import { Skeleton } from "./ui/skeleton";
+import { useDispatch } from "react-redux";
+import { setSaleCarCount } from "@/state";
+import { useAppSelector } from "@/state/redux";
 
 interface CarsListProps {
   itemsPerPage?: number;
@@ -17,6 +20,11 @@ interface CarsListProps {
 const CarsList = ({
   itemsPerPage = 6, //If don't pass nay value to itemsPerPage prop, its default value is 6
 }: CarsListProps) => {
+  //Fetch Car List
+  const { data: saleCars, isFetching: carFetching } = useGetAllSaleCarsQuery();
+  const dispatch = useDispatch();
+  const totalSaleCars = useAppSelector(({ global }) => global.saleCarCount);
+
   const [currentPage] = useQueryState("page");
 
   //Calculate the next range of cars to be displayed
@@ -25,7 +33,7 @@ const CarsList = ({
 
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
-  const [makes, models] = useMakeModelsParam("makeModels");
+  const [makes, models] = useMakeModelsParam("makeModels", saleCars!);
   const [minPrice, maxPrice] = useAmountRangeParam("price_range");
   const [minMileage, maxMileage] = useAmountRangeParam("mileage_range");
   const fuel = useSelectParam("fuel");
@@ -34,9 +42,6 @@ const CarsList = ({
   const [minYear, maxYear] = useAmountRangeParam("year");
   //
 
-  //Fetch Car List
-  const { data: totalSaleCars } = useGetSaleCarsCountQuery();
-  const { data: saleCars, isFetching: carFetching } = useGetAllSaleCarsQuery();
   /*
   Filtering car based on filter applied (useMemo to ensure that list of filtered car 
   is rerendered when one of the filters applied).
@@ -81,13 +86,9 @@ const CarsList = ({
     maxYear,
   ]);
 
-  const isFiltered =
-    !type ||
-    makes.length > 0 ||
-    models.length > 0 ||
-    !fuel ||
-    !transmission ||
-    !drive;
+  useEffect(() => {
+    if (!carFetching) dispatch(setSaleCarCount(filteredCars.length));
+  }, [filteredCars]);
 
   return (
     <>
@@ -108,13 +109,7 @@ const CarsList = ({
           </div>
           <div className="mt-5 me-2">
             <ProductPagination
-              numOfItems={
-                isFiltered
-                  ? filteredCars.length
-                  : totalSaleCars
-                    ? totalSaleCars
-                    : 0
-              }
+              numOfItems={totalSaleCars}
               itemsPerPage={itemsPerPage}
             />
           </div>

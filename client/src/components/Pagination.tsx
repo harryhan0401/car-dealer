@@ -5,6 +5,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 
+function scrollToTop() {
+  window.scroll({ top: 0, behavior: "instant" });
+}
 const ProductPagination = ({
   numOfItems,
   itemsPerPage,
@@ -42,7 +45,10 @@ const ProductPagination = ({
   return (
     <div className="flex w-full justify-end">
       <button
-        onClick={() => currentPage - 1 > 0 && setCurrentPage(currentPage - 1)}
+        onClick={() => {
+          currentPage - 1 > 0 && setCurrentPage(currentPage - 1);
+          scrollToTop();
+        }}
         disabled={currentPage - 1 == 0}
         className={`border-2 rounded-l-sm px-2 flex items-center gap-1 cursor-pointer ${currentPage - 1 == 0 && "opacity-50 pointer-events-none"}`}
       >
@@ -52,16 +58,20 @@ const ProductPagination = ({
       {getPageNumbers(currentPage, totalPages).map((page) => (
         <button
           key={page}
-          onClick={() => setCurrentPage(page)}
+          onClick={() => {
+            setCurrentPage(page);
+            scrollToTop();
+          }}
           className={`px-3 py-1 border rounded ${currentPage === page ? "bg-primary text-white" : "bg-transparent"}`}
         >
           {page}
         </button>
       ))}
       <button
-        onClick={() =>
-          currentPage + 1 <= totalPages && setCurrentPage(currentPage + 1)
-        }
+        onClick={() => {
+          currentPage + 1 <= totalPages && setCurrentPage(currentPage + 1);
+          scrollToTop();
+        }}
         disabled={currentPage + 1 > totalPages}
         className={`border-2 rounded-r-sm px-2 flex items-center gap-1 cursor-pointer ${currentPage + 1 > totalPages && "opacity-50 pointer-events-none"}`}
       >

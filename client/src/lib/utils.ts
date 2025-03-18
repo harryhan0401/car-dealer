@@ -1,7 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { cars } from "@/lib/db"
-import { AuthUser, SignUpOutput } from "aws-amplify/auth";
+import { AuthUser } from "aws-amplify/auth";
+import { SaleCar } from "@/types/prismaTypes";
+import { FilterMakesModels } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -50,15 +51,24 @@ export function getMakeImage(make: string): string {
   else return ""
 }
 
-export function parseFilterMakeModels(makeModelsQueryString: string): FilterMakesModels[] {
-  const parsedData: FilterMakesModels[] = makeModelsQueryString
-    .split(";") //Split between makes
-    .map((makeModel) => {
-      const [make, models] = makeModel.split(":"); //For each make, split make and models by ":"
-      return { make, models: models ? models.split(",") : getUniqueModelsByMake(cars, make) }; //Return the parsedData following FilterMakesModels[] type
-    });
-
-  return parsedData;
+export function parseFilterMakeModels(makeModelsQueryString: string, saleCars: SaleCar[]): FilterMakesModels[] {
+  if (saleCars) {
+    const parsedData: FilterMakesModels[] = makeModelsQueryString
+      .split(";") //Split between makes
+      .map((makeModel) => {
+        const [make, models] = makeModel.split(":"); //For each make, split make and models by ":"
+        const uniqueModelOptions = Array.from(
+          new Set(
+            saleCars
+              .filter(({ car }) => car.make === make) // Filter by `make`
+              .map(({ car }) => car.model) // Extract models
+          )
+        );
+        return { make, models: models ? models.split(",") : uniqueModelOptions };
+      });
+    return parsedData;
+  }
+  return [];
 }
 
 
@@ -72,13 +82,18 @@ export function convertToMakeModelsString(selectedMakesModels: FilterMakesModels
   return queryString;
 }
 
-export function getUniqueModelsByMake(cars: CarType[], make: string): string[] {
-  const modelOptions = Array.from(
-    new Set(
-      cars.filter((car) => car.make === make).map((car) => car.model)
-    )
-  );
-  return modelOptions;
+export function getUniqueModelsByMake(cars: SaleCar[], make: string): string[] {
+  if (cars) {
+    const modelOptions = Array.from(
+      new Set(
+        cars
+          .filter(({ car }) => car.make === make)
+          .map(({ car }) => car.model)
+      )
+    );
+    return modelOptions;
+  }
+  return [];
 }
 
 export async function createNewUserInDatabase(user: AuthUser, userEmail: string, userRole: string, fetchWithBQ: any) {

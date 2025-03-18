@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  favourites: []
+  favourites: [],
+  uniqueMakes: [],
+  saleCarCount: 0
 };
 
 export const globalSlice = createSlice({
@@ -11,9 +13,15 @@ export const globalSlice = createSlice({
     setFavourites: (state, action) => {
       state.favourites = action.payload; // Replace the entire favourites list
     },
+    setUniqueMakes: (state, action) => {
+      state.uniqueMakes = action.payload; // Replace the entire favourites list
+    },
+    setSaleCarCount: (state, action) => {
+      state.saleCarCount = action.payload;
+    }
   },
 });
 
-export const { setFavourites } = globalSlice.actions;
+export const { setFavourites, setUniqueMakes, setSaleCarCount } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -1,6 +1,8 @@
 import { useQueryState } from "nuqs";
 import { parseFilterMakeModels } from "./utils";
 import React from "react";
+import { FilterMakesModels } from "./types";
+import { SaleCar } from "@/types/prismaTypes";
 
 const MOBILE_BREAKPOINT = 1024
 
@@ -86,10 +88,10 @@ export const useSelectParam = (queryParam: string): "" | string[] => {
     return "";
 }
 
-export const useMakeModelsParam = (queryParam: string): [string[], string[]] => {
+export const useMakeModelsParam = (queryParam: string, saleCars: SaleCar[]): [string[], string[]] => {
     const [makeModels] = useQueryState(queryParam);
     if (makeModels) {
-        const filteredMakeModels: FilterMakesModels[] = parseFilterMakeModels(makeModels);
+        const filteredMakeModels: FilterMakesModels[] = parseFilterMakeModels(makeModels, saleCars);
         const makes = Array.from(filteredMakeModels.map((makeModel) => makeModel.make));
         const models = Array.from(filteredMakeModels.map((makeModel) => makeModel.models));
         const allModels = models.flat();
