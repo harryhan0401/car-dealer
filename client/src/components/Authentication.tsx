@@ -5,20 +5,38 @@ import Favourite from "./Favourite";
 import Profile from "./Profile";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setFavourites } from "@/state";
+import { useIsMobile } from "@/lib/hooks";
 
 const Authentication = () => {
+  const isMobile = useIsMobile();
+
   const { data: authUser, isLoading } = useGetAuthUserQuery();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (authUser)
+      dispatch(
+        setFavourites(
+          authUser.userInfo.favourites.map((fav: { id: number }) => fav.id)
+        )
+      );
+  }, [authUser]);
 
   if (isLoading) {
     return null;
   }
-
   return (
     <>
       {authUser ? (
         <>
-          <Notification />
-          <Favourite noOfFavourites={authUser.userInfo.favourites.length} />
+          {!isMobile && (
+            <>
+              <Notification />
+              <Favourite cognitoId={authUser.cognitoInfo.userId} />
+            </>
+          )}
           <Profile
             cognitoId={authUser.cognitoInfo.userId}
             userRole={authUser.userRole}

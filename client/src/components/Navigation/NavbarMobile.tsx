@@ -5,9 +5,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import Location from "./Location";
+import Location from "../Location";
 import Link from "next/link";
-import Profile from "./Profile";
+import Authentication from "../Authentication";
 const NavbarMobile = ({
   children,
   navLinks,
@@ -21,7 +21,7 @@ const NavbarMobile = ({
       <SheetContent className="z-100 ">
         <SheetHeader>
           <SheetTitle>
-            <Profile />
+            <Authentication />
           </SheetTitle>
         </SheetHeader>
         <div className="flex flex-col h-full justify-between py-6">

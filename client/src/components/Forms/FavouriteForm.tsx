@@ -1,24 +1,33 @@
 "use client";
+import { setFavourites } from "@/state";
 import { useUpdateUserFavouritesMutation } from "@/state/api";
+import { useAppSelector } from "@/state/redux";
 import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 const FavouriteForm = ({
   authUser,
   saleCarId,
-  refetchUser,
 }: {
   authUser: AppUser;
   saleCarId: number;
-  refetchUser: () => void;
 }) => {
+  const dispatch = useDispatch();
   const [updateUserFavourites, { isLoading }] =
     useUpdateUserFavouritesMutation();
 
-  const userFavourites: number[] = authUser.userInfo.favourites.map(
-    (fav: { id: number }) => fav.id
+  let userFavourites: number[] = useAppSelector(
+    ({ global }) => global.favourites
   );
+
+  if (userFavourites.length == 0) {
+    userFavourites = authUser.userInfo.favourites.map(
+      (fav: { id: number }) => fav.id
+    );
+  }
+
   const [isFavourite, setIsFavourite] = useState<boolean>(
     userFavourites.includes(saleCarId)
   );
@@ -30,14 +39,19 @@ const FavouriteForm = ({
         cognitoId,
         saleCarId,
       }).unwrap();
-      if (
-        res.favourites.map((fav: { id: number }) => fav.id).includes(saleCarId)
-      )
-        setIsFavourite(true);
-      else {
-        setIsFavourite(false);
+      if (res) {
+        const favourites = res.favourites.map((fav: { id: number }) => fav.id);
+        if (favourites.includes(saleCarId)) {
+          setIsFavourite(true);
+        } else {
+          setIsFavourite(false);
+        }
+        dispatch(setFavourites(favourites));
+      } else {
+        throw new Error(
+          "Unable to add new favourite - line-45 FavouriteForm.tsx"
+        );
       }
-      refetchUser();
     } catch (error) {
       console.error("Error adding favourite:", error);
     }

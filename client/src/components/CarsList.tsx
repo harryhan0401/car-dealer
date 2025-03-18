@@ -4,7 +4,7 @@ import {
   useMakeModelsParam,
   useSelectParam,
 } from "@/lib/hooks";
-import VerticalCarCard from "./Cards/VerticalCarCard";
+import CarCard from "./Cards/CarCard";
 import { useMemo } from "react";
 import ProductPagination from "./Pagination";
 import { useQueryState } from "nuqs";
@@ -103,7 +103,7 @@ const CarsList = ({
             {filteredCars
               ?.slice(startIndex, endIndex)
               .map((car, index) => (
-                <VerticalCarCard key={Math.random()} {...car} index={index} />
+                <CarCard key={car.id} {...car} index={index} />
               ))}
           </div>
           <div className="mt-5 me-2">

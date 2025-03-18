@@ -1,9 +1,9 @@
 import { Menu } from "lucide-react";
 import NavLink from "./NavLink";
-import CompanyLogo from "./CompanyLogo";
+import CompanyLogo from "../CompanyLogo";
 import NavbarMobile from "./NavbarMobile";
-import Location from "./Location";
-import Authentication from "./Authentication";
+import Location from "../Location";
+import Authentication from "../Authentication";
 
 const Navbar = () => {
   const navLinks: TNavLink[] = [
