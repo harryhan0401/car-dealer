@@ -2,7 +2,10 @@
 CREATE EXTENSION IF NOT EXISTS "postgis";
 
 -- CreateEnum
-CREATE TYPE "CarType" AS ENUM ('Sedan', 'Coupe', 'Hatchback', 'Suv', 'Truck', 'Convertible', 'Wagon', 'Minivan', 'Sportscar', 'Crossover', 'Roadster', 'Luxury', 'Electric', 'Hybrid', 'Diesel', 'CrossoverSuv', 'Van');
+CREATE TYPE "Make" AS ENUM ('Acura', 'AlfaRomeo', 'AstonMartin', 'Audi', 'Bentley', 'BMW', 'Bugatti', 'Buick', 'Cadillac', 'Chevrolet', 'Chrysler', 'Citroen', 'Dodge', 'Ferrari', 'Fiat', 'Ford', 'Genesis', 'Gmc', 'Honda', 'Hyundai', 'Infiniti', 'Jaguar', 'Jeep', 'Kia', 'Koenigsegg', 'Lamborghini', 'LandRover', 'Lexus', 'Lincoln', 'Lotus', 'Maserati', 'Maybach', 'Mazda', 'Mclaren', 'MercedesBenz', 'Mini', 'Mitsubishi', 'Nissan', 'Pagani', 'Peugeot', 'Porsche', 'Ram', 'Renault', 'RollsRoyce', 'Saab', 'Subaru', 'Suzuki', 'Tesla', 'Toyota', 'Volkswagen', 'Volvo');
+
+-- CreateEnum
+CREATE TYPE "Type" AS ENUM ('Sedan', 'Coupe', 'Hatchback', 'SUV', 'Truck', 'Convertible', 'Wagon', 'Minivan', 'Sportscar', 'Crossover', 'Roadster', 'Luxury', 'Electric', 'Hybrid', 'Diesel', 'CrossoverSUV', 'Van');
 
 -- CreateEnum
 CREATE TYPE "Fuel" AS ENUM ('Petrol', 'Diesel', 'Hybrid', 'Electric', 'Ethanol', 'Unleaded', 'E10', 'PremiumUnleaded95', 'PremiumUnleaded98', 'Biofuels', 'E85', 'Hydrogen', 'NaturalGas', 'Biodiesel', 'LPG');
@@ -55,12 +58,11 @@ CREATE TABLE "Location" (
 -- CreateTable
 CREATE TABLE "Car" (
     "id" SERIAL NOT NULL,
-    "make" TEXT NOT NULL,
+    "make" "Make" NOT NULL,
     "model" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
-    "type" TEXT NOT NULL,
+    "type" "Type" NOT NULL,
     "fuel" "Fuel" NOT NULL,
-    "horsePower" INTEGER NOT NULL,
     "drive" "Drive" NOT NULL,
     "transmission" "Transmission" NOT NULL,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -134,6 +136,9 @@ CREATE TABLE "_UserFavourites" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_cognitoId_key" ON "User"("cognitoId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Car_make_model_year_type_fuel_drive_transmission_key" ON "Car"("make", "model", "year", "type", "fuel", "drive", "transmission");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "SaleCar_vin_key" ON "SaleCar"("vin");

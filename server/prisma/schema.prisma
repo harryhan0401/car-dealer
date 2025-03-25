@@ -9,11 +9,65 @@ datasource db {
   extensions = [postgis]
 }
 
-enum CarType {
+enum Make {
+  Acura
+  AlfaRomeo
+  AstonMartin
+  Audi
+  Bentley
+  BMW
+  Bugatti
+  Buick
+  Cadillac
+  Chevrolet
+  Chrysler
+  Citroen
+  Dodge
+  Ferrari
+  Fiat
+  Ford
+  Genesis
+  Gmc
+  Honda
+  Hyundai
+  Infiniti
+  Jaguar
+  Jeep
+  Kia
+  Koenigsegg
+  Lamborghini
+  LandRover
+  Lexus
+  Lincoln
+  Lotus
+  Maserati
+  Maybach
+  Mazda
+  Mclaren
+  MercedesBenz
+  Mini
+  Mitsubishi
+  Nissan
+  Pagani
+  Peugeot
+  Porsche
+  Ram
+  Renault
+  RollsRoyce
+  Saab
+  Subaru
+  Suzuki
+  Tesla
+  Toyota
+  Volkswagen
+  Volvo
+}
+
+enum Type {
   Sedan
   Coupe
   Hatchback
-  Suv
+  SUV
   Truck
   Convertible
   Wagon
@@ -25,7 +79,7 @@ enum CarType {
   Electric
   Hybrid
   Diesel
-  CrossoverSuv
+  CrossoverSUV
   Van
 }
 
@@ -126,18 +180,19 @@ model Location {
 
 model Car {
   id              Int          @id @default(autoincrement())
-  make            String
+  make            Make
   model           String
   year            Int
-  type            String
+  type            Type
   fuel            Fuel
-  horsePower      Int
   drive           Drive
   transmission    Transmission
   dateTimeCreated DateTime     @default(now())
   dateTimeUpdated DateTime     @default(now()) @updatedAt
 
   carSales SaleCar[]
+
+  @@unique([make, model, year, type, fuel, drive, transmission])
 }
 
 model SaleCar {

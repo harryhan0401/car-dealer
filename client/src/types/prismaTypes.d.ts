@@ -53,11 +53,68 @@ export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
  * Enums
  */
 export namespace $Enums {
-  export const CarType: {
+  export const Make: {
+  Acura: 'Acura',
+  AlfaRomeo: 'AlfaRomeo',
+  AstonMartin: 'AstonMartin',
+  Audi: 'Audi',
+  Bentley: 'Bentley',
+  BMW: 'BMW',
+  Bugatti: 'Bugatti',
+  Buick: 'Buick',
+  Cadillac: 'Cadillac',
+  Chevrolet: 'Chevrolet',
+  Chrysler: 'Chrysler',
+  Citroen: 'Citroen',
+  Dodge: 'Dodge',
+  Ferrari: 'Ferrari',
+  Fiat: 'Fiat',
+  Ford: 'Ford',
+  Genesis: 'Genesis',
+  Gmc: 'Gmc',
+  Honda: 'Honda',
+  Hyundai: 'Hyundai',
+  Infiniti: 'Infiniti',
+  Jaguar: 'Jaguar',
+  Jeep: 'Jeep',
+  Kia: 'Kia',
+  Koenigsegg: 'Koenigsegg',
+  Lamborghini: 'Lamborghini',
+  LandRover: 'LandRover',
+  Lexus: 'Lexus',
+  Lincoln: 'Lincoln',
+  Lotus: 'Lotus',
+  Maserati: 'Maserati',
+  Maybach: 'Maybach',
+  Mazda: 'Mazda',
+  Mclaren: 'Mclaren',
+  MercedesBenz: 'MercedesBenz',
+  Mini: 'Mini',
+  Mitsubishi: 'Mitsubishi',
+  Nissan: 'Nissan',
+  Pagani: 'Pagani',
+  Peugeot: 'Peugeot',
+  Porsche: 'Porsche',
+  Ram: 'Ram',
+  Renault: 'Renault',
+  RollsRoyce: 'RollsRoyce',
+  Saab: 'Saab',
+  Subaru: 'Subaru',
+  Suzuki: 'Suzuki',
+  Tesla: 'Tesla',
+  Toyota: 'Toyota',
+  Volkswagen: 'Volkswagen',
+  Volvo: 'Volvo'
+};
+
+export type Make = (typeof Make)[keyof typeof Make]
+
+
+export const Type: {
   Sedan: 'Sedan',
   Coupe: 'Coupe',
   Hatchback: 'Hatchback',
-  Suv: 'Suv',
+  SUV: 'SUV',
   Truck: 'Truck',
   Convertible: 'Convertible',
   Wagon: 'Wagon',
@@ -69,11 +126,11 @@ export namespace $Enums {
   Electric: 'Electric',
   Hybrid: 'Hybrid',
   Diesel: 'Diesel',
-  CrossoverSuv: 'CrossoverSuv',
+  CrossoverSUV: 'CrossoverSUV',
   Van: 'Van'
 };
 
-export type CarType = (typeof CarType)[keyof typeof CarType]
+export type Type = (typeof Type)[keyof typeof Type]
 
 
 export const Fuel: {
@@ -157,9 +214,13 @@ export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
 }
 
-export type CarType = $Enums.CarType
+export type Make = $Enums.Make
 
-export const CarType: typeof $Enums.CarType
+export const Make: typeof $Enums.Make
+
+export type Type = $Enums.Type
+
+export const Type: typeof $Enums.Type
 
 export type Fuel = $Enums.Fuel
 
@@ -3997,23 +4058,20 @@ export namespace Prisma {
   export type CarAvgAggregateOutputType = {
     id: number | null
     year: number | null
-    horsePower: number | null
   }
 
   export type CarSumAggregateOutputType = {
     id: number | null
     year: number | null
-    horsePower: number | null
   }
 
   export type CarMinAggregateOutputType = {
     id: number | null
-    make: string | null
+    make: $Enums.Make | null
     model: string | null
     year: number | null
-    type: string | null
+    type: $Enums.Type | null
     fuel: $Enums.Fuel | null
-    horsePower: number | null
     drive: $Enums.Drive | null
     transmission: $Enums.Transmission | null
     dateTimeCreated: Date | null
@@ -4022,12 +4080,11 @@ export namespace Prisma {
 
   export type CarMaxAggregateOutputType = {
     id: number | null
-    make: string | null
+    make: $Enums.Make | null
     model: string | null
     year: number | null
-    type: string | null
+    type: $Enums.Type | null
     fuel: $Enums.Fuel | null
-    horsePower: number | null
     drive: $Enums.Drive | null
     transmission: $Enums.Transmission | null
     dateTimeCreated: Date | null
@@ -4041,7 +4098,6 @@ export namespace Prisma {
     year: number
     type: number
     fuel: number
-    horsePower: number
     drive: number
     transmission: number
     dateTimeCreated: number
@@ -4053,13 +4109,11 @@ export namespace Prisma {
   export type CarAvgAggregateInputType = {
     id?: true
     year?: true
-    horsePower?: true
   }
 
   export type CarSumAggregateInputType = {
     id?: true
     year?: true
-    horsePower?: true
   }
 
   export type CarMinAggregateInputType = {
@@ -4069,7 +4123,6 @@ export namespace Prisma {
     year?: true
     type?: true
     fuel?: true
-    horsePower?: true
     drive?: true
     transmission?: true
     dateTimeCreated?: true
@@ -4083,7 +4136,6 @@ export namespace Prisma {
     year?: true
     type?: true
     fuel?: true
-    horsePower?: true
     drive?: true
     transmission?: true
     dateTimeCreated?: true
@@ -4097,7 +4149,6 @@ export namespace Prisma {
     year?: true
     type?: true
     fuel?: true
-    horsePower?: true
     drive?: true
     transmission?: true
     dateTimeCreated?: true
@@ -4193,12 +4244,11 @@ export namespace Prisma {
 
   export type CarGroupByOutputType = {
     id: number
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated: Date
@@ -4231,7 +4281,6 @@ export namespace Prisma {
     year?: boolean
     type?: boolean
     fuel?: boolean
-    horsePower?: boolean
     drive?: boolean
     transmission?: boolean
     dateTimeCreated?: boolean
@@ -4247,7 +4296,6 @@ export namespace Prisma {
     year?: boolean
     type?: boolean
     fuel?: boolean
-    horsePower?: boolean
     drive?: boolean
     transmission?: boolean
     dateTimeCreated?: boolean
@@ -4261,7 +4309,6 @@ export namespace Prisma {
     year?: boolean
     type?: boolean
     fuel?: boolean
-    horsePower?: boolean
     drive?: boolean
     transmission?: boolean
     dateTimeCreated?: boolean
@@ -4275,14 +4322,13 @@ export namespace Prisma {
     year?: boolean
     type?: boolean
     fuel?: boolean
-    horsePower?: boolean
     drive?: boolean
     transmission?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
   }
 
-  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "make" | "model" | "year" | "type" | "fuel" | "horsePower" | "drive" | "transmission" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["car"]>
+  export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "make" | "model" | "year" | "type" | "fuel" | "drive" | "transmission" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["car"]>
   export type CarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     carSales?: boolean | Car$carSalesArgs<ExtArgs>
     _count?: boolean | CarCountOutputTypeDefaultArgs<ExtArgs>
@@ -4297,12 +4343,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      make: string
+      make: $Enums.Make
       model: string
       year: number
-      type: string
+      type: $Enums.Type
       fuel: $Enums.Fuel
-      horsePower: number
       drive: $Enums.Drive
       transmission: $Enums.Transmission
       dateTimeCreated: Date
@@ -4732,12 +4777,11 @@ export namespace Prisma {
    */ 
   interface CarFieldRefs {
     readonly id: FieldRef<"Car", 'Int'>
-    readonly make: FieldRef<"Car", 'String'>
+    readonly make: FieldRef<"Car", 'Make'>
     readonly model: FieldRef<"Car", 'String'>
     readonly year: FieldRef<"Car", 'Int'>
-    readonly type: FieldRef<"Car", 'String'>
+    readonly type: FieldRef<"Car", 'Type'>
     readonly fuel: FieldRef<"Car", 'Fuel'>
-    readonly horsePower: FieldRef<"Car", 'Int'>
     readonly drive: FieldRef<"Car", 'Drive'>
     readonly transmission: FieldRef<"Car", 'Transmission'>
     readonly dateTimeCreated: FieldRef<"Car", 'DateTime'>
@@ -9861,7 +9905,6 @@ export namespace Prisma {
     year: 'year',
     type: 'type',
     fuel: 'fuel',
-    horsePower: 'horsePower',
     drive: 'drive',
     transmission: 'transmission',
     dateTimeCreated: 'dateTimeCreated',
@@ -9994,6 +10037,34 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Make'
+   */
+  export type EnumMakeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Make'>
+    
+
+
+  /**
+   * Reference to a field of type 'Make[]'
+   */
+  export type ListEnumMakeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Make[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Type'
+   */
+  export type EnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type'>
+    
+
+
+  /**
+   * Reference to a field of type 'Type[]'
+   */
+  export type ListEnumTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Type[]'>
     
 
 
@@ -10267,12 +10338,11 @@ export namespace Prisma {
     OR?: CarWhereInput[]
     NOT?: CarWhereInput | CarWhereInput[]
     id?: IntFilter<"Car"> | number
-    make?: StringFilter<"Car"> | string
+    make?: EnumMakeFilter<"Car"> | $Enums.Make
     model?: StringFilter<"Car"> | string
     year?: IntFilter<"Car"> | number
-    type?: StringFilter<"Car"> | string
+    type?: EnumTypeFilter<"Car"> | $Enums.Type
     fuel?: EnumFuelFilter<"Car"> | $Enums.Fuel
-    horsePower?: IntFilter<"Car"> | number
     drive?: EnumDriveFilter<"Car"> | $Enums.Drive
     transmission?: EnumTransmissionFilter<"Car"> | $Enums.Transmission
     dateTimeCreated?: DateTimeFilter<"Car"> | Date | string
@@ -10287,7 +10357,6 @@ export namespace Prisma {
     year?: SortOrder
     type?: SortOrder
     fuel?: SortOrder
-    horsePower?: SortOrder
     drive?: SortOrder
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
@@ -10297,21 +10366,21 @@ export namespace Prisma {
 
   export type CarWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    make_model_year_type_fuel_drive_transmission?: CarMakeModelYearTypeFuelDriveTransmissionCompoundUniqueInput
     AND?: CarWhereInput | CarWhereInput[]
     OR?: CarWhereInput[]
     NOT?: CarWhereInput | CarWhereInput[]
-    make?: StringFilter<"Car"> | string
+    make?: EnumMakeFilter<"Car"> | $Enums.Make
     model?: StringFilter<"Car"> | string
     year?: IntFilter<"Car"> | number
-    type?: StringFilter<"Car"> | string
+    type?: EnumTypeFilter<"Car"> | $Enums.Type
     fuel?: EnumFuelFilter<"Car"> | $Enums.Fuel
-    horsePower?: IntFilter<"Car"> | number
     drive?: EnumDriveFilter<"Car"> | $Enums.Drive
     transmission?: EnumTransmissionFilter<"Car"> | $Enums.Transmission
     dateTimeCreated?: DateTimeFilter<"Car"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Car"> | Date | string
     carSales?: SaleCarListRelationFilter
-  }, "id">
+  }, "id" | "make_model_year_type_fuel_drive_transmission">
 
   export type CarOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10320,7 +10389,6 @@ export namespace Prisma {
     year?: SortOrder
     type?: SortOrder
     fuel?: SortOrder
-    horsePower?: SortOrder
     drive?: SortOrder
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
@@ -10337,12 +10405,11 @@ export namespace Prisma {
     OR?: CarScalarWhereWithAggregatesInput[]
     NOT?: CarScalarWhereWithAggregatesInput | CarScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Car"> | number
-    make?: StringWithAggregatesFilter<"Car"> | string
+    make?: EnumMakeWithAggregatesFilter<"Car"> | $Enums.Make
     model?: StringWithAggregatesFilter<"Car"> | string
     year?: IntWithAggregatesFilter<"Car"> | number
-    type?: StringWithAggregatesFilter<"Car"> | string
+    type?: EnumTypeWithAggregatesFilter<"Car"> | $Enums.Type
     fuel?: EnumFuelWithAggregatesFilter<"Car"> | $Enums.Fuel
-    horsePower?: IntWithAggregatesFilter<"Car"> | number
     drive?: EnumDriveWithAggregatesFilter<"Car"> | $Enums.Drive
     transmission?: EnumTransmissionWithAggregatesFilter<"Car"> | $Enums.Transmission
     dateTimeCreated?: DateTimeWithAggregatesFilter<"Car"> | Date | string
@@ -10795,12 +10862,11 @@ export namespace Prisma {
   }
 
   export type CarCreateInput = {
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
@@ -10810,12 +10876,11 @@ export namespace Prisma {
 
   export type CarUncheckedCreateInput = {
     id?: number
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
@@ -10824,12 +10889,11 @@ export namespace Prisma {
   }
 
   export type CarUpdateInput = {
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10839,12 +10903,11 @@ export namespace Prisma {
 
   export type CarUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10854,12 +10917,11 @@ export namespace Prisma {
 
   export type CarCreateManyInput = {
     id?: number
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
@@ -10867,12 +10929,11 @@ export namespace Prisma {
   }
 
   export type CarUpdateManyMutationInput = {
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10881,12 +10942,11 @@ export namespace Prisma {
 
   export type CarUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11436,6 +11496,20 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type EnumMakeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Make | EnumMakeFieldRefInput<$PrismaModel>
+    in?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMakeFilter<$PrismaModel> | $Enums.Make
+  }
+
+  export type EnumTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeFilter<$PrismaModel> | $Enums.Type
+  }
+
   export type EnumFuelFilter<$PrismaModel = never> = {
     equals?: $Enums.Fuel | EnumFuelFieldRefInput<$PrismaModel>
     in?: $Enums.Fuel[] | ListEnumFuelFieldRefInput<$PrismaModel>
@@ -11457,6 +11531,16 @@ export namespace Prisma {
     not?: NestedEnumTransmissionFilter<$PrismaModel> | $Enums.Transmission
   }
 
+  export type CarMakeModelYearTypeFuelDriveTransmissionCompoundUniqueInput = {
+    make: $Enums.Make
+    model: string
+    year: number
+    type: $Enums.Type
+    fuel: $Enums.Fuel
+    drive: $Enums.Drive
+    transmission: $Enums.Transmission
+  }
+
   export type CarCountOrderByAggregateInput = {
     id?: SortOrder
     make?: SortOrder
@@ -11464,7 +11548,6 @@ export namespace Prisma {
     year?: SortOrder
     type?: SortOrder
     fuel?: SortOrder
-    horsePower?: SortOrder
     drive?: SortOrder
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
@@ -11474,7 +11557,6 @@ export namespace Prisma {
   export type CarAvgOrderByAggregateInput = {
     id?: SortOrder
     year?: SortOrder
-    horsePower?: SortOrder
   }
 
   export type CarMaxOrderByAggregateInput = {
@@ -11484,7 +11566,6 @@ export namespace Prisma {
     year?: SortOrder
     type?: SortOrder
     fuel?: SortOrder
-    horsePower?: SortOrder
     drive?: SortOrder
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
@@ -11498,7 +11579,6 @@ export namespace Prisma {
     year?: SortOrder
     type?: SortOrder
     fuel?: SortOrder
-    horsePower?: SortOrder
     drive?: SortOrder
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
@@ -11508,7 +11588,26 @@ export namespace Prisma {
   export type CarSumOrderByAggregateInput = {
     id?: SortOrder
     year?: SortOrder
-    horsePower?: SortOrder
+  }
+
+  export type EnumMakeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Make | EnumMakeFieldRefInput<$PrismaModel>
+    in?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMakeWithAggregatesFilter<$PrismaModel> | $Enums.Make
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMakeFilter<$PrismaModel>
+    _max?: NestedEnumMakeFilter<$PrismaModel>
+  }
+
+  export type EnumTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeWithAggregatesFilter<$PrismaModel> | $Enums.Type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeFilter<$PrismaModel>
+    _max?: NestedEnumTypeFilter<$PrismaModel>
   }
 
   export type EnumFuelWithAggregatesFilter<$PrismaModel = never> = {
@@ -12115,6 +12214,14 @@ export namespace Prisma {
     connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
   }
 
+  export type EnumMakeFieldUpdateOperationsInput = {
+    set?: $Enums.Make
+  }
+
+  export type EnumTypeFieldUpdateOperationsInput = {
+    set?: $Enums.Type
+  }
+
   export type EnumFuelFieldUpdateOperationsInput = {
     set?: $Enums.Fuel
   }
@@ -12516,6 +12623,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumMakeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Make | EnumMakeFieldRefInput<$PrismaModel>
+    in?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMakeFilter<$PrismaModel> | $Enums.Make
+  }
+
+  export type NestedEnumTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeFilter<$PrismaModel> | $Enums.Type
+  }
+
   export type NestedEnumFuelFilter<$PrismaModel = never> = {
     equals?: $Enums.Fuel | EnumFuelFieldRefInput<$PrismaModel>
     in?: $Enums.Fuel[] | ListEnumFuelFieldRefInput<$PrismaModel>
@@ -12535,6 +12656,26 @@ export namespace Prisma {
     in?: $Enums.Transmission[] | ListEnumTransmissionFieldRefInput<$PrismaModel>
     notIn?: $Enums.Transmission[] | ListEnumTransmissionFieldRefInput<$PrismaModel>
     not?: NestedEnumTransmissionFilter<$PrismaModel> | $Enums.Transmission
+  }
+
+  export type NestedEnumMakeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Make | EnumMakeFieldRefInput<$PrismaModel>
+    in?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Make[] | ListEnumMakeFieldRefInput<$PrismaModel>
+    not?: NestedEnumMakeWithAggregatesFilter<$PrismaModel> | $Enums.Make
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumMakeFilter<$PrismaModel>
+    _max?: NestedEnumMakeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Type | EnumTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Type[] | ListEnumTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeWithAggregatesFilter<$PrismaModel> | $Enums.Type
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeFilter<$PrismaModel>
+    _max?: NestedEnumTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumFuelWithAggregatesFilter<$PrismaModel = never> = {
@@ -13156,12 +13297,11 @@ export namespace Prisma {
   }
 
   export type CarCreateWithoutCarSalesInput = {
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
@@ -13170,12 +13310,11 @@ export namespace Prisma {
 
   export type CarUncheckedCreateWithoutCarSalesInput = {
     id?: number
-    make: string
+    make: $Enums.Make
     model: string
     year: number
-    type: string
+    type: $Enums.Type
     fuel: $Enums.Fuel
-    horsePower: number
     drive: $Enums.Drive
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
@@ -13287,12 +13426,11 @@ export namespace Prisma {
   }
 
   export type CarUpdateWithoutCarSalesInput = {
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13301,12 +13439,11 @@ export namespace Prisma {
 
   export type CarUncheckedUpdateWithoutCarSalesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    make?: StringFieldUpdateOperationsInput | string
+    make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeFieldUpdateOperationsInput | $Enums.Type
     fuel?: EnumFuelFieldUpdateOperationsInput | $Enums.Fuel
-    horsePower?: IntFieldUpdateOperationsInput | number
     drive?: EnumDriveFieldUpdateOperationsInput | $Enums.Drive
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string

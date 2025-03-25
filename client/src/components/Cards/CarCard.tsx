@@ -30,19 +30,19 @@ const CarCard = ({
   index,
   isHighlight,
 }: CarCardProps) => {
-  const { make, model, year, fuel, horsePower, drive } = car;
+  const { make, model, year, fuel, drive } = car;
   const { city } = seller.location;
   const { data: authUser } = useGetAuthUserQuery();
   const title = make + " " + model + " " + year;
   return (
     <div className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}>
-      <div className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10" : ""}`}>
+      <div className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10 lg:items-center" : ""}`}>
         <Image
           // src={`/${photoUrls[0]}`}
           src={
             make.toLowerCase() == "bmw"
               ? "/bmw.jpg"
-              : make.toLowerCase() == "mercedes-benz"
+              : make.toLowerCase() == "mercedesbenz"
                 ? "/mercedes.jpg"
                 : make.toLowerCase() == "audi"
                   ? "/audi.jpg"
@@ -74,7 +74,7 @@ const CarCard = ({
           </section>
           <section
             id="car-statistics"
-            className="grid grid-cols-2 xl:grid-cols-4 max-w-[500px] gap-5 text-sm sm:text-base"
+            className="grid grid-cols-2 xl:grid-cols-3 max-w-[500px] gap-5 text-sm sm:text-base"
           >
             <section
               id="car_mileage"
@@ -97,13 +97,13 @@ const CarCard = ({
                 </p>
               )}
             </section>
-            <section
+            {/* <section
               id="car-horse-power"
               className="border rounded-lg p-2 bg-neutral"
             >
               <PiEngineLight size={24} />
               <p>{horsePower} kW</p>
-            </section>
+            </section> */}
             <section
               id="car-drive"
               className="border rounded-lg p-2 bg-neutral"

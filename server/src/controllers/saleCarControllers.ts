@@ -80,3 +80,12 @@ export const getSaleCarById = async (req: Request, res: Response): Promise<void>
         res.status(500).json({ message: `Error retrieving sale car: ${error.message}` });
     }
 }
+export const createSaleCar = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { cognitoId } = req.params;
+        const {vin,mileage,price} = req.body
+
+    } catch (error) {
+
+    }
+}

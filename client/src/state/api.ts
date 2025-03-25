@@ -1,5 +1,5 @@
 import { createNewUserInDatabase } from "@/lib/utils";
-import { SaleCar, User } from "@/types/prismaTypes";
+import { Car, SaleCar, User } from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
@@ -60,7 +60,20 @@ export const api = createApi({
     }),
     getAllSaleCars: build.query<SaleCar[], void>({
       query: () => "/saleCars/all",
-
+    }),
+    createSaleCar: build.mutation<SaleCar, { saleCarData: FormData, cognitoId: string }>({
+      query: ({ saleCarData, cognitoId }) => ({
+        url: `/saleCars/${cognitoId}`,
+        method: 'POST',
+        body: saleCarData,
+      }),
+    }),
+    createCar: build.mutation<Car, FormData>({
+      query: (carData) => ({
+        url: '/cars',
+        method: 'POST',
+        body: carData,
+      }),
     }),
     updateUserSettings: build.mutation<User, { cognitoId: string } & Partial<User>>({
       query: ({ cognitoId, ...updatedUser }) => ({
@@ -81,4 +94,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;
+export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useCreateCarMutation, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;
