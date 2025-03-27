@@ -1,5 +1,5 @@
 "use client";
-import { carSchema, CarData, SaleCarData } from "@/lib/schemas";
+import { carSchema, CarData } from "@/lib/schemas";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,9 +12,9 @@ import { Form } from "@/components/ui/form";
 
 import { CustomFormField } from "../FormField";
 
-import { useCreateCarMutation, useGetAuthUserQuery } from "@/state/api";
+import { useGetAuthUserQuery } from "@/state/api";
 import React, { useCallback } from "react";
-import { Car, SaleCar } from "@/types/prismaTypes";
+import { TSellCarFormData } from "@/lib/types";
 
 const SellCarFormPartOne = React.memo(
   ({
@@ -22,12 +22,11 @@ const SellCarFormPartOne = React.memo(
     handleFormSubmit,
     cb,
   }: {
-    sellCarFormData: Car;
+    sellCarFormData: TSellCarFormData;
     handleFormSubmit: any;
     cb: (name: string) => void;
   }) => {
     const { data: authUser } = useGetAuthUserQuery();
-    const [createCar] = useCreateCarMutation();
 
     const carForm = useForm<CarData>({
       defaultValues: sellCarFormData
@@ -44,25 +43,8 @@ const SellCarFormPartOne = React.memo(
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-
-        const formData = new FormData();
-        Object.entries(data).forEach(([key, value]) => {
-          if (key === "photoUrls") {
-            const files = value as File[];
-            files.forEach((file: File) => {
-              formData.append("photos", file);
-            });
-          } else if (Array.isArray(value)) {
-            formData.append(key, JSON.stringify(value));
-          } else {
-            formData.append(key, String(value));
-          }
-        });
-        const res = await createCar(formData);
-        if (!res.error) {
-          handleFormSubmit(res.data);
-          cb("item-2");
-        }
+        handleFormSubmit({ ...sellCarFormData, ...data });
+        cb("item-2");
       },
       [authUser]
     );
@@ -147,7 +129,7 @@ const SellCarFormPartOne = React.memo(
               )}
             />
           </div>
-          <Button type="submit">Next</Button>
+          <Button type="submit">Save</Button>
         </form>
       </Form>
     );

@@ -271,6 +271,56 @@ input[type=number] {
   @apply bg-background border-border text-foreground hover:bg-muted;
 }
 
+/* Filepond Droparea UI Overrides*/
+.filepond--root {
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+}
+
+.filepond--image-preview-wrapper {
+  border-radius: 10px !important;
+}
+
+.filepond--image-preview {
+  background-color: #f1f0ef !important;
+}
+
+.filepond--panel.filepond--panel-root {
+  border-radius: 10px !important;
+}
+
+
+#upload-image {
+  display: grid;
+  height: 400px;
+  grid-template-areas:
+    "filepond-image-1 filepond-image-2 filepond-image-3"
+    "filepond-image-4 filepond-image-5 filepond-image-6";
+  gap: 5px;
+}
+
+.filepond-image-1 {
+  grid-area: filepond-image-1;
+}
+
+.filepond-image-2 {
+  grid-area: filepond-image-2;
+}
+
+.filepond-image-3 {
+  grid-area: filepond-image-3;
+}
+
+.filepond-image-4 {
+  grid-area: filepond-image-4;
+}
+
+.filepond-image-5 {
+  grid-area: filepond-image-5;
+}
+
+
+
 
 /* Responsive Container*/
 @media(min-width:640px) {

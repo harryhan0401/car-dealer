@@ -1,4 +1,5 @@
 import { SaleCar } from "@/types/prismaTypes";
+import { CarData, SaleCarData } from "./schemas";
 
 export type NotificationListItemProps = {
     id: number;
@@ -47,3 +48,5 @@ export type TNavLink = {
     label: string;
     path: string;
 }
+
+export type TSellCarFormData = SaleCarData & CarData;

@@ -7,15 +7,17 @@ import React, { useCallback } from "react";
 import { CustomFormField } from "../FormField";
 import { useGetAuthUserQuery } from "@/state/api";
 import { Form } from "../ui/form";
-import { Car, SaleCar } from "@/types/prismaTypes";
+import { TSellCarFormData } from "@/lib/types";
+
+const plusSymbolSVG = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="54" height="54" stroke="gray" stroke-width="2" stroke-dasharray="4,4" fill="none" rx="6"/><line x1="30" y1="15" x2="30" y2="45" stroke="gray" stroke-width="4"/><line x1="15" y1="30" x2="45" y2="30" stroke="gray" stroke-width="4"/></svg>`;
 
 const SellCarFormPartThree = React.memo(
   ({
-    sellFormData,
+    sellCarFormData,
     handleFormSubmit,
     cb,
   }: {
-    sellFormData: Car & SaleCar;
+    sellCarFormData: TSellCarFormData;
     handleFormSubmit: any;
     cb: (name: string) => void;
   }) => {
@@ -23,8 +25,14 @@ const SellCarFormPartThree = React.memo(
 
     const saleForm = useForm<SaleCarData2>({
       defaultValues: {
-        photoUrls: sellFormData.photoUrls || [], // Assuming this is an array of URLs
+        photo: sellCarFormData.photo,
+        optionalPhoto1: sellCarFormData.optionalPhoto1,
+        optionalPhoto2: sellCarFormData.optionalPhoto2,
+        optionalPhoto3: sellCarFormData.optionalPhoto3,
+        optionalPhoto4: sellCarFormData.optionalPhoto4,
+        optionalPhoto5: sellCarFormData.optionalPhoto5,
       },
+      resolver: zodResolver(saleCarSchema2),
     });
 
     const onSubmit = useCallback(
@@ -32,9 +40,7 @@ const SellCarFormPartThree = React.memo(
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-        data.isCompleted = true;
-        console.log({ ...sellFormData, ...data });
-        handleFormSubmit({ ...sellFormData, ...data });
+        handleFormSubmit({ ...sellCarFormData, ...data });
         cb("item-4");
       },
       [authUser]
@@ -46,13 +52,56 @@ const SellCarFormPartThree = React.memo(
           onSubmit={saleForm.handleSubmit(onSubmit)}
           className="p-4 space-y-10"
         >
-          <CustomFormField type="file" name="photoUrls" label="Photo*" />
+          <div id="upload-image">
+            <CustomFormField
+              type="file"
+              multiple={false}
+              name="photo"
+              filePondLabelIdle={`Pick the best photo. This will be displayed as thumbnail`}
+              className="filepond-image-1"
+            />
+            <CustomFormField
+              type="file"
+              name="optionalPhoto1"
+              filePondLabelIdle={`${plusSymbolSVG}`}
+              className="filepond-image-2"
+              isOptionalPhotoField={true}
+            />
+            <CustomFormField
+              type="file"
+              name="optionalPhoto2"
+              filePondLabelIdle={`${plusSymbolSVG}`}
+              className="filepond-image-3"
+              isOptionalPhotoField={true}
+            />
+            <CustomFormField
+              type="file"
+              name="optionalPhoto3"
+              filePondLabelIdle={`${plusSymbolSVG}`}
+              className="filepond-image-4"
+              isOptionalPhotoField={true}
+            />
+            <CustomFormField
+              type="file"
+              name="optionalPhoto4"
+              filePondLabelIdle={`${plusSymbolSVG}`}
+              className="filepond-image-5"
+              isOptionalPhotoField={true}
+            />
+            <CustomFormField
+              type="file"
+              name="optionalPhoto5"
+              filePondLabelIdle={`${plusSymbolSVG}`}
+              className="filepond-image-6"
+              isOptionalPhotoField={true}
+            />
+          </div>
 
           <div className="flex gap-10">
-            <Button onClick={() => cb("item-1")} variant="back">
+            <Button onClick={() => cb("item-2")} variant="back">
               Back
             </Button>
-            <Button type="submit">Next</Button>
+            <Button type="submit">Save</Button>
           </div>
         </form>
       </Form>

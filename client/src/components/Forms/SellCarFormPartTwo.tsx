@@ -5,22 +5,22 @@ import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
 import React, { useCallback } from "react";
 import { CustomFormField } from "../FormField";
-import { useCreateSaleCarMutation, useGetAuthUserQuery } from "@/state/api";
+import { useGetAuthUserQuery } from "@/state/api";
 import { Form } from "../ui/form";
-import { Car, SaleCar } from "@/types/prismaTypes";
+import { TSellCarFormData } from "@/lib/types";
 
 const SellCarFormPartTwo = React.memo(
   ({
-    sellFormData,
+    sellCarFormData,
     handleFormSubmit,
     cb,
   }: {
-    sellFormData: Car & SaleCar;
+    sellCarFormData: TSellCarFormData;
     handleFormSubmit: any;
     cb: (name: string) => void;
   }) => {
     const { data: authUser } = useGetAuthUserQuery();
-    const { vin, mileage, price, description } = sellFormData;
+    const { vin, mileage, price, description } = sellCarFormData;
 
     const saleForm = useForm<SaleCarData1>({
       defaultValues: {
@@ -37,10 +37,8 @@ const SellCarFormPartTwo = React.memo(
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-        data.carId = sellFormData.id;
-        const { id, ...carDataWithoutId } = sellFormData;
-        handleFormSubmit({ ...carDataWithoutId, ...data });
-        // cb("item-3");
+        handleFormSubmit({ ...sellCarFormData, ...data });
+        cb("item-3");
       },
       [authUser]
     );
@@ -73,7 +71,7 @@ const SellCarFormPartTwo = React.memo(
             <Button onClick={() => cb("item-1")} variant="back">
               Back
             </Button>
-            <Button type="submit">Next</Button>
+            <Button type="submit">Save</Button>
           </div>
         </form>
       </Form>

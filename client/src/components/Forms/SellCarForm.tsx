@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import SellCarFormPartOne from "./SellCarFormPartOne";
 import SellCarFormPartTwo from "./SellCarFormPartTwo";
 
@@ -11,9 +11,8 @@ import {
 } from "@/components/ui/accordion";
 import StepDisplay from "../StepDisplay";
 import SellCarFormPartThree from "./SellCarFormPartThree";
-import { CarData, SaleCarData } from "@/lib/schemas";
+import { TSellCarFormData } from "@/lib/types";
 
-type TSellCarFormData = SaleCarData & CarData;
 const SellCarForm = () => {
   const [sellCarFormData, setSellCarFormData] = useState<TSellCarFormData>();
   const [openItem, setOpenItem] = useState<string | null>(null);
@@ -40,7 +39,7 @@ const SellCarForm = () => {
         </AccordionTrigger>
         <AccordionContent>
           <SellCarFormPartOne
-            sellCarFormData={sellCarFormData}
+            sellCarFormData={sellCarFormData!}
             handleFormSubmit={handlCarFormSubmit}
             cb={handleAccordionItemFocus}
           />
@@ -53,39 +52,29 @@ const SellCarForm = () => {
         </AccordionTrigger>
         <AccordionContent>
           <SellCarFormPartTwo
-            sellFormData={sellCarFormData}
+            sellCarFormData={sellCarFormData!}
             handleFormSubmit={handlCarFormSubmit}
             cb={handleAccordionItemFocus}
           />
         </AccordionContent>
       </AccordionItem>
       {/*Sell Car form step 3 */}
-      <AccordionItem
-        value="item-3"
-        disabled={!sellCarFormData || sellCarFormData!.vin === ""}
-      >
+      <AccordionItem value="item-3" disabled={!sellCarFormData?.vin}>
         <AccordionTrigger>
           <StepDisplay stepNumber={3} title="Upload car photos" />
         </AccordionTrigger>
         <AccordionContent>
           <SellCarFormPartThree
-            sellFormData={sellCarFormData}
+            sellCarFormData={sellCarFormData!}
             handleFormSubmit={handlCarFormSubmit}
             cb={handleAccordionItemFocus}
           />
         </AccordionContent>
       </AccordionItem>
       {/*Sell Car form step 4 */}
-      <AccordionItem value="item-4" disabled={!sellCarFormData?.isCompleted}>
+      <AccordionItem value="item-4" disabled={!sellCarFormData?.photo?.length}>
         <AccordionTrigger>
           <StepDisplay stepNumber={4} title="Review" />
-        </AccordionTrigger>
-        <AccordionContent></AccordionContent>
-      </AccordionItem>
-      {/*Sell Car form step 5 */}
-      <AccordionItem value="item-5" disabled={!sellCarFormData?.isCompleted}>
-        <AccordionTrigger>
-          <StepDisplay stepNumber={5} title="Submit" />
         </AccordionTrigger>
         <AccordionContent></AccordionContent>
       </AccordionItem>

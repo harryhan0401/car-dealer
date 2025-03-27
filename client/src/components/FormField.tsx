@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ControllerRenderProps,
   FieldValues,
@@ -35,7 +35,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
 interface FormFieldProps {
   name: string;
-  label: string;
+  label?: string;
   type?:
     | "text"
     | "email"
@@ -48,7 +48,6 @@ interface FormFieldProps {
     | "multi-input";
   placeholder?: string;
   options?: { value: string; label: string }[];
-  accept?: string;
   className?: string;
   labelClassName?: string;
   inputClassName?: string;
@@ -57,15 +56,17 @@ interface FormFieldProps {
   multiple?: boolean;
   isIcon?: boolean;
   initialValue?: string | number | boolean | string[];
+  filePondLabelIdle?: string;
+  imagePreviewHeight?: number;
+  isOptionalPhotoField?: boolean;
 }
 
-export const CustomFormField= ({
+export const CustomFormField = ({
   name,
   label,
   type = "text",
   placeholder,
   options,
-  accept,
   className,
   inputClassName,
   labelClassName,
@@ -73,8 +74,19 @@ export const CustomFormField= ({
   multiple = false,
   isIcon = false,
   initialValue,
+  filePondLabelIdle,
+  isOptionalPhotoField = false,
 }: FormFieldProps) => {
-  const { control } = useFormContext();
+  const { control, trigger, watch, clearErrors } = useFormContext();
+
+  if (isOptionalPhotoField) {
+    const value = watch(name); // Watch for value changes
+    useEffect(() => {
+      if (name.includes("optionalPhoto")) {
+        if (value && value.length == 0) clearErrors("photo");
+      }
+    }, [value, name, trigger]); // Runs whenever `value` or `name` changes
+  }
 
   const renderFormControl = (
     field: ControllerRenderProps<FieldValues, string>
@@ -121,7 +133,7 @@ export const CustomFormField= ({
               checked={field.value}
               onCheckedChange={field.onChange}
               id={name}
-              className={`text-customgreys-dirtyGrey ${inputClassName}`}
+              className={` ${inputClassName}`}
             />
             <FormLabel htmlFor={name} className={labelClassName}>
               {label}
@@ -132,13 +144,17 @@ export const CustomFormField= ({
         return (
           <FilePond
             className={`${inputClassName}`}
+            files={field.value}
             onupdatefiles={(fileItems) => {
               const files = fileItems.map((fileItem) => fileItem.file);
               field.onChange(files);
             }}
-            allowMultiple={true}
-            labelIdle={`Drag & Drop your images or <span class="filepond--label-action">Browse</span>`}
+            stylePanelLayout={"integrated"}
+            acceptedFileTypes={["image/*"]}
+            allowMultiple={multiple}
+            labelIdle={filePondLabelIdle}
             credits={false}
+            allowImageExifOrientation={true}
           />
         );
       case "number":
@@ -184,18 +200,15 @@ export const CustomFormField= ({
             type !== "switch" && "rounded-md"
           } relative ${className}`}
         >
-          {type !== "switch" && (
+          {type !== "switch" && type !== "file" && (
             <div className="flex justify-between items-center">
               <FormLabel className={`text-sm ${labelClassName}`}>
                 {label}
               </FormLabel>
 
-              {!disabled &&
-                isIcon &&
-                type !== "file" &&
-                type !== "multi-input" && (
-                  <Edit className="size-4 text-customgreys-dirtyGrey" />
-                )}
+              {!disabled && isIcon && type !== "multi-input" && (
+                <Edit className="size-4" />
+              )}
             </div>
           )}
           <FormControl>
@@ -204,7 +217,9 @@ export const CustomFormField= ({
               value: field.value !== undefined ? field.value : initialValue,
             })}
           </FormControl>
-          <FormMessage className="text-red-400" />
+          <FormMessage
+            className={` ${type == "file" && "absolute bottom-[-14rem] right-[-39rem]"} text-red-400`}
+          />
         </FormItem>
       )}
     />
@@ -250,7 +265,7 @@ const MultiInputField: React.FC<MultiInputFieldProps> = ({
             onClick={() => remove(index)}
             variant="ghost"
             size="icon"
-            className="text-customgreys-dirtyGrey"
+            className=""
           >
             <X className="w-4 h-4" />
           </Button>
@@ -261,7 +276,7 @@ const MultiInputField: React.FC<MultiInputFieldProps> = ({
         onClick={() => append("")}
         variant="outline"
         size="sm"
-        className="mt-2 text-customgreys-dirtyGrey"
+        className="mt-2 "
       >
         <Plus className="w-4 h-4 mr-2" />
         Add Item
