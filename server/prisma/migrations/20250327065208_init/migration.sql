@@ -74,7 +74,7 @@ CREATE TABLE "Car" (
 -- CreateTable
 CREATE TABLE "SaleCar" (
     "id" SERIAL NOT NULL,
-    "vin" TEXT NOT NULL,
+    "vin" VARCHAR(17) NOT NULL,
     "sellerCognitoId" TEXT NOT NULL,
     "carId" INTEGER NOT NULL,
     "mileage" INTEGER NOT NULL,

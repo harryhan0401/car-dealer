@@ -10,22 +10,14 @@ import { Button } from "@/components/ui/button";
 
 import { Form } from "@/components/ui/form";
 
-import { CustomFormField } from "../FormField";
+import { CustomFormField } from "../../FormField";
 
 import { useGetAuthUserQuery } from "@/state/api";
 import React, { useCallback } from "react";
-import { TSellCarFormData } from "@/lib/types";
+import { SellCarFormStepProps } from "@/lib/types";
 
 const SellCarFormPartOne = React.memo(
-  ({
-    sellCarFormData,
-    handleFormSubmit,
-    cb,
-  }: {
-    sellCarFormData: TSellCarFormData;
-    handleFormSubmit: any;
-    cb: (name: string) => void;
-  }) => {
+  ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
 
     const carForm = useForm<CarData>({

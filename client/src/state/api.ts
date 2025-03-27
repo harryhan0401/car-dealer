@@ -16,7 +16,7 @@ export const api = createApi({
     }
   }),
   reducerPath: "api",
-  tagTypes: ["Users"],
+  tagTypes: ["Users", "SaleCars"],
   endpoints: (build) => ({
     getAuthUser: build.query<AppUser, void>({
       queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
@@ -60,21 +60,25 @@ export const api = createApi({
     }),
     getAllSaleCars: build.query<SaleCar[], void>({
       query: () => "/saleCars/all",
+      providesTags: (result) =>
+        result
+          ? [
+            ...result.map(({ id }) => ({ type: "SaleCars" as const, id })),
+            { type: "SaleCars", id: "LIST" },
+          ]
+          : [{ type: "SaleCars", id: "LIST" }],
     }),
-    createSaleCar: build.mutation<SaleCar, { saleCarData: FormData, cognitoId: string }>({
-      query: ({ saleCarData, cognitoId }) => ({
-        url: `/saleCars/${cognitoId}`,
+    createSaleCar: build.mutation<SaleCar, FormData>({
+      query: (newSaleCar) => ({
+        url: `/saleCars`,
         method: 'POST',
-        body: saleCarData,
+        body: newSaleCar,
       }),
+      invalidatesTags: () => [
+        { type: "SaleCars", id: "LIST" }
+      ]
     }),
-    createCar: build.mutation<Car, FormData>({
-      query: (carData) => ({
-        url: '/cars',
-        method: 'POST',
-        body: carData,
-      }),
-    }),
+
     updateUserSettings: build.mutation<User, { cognitoId: string } & Partial<User>>({
       query: ({ cognitoId, ...updatedUser }) => ({
         url: `/users/${cognitoId}`,
@@ -94,4 +98,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useCreateCarMutation, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;
+export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;

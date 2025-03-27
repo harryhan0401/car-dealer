@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
-import { PiEngineLight } from "react-icons/pi";
 import { GiStoneWheel } from "react-icons/gi";
 import { Bolt, Flame, Fuel, MapPin, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
@@ -17,7 +16,8 @@ type CarCardProps = {
   car: SaleCar;
   seller: User;
   index: number;
-  isHighlight: boolean;
+  isHighlight?: boolean;
+  isReview?: boolean;
 };
 
 const CarCard = ({
@@ -28,15 +28,20 @@ const CarCard = ({
   car,
   seller,
   index,
-  isHighlight,
+  isHighlight = false,
+  isReview = false,
 }: CarCardProps) => {
   const { make, model, year, fuel, drive } = car;
-  const { city } = seller.location;
+  const { city } = seller.location ? seller.location : "";
   const { data: authUser } = useGetAuthUserQuery();
   const title = make + " " + model + " " + year;
   return (
-    <div className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}>
-      <div className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10 lg:items-center" : ""}`}>
+    <div
+      className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}
+    >
+      <div
+        className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10 lg:items-center" : ""}`}
+      >
         <Image
           // src={`/${photoUrls[0]}`}
           src={
@@ -117,27 +122,29 @@ const CarCard = ({
             className="flex items-center gap-1 text-primary"
           >
             <MapPin size={24} />
-            <p>{city}</p>
+            <p>{city ? city : "Not Available"}</p>
           </section>
           <section id="car-description">
             <p className="line-clamp-2">{description}</p>
           </section>
-          <section
-            id="car-interaction-group"
-            className={`flex ${authUser ? "gap-5" : ""}`}
-          >
-            <Button className="flex-1" aria-label={`Buy ${title}`}>
-              <span>
-                <ShoppingCart />
-              </span>
-              Buy now
-            </Button>
-            {authUser && (
-              <div>
-                <FavouriteForm authUser={authUser} saleCarId={id} />
-              </div>
-            )}
-          </section>
+          {!isReview && (
+            <section
+              id="car-interaction-group"
+              className={`flex ${authUser ? "gap-5" : ""}`}
+            >
+              <Button className="flex-1" aria-label={`Buy ${title}`}>
+                <span>
+                  <ShoppingCart />
+                </span>
+                Buy now
+              </Button>
+              {authUser && (
+                <div>
+                  <FavouriteForm authUser={authUser} saleCarId={id} />
+                </div>
+              )}
+            </section>
+          )}
         </div>
       </div>
     </div>

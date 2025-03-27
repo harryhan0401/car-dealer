@@ -18,14 +18,16 @@ const imageSchema = z
     .instanceof(File, { message: "Invalid file type" });
 
 
-export const saleCarSchema2 = z.object({
+export const baseSaleCarSchema2 = z.object({
     photo: z.array(imageSchema).min(1, { message: "Main photo is required" }),
     optionalPhoto1: z.array(imageSchema).optional(),
     optionalPhoto2: z.array(imageSchema).optional(),
     optionalPhoto3: z.array(imageSchema).optional(),
     optionalPhoto4: z.array(imageSchema).optional(),
     optionalPhoto5: z.array(imageSchema).optional()
-}).superRefine((data, ctx) => {
+})
+
+export const saleCarSchema2 = baseSaleCarSchema2.superRefine((data, ctx) => {
     if (data.photo.length && data.photo[0].size > 5 * 1024 * 1024) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -72,3 +74,27 @@ export const carSchema = z.object({
 });
 
 export type CarData = z.infer<typeof carSchema>;
+
+export const sellCarSchema = carSchema.extend(saleCarSchema1.shape).extend(baseSaleCarSchema2.shape).superRefine((data, ctx) => {
+    if (data.photo.length && data.photo[0].size > 5 * 1024 * 1024) {
+        ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Photo size must be less than 5MB",
+            path: ["photo"],
+        });
+    }
+    const optionalPhotoKeys = Object.keys(data).filter(key => key.startsWith("optionalPhoto")) as (keyof typeof data)[];
+
+    optionalPhotoKeys.forEach(optionalPhotoKey => {
+        const optionalPhoto = data[optionalPhotoKey] as File[];
+        if (optionalPhoto && optionalPhoto.length && optionalPhoto[0].size > 5 * 1024 * 1024) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Photo size must be less than 5MB",
+                path: ["photo"], // Report error on the specific optional photo field
+            });
+        }
+    });
+})
+
+export type SellCarFormData = z.infer<typeof sellCarSchema>;

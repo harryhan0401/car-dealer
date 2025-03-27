@@ -202,8 +202,11 @@ export const CustomFormField = ({
         >
           {type !== "switch" && type !== "file" && (
             <div className="flex justify-between items-center">
-              <FormLabel className={`text-sm ${labelClassName}`}>
-                {label}
+              <FormLabel
+                className={`text-sm ${labelClassName}`}
+                asChild={type === "select"}
+              >
+                {type === "select" ? <legend>{label}</legend> : label}
               </FormLabel>
 
               {!disabled && isIcon && type !== "multi-input" && (

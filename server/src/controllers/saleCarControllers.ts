@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export const getAllSaleCars = async (_req: Request, res: Response): Promise<void> => {
     try {
         const saleCars = await prisma.saleCar.findMany({
-            orderBy: { "id": "desc" },
+            orderBy: { "dateTimeUpdated": "desc" },
             include: {
                 car: true,
                 seller: {
@@ -17,7 +17,6 @@ export const getAllSaleCars = async (_req: Request, res: Response): Promise<void
                 },
             },
         });
-
 
         if (saleCars) {
             res.json(saleCars);
@@ -82,10 +81,71 @@ export const getSaleCarById = async (req: Request, res: Response): Promise<void>
 }
 export const createSaleCar = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { cognitoId } = req.params;
-        const {vin,mileage,price} = req.body
+        const files = req.files as Express.Multer.File[];
+        let carId = -1;
+        const {
+            make,
+            model,
+            year,
+            type,
+            fuel,
+            drive,
+            transmission,
+            vin,
+            mileage,
+            price,
+            description,
+            cognitoId,
+        } = req.body;
+        const query = Prisma.sql`
+        SELECT * 
+            FROM "Car" 
+        WHERE LOWER("make" :: TEXT) = LOWER(${make}) 
+            AND LOWER("model" :: TEXT) = LOWER(${model}) 
+            AND "year" = ${parseInt(year)} 
+            AND LOWER("type" :: TEXT) = LOWER(${type}) 
+            AND LOWER("fuel" :: TEXT) = LOWER(${fuel}) 
+            AND LOWER("drive" :: TEXT) = LOWER(${drive}) 
+            AND LOWER("transmission" :: TEXT) = LOWER(${transmission})`
+        const data = await prisma.$queryRaw(query);
 
-    } catch (error) {
+        if (Array.isArray(data) && data.length > 0) {
+            const firstCar = data[0];
+            carId = firstCar.id;
+        }
+        else {
+            const newCar = await prisma.car.create({
+                data: {
+                    make,
+                    model,
+                    year: parseInt(year),
+                    type,
+                    fuel,
+                    drive,
+                    transmission,
+                }
+            });
+            carId = newCar.id
+        }
+
+        const newSaleCar = await prisma.saleCar.create({
+            data: {
+                vin,
+                sellerCognitoId: cognitoId,
+                carId,
+                mileage: parseInt(mileage),
+                price: parseInt(price),
+                photoUrls: [],
+                description
+            },
+            include: {
+                seller: true,
+                car: true,
+            },
+        })
+        res.status(201).json(newSaleCar);
+    } catch (error: any) {
+        res.status(500).json({ message: `Error creating sale car: ${error.message}` });
 
     }
 }

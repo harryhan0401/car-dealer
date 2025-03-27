@@ -49,4 +49,9 @@ export type TNavLink = {
     path: string;
 }
 
+export interface SellCarFormStepProps {
+    sellCarFormData: TSellCarFormData;
+    handleFormSubmit?: any;
+    cb: (name: string) => void;
+}
 export type TSellCarFormData = SaleCarData & CarData;

@@ -9,7 +9,6 @@ const Navbar = () => {
   const navLinks: TNavLink[] = [
     { label: "Buy", path: "/" },
     { label: "Sell", path: "/sell" },
-    { label: "Reviews", path: "/reviews/" },
   ];
 
   return (

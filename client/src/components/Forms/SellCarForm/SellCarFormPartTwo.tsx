@@ -2,23 +2,15 @@
 import { saleCarSchema1, SaleCarData1 } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import React, { useCallback } from "react";
-import { CustomFormField } from "../FormField";
+import { CustomFormField } from "../../FormField";
 import { useGetAuthUserQuery } from "@/state/api";
-import { Form } from "../ui/form";
-import { TSellCarFormData } from "@/lib/types";
+import { Form } from "../../ui/form";
+import { SellCarFormStepProps } from "@/lib/types";
 
 const SellCarFormPartTwo = React.memo(
-  ({
-    sellCarFormData,
-    handleFormSubmit,
-    cb,
-  }: {
-    sellCarFormData: TSellCarFormData;
-    handleFormSubmit: any;
-    cb: (name: string) => void;
-  }) => {
+  ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
     const { vin, mileage, price, description } = sellCarFormData;
 

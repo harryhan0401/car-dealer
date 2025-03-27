@@ -197,7 +197,7 @@ model Car {
 
 model SaleCar {
   id              Int      @id @default(autoincrement())
-  vin             String   @unique
+  vin             String   @unique @db.VarChar(17)
   sellerCognitoId String
   carId           Int
   mileage         Int

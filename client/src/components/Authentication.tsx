@@ -16,12 +16,13 @@ const Authentication = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();
   const dispatch = useDispatch();
   useEffect(() => {
-    if (authUser)
+    if (authUser && authUser.userInfo.favourites) {
       dispatch(
         setFavourites(
           authUser.userInfo.favourites.map((fav: { id: number }) => fav.id)
         )
       );
+    }
   }, [authUser]);
 
   if (isLoading) {
