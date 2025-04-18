@@ -1,5 +1,5 @@
-import { createNewUserInDatabase } from "@/lib/utils";
-import { Car, SaleCar, User } from "@/types/prismaTypes";
+import { createNewUserInDatabase, saveProfileSetupStatus } from "@/lib/utils";
+import { SaleCar, User } from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
@@ -39,6 +39,8 @@ export const api = createApi({
               fetchWithBQ
             );
           }
+          const { isProfileSetup } = userDetailsResponse.data as User;
+          saveProfileSetupStatus(isProfileSetup);
           return {
             data: {
               cognitoInfo: { ...user },
@@ -50,7 +52,10 @@ export const api = createApi({
           return { error: error.message || "Could not fetch user data" };
         }
       },
+      providesTags: (result) =>
+        result?.userInfo ? [{ type: "Users", id: result.userInfo.id }] : [],
     }),
+    //sale cars related endpoints
     getSaleCars: build.query<SaleCar[], { take: number; skip: number; }>({
       query: ({ take, skip }) => {
 
@@ -74,16 +79,18 @@ export const api = createApi({
         method: 'POST',
         body: newSaleCar,
       }),
-      invalidatesTags: () => [
-        { type: "SaleCars", id: "LIST" }
+      invalidatesTags: (result) => [
+        { type: "Users", id: result?.seller.id },
+        { type: "SaleCars", id: "LIST" },
       ]
     }),
 
-    updateUserSettings: build.mutation<User, { cognitoId: string } & Partial<User>>({
-      query: ({ cognitoId, ...updatedUser }) => ({
+    //user related endpoints
+    updateUserProfile: build.mutation<User, { cognitoId: string, userProfileData: FormData }>({
+      query: ({ cognitoId, userProfileData }) => ({
         url: `/users/${cognitoId}`,
         method: 'PUT',
-        body: updatedUser,
+        body: userProfileData,
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }]
     }),
@@ -98,4 +105,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useUpdateUserSettingsMutation, useUpdateUserFavouritesMutation } = api;
+export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useUpdateUserProfileMutation, useUpdateUserFavouritesMutation } = api;

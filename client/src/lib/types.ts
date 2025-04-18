@@ -1,5 +1,5 @@
 import { SaleCar } from "@/types/prismaTypes";
-import { CarData, SaleCarData } from "./schemas";
+import { avatarData, CarData, locationData, SaleCarData, userData } from "./schemas";
 
 export type NotificationListItemProps = {
     id: number;
@@ -55,3 +55,26 @@ export interface SellCarFormStepProps {
     cb: (name: string) => void;
 }
 export type TSellCarFormData = SaleCarData & CarData;
+
+export type TProfileSetupSteps = {
+    step: number;
+    title: string;
+}
+
+export type TOption = { value: string; label: string }
+
+export type TAddressComponentMap = {
+    subPremise: string;
+    premise: string;
+    street_number: string;
+    route: string;
+    country: string;
+    postal_code: string;
+    locality: string;
+    administrative_area_level_1: string;
+};
+
+export type TUserProfileFormData = userData & locationData & avatarData
+
+
+

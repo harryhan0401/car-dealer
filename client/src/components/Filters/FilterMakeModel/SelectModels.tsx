@@ -11,7 +11,7 @@ import { ChangeEvent } from "react";
 export function SelectModels({
   selectedMakesModels,
   setSelectedMakesModels,
-  saleCars
+  saleCars,
 }: StepType) {
   const handleOptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     const make = e.target.getAttribute("name")!;
@@ -58,7 +58,11 @@ export function SelectModels({
             value={makeModels.make}
             key={makeModels.make + "-" + Math.random()}
           >
-            <AccordionTrigger>{makeModels.make}</AccordionTrigger>
+            <AccordionTrigger>
+              {makeModels.make === "MercedesBenz"
+                ? "Mercedes-Benz"
+                : makeModels.make}
+            </AccordionTrigger>
             <AccordionContent>
               {modelOptions.map((model) => (
                 <div key={model + "-" + makeModels.make + "-" + Math.random()}>

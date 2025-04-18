@@ -7,9 +7,9 @@ import { StepType } from "@/lib/types";
 const SelectMakes = ({
   selectedMakesModels,
   setSelectedMakesModels,
-  saleCars
+  saleCars,
 }: StepType) => {
-  const uniqueMakes = useAppSelector(({global}) => global.uniqueMakes);
+  const uniqueMakes = useAppSelector(({ global }) => global.uniqueMakes);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     const value = (event.target as HTMLButtonElement).getAttribute("value");
     if (value) {
@@ -35,7 +35,7 @@ const SelectMakes = ({
           className={`card h-[200px] grid justify-center items-center active:scale-95 transform duration-300 ease-in-out ${selectedMakesModels.some((makeModel) => makeModel.make === make) ? "border-black border" : ""}`}
           onClick={(event) => handleClick(event)}
         >
-          {make}
+          {make === "MercedesBenz" ? "Mercedes-Benz" : make}
         </button>
       ))}
     </div>

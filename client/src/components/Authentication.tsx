@@ -35,11 +35,10 @@ const Authentication = () => {
           {!isMobile && (
             <>
               <Notification />
-              <Favourite cognitoId={authUser.cognitoInfo.userId} />
+              <Favourite />
             </>
           )}
           <Profile
-            cognitoId={authUser.cognitoInfo.userId}
             userRole={authUser.userRole}
             userImage={"https://placehold.co/50x50"}
             username={authUser.cognitoInfo.username}

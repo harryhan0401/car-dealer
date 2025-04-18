@@ -2,11 +2,11 @@ import { useAppSelector } from "@/state/redux";
 import { Heart } from "lucide-react";
 
 import Link from "next/link";
-const Favourite = ({ cognitoId }: { cognitoId: string }) => {
+const Favourite = () => {
   const favourites = useAppSelector(({ global }) => global.favourites);
   return (
     <Link
-      href={`/users/${cognitoId}/favourites`}
+      href={`/users/favourites`}
       className="relative rounded px-[0.6rem] py-2 bg-border cursor-pointer"
     >
       <Heart className="size-6" />

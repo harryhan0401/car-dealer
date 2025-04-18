@@ -1,8 +1,10 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { AuthUser } from "aws-amplify/auth";
+import { AuthUser, signOut } from "aws-amplify/auth";
 import { SaleCar } from "@/types/prismaTypes";
 import { FilterMakesModels } from "./types";
+import Cookies from "js-cookie";
+
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -45,7 +47,7 @@ export const getHistogramData = (numBins: number, data: number[]) => {
 };
 
 export function getMakeImage(make: string): string {
-  if (make == "Mercedes-Benz") return "/mercedes-logo.svg"
+  if (make == "MercedesBenz") return "/mercedes-logo.svg"
   else if (make == "BMW") return "/bmw-logo.svg"
   else if (make == "Audi") return "/audi-logo.svg"
   else return ""
@@ -132,4 +134,19 @@ export function getPageNumbers(currentPage: number, totalPages: number) {
   } else {
     return [currentPage - 2, currentPage - 1, currentPage, currentPage + 1, currentPage + 2];
   }
+};
+
+export const handleSignOut = async () => {
+  await signOut();
+  Cookies.remove("isProfileSetup");
+  window.location.href = "/";
+};
+
+export const saveProfileSetupStatus = (isProfileSetup: boolean) => {
+  // Set a regular cookie with isProfileSetup value (this can be read on the server-side)
+  Cookies.set("isProfileSetup", JSON.stringify(isProfileSetup), {
+    expires: 1, // expires in 1 day
+    secure: process.env.NODE_ENV === "production", // Ensure secure cookie in production
+    sameSite: "Strict", // for better CSRF protection
+  });
 };

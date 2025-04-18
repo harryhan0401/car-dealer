@@ -16,14 +16,20 @@ import { useDispatch } from "react-redux";
 import { SaleCar } from "@/types/prismaTypes";
 import { setUniqueMakes } from "@/state";
 
-export default function FilterMakesModels({ saleCars }: { saleCars: SaleCar[] }) {
+export default function FilterMakesModels({
+  saleCars,
+}: {
+  saleCars: SaleCar[];
+}) {
   const dispatch = useDispatch();
   //Filter Make and Model
   const [makeModels, setMakeModels] = useQueryState("makeModels", {
     defaultValue: "",
   });
 
-  let filteredMakesModels = makeModels ? parseFilterMakeModels(makeModels, saleCars) : [];
+  let filteredMakesModels = makeModels
+    ? parseFilterMakeModels(makeModels, saleCars)
+    : [];
 
   const removeFilteredMake = (make: string) => {
     const updatedMakesModels = filteredMakesModels.filter(
@@ -61,7 +67,7 @@ export default function FilterMakesModels({ saleCars }: { saleCars: SaleCar[] })
                   alt={make.charAt(0) + make.slice(1) + " Logo"}
                 />
                 <div className="max-w-[150px]">
-                  <h2>{make}</h2>
+                  <h2>{make == "MercedesBenz" ? "Mercedes-Benz" : make}</h2>
                   <p className="text-[#bcbcbc] text-sm truncate ">
                     {models.join(", ")}
                   </p>

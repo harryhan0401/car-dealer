@@ -212,6 +212,15 @@ export const PaymentStatus: {
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
 
+
+export const PreferredContactMethod: {
+  Email: 'Email',
+  Phone: 'Phone',
+  All: 'All'
+};
+
+export type PreferredContactMethod = (typeof PreferredContactMethod)[keyof typeof PreferredContactMethod]
+
 }
 
 export type Make = $Enums.Make
@@ -245,6 +254,10 @@ export const PaymentMethod: typeof $Enums.PaymentMethod
 export type PaymentStatus = $Enums.PaymentStatus
 
 export const PaymentStatus: typeof $Enums.PaymentStatus
+
+export type PreferredContactMethod = $Enums.PreferredContactMethod
+
+export const PreferredContactMethod: typeof $Enums.PreferredContactMethod
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1785,6 +1798,9 @@ export namespace Prisma {
     lastName: string | null
     email: string | null
     phone: string | null
+    avatarUrl: string | null
+    preferredContactMethod: $Enums.PreferredContactMethod | null
+    isProfileSetup: boolean | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -1797,6 +1813,9 @@ export namespace Prisma {
     lastName: string | null
     email: string | null
     phone: string | null
+    avatarUrl: string | null
+    preferredContactMethod: $Enums.PreferredContactMethod | null
+    isProfileSetup: boolean | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -1809,6 +1828,9 @@ export namespace Prisma {
     lastName: number
     email: number
     phone: number
+    avatarUrl: number
+    preferredContactMethod: number
+    isProfileSetup: number
     dateTimeCreated: number
     dateTimeUpdated: number
     _all: number
@@ -1833,6 +1855,9 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phone?: true
+    avatarUrl?: true
+    preferredContactMethod?: true
+    isProfileSetup?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -1845,6 +1870,9 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phone?: true
+    avatarUrl?: true
+    preferredContactMethod?: true
+    isProfileSetup?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -1857,6 +1885,9 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phone?: true
+    avatarUrl?: true
+    preferredContactMethod?: true
+    isProfileSetup?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
     _all?: true
@@ -1956,6 +1987,9 @@ export namespace Prisma {
     lastName: string
     email: string
     phone: string
+    avatarUrl: string
+    preferredContactMethod: $Enums.PreferredContactMethod
+    isProfileSetup: boolean
     dateTimeCreated: Date
     dateTimeUpdated: Date
     _count: UserCountAggregateOutputType | null
@@ -1987,6 +2021,9 @@ export namespace Prisma {
     lastName?: boolean
     email?: boolean
     phone?: boolean
+    avatarUrl?: boolean
+    preferredContactMethod?: boolean
+    isProfileSetup?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     favourites?: boolean | User$favouritesArgs<ExtArgs>
@@ -2006,6 +2043,9 @@ export namespace Prisma {
     lastName?: boolean
     email?: boolean
     phone?: boolean
+    avatarUrl?: boolean
+    preferredContactMethod?: boolean
+    isProfileSetup?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     location?: boolean | User$locationArgs<ExtArgs>
@@ -2019,6 +2059,9 @@ export namespace Prisma {
     lastName?: boolean
     email?: boolean
     phone?: boolean
+    avatarUrl?: boolean
+    preferredContactMethod?: boolean
+    isProfileSetup?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     location?: boolean | User$locationArgs<ExtArgs>
@@ -2032,11 +2075,14 @@ export namespace Prisma {
     lastName?: boolean
     email?: boolean
     phone?: boolean
+    avatarUrl?: boolean
+    preferredContactMethod?: boolean
+    isProfileSetup?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cognitoId" | "locationId" | "firstName" | "lastName" | "email" | "phone" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "cognitoId" | "locationId" | "firstName" | "lastName" | "email" | "phone" | "avatarUrl" | "preferredContactMethod" | "isProfileSetup" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     favourites?: boolean | User$favouritesArgs<ExtArgs>
     carSales?: boolean | User$carSalesArgs<ExtArgs>
@@ -2071,6 +2117,9 @@ export namespace Prisma {
       lastName: string
       email: string
       phone: string
+      avatarUrl: string
+      preferredContactMethod: $Enums.PreferredContactMethod
+      isProfileSetup: boolean
       dateTimeCreated: Date
       dateTimeUpdated: Date
     }, ExtArgs["result"]["user"]>
@@ -2509,6 +2558,9 @@ export namespace Prisma {
     readonly lastName: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
+    readonly avatarUrl: FieldRef<"User", 'String'>
+    readonly preferredContactMethod: FieldRef<"User", 'PreferredContactMethod'>
+    readonly isProfileSetup: FieldRef<"User", 'Boolean'>
     readonly dateTimeCreated: FieldRef<"User", 'DateTime'>
     readonly dateTimeUpdated: FieldRef<"User", 'DateTime'>
   }
@@ -5250,6 +5302,7 @@ export namespace Prisma {
     mileage: number | null
     price: number | null
     description: string | null
+    isPublic: boolean | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -5262,6 +5315,7 @@ export namespace Prisma {
     mileage: number | null
     price: number | null
     description: string | null
+    isPublic: boolean | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -5275,6 +5329,7 @@ export namespace Prisma {
     price: number
     photoUrls: number
     description: number
+    isPublic: number
     dateTimeCreated: number
     dateTimeUpdated: number
     _all: number
@@ -5303,6 +5358,7 @@ export namespace Prisma {
     mileage?: true
     price?: true
     description?: true
+    isPublic?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -5315,6 +5371,7 @@ export namespace Prisma {
     mileage?: true
     price?: true
     description?: true
+    isPublic?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
   }
@@ -5328,6 +5385,7 @@ export namespace Prisma {
     price?: true
     photoUrls?: true
     description?: true
+    isPublic?: true
     dateTimeCreated?: true
     dateTimeUpdated?: true
     _all?: true
@@ -5428,6 +5486,7 @@ export namespace Prisma {
     price: number
     photoUrls: string[]
     description: string
+    isPublic: boolean
     dateTimeCreated: Date
     dateTimeUpdated: Date
     _count: SaleCarCountAggregateOutputType | null
@@ -5460,6 +5519,7 @@ export namespace Prisma {
     price?: boolean
     photoUrls?: boolean
     description?: boolean
+    isPublic?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     order?: boolean | SaleCar$orderArgs<ExtArgs>
@@ -5478,6 +5538,7 @@ export namespace Prisma {
     price?: boolean
     photoUrls?: boolean
     description?: boolean
+    isPublic?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     seller?: boolean | UserDefaultArgs<ExtArgs>
@@ -5493,6 +5554,7 @@ export namespace Prisma {
     price?: boolean
     photoUrls?: boolean
     description?: boolean
+    isPublic?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
     seller?: boolean | UserDefaultArgs<ExtArgs>
@@ -5508,11 +5570,12 @@ export namespace Prisma {
     price?: boolean
     photoUrls?: boolean
     description?: boolean
+    isPublic?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
   }
 
-  export type SaleCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "description" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["saleCar"]>
+  export type SaleCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "description" | "isPublic" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["saleCar"]>
   export type SaleCarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     order?: boolean | SaleCar$orderArgs<ExtArgs>
     favouritedBy?: boolean | SaleCar$favouritedByArgs<ExtArgs>
@@ -5546,6 +5609,7 @@ export namespace Prisma {
       price: number
       photoUrls: string[]
       description: string
+      isPublic: boolean
       dateTimeCreated: Date
       dateTimeUpdated: Date
     }, ExtArgs["result"]["saleCar"]>
@@ -5983,6 +6047,7 @@ export namespace Prisma {
     readonly price: FieldRef<"SaleCar", 'Float'>
     readonly photoUrls: FieldRef<"SaleCar", 'String[]'>
     readonly description: FieldRef<"SaleCar", 'String'>
+    readonly isPublic: FieldRef<"SaleCar", 'Boolean'>
     readonly dateTimeCreated: FieldRef<"SaleCar", 'DateTime'>
     readonly dateTimeUpdated: FieldRef<"SaleCar", 'DateTime'>
   }
@@ -9877,6 +9942,9 @@ export namespace Prisma {
     lastName: 'lastName',
     email: 'email',
     phone: 'phone',
+    avatarUrl: 'avatarUrl',
+    preferredContactMethod: 'preferredContactMethod',
+    isProfileSetup: 'isProfileSetup',
     dateTimeCreated: 'dateTimeCreated',
     dateTimeUpdated: 'dateTimeUpdated'
   };
@@ -9923,6 +9991,7 @@ export namespace Prisma {
     price: 'price',
     photoUrls: 'photoUrls',
     description: 'description',
+    isPublic: 'isPublic',
     dateTimeCreated: 'dateTimeCreated',
     dateTimeUpdated: 'dateTimeUpdated'
   };
@@ -10023,6 +10092,27 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'PreferredContactMethod'
+   */
+  export type EnumPreferredContactMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredContactMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'PreferredContactMethod[]'
+   */
+  export type ListEnumPreferredContactMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredContactMethod[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -10180,6 +10270,9 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     phone?: StringFilter<"User"> | string
+    avatarUrl?: StringFilter<"User"> | string
+    preferredContactMethod?: EnumPreferredContactMethodFilter<"User"> | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFilter<"User"> | boolean
     dateTimeCreated?: DateTimeFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
     favourites?: SaleCarListRelationFilter
@@ -10198,6 +10291,9 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    avatarUrl?: SortOrder
+    preferredContactMethod?: SortOrder
+    isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     favourites?: SaleCarOrderByRelationAggregateInput
@@ -10219,6 +10315,9 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     phone?: StringFilter<"User"> | string
+    avatarUrl?: StringFilter<"User"> | string
+    preferredContactMethod?: EnumPreferredContactMethodFilter<"User"> | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFilter<"User"> | boolean
     dateTimeCreated?: DateTimeFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
     favourites?: SaleCarListRelationFilter
@@ -10237,6 +10336,9 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    avatarUrl?: SortOrder
+    preferredContactMethod?: SortOrder
+    isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -10257,6 +10359,9 @@ export namespace Prisma {
     lastName?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     phone?: StringWithAggregatesFilter<"User"> | string
+    avatarUrl?: StringWithAggregatesFilter<"User"> | string
+    preferredContactMethod?: EnumPreferredContactMethodWithAggregatesFilter<"User"> | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolWithAggregatesFilter<"User"> | boolean
     dateTimeCreated?: DateTimeWithAggregatesFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -10428,6 +10533,7 @@ export namespace Prisma {
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
     description?: StringFilter<"SaleCar"> | string
+    isPublic?: BoolFilter<"SaleCar"> | boolean
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
@@ -10445,6 +10551,7 @@ export namespace Prisma {
     price?: SortOrder
     photoUrls?: SortOrder
     description?: SortOrder
+    isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     order?: OrderOrderByWithRelationInput
@@ -10465,6 +10572,7 @@ export namespace Prisma {
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
     description?: StringFilter<"SaleCar"> | string
+    isPublic?: BoolFilter<"SaleCar"> | boolean
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
@@ -10482,6 +10590,7 @@ export namespace Prisma {
     price?: SortOrder
     photoUrls?: SortOrder
     description?: SortOrder
+    isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
     _count?: SaleCarCountOrderByAggregateInput
@@ -10503,6 +10612,7 @@ export namespace Prisma {
     price?: FloatWithAggregatesFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
     description?: StringWithAggregatesFilter<"SaleCar"> | string
+    isPublic?: BoolWithAggregatesFilter<"SaleCar"> | boolean
     dateTimeCreated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
   }
@@ -10719,10 +10829,13 @@ export namespace Prisma {
 
   export type UserCreateInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -10737,10 +10850,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -10756,6 +10872,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -10774,6 +10893,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -10787,10 +10909,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -10801,6 +10926,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10813,6 +10941,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10959,6 +11090,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -10976,6 +11108,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -10988,6 +11121,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -11005,6 +11139,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -11020,6 +11155,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -11030,6 +11166,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11043,6 +11180,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11284,6 +11422,18 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type EnumPreferredContactMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferredContactMethod | EnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferredContactMethodFilter<$PrismaModel> | $Enums.PreferredContactMethod
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -11343,6 +11493,9 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    avatarUrl?: SortOrder
+    preferredContactMethod?: SortOrder
+    isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11360,6 +11513,9 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    avatarUrl?: SortOrder
+    preferredContactMethod?: SortOrder
+    isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11372,6 +11528,9 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    avatarUrl?: SortOrder
+    preferredContactMethod?: SortOrder
+    isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11429,6 +11588,24 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumPreferredContactMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferredContactMethod | EnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferredContactMethodWithAggregatesFilter<$PrismaModel> | $Enums.PreferredContactMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPreferredContactMethodFilter<$PrismaModel>
+    _max?: NestedEnumPreferredContactMethodFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -11683,6 +11860,7 @@ export namespace Prisma {
     price?: SortOrder
     photoUrls?: SortOrder
     description?: SortOrder
+    isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11702,6 +11880,7 @@ export namespace Prisma {
     mileage?: SortOrder
     price?: SortOrder
     description?: SortOrder
+    isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -11714,6 +11893,7 @@ export namespace Prisma {
     mileage?: SortOrder
     price?: SortOrder
     description?: SortOrder
+    isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
@@ -12005,6 +12185,14 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type EnumPreferredContactMethodFieldUpdateOperationsInput = {
+    set?: $Enums.PreferredContactMethod
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -12527,6 +12715,18 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumPreferredContactMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferredContactMethod | EnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferredContactMethodFilter<$PrismaModel> | $Enums.PreferredContactMethod
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -12607,6 +12807,24 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumPreferredContactMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PreferredContactMethod | EnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PreferredContactMethod[] | ListEnumPreferredContactMethodFieldRefInput<$PrismaModel>
+    not?: NestedEnumPreferredContactMethodWithAggregatesFilter<$PrismaModel> | $Enums.PreferredContactMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPreferredContactMethodFilter<$PrismaModel>
+    _max?: NestedEnumPreferredContactMethodFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -12781,6 +12999,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -12797,6 +13016,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -12813,6 +13033,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -12828,6 +13049,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -12955,6 +13177,7 @@ export namespace Prisma {
     price?: FloatFilter<"SaleCar"> | number
     photoUrls?: StringNullableListFilter<"SaleCar">
     description?: StringFilter<"SaleCar"> | string
+    isPublic?: BoolFilter<"SaleCar"> | boolean
     dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
   }
@@ -13077,10 +13300,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutLocationInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -13093,10 +13319,13 @@ export namespace Prisma {
   export type UserUncheckedCreateWithoutLocationInput = {
     id?: number
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -13143,6 +13372,9 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     phone?: StringFilter<"User"> | string
+    avatarUrl?: StringFilter<"User"> | string
+    preferredContactMethod?: EnumPreferredContactMethodFilter<"User"> | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFilter<"User"> | boolean
     dateTimeCreated?: DateTimeFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
   }
@@ -13153,6 +13385,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderCreateNestedOneWithoutSaleCarInput
@@ -13168,6 +13401,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
@@ -13226,10 +13460,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutFavouritesInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     carSales?: SaleCarCreateNestedManyWithoutSellerInput
@@ -13243,10 +13480,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
@@ -13262,10 +13502,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutCarSalesInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -13279,10 +13522,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -13389,6 +13635,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -13406,6 +13655,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -13456,6 +13708,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
@@ -13472,6 +13725,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
@@ -13484,10 +13738,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutOrdersInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -13501,10 +13758,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -13557,6 +13817,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
@@ -13573,6 +13834,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
@@ -13595,6 +13857,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -13612,6 +13877,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -13704,10 +13972,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutReviewsInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -13721,10 +13992,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -13740,10 +14014,13 @@ export namespace Prisma {
 
   export type UserCreateWithoutReviewerInput = {
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
@@ -13757,10 +14034,13 @@ export namespace Prisma {
     id?: number
     cognitoId: string
     locationId?: number | null
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
@@ -13791,6 +14071,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -13808,6 +14091,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -13833,6 +14119,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -13850,6 +14139,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -13866,6 +14158,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -13903,6 +14196,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -13919,6 +14213,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -13933,6 +14228,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13943,6 +14239,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -13958,6 +14255,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -13972,6 +14270,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14062,6 +14361,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
@@ -14078,6 +14380,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
@@ -14090,10 +14395,13 @@ export namespace Prisma {
   export type UserCreateManyLocationInput = {
     id?: number
     cognitoId: string
-    firstName: string
-    lastName: string
+    firstName?: string
+    lastName?: string
     email: string
-    phone: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -14105,6 +14413,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14117,6 +14428,7 @@ export namespace Prisma {
     price: number
     photoUrls?: SaleCarCreatephotoUrlsInput | string[]
     description: string
+    isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -14127,6 +14439,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUpdateOneWithoutSaleCarNestedInput
@@ -14142,6 +14455,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
@@ -14156,6 +14470,7 @@ export namespace Prisma {
     price?: FloatFieldUpdateOperationsInput | number
     photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14166,6 +14481,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     carSales?: SaleCarUpdateManyWithoutSellerNestedInput
@@ -14183,6 +14501,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
@@ -14199,6 +14520,9 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }

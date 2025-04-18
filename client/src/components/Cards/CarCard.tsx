@@ -34,7 +34,8 @@ const CarCard = ({
   const { make, model, year, fuel, drive } = car;
   const { city } = seller.location ? seller.location : "";
   const { data: authUser } = useGetAuthUserQuery();
-  const title = make + " " + model + " " + year;
+  const customMake = make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
+  const title = customMake + " " + model + " " + year;
   return (
     <div
       className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}

@@ -145,16 +145,25 @@ enum PaymentStatus {
   Denied
 }
 
+enum PreferredContactMethod {
+  Email
+  Phone
+  All
+}
+
 model User {
-  id              Int      @id @default(autoincrement())
-  cognitoId       String   @unique
-  locationId      Int?
-  firstName       String
-  lastName        String
-  email           String
-  phone           String
-  dateTimeCreated DateTime @default(now())
-  dateTimeUpdated DateTime @default(now()) @updatedAt
+  id                     Int                    @id @default(autoincrement())
+  cognitoId              String                 @unique
+  locationId             Int?
+  firstName              String                 @default("")
+  lastName               String                 @default("")
+  email                  String
+  phone                  String                 @default("")
+  avatarUrl              String                 @default("")
+  preferredContactMethod PreferredContactMethod @default(Email)
+  isProfileSetup         Boolean                @default(false)
+  dateTimeCreated        DateTime               @default(now())
+  dateTimeUpdated        DateTime               @default(now()) @updatedAt
 
   favourites SaleCar[] @relation("UserFavourites")
   carSales   SaleCar[]
@@ -204,6 +213,7 @@ model SaleCar {
   price           Float
   photoUrls       String[]
   description     String
+  isPublic        Boolean  @default(false)
   dateTimeCreated DateTime @default(now())
   dateTimeUpdated DateTime @default(now()) @updatedAt
 

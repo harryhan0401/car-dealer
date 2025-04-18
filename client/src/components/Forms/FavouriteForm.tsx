@@ -22,7 +22,7 @@ const FavouriteForm = ({
     ({ global }) => global.favourites
   );
 
-  if (userFavourites.length == 0) {
+  if (userFavourites.length == 0 && authUser.userInfo.favourites) {
     userFavourites = authUser.userInfo.favourites.map(
       (fav: { id: number }) => fav.id
     );

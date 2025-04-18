@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["placehold.co"], dangerouslyAllowSVG: true
+    domains: ["placehold.co", "github.com", "localhost"], dangerouslyAllowSVG: true
   }
 };
 

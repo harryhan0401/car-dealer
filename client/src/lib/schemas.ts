@@ -1,6 +1,9 @@
 // schemas/saleCarSchema.ts
-import { Fuel, Drive, Transmission, Type, Make } from "@/lib/constants";
+import { Fuel, Drive, Transmission, Type, Make, PreferContactMethods } from "@/lib/constants";
 import { z } from "zod";
+
+const imageSchema = z
+    .instanceof(File, { message: "Invalid file type" });
 
 export const saleCarSchema1 = z.object({
     vin: z.string().length(17, { message: "VIN must be 17 characters" }),
@@ -11,12 +14,6 @@ export const saleCarSchema1 = z.object({
         { message: "Description must be at least 10 words" }
     ),
 });
-export type SaleCarData1 = z.infer<typeof saleCarSchema1>;
-
-
-const imageSchema = z
-    .instanceof(File, { message: "Invalid file type" });
-
 
 export const baseSaleCarSchema2 = z.object({
     photo: z.array(imageSchema).min(1, { message: "Main photo is required" }),
@@ -48,10 +45,6 @@ export const saleCarSchema2 = baseSaleCarSchema2.superRefine((data, ctx) => {
         }
     });
 })
-export type SaleCarData2 = z.infer<typeof saleCarSchema2>;
-
-
-export type SaleCarData = SaleCarData1 & SaleCarData2
 
 export const carSchema = z.object({
     make: z.enum(Object.keys(Make) as [string, ...string[]], {
@@ -72,8 +65,6 @@ export const carSchema = z.object({
         invalid_type_error: "Transmission must be selected"
     }),
 });
-
-export type CarData = z.infer<typeof carSchema>;
 
 export const sellCarSchema = carSchema.extend(saleCarSchema1.shape).extend(baseSaleCarSchema2.shape).superRefine((data, ctx) => {
     if (data.photo.length && data.photo[0].size > 5 * 1024 * 1024) {
@@ -97,4 +88,51 @@ export const sellCarSchema = carSchema.extend(saleCarSchema1.shape).extend(baseS
     });
 })
 
+export const userSchema = z.object({
+    firstName: z.string().min(2, "First name must be at least 2 characters"),
+    lastName: z.string().min(2, "Last name must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    phone: z
+        .string()
+        .min(10, "Phone number must be at least 10 digits")
+        .max(15, "Phone number can't exceed 15 digits")
+        .regex(/^\+?[0-9]+$/, "Phone number must contain only digits and an optional leading +"),
+    preferredContactMethod: z.enum(Object.keys(PreferContactMethods) as [string, ...string[]], {
+        invalid_type_error: "Preferred Contact Method must be selected"
+    }),
+});
+
+export const locationSchema = z.object({
+    address: z.string().min(1, "Address is required"),
+    city: z.string().min(1, "City is required"),
+    state: z.string().min(1, "State is required"),
+    country: z.string().min(1, "Country is required"),
+    postalCode: z.string().min(1, "Postal Code is required"),
+    latitude: z.number().optional().nullable().refine(
+        (val) => val === null || (typeof val === 'number' && val >= -90 && val <= 90),
+        {
+            message: "Latitude must be a number between -90 and 90",
+        }
+    ),
+    longitude: z.number().optional().nullable().refine(
+        (val) => val === null || (typeof val === 'number' && val >= -180 && val <= 180),
+        {
+            message: "Longitude must be a number between -180 and 180",
+        }
+    ),
+})
+
+export const avatarSchema = z.object({
+    avatarUrl: z.array(imageSchema).min(1, { message: "Avatar is required" }),
+})
+
+export type locationData = z.infer<typeof locationSchema>;
+export type userData = z.infer<typeof userSchema>;
+export type avatarData = z.infer<typeof avatarSchema>;
+
+
+export type SaleCarData1 = z.infer<typeof saleCarSchema1>;
+export type SaleCarData2 = z.infer<typeof saleCarSchema2>;
+export type CarData = z.infer<typeof carSchema>;
+export type SaleCarData = SaleCarData1 & SaleCarData2
 export type SellCarFormData = z.infer<typeof sellCarSchema>;

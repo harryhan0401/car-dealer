@@ -1,3 +1,5 @@
+import { TOption, TProfileSetupSteps } from "./types";
+
 export const FooterCompanyNavLinks = [
   { name: "About", href: "/about" },
   { name: "Career", href: "/career" },
@@ -155,3 +157,21 @@ export enum PaymentMethod {
   ApplePay = "ApplePay",
   GooglePay = "GooglePay"
 }
+
+export enum PreferContactMethods {
+  Email = "Email",
+  Phone = "Phone",
+  All = "All"
+}
+
+export const profileSetupSteps: TProfileSetupSteps[] = [
+  { step: 1, title: "Fill your details" },
+  { step: 2, title: "Fill your address" },
+  { step: 3, title: "Upload your avatar" },
+  { step: 4, title: "Confirm" }
+]
+
+export const preferContactMethods: TOption[] =
+  [{ value: "Email", label: "Email" },
+  { value: "Phone", label: "Phone" },
+  { value: "All", label: "All" }]

@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,27 +6,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
-import { signOut } from "aws-amplify/auth";
 import { useRouter } from "next/navigation";
 import { Avatar } from "./ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { handleSignOut } from "@/lib/utils";
 
 const Profile = ({
-  cognitoId,
   userRole,
   userImage,
   username,
 }: {
-  cognitoId: string;
   userRole: string;
   userImage: string;
   username: string;
 }) => {
   const router = useRouter();
-  const handleSignOut = async () => {
-    await signOut();
-    window.location.href = "/";
-  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="flex items-center gap-2 focus:outline-none">
@@ -37,14 +31,14 @@ const Profile = ({
             {username.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
-        <p className="bg-border ps-5 pe-2 py-1 ms-[-0.8rem] rounded focus:outline-none">{username}</p>
+        <p className="bg-border ps-5 pe-2 py-1 ms-[-0.8rem] rounded focus:outline-none">
+          {username}
+        </p>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="bg-white text-secondary py-3">
         <DropdownMenuItem
           className="cursor-pointer hover:!bg-black hover:!text-white font-bold px-2 "
-          onClick={() =>
-            router.push(`/${userRole.toLowerCase()}s/:${cognitoId}`)
-          }
+          onClick={() => router.push(`/${userRole.toLowerCase()}s`)}
         >
           View profile
         </DropdownMenuItem>

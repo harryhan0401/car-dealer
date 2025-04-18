@@ -1,0 +1,22 @@
+.filepond--image-preview-wrapper {
+    transform: scale(1.25) !important;
+}
+
+.filepond--file-action-button {
+    transform: translate3d(-25px, 0px, 0px) scale3d(1, 1, 1) !important
+}
+
+canvas {
+    border-radius: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+
+.filepond--image-canvas-wrapper {
+    transform: none !important;
+}
+
+.filepond--image-bitmap {
+    height: 100% !important;
+}

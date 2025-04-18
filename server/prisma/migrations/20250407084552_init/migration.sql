@@ -25,15 +25,21 @@ CREATE TYPE "PaymentMethod" AS ENUM ('Cash', 'CreditCard', 'DebitCard', 'Paypal'
 -- CreateEnum
 CREATE TYPE "PaymentStatus" AS ENUM ('Pending', 'Paid', 'Denied');
 
+-- CreateEnum
+CREATE TYPE "PreferredContactMethod" AS ENUM ('Email', 'Phone', 'All');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
     "cognitoId" TEXT NOT NULL,
     "locationId" INTEGER,
-    "firstName" TEXT NOT NULL,
-    "lastName" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL DEFAULT '',
+    "lastName" TEXT NOT NULL DEFAULT '',
     "email" TEXT NOT NULL,
-    "phone" TEXT NOT NULL,
+    "phone" TEXT NOT NULL DEFAULT '',
+    "avatarUrl" TEXT NOT NULL DEFAULT '',
+    "preferredContactMethod" "PreferredContactMethod" NOT NULL DEFAULT 'Email',
+    "isProfileSetup" BOOLEAN NOT NULL DEFAULT false,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -81,6 +87,7 @@ CREATE TABLE "SaleCar" (
     "price" DOUBLE PRECISION NOT NULL,
     "photoUrls" TEXT[],
     "description" TEXT NOT NULL,
+    "isPublic" BOOLEAN NOT NULL DEFAULT false,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

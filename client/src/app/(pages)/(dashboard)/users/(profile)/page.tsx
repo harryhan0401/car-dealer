@@ -1,0 +1,47 @@
+"use client";
+import { useGetAuthUserQuery } from "@/state/api";
+import UserDetails from "../_components/UserDetails";
+import { Separator } from "@/components/ui/separator";
+import YourCars from "../_components/YourCars";
+import Favourites from "../_components/Favourites";
+
+const Profile = () => {
+  const { data: authUser, isLoading } = useGetAuthUserQuery();
+  if (isLoading) return <p>Loading...</p>;
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    preferredContactMethod,
+    location,
+  } = authUser?.userInfo;
+  const completeAddress =
+    location.address +
+    ", " +
+    location.city +
+    " " +
+    location.state +
+    ", " +
+    location.postalCode +
+    ", " +
+    location.country;
+
+  return (
+    <main className="p-4 h-full w-full">
+      <UserDetails
+        firstName={firstName}
+        lastName={lastName}
+        email={email}
+        phone={phone}
+        preferredContactMethod={preferredContactMethod}
+        completeAddress={completeAddress}
+      />
+      <Separator className="my-4" />
+      <YourCars saleCars={authUser?.userInfo.carSales} authUser={authUser!} />
+      <Separator className="my-4" />
+      <Favourites />
+    </main>
+  );
+};
+export default Profile;

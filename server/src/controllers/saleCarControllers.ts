@@ -7,6 +7,7 @@ const prisma = new PrismaClient();
 export const getAllSaleCars = async (_req: Request, res: Response): Promise<void> => {
     try {
         const saleCars = await prisma.saleCar.findMany({
+            where: { "isPublic": true },
             orderBy: { "dateTimeUpdated": "desc" },
             include: {
                 car: true,

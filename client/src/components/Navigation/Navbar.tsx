@@ -4,6 +4,7 @@ import CompanyLogo from "../CompanyLogo";
 import NavbarMobile from "./NavbarMobile";
 import Location from "../Location";
 import Authentication from "../Authentication";
+import { TNavLink } from "@/lib/types";
 
 const Navbar = () => {
   const navLinks: TNavLink[] = [

@@ -4,7 +4,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -289,6 +288,10 @@ input[type=number] {
   border-radius: 10px !important;
 }
 
+.filepond--image-preview-overlay {
+  opacity: 0 !important;
+}
+
 
 #upload-image {
   display: grid;
@@ -318,9 +321,6 @@ input[type=number] {
 .filepond-image-5 {
   grid-area: filepond-image-5;
 }
-
-
-
 
 /* Responsive Container*/
 @media(min-width:640px) {
@@ -358,5 +358,29 @@ input[type=number] {
 
   .card {
     @apply border-white bg-white p-5 drop-shadow-md rounded-lg
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .stepper_step_container {
+    @apply grid grid-cols-2 gap-[30px] my-[30px];
+  }
+
+  .stepper_step_heading {
+    @apply text-center text-foreground/70 mt-[30px];
+  }
+
+  .form {
+    @apply max-w-[320px] sm:max-w-[600px] lg:max-w-[1000px] mx-auto py-10 flex flex-col gap-5;
   }
 }
