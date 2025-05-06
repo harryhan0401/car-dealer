@@ -46,7 +46,7 @@ const SellCarFormPartFour = ({ sellCarFormData, cb }: SellCarFormStepProps) => {
       formData.append("cognitoId", authUser.cognitoInfo.userId);
       const res = await createSaleCar(formData);
       if (!res.error) {
-        router.push("/");
+        router.push("/users");
       }
     },
     [authUser]

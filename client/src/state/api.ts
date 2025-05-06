@@ -63,6 +63,10 @@ export const api = createApi({
         return url;
       }
     }),
+    getSaleCarById: build.query<SaleCar, number>({
+      query: (id) => `/saleCars/${id}`,
+      providesTags: (id) => [{ type: "SaleCars", id }],
+    }),
     getAllSaleCars: build.query<SaleCar[], void>({
       query: () => "/saleCars/all",
       providesTags: (result) =>
@@ -84,6 +88,13 @@ export const api = createApi({
         { type: "SaleCars", id: "LIST" },
       ]
     }),
+    deleteSaleCar: build.mutation<number, number>({
+      query: (id) => ({
+        url: `/saleCars/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result) => [{ type: "Users", id: result }, { type: "SaleCars", id: "LIST" }],
+    }),
 
     //user related endpoints
     updateUserProfile: build.mutation<User, { cognitoId: string, userProfileData: FormData }>({
@@ -94,7 +105,7 @@ export const api = createApi({
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }]
     }),
-    updateUserFavourites: build.mutation<User, { cognitoId: string; saleCarId: number }>({
+    addSaleCarFavourite: build.mutation<User, { cognitoId: string; saleCarId: number }>({
       query: ({ cognitoId, saleCarId }) => ({
         url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
         method: 'PATCH',  // Using PATCH for partial updates
@@ -102,7 +113,15 @@ export const api = createApi({
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
     }),
+    removeSaleCarFavourite: build.mutation<User, { cognitoId: string; saleCarId: number }>({
+      query: ({ cognitoId, saleCarId }) => ({
+        url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
+        method: 'DELETE',  // Using DELETE for removing a favourite
+        body: { saleCarId },
+      }),
+      invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
+    }),
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useUpdateUserProfileMutation, useUpdateUserFavouritesMutation } = api;
+export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetSaleCarByIdQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useDeleteSaleCarMutation, useUpdateUserProfileMutation, useAddSaleCarFavouriteMutation, useRemoveSaleCarFavouriteMutation } = api;

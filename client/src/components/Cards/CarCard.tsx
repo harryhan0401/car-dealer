@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiStoneWheel } from "react-icons/gi";
-import { Bolt, Flame, Fuel, MapPin, ShoppingCart } from "lucide-react";
+import { Bolt, Flame, Fuel, MapPin, Phone } from "lucide-react";
 import { Button } from "../ui/button";
 import { SaleCar, User } from "@/types/prismaTypes";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
+import Link from "next/link";
 
 type CarCardProps = {
   id: number;
@@ -34,33 +35,36 @@ const CarCard = ({
   const { make, model, year, fuel, drive } = car;
   const { city } = seller.location ? seller.location : "";
   const { data: authUser } = useGetAuthUserQuery();
-  const customMake = make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
+  const customMake =
+    make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
   const title = customMake + " " + model + " " + year;
   return (
     <div
-      className={`card rounded-2xl ${isHighlight ? "lg:col-span-2 border border-primary " : ""}`}
+      className={`card rounded-2xl ${isHighlight && "lg:col-span-2 border border-primary "}`}
     >
       <div
-        className={`grid ${isHighlight ? "lg:grid-cols-2 lg:gap-10 lg:items-center" : ""}`}
+        className={`grid ${isHighlight && "lg:grid-cols-2 lg:gap-10 lg:items-center"}`}
       >
-        <Image
-          // src={`/${photoUrls[0]}`}
-          src={
-            make.toLowerCase() == "bmw"
-              ? "/bmw.jpg"
-              : make.toLowerCase() == "mercedesbenz"
-                ? "/mercedes.jpg"
-                : make.toLowerCase() == "audi"
-                  ? "/audi.jpg"
-                  : ""
-          }
-          height={250}
-          width={500}
-          className="w-full object-cover object-center rounded-2xl"
-          alt="Car"
-          quality={[0, 1, 2, 3, 4].includes(index) ? 0 : 100}
-          priority={[0, 1, 2, 3, 4].includes(index)}
-        />
+        <Link href={`/salecars/${id}`}>
+          <Image
+            // src={`/${photoUrls[0]}`}
+            src={
+              make.toLowerCase() == "bmw"
+                ? "/bmw.jpg"
+                : make.toLowerCase() == "mercedesbenz"
+                  ? "/mercedes.jpg"
+                  : make.toLowerCase() == "audi"
+                    ? "/audi.jpg"
+                    : ""
+            }
+            height={250}
+            width={500}
+            className="w-full object-cover object-center rounded-2xl"
+            alt="Car"
+            quality={[0, 1, 2, 3, 4].includes(index) ? 0 : 100}
+            priority={[0, 1, 2, 3, 4].includes(index)}
+          />
+        </Link>
         <div className="py-3 px-4 flex flex-col gap-3">
           <section
             id="car-title"
@@ -68,7 +72,7 @@ const CarCard = ({
           >
             <p>{title}</p>
             <p
-              className={`${isHighlight ? "text-neutral bg-primary px-2 py-1 rounded-md flex items-center gap-1" : ""}`}
+              className={`${isHighlight && "text-neutral bg-primary px-2 py-1 rounded-md flex items-center gap-1"}`}
             >
               {isHighlight && (
                 <span>
@@ -131,13 +135,13 @@ const CarCard = ({
           {!isReview && (
             <section
               id="car-interaction-group"
-              className={`flex ${authUser ? "gap-5" : ""}`}
+              className={`flex ${authUser && "gap-5"}`}
             >
-              <Button className="flex-1" aria-label={`Buy ${title}`}>
+              <Button className="flex-1" aria-label="Contact Seller">
                 <span>
-                  <ShoppingCart />
+                  <Phone />
                 </span>
-                Buy now
+                Contact Seller
               </Button>
               {authUser && (
                 <div>

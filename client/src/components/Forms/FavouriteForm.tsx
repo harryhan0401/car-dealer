@@ -1,11 +1,10 @@
 "use client";
 import { setFavourites } from "@/state";
-import { useUpdateUserFavouritesMutation } from "@/state/api";
-import { useAppSelector } from "@/state/redux";
+import { useAddSaleCarFavouriteMutation } from "@/state/api";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 const FavouriteForm = ({
   authUser,
@@ -14,9 +13,9 @@ const FavouriteForm = ({
   authUser: AppUser;
   saleCarId: number;
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [updateUserFavourites, { isLoading }] =
-    useUpdateUserFavouritesMutation();
+    useAddSaleCarFavouriteMutation();
 
   let userFavourites: number[] = useAppSelector(
     ({ global }) => global.favourites
@@ -48,9 +47,7 @@ const FavouriteForm = ({
         }
         dispatch(setFavourites(favourites));
       } else {
-        throw new Error(
-          "Unable to add new favourite - line-45 FavouriteForm.tsx"
-        );
+        throw new Error("Unable to add new favourite. Please try again later.");
       }
     } catch (error) {
       console.error("Error adding favourite:", error);

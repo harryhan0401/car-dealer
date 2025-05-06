@@ -159,6 +159,19 @@ input[type=number] {
   bottom: -21px;
 }
 
+.saleCarSection {
+  position: relative;
+}
+
+.saleCarSection.active::before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-neutral-300);
+  bottom: 0px;
+}
+
 .price-input,
 .mileage-input {
   position: relative;

@@ -30,8 +30,6 @@ export const getAllSaleCars = async (_req: Request, res: Response): Promise<void
     }
 }
 
-
-
 export const getSaleCars = async (req: Request, res: Response): Promise<void> => {
     const take = parseInt(req.query.take as string) || 40;
     const skip = parseInt(req.query.skip as string) || 0;
@@ -148,5 +146,42 @@ export const createSaleCar = async (req: Request, res: Response): Promise<void> 
     } catch (error: any) {
         res.status(500).json({ message: `Error creating sale car: ${error.message}` });
 
+    }
+}
+
+export async function deleteSaleCar(req: Request, res: Response): Promise<void> {
+    try {
+        if (!req.user) {
+            res.status(401).json({ message: "Unauthorized: User not found" });
+            return;
+        }
+        const { saleCarId } = req.params;
+
+        // First check if the sale car exists and belongs to the user
+        const saleCar = await prisma.saleCar.findUnique({
+            where: { id: +saleCarId },
+            include: { seller: true }
+        });
+
+        if (!saleCar) {
+            res.status(404).json({ message: "Sale car not found" });
+            return;
+        }
+
+        if (saleCar.sellerCognitoId !== req.user?.id) {
+            res.status(403).json({ message: "Unauthorized: You can only delete your own listings" });
+            return;
+        }
+
+        // If checks pass, proceed with deletion
+        const deletedSaleCar = await prisma.saleCar.delete({
+            where: { id: +saleCarId },
+            include: { seller: true }
+        });
+
+        res.status(200).json(deletedSaleCar.seller.id);
+    } catch (error: any) {
+        console.error("Error deleting sale car:", error);
+        res.status(500).json({ message: `Error deleting sale car: ${error.message}` });
     }
 }

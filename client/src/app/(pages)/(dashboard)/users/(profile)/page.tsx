@@ -4,10 +4,12 @@ import UserDetails from "../_components/UserDetails";
 import { Separator } from "@/components/ui/separator";
 import YourCars from "../_components/YourCars";
 import Favourites from "../_components/Favourites";
+import SellCarForm from "@/components/Forms/SellCarForm/SellCarForm";
 
 const Profile = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();
   if (isLoading) return <p>Loading...</p>;
+  if (!authUser) return <p>You are not authorized to view this page!</p>;
   const {
     firstName,
     lastName,
@@ -15,7 +17,7 @@ const Profile = () => {
     phone,
     preferredContactMethod,
     location,
-  } = authUser?.userInfo;
+  } = authUser.userInfo;
   const completeAddress =
     location.address +
     ", " +
@@ -38,9 +40,9 @@ const Profile = () => {
         completeAddress={completeAddress}
       />
       <Separator className="my-4" />
-      <YourCars saleCars={authUser?.userInfo.carSales} authUser={authUser!} />
+      <YourCars saleCars={authUser.userInfo.carSales} />
       <Separator className="my-4" />
-      <Favourites />
+      <Favourites favourites={authUser.userInfo.favourites} />
     </main>
   );
 };

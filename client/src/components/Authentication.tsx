@@ -18,9 +18,7 @@ const Authentication = () => {
   useEffect(() => {
     if (authUser && authUser.userInfo.favourites) {
       dispatch(
-        setFavourites(
-          authUser.userInfo.favourites.map((fav: { id: number }) => fav.id)
-        )
+        setFavourites(authUser.userInfo.favourites)
       );
     }
   }, [authUser]);

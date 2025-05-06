@@ -8,7 +8,11 @@ interface NavLinkProps {
 }
 const NavLink = ({ path, label }: NavLinkProps) => {
   const pathname = usePathname();
-  const isActive = pathname === path ? "active text-primary" : "";
+  
+  const isMatchingPath = pathname === path;
+  const isSaleCarPath = pathname.includes("salecar") && path !== "/sell";
+  
+  const isActive = isMatchingPath || isSaleCarPath ? "active text-primary" : "";
 
   return (
     <Link className={`navLink ${isActive}`} href={path} scroll={false}>

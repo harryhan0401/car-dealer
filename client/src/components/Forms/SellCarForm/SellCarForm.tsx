@@ -16,7 +16,7 @@ import { AccordionHeader } from "@radix-ui/react-accordion";
 import { useGetAuthUserQuery } from "@/state/api";
 import Authentication from "@/components/Authentication";
 
-import { Angry, Smile } from "lucide-react";
+import { Angry } from "lucide-react";
 
 const SellCarForm = () => {
   const { data: authUser } = useGetAuthUserQuery();

@@ -112,7 +112,7 @@ export const CustomFormField = ({
             placeholder={placeholder}
             {...field}
             rows={3}
-            className={`border-gray-200 p-4 ${inputClassName}`}
+            className={`border-gray-200 p-4 resize-none ${inputClassName}`}
           />
         );
       case "select":
