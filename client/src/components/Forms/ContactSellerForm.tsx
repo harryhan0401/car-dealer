@@ -9,9 +9,13 @@ import { Send } from "lucide-react";
 
 const ContactSellerForm = () => {
   const { data: user } = useGetAuthUserQuery();
-  if (!user) return null;
   const contactForm = useForm<userData>({
-    defaultValues: user.userInfo,
+    defaultValues: user?.userInfo || {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+    },
     resolver: zodResolver(userSchema),
   });
   const onSubmit = async (data: userData) => {

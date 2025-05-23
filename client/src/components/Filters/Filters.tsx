@@ -6,21 +6,21 @@ import FilterDrive from "@/components/Filters/FilterSelect/FilterDrive";
 import FilterYear from "@/components/Filters/FilterRange/FilterYear";
 import FilterTransmission from "./FilterSelect/FilterTransmission";
 import ResetAll from "./ResetAll";
-import { useGetAllSaleCarsQuery } from "@/state/api";
+import { useGetAllSellCarsQuery } from "@/state/api";
 
 const Filters = () => {
-  const { data: saleCars, isFetching: carFetching } = useGetAllSaleCarsQuery();
+  const { data: sellCars, isFetching: carFetching } = useGetAllSellCarsQuery();
   return (
     <>
-      {!carFetching && saleCars && (
+      {!carFetching && sellCars && (
         <div className="flex flex-col gap-5">
-          <FilterMakesModels saleCars={saleCars} />
-          <FilterPrice saleCars={saleCars} />
-          <FilterMileage saleCars={saleCars} />
+          <FilterMakesModels sellCars={sellCars} />
+          <FilterPrice sellCars={sellCars} />
+          <FilterMileage sellCars={sellCars} />
           <FilterFuel />
           <FilterTransmission />
           <FilterDrive />
-          <FilterYear saleCars={saleCars} />
+          <FilterYear sellCars={sellCars} />
           <ResetAll />
         </div>
       )}

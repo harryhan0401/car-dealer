@@ -29,10 +29,15 @@ export type Location = $Result.DefaultSelection<Prisma.$LocationPayload>
  */
 export type Car = $Result.DefaultSelection<Prisma.$CarPayload>
 /**
- * Model SaleCar
+ * Model SellCar
  * 
  */
-export type SaleCar = $Result.DefaultSelection<Prisma.$SaleCarPayload>
+export type SellCar = $Result.DefaultSelection<Prisma.$SellCarPayload>
+/**
+ * Model Enquiry
+ * 
+ */
+export type Enquiry = $Result.DefaultSelection<Prisma.$EnquiryPayload>
 /**
  * Model Order
  * 
@@ -182,12 +187,21 @@ export type Transmission = (typeof Transmission)[keyof typeof Transmission]
 
 export const OrderStatus: {
   Pending: 'Pending',
-  Denied: 'Denied',
+  Declined: 'Declined',
   Confirmed: 'Confirmed',
   Paid: 'Paid'
 };
 
 export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
+
+
+export const EnquiryStatus: {
+  Received: 'Received',
+  Accepted: 'Accepted',
+  Declined: 'Declined'
+};
+
+export type EnquiryStatus = (typeof EnquiryStatus)[keyof typeof EnquiryStatus]
 
 
 export const PaymentMethod: {
@@ -207,7 +221,7 @@ export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 export const PaymentStatus: {
   Pending: 'Pending',
   Paid: 'Paid',
-  Denied: 'Denied'
+  Declined: 'Declined'
 };
 
 export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
@@ -246,6 +260,10 @@ export const Transmission: typeof $Enums.Transmission
 export type OrderStatus = $Enums.OrderStatus
 
 export const OrderStatus: typeof $Enums.OrderStatus
+
+export type EnquiryStatus = $Enums.EnquiryStatus
+
+export const EnquiryStatus: typeof $Enums.EnquiryStatus
 
 export type PaymentMethod = $Enums.PaymentMethod
 
@@ -415,14 +433,24 @@ export class PrismaClient<
   get car(): Prisma.CarDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.saleCar`: Exposes CRUD operations for the **SaleCar** model.
+   * `prisma.sellCar`: Exposes CRUD operations for the **SellCar** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more SaleCars
-    * const saleCars = await prisma.saleCar.findMany()
+    * // Fetch zero or more SellCars
+    * const sellCars = await prisma.sellCar.findMany()
     * ```
     */
-  get saleCar(): Prisma.SaleCarDelegate<ExtArgs, ClientOptions>;
+  get sellCar(): Prisma.SellCarDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.enquiry`: Exposes CRUD operations for the **Enquiry** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Enquiries
+    * const enquiries = await prisma.enquiry.findMany()
+    * ```
+    */
+  get enquiry(): Prisma.EnquiryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.order`: Exposes CRUD operations for the **Order** model.
@@ -896,7 +924,8 @@ export namespace Prisma {
     User: 'User',
     Location: 'Location',
     Car: 'Car',
-    SaleCar: 'SaleCar',
+    SellCar: 'SellCar',
+    Enquiry: 'Enquiry',
     Order: 'Order',
     Payment: 'Payment',
     Review: 'Review'
@@ -918,7 +947,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "location" | "car" | "saleCar" | "order" | "payment" | "review"
+      modelProps: "user" | "location" | "car" | "sellCar" | "enquiry" | "order" | "payment" | "review"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1128,77 +1157,151 @@ export namespace Prisma {
           }
         }
       }
-      SaleCar: {
-        payload: Prisma.$SaleCarPayload<ExtArgs>
-        fields: Prisma.SaleCarFieldRefs
+      SellCar: {
+        payload: Prisma.$SellCarPayload<ExtArgs>
+        fields: Prisma.SellCarFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.SaleCarFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload> | null
+            args: Prisma.SellCarFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.SaleCarFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           findFirst: {
-            args: Prisma.SaleCarFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload> | null
+            args: Prisma.SellCarFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.SaleCarFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           findMany: {
-            args: Prisma.SaleCarFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>[]
+            args: Prisma.SellCarFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>[]
           }
           create: {
-            args: Prisma.SaleCarCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           createMany: {
-            args: Prisma.SaleCarCreateManyArgs<ExtArgs>
+            args: Prisma.SellCarCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.SaleCarCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>[]
+            args: Prisma.SellCarCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>[]
           }
           delete: {
-            args: Prisma.SaleCarDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           update: {
-            args: Prisma.SaleCarUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           deleteMany: {
-            args: Prisma.SaleCarDeleteManyArgs<ExtArgs>
+            args: Prisma.SellCarDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.SaleCarUpdateManyArgs<ExtArgs>
+            args: Prisma.SellCarUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.SaleCarUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>[]
+            args: Prisma.SellCarUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>[]
           }
           upsert: {
-            args: Prisma.SaleCarUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SaleCarPayload>
+            args: Prisma.SellCarUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SellCarPayload>
           }
           aggregate: {
-            args: Prisma.SaleCarAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSaleCar>
+            args: Prisma.SellCarAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSellCar>
           }
           groupBy: {
-            args: Prisma.SaleCarGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SaleCarGroupByOutputType>[]
+            args: Prisma.SellCarGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SellCarGroupByOutputType>[]
           }
           count: {
-            args: Prisma.SaleCarCountArgs<ExtArgs>
-            result: $Utils.Optional<SaleCarCountAggregateOutputType> | number
+            args: Prisma.SellCarCountArgs<ExtArgs>
+            result: $Utils.Optional<SellCarCountAggregateOutputType> | number
+          }
+        }
+      }
+      Enquiry: {
+        payload: Prisma.$EnquiryPayload<ExtArgs>
+        fields: Prisma.EnquiryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnquiryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnquiryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          findFirst: {
+            args: Prisma.EnquiryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnquiryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          findMany: {
+            args: Prisma.EnquiryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>[]
+          }
+          create: {
+            args: Prisma.EnquiryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          createMany: {
+            args: Prisma.EnquiryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnquiryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>[]
+          }
+          delete: {
+            args: Prisma.EnquiryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          update: {
+            args: Prisma.EnquiryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnquiryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnquiryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnquiryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnquiryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnquiryPayload>
+          }
+          aggregate: {
+            args: Prisma.EnquiryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnquiry>
+          }
+          groupBy: {
+            args: Prisma.EnquiryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnquiryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnquiryCountArgs<ExtArgs>
+            result: $Utils.Optional<EnquiryCountAggregateOutputType> | number
           }
         }
       }
@@ -1511,7 +1614,8 @@ export namespace Prisma {
     user?: UserOmit
     location?: LocationOmit
     car?: CarOmit
-    saleCar?: SaleCarOmit
+    sellCar?: SellCarOmit
+    enquiry?: EnquiryOmit
     order?: OrderOmit
     payment?: PaymentOmit
     review?: ReviewOmit
@@ -1614,6 +1718,7 @@ export namespace Prisma {
     orders: number
     reviews: number
     reviewer: number
+    enquiries: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1622,6 +1727,7 @@ export namespace Prisma {
     orders?: boolean | UserCountOutputTypeCountOrdersArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
     reviewer?: boolean | UserCountOutputTypeCountReviewerArgs
+    enquiries?: boolean | UserCountOutputTypeCountEnquiriesArgs
   }
 
   // Custom InputTypes
@@ -1639,14 +1745,14 @@ export namespace Prisma {
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountFavouritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
   export type UserCountOutputTypeCountCarSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
   }
 
   /**
@@ -1670,17 +1776,24 @@ export namespace Prisma {
     where?: ReviewWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountEnquiriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnquiryWhereInput
+  }
+
 
   /**
    * Count Type LocationCountOutputType
    */
 
   export type LocationCountOutputType = {
-    Users: number
+    users: number
   }
 
   export type LocationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Users?: boolean | LocationCountOutputTypeCountUsersArgs
+    users?: boolean | LocationCountOutputTypeCountUsersArgs
   }
 
   // Custom InputTypes
@@ -1707,11 +1820,11 @@ export namespace Prisma {
    */
 
   export type CarCountOutputType = {
-    carSales: number
+    sellCars: number
   }
 
   export type CarCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    carSales?: boolean | CarCountOutputTypeCountCarSalesArgs
+    sellCars?: boolean | CarCountOutputTypeCountSellCarsArgs
   }
 
   // Custom InputTypes
@@ -1728,38 +1841,47 @@ export namespace Prisma {
   /**
    * CarCountOutputType without action
    */
-  export type CarCountOutputTypeCountCarSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SaleCarWhereInput
+  export type CarCountOutputTypeCountSellCarsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SellCarWhereInput
   }
 
 
   /**
-   * Count Type SaleCarCountOutputType
+   * Count Type SellCarCountOutputType
    */
 
-  export type SaleCarCountOutputType = {
+  export type SellCarCountOutputType = {
+    enquiries: number
     favouritedBy: number
   }
 
-  export type SaleCarCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    favouritedBy?: boolean | SaleCarCountOutputTypeCountFavouritedByArgs
+  export type SellCarCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    enquiries?: boolean | SellCarCountOutputTypeCountEnquiriesArgs
+    favouritedBy?: boolean | SellCarCountOutputTypeCountFavouritedByArgs
   }
 
   // Custom InputTypes
   /**
-   * SaleCarCountOutputType without action
+   * SellCarCountOutputType without action
    */
-  export type SaleCarCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCarCountOutputType
+     * Select specific fields to fetch from the SellCarCountOutputType
      */
-    select?: SaleCarCountOutputTypeSelect<ExtArgs> | null
+    select?: SellCarCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * SaleCarCountOutputType without action
+   * SellCarCountOutputType without action
    */
-  export type SaleCarCountOutputTypeCountFavouritedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarCountOutputTypeCountEnquiriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnquiryWhereInput
+  }
+
+  /**
+   * SellCarCountOutputType without action
+   */
+  export type SellCarCountOutputTypeCountFavouritedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserWhereInput
   }
 
@@ -2032,6 +2154,7 @@ export namespace Prisma {
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     reviewer?: boolean | User$reviewerArgs<ExtArgs>
     location?: boolean | User$locationArgs<ExtArgs>
+    enquiries?: boolean | User$enquiriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2090,6 +2213,7 @@ export namespace Prisma {
     reviews?: boolean | User$reviewsArgs<ExtArgs>
     reviewer?: boolean | User$reviewerArgs<ExtArgs>
     location?: boolean | User$locationArgs<ExtArgs>
+    enquiries?: boolean | User$enquiriesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2102,12 +2226,13 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      favourites: Prisma.$SaleCarPayload<ExtArgs>[]
-      carSales: Prisma.$SaleCarPayload<ExtArgs>[]
+      favourites: Prisma.$SellCarPayload<ExtArgs>[]
+      carSales: Prisma.$SellCarPayload<ExtArgs>[]
       orders: Prisma.$OrderPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
       reviewer: Prisma.$ReviewPayload<ExtArgs>[]
       location: Prisma.$LocationPayload<ExtArgs> | null
+      enquiries: Prisma.$EnquiryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2516,12 +2641,13 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    favourites<T extends User$favouritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favouritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    carSales<T extends User$carSalesArgs<ExtArgs> = {}>(args?: Subset<T, User$carSalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    favourites<T extends User$favouritesArgs<ExtArgs> = {}>(args?: Subset<T, User$favouritesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    carSales<T extends User$carSalesArgs<ExtArgs> = {}>(args?: Subset<T, User$carSalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     orders<T extends User$ordersArgs<ExtArgs> = {}>(args?: Subset<T, User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviewer<T extends User$reviewerArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     location<T extends User$locationArgs<ExtArgs> = {}>(args?: Subset<T, User$locationArgs<ExtArgs>>): Prisma__LocationClient<$Result.GetResult<Prisma.$LocationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    enquiries<T extends User$enquiriesArgs<ExtArgs> = {}>(args?: Subset<T, User$enquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2963,23 +3089,23 @@ export namespace Prisma {
    */
   export type User$favouritesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
-    where?: SaleCarWhereInput
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
-    cursor?: SaleCarWhereUniqueInput
+    include?: SellCarInclude<ExtArgs> | null
+    where?: SellCarWhereInput
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
+    cursor?: SellCarWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
@@ -2987,23 +3113,23 @@ export namespace Prisma {
    */
   export type User$carSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
-    where?: SaleCarWhereInput
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
-    cursor?: SaleCarWhereUniqueInput
+    include?: SellCarInclude<ExtArgs> | null
+    where?: SellCarWhereInput
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
+    cursor?: SellCarWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
@@ -3095,6 +3221,30 @@ export namespace Prisma {
      */
     include?: LocationInclude<ExtArgs> | null
     where?: LocationWhereInput
+  }
+
+  /**
+   * User.enquiries
+   */
+  export type User$enquiriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    where?: EnquiryWhereInput
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    cursor?: EnquiryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnquiryScalarFieldEnum | EnquiryScalarFieldEnum[]
   }
 
   /**
@@ -3338,7 +3488,7 @@ export namespace Prisma {
     postalCode?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    Users?: boolean | Location$UsersArgs<ExtArgs>
+    users?: boolean | Location$usersArgs<ExtArgs>
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["location"]>
 
@@ -3367,7 +3517,7 @@ export namespace Prisma {
 
   export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "address" | "city" | "state" | "country" | "postalCode" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["location"]>
   export type LocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Users?: boolean | Location$UsersArgs<ExtArgs>
+    users?: boolean | Location$usersArgs<ExtArgs>
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LocationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3375,7 +3525,7 @@ export namespace Prisma {
   export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Location"
     objects: {
-      Users: Prisma.$UserPayload<ExtArgs>[]
+      users: Prisma.$UserPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3709,7 +3859,7 @@ export namespace Prisma {
    */
   export interface Prisma__LocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Users<T extends Location$UsersArgs<ExtArgs> = {}>(args?: Subset<T, Location$UsersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Location$usersArgs<ExtArgs> = {}>(args?: Subset<T, Location$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4053,9 +4203,9 @@ export namespace Prisma {
   }
 
   /**
-   * Location.Users
+   * Location.users
    */
-  export type Location$UsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Location$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -4337,7 +4487,7 @@ export namespace Prisma {
     transmission?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    carSales?: boolean | Car$carSalesArgs<ExtArgs>
+    sellCars?: boolean | Car$sellCarsArgs<ExtArgs>
     _count?: boolean | CarCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["car"]>
 
@@ -4382,7 +4532,7 @@ export namespace Prisma {
 
   export type CarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "make" | "model" | "year" | "type" | "fuel" | "drive" | "transmission" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["car"]>
   export type CarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    carSales?: boolean | Car$carSalesArgs<ExtArgs>
+    sellCars?: boolean | Car$sellCarsArgs<ExtArgs>
     _count?: boolean | CarCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4391,7 +4541,7 @@ export namespace Prisma {
   export type $CarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Car"
     objects: {
-      carSales: Prisma.$SaleCarPayload<ExtArgs>[]
+      sellCars: Prisma.$SellCarPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4798,7 +4948,7 @@ export namespace Prisma {
    */
   export interface Prisma__CarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    carSales<T extends Car$carSalesArgs<ExtArgs> = {}>(args?: Subset<T, Car$carSalesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sellCars<T extends Car$sellCarsArgs<ExtArgs> = {}>(args?: Subset<T, Car$sellCarsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5226,27 +5376,27 @@ export namespace Prisma {
   }
 
   /**
-   * Car.carSales
+   * Car.sellCars
    */
-  export type Car$carSalesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Car$sellCarsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
-    where?: SaleCarWhereInput
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
-    cursor?: SaleCarWhereUniqueInput
+    include?: SellCarInclude<ExtArgs> | null
+    where?: SellCarWhereInput
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
+    cursor?: SellCarWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
@@ -5269,45 +5419,32 @@ export namespace Prisma {
 
 
   /**
-   * Model SaleCar
+   * Model SellCar
    */
 
-  export type AggregateSaleCar = {
-    _count: SaleCarCountAggregateOutputType | null
-    _avg: SaleCarAvgAggregateOutputType | null
-    _sum: SaleCarSumAggregateOutputType | null
-    _min: SaleCarMinAggregateOutputType | null
-    _max: SaleCarMaxAggregateOutputType | null
+  export type AggregateSellCar = {
+    _count: SellCarCountAggregateOutputType | null
+    _avg: SellCarAvgAggregateOutputType | null
+    _sum: SellCarSumAggregateOutputType | null
+    _min: SellCarMinAggregateOutputType | null
+    _max: SellCarMaxAggregateOutputType | null
   }
 
-  export type SaleCarAvgAggregateOutputType = {
+  export type SellCarAvgAggregateOutputType = {
     id: number | null
     carId: number | null
     mileage: number | null
     price: number | null
   }
 
-  export type SaleCarSumAggregateOutputType = {
+  export type SellCarSumAggregateOutputType = {
     id: number | null
     carId: number | null
     mileage: number | null
     price: number | null
   }
 
-  export type SaleCarMinAggregateOutputType = {
-    id: number | null
-    vin: string | null
-    sellerCognitoId: string | null
-    carId: number | null
-    mileage: number | null
-    price: number | null
-    description: string | null
-    isPublic: boolean | null
-    dateTimeCreated: Date | null
-    dateTimeUpdated: Date | null
-  }
-
-  export type SaleCarMaxAggregateOutputType = {
+  export type SellCarMinAggregateOutputType = {
     id: number | null
     vin: string | null
     sellerCognitoId: string | null
@@ -5320,7 +5457,20 @@ export namespace Prisma {
     dateTimeUpdated: Date | null
   }
 
-  export type SaleCarCountAggregateOutputType = {
+  export type SellCarMaxAggregateOutputType = {
+    id: number | null
+    vin: string | null
+    sellerCognitoId: string | null
+    carId: number | null
+    mileage: number | null
+    price: number | null
+    description: string | null
+    isPublic: boolean | null
+    dateTimeCreated: Date | null
+    dateTimeUpdated: Date | null
+  }
+
+  export type SellCarCountAggregateOutputType = {
     id: number
     vin: number
     sellerCognitoId: number
@@ -5336,34 +5486,21 @@ export namespace Prisma {
   }
 
 
-  export type SaleCarAvgAggregateInputType = {
+  export type SellCarAvgAggregateInputType = {
     id?: true
     carId?: true
     mileage?: true
     price?: true
   }
 
-  export type SaleCarSumAggregateInputType = {
+  export type SellCarSumAggregateInputType = {
     id?: true
     carId?: true
     mileage?: true
     price?: true
   }
 
-  export type SaleCarMinAggregateInputType = {
-    id?: true
-    vin?: true
-    sellerCognitoId?: true
-    carId?: true
-    mileage?: true
-    price?: true
-    description?: true
-    isPublic?: true
-    dateTimeCreated?: true
-    dateTimeUpdated?: true
-  }
-
-  export type SaleCarMaxAggregateInputType = {
+  export type SellCarMinAggregateInputType = {
     id?: true
     vin?: true
     sellerCognitoId?: true
@@ -5376,7 +5513,20 @@ export namespace Prisma {
     dateTimeUpdated?: true
   }
 
-  export type SaleCarCountAggregateInputType = {
+  export type SellCarMaxAggregateInputType = {
+    id?: true
+    vin?: true
+    sellerCognitoId?: true
+    carId?: true
+    mileage?: true
+    price?: true
+    description?: true
+    isPublic?: true
+    dateTimeCreated?: true
+    dateTimeUpdated?: true
+  }
+
+  export type SellCarCountAggregateInputType = {
     id?: true
     vin?: true
     sellerCognitoId?: true
@@ -5391,93 +5541,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type SaleCarAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which SaleCar to aggregate.
+     * Filter which SellCar to aggregate.
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SaleCars to fetch.
+     * Determine the order of SellCars to fetch.
      */
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: SaleCarWhereUniqueInput
+    cursor?: SellCarWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SaleCars from the position of the cursor.
+     * Take `±n` SellCars from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SaleCars.
+     * Skip the first `n` SellCars.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned SaleCars
+     * Count returned SellCars
     **/
-    _count?: true | SaleCarCountAggregateInputType
+    _count?: true | SellCarCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: SaleCarAvgAggregateInputType
+    _avg?: SellCarAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: SaleCarSumAggregateInputType
+    _sum?: SellCarSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: SaleCarMinAggregateInputType
+    _min?: SellCarMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: SaleCarMaxAggregateInputType
+    _max?: SellCarMaxAggregateInputType
   }
 
-  export type GetSaleCarAggregateType<T extends SaleCarAggregateArgs> = {
-        [P in keyof T & keyof AggregateSaleCar]: P extends '_count' | 'count'
+  export type GetSellCarAggregateType<T extends SellCarAggregateArgs> = {
+        [P in keyof T & keyof AggregateSellCar]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateSaleCar[P]>
-      : GetScalarType<T[P], AggregateSaleCar[P]>
+        : GetScalarType<T[P], AggregateSellCar[P]>
+      : GetScalarType<T[P], AggregateSellCar[P]>
   }
 
 
 
 
-  export type SaleCarGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SaleCarWhereInput
-    orderBy?: SaleCarOrderByWithAggregationInput | SaleCarOrderByWithAggregationInput[]
-    by: SaleCarScalarFieldEnum[] | SaleCarScalarFieldEnum
-    having?: SaleCarScalarWhereWithAggregatesInput
+  export type SellCarGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SellCarWhereInput
+    orderBy?: SellCarOrderByWithAggregationInput | SellCarOrderByWithAggregationInput[]
+    by: SellCarScalarFieldEnum[] | SellCarScalarFieldEnum
+    having?: SellCarScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: SaleCarCountAggregateInputType | true
-    _avg?: SaleCarAvgAggregateInputType
-    _sum?: SaleCarSumAggregateInputType
-    _min?: SaleCarMinAggregateInputType
-    _max?: SaleCarMaxAggregateInputType
+    _count?: SellCarCountAggregateInputType | true
+    _avg?: SellCarAvgAggregateInputType
+    _sum?: SellCarSumAggregateInputType
+    _min?: SellCarMinAggregateInputType
+    _max?: SellCarMaxAggregateInputType
   }
 
-  export type SaleCarGroupByOutputType = {
+  export type SellCarGroupByOutputType = {
     id: number
     vin: string
     sellerCognitoId: string
@@ -5489,28 +5639,28 @@ export namespace Prisma {
     isPublic: boolean
     dateTimeCreated: Date
     dateTimeUpdated: Date
-    _count: SaleCarCountAggregateOutputType | null
-    _avg: SaleCarAvgAggregateOutputType | null
-    _sum: SaleCarSumAggregateOutputType | null
-    _min: SaleCarMinAggregateOutputType | null
-    _max: SaleCarMaxAggregateOutputType | null
+    _count: SellCarCountAggregateOutputType | null
+    _avg: SellCarAvgAggregateOutputType | null
+    _sum: SellCarSumAggregateOutputType | null
+    _min: SellCarMinAggregateOutputType | null
+    _max: SellCarMaxAggregateOutputType | null
   }
 
-  type GetSaleCarGroupByPayload<T extends SaleCarGroupByArgs> = Prisma.PrismaPromise<
+  type GetSellCarGroupByPayload<T extends SellCarGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SaleCarGroupByOutputType, T['by']> &
+      PickEnumerable<SellCarGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SaleCarGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof SellCarGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], SaleCarGroupByOutputType[P]>
-            : GetScalarType<T[P], SaleCarGroupByOutputType[P]>
+              : GetScalarType<T[P], SellCarGroupByOutputType[P]>
+            : GetScalarType<T[P], SellCarGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type SaleCarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SellCarSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     vin?: boolean
     sellerCognitoId?: boolean
@@ -5522,30 +5672,15 @@ export namespace Prisma {
     isPublic?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    order?: boolean | SaleCar$orderArgs<ExtArgs>
-    favouritedBy?: boolean | SaleCar$favouritedByArgs<ExtArgs>
+    enquiries?: boolean | SellCar$enquiriesArgs<ExtArgs>
+    order?: boolean | SellCar$orderArgs<ExtArgs>
+    favouritedBy?: boolean | SellCar$favouritedByArgs<ExtArgs>
     seller?: boolean | UserDefaultArgs<ExtArgs>
     car?: boolean | CarDefaultArgs<ExtArgs>
-    _count?: boolean | SaleCarCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["saleCar"]>
+    _count?: boolean | SellCarCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sellCar"]>
 
-  export type SaleCarSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    vin?: boolean
-    sellerCognitoId?: boolean
-    carId?: boolean
-    mileage?: boolean
-    price?: boolean
-    photoUrls?: boolean
-    description?: boolean
-    isPublic?: boolean
-    dateTimeCreated?: boolean
-    dateTimeUpdated?: boolean
-    seller?: boolean | UserDefaultArgs<ExtArgs>
-    car?: boolean | CarDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["saleCar"]>
-
-  export type SaleCarSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type SellCarSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     vin?: boolean
     sellerCognitoId?: boolean
@@ -5559,9 +5694,25 @@ export namespace Prisma {
     dateTimeUpdated?: boolean
     seller?: boolean | UserDefaultArgs<ExtArgs>
     car?: boolean | CarDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["saleCar"]>
+  }, ExtArgs["result"]["sellCar"]>
 
-  export type SaleCarSelectScalar = {
+  export type SellCarSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    vin?: boolean
+    sellerCognitoId?: boolean
+    carId?: boolean
+    mileage?: boolean
+    price?: boolean
+    photoUrls?: boolean
+    description?: boolean
+    isPublic?: boolean
+    dateTimeCreated?: boolean
+    dateTimeUpdated?: boolean
+    seller?: boolean | UserDefaultArgs<ExtArgs>
+    car?: boolean | CarDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["sellCar"]>
+
+  export type SellCarSelectScalar = {
     id?: boolean
     vin?: boolean
     sellerCognitoId?: boolean
@@ -5575,26 +5726,28 @@ export namespace Prisma {
     dateTimeUpdated?: boolean
   }
 
-  export type SaleCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "description" | "isPublic" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["saleCar"]>
-  export type SaleCarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    order?: boolean | SaleCar$orderArgs<ExtArgs>
-    favouritedBy?: boolean | SaleCar$favouritedByArgs<ExtArgs>
+  export type SellCarOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "vin" | "sellerCognitoId" | "carId" | "mileage" | "price" | "photoUrls" | "description" | "isPublic" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["sellCar"]>
+  export type SellCarInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    enquiries?: boolean | SellCar$enquiriesArgs<ExtArgs>
+    order?: boolean | SellCar$orderArgs<ExtArgs>
+    favouritedBy?: boolean | SellCar$favouritedByArgs<ExtArgs>
     seller?: boolean | UserDefaultArgs<ExtArgs>
     car?: boolean | CarDefaultArgs<ExtArgs>
-    _count?: boolean | SaleCarCountOutputTypeDefaultArgs<ExtArgs>
+    _count?: boolean | SellCarCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type SaleCarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     seller?: boolean | UserDefaultArgs<ExtArgs>
     car?: boolean | CarDefaultArgs<ExtArgs>
   }
-  export type SaleCarIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     seller?: boolean | UserDefaultArgs<ExtArgs>
     car?: boolean | CarDefaultArgs<ExtArgs>
   }
 
-  export type $SaleCarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SaleCar"
+  export type $SellCarPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SellCar"
     objects: {
+      enquiries: Prisma.$EnquiryPayload<ExtArgs>[]
       order: Prisma.$OrderPayload<ExtArgs> | null
       favouritedBy: Prisma.$UserPayload<ExtArgs>[]
       seller: Prisma.$UserPayload<ExtArgs>
@@ -5612,136 +5765,136 @@ export namespace Prisma {
       isPublic: boolean
       dateTimeCreated: Date
       dateTimeUpdated: Date
-    }, ExtArgs["result"]["saleCar"]>
+    }, ExtArgs["result"]["sellCar"]>
     composites: {}
   }
 
-  type SaleCarGetPayload<S extends boolean | null | undefined | SaleCarDefaultArgs> = $Result.GetResult<Prisma.$SaleCarPayload, S>
+  type SellCarGetPayload<S extends boolean | null | undefined | SellCarDefaultArgs> = $Result.GetResult<Prisma.$SellCarPayload, S>
 
-  type SaleCarCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SaleCarFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SaleCarCountAggregateInputType | true
+  type SellCarCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SellCarFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SellCarCountAggregateInputType | true
     }
 
-  export interface SaleCarDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SaleCar'], meta: { name: 'SaleCar' } }
+  export interface SellCarDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SellCar'], meta: { name: 'SellCar' } }
     /**
-     * Find zero or one SaleCar that matches the filter.
-     * @param {SaleCarFindUniqueArgs} args - Arguments to find a SaleCar
+     * Find zero or one SellCar that matches the filter.
+     * @param {SellCarFindUniqueArgs} args - Arguments to find a SellCar
      * @example
-     * // Get one SaleCar
-     * const saleCar = await prisma.saleCar.findUnique({
+     * // Get one SellCar
+     * const sellCar = await prisma.sellCar.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends SaleCarFindUniqueArgs>(args: SelectSubset<T, SaleCarFindUniqueArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends SellCarFindUniqueArgs>(args: SelectSubset<T, SellCarFindUniqueArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find one SaleCar that matches the filter or throw an error with `error.code='P2025'`
+     * Find one SellCar that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {SaleCarFindUniqueOrThrowArgs} args - Arguments to find a SaleCar
+     * @param {SellCarFindUniqueOrThrowArgs} args - Arguments to find a SellCar
      * @example
-     * // Get one SaleCar
-     * const saleCar = await prisma.saleCar.findUniqueOrThrow({
+     * // Get one SellCar
+     * const sellCar = await prisma.sellCar.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends SaleCarFindUniqueOrThrowArgs>(args: SelectSubset<T, SaleCarFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends SellCarFindUniqueOrThrowArgs>(args: SelectSubset<T, SellCarFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first SaleCar that matches the filter.
+     * Find the first SellCar that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarFindFirstArgs} args - Arguments to find a SaleCar
+     * @param {SellCarFindFirstArgs} args - Arguments to find a SellCar
      * @example
-     * // Get one SaleCar
-     * const saleCar = await prisma.saleCar.findFirst({
+     * // Get one SellCar
+     * const sellCar = await prisma.sellCar.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends SaleCarFindFirstArgs>(args?: SelectSubset<T, SaleCarFindFirstArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends SellCarFindFirstArgs>(args?: SelectSubset<T, SellCarFindFirstArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find the first SaleCar that matches the filter or
+     * Find the first SellCar that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarFindFirstOrThrowArgs} args - Arguments to find a SaleCar
+     * @param {SellCarFindFirstOrThrowArgs} args - Arguments to find a SellCar
      * @example
-     * // Get one SaleCar
-     * const saleCar = await prisma.saleCar.findFirstOrThrow({
+     * // Get one SellCar
+     * const sellCar = await prisma.sellCar.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends SaleCarFindFirstOrThrowArgs>(args?: SelectSubset<T, SaleCarFindFirstOrThrowArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends SellCarFindFirstOrThrowArgs>(args?: SelectSubset<T, SellCarFindFirstOrThrowArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Find zero or more SaleCars that matches the filter.
+     * Find zero or more SellCars that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {SellCarFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all SaleCars
-     * const saleCars = await prisma.saleCar.findMany()
+     * // Get all SellCars
+     * const sellCars = await prisma.sellCar.findMany()
      * 
-     * // Get first 10 SaleCars
-     * const saleCars = await prisma.saleCar.findMany({ take: 10 })
+     * // Get first 10 SellCars
+     * const sellCars = await prisma.sellCar.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const saleCarWithIdOnly = await prisma.saleCar.findMany({ select: { id: true } })
+     * const sellCarWithIdOnly = await prisma.sellCar.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends SaleCarFindManyArgs>(args?: SelectSubset<T, SaleCarFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends SellCarFindManyArgs>(args?: SelectSubset<T, SellCarFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
-     * Create a SaleCar.
-     * @param {SaleCarCreateArgs} args - Arguments to create a SaleCar.
+     * Create a SellCar.
+     * @param {SellCarCreateArgs} args - Arguments to create a SellCar.
      * @example
-     * // Create one SaleCar
-     * const SaleCar = await prisma.saleCar.create({
+     * // Create one SellCar
+     * const SellCar = await prisma.sellCar.create({
      *   data: {
-     *     // ... data to create a SaleCar
+     *     // ... data to create a SellCar
      *   }
      * })
      * 
      */
-    create<T extends SaleCarCreateArgs>(args: SelectSubset<T, SaleCarCreateArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends SellCarCreateArgs>(args: SelectSubset<T, SellCarCreateArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Create many SaleCars.
-     * @param {SaleCarCreateManyArgs} args - Arguments to create many SaleCars.
+     * Create many SellCars.
+     * @param {SellCarCreateManyArgs} args - Arguments to create many SellCars.
      * @example
-     * // Create many SaleCars
-     * const saleCar = await prisma.saleCar.createMany({
+     * // Create many SellCars
+     * const sellCar = await prisma.sellCar.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends SaleCarCreateManyArgs>(args?: SelectSubset<T, SaleCarCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends SellCarCreateManyArgs>(args?: SelectSubset<T, SellCarCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many SaleCars and returns the data saved in the database.
-     * @param {SaleCarCreateManyAndReturnArgs} args - Arguments to create many SaleCars.
+     * Create many SellCars and returns the data saved in the database.
+     * @param {SellCarCreateManyAndReturnArgs} args - Arguments to create many SellCars.
      * @example
-     * // Create many SaleCars
-     * const saleCar = await prisma.saleCar.createManyAndReturn({
+     * // Create many SellCars
+     * const sellCar = await prisma.sellCar.createManyAndReturn({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      * 
-     * // Create many SaleCars and only return the `id`
-     * const saleCarWithIdOnly = await prisma.saleCar.createManyAndReturn({
+     * // Create many SellCars and only return the `id`
+     * const sellCarWithIdOnly = await prisma.sellCar.createManyAndReturn({
      *   select: { id: true },
      *   data: [
      *     // ... provide data here
@@ -5751,28 +5904,28 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends SaleCarCreateManyAndReturnArgs>(args?: SelectSubset<T, SaleCarCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends SellCarCreateManyAndReturnArgs>(args?: SelectSubset<T, SellCarCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Delete a SaleCar.
-     * @param {SaleCarDeleteArgs} args - Arguments to delete one SaleCar.
+     * Delete a SellCar.
+     * @param {SellCarDeleteArgs} args - Arguments to delete one SellCar.
      * @example
-     * // Delete one SaleCar
-     * const SaleCar = await prisma.saleCar.delete({
+     * // Delete one SellCar
+     * const SellCar = await prisma.sellCar.delete({
      *   where: {
-     *     // ... filter to delete one SaleCar
+     *     // ... filter to delete one SellCar
      *   }
      * })
      * 
      */
-    delete<T extends SaleCarDeleteArgs>(args: SelectSubset<T, SaleCarDeleteArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends SellCarDeleteArgs>(args: SelectSubset<T, SellCarDeleteArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Update one SaleCar.
-     * @param {SaleCarUpdateArgs} args - Arguments to update one SaleCar.
+     * Update one SellCar.
+     * @param {SellCarUpdateArgs} args - Arguments to update one SellCar.
      * @example
-     * // Update one SaleCar
-     * const saleCar = await prisma.saleCar.update({
+     * // Update one SellCar
+     * const sellCar = await prisma.sellCar.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5782,30 +5935,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends SaleCarUpdateArgs>(args: SelectSubset<T, SaleCarUpdateArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends SellCarUpdateArgs>(args: SelectSubset<T, SellCarUpdateArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
-     * Delete zero or more SaleCars.
-     * @param {SaleCarDeleteManyArgs} args - Arguments to filter SaleCars to delete.
+     * Delete zero or more SellCars.
+     * @param {SellCarDeleteManyArgs} args - Arguments to filter SellCars to delete.
      * @example
-     * // Delete a few SaleCars
-     * const { count } = await prisma.saleCar.deleteMany({
+     * // Delete a few SellCars
+     * const { count } = await prisma.sellCar.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends SaleCarDeleteManyArgs>(args?: SelectSubset<T, SaleCarDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends SellCarDeleteManyArgs>(args?: SelectSubset<T, SellCarDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more SaleCars.
+     * Update zero or more SellCars.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {SellCarUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many SaleCars
-     * const saleCar = await prisma.saleCar.updateMany({
+     * // Update many SellCars
+     * const sellCar = await prisma.sellCar.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5815,14 +5968,14 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends SaleCarUpdateManyArgs>(args: SelectSubset<T, SaleCarUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends SellCarUpdateManyArgs>(args: SelectSubset<T, SellCarUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more SaleCars and returns the data updated in the database.
-     * @param {SaleCarUpdateManyAndReturnArgs} args - Arguments to update many SaleCars.
+     * Update zero or more SellCars and returns the data updated in the database.
+     * @param {SellCarUpdateManyAndReturnArgs} args - Arguments to update many SellCars.
      * @example
-     * // Update many SaleCars
-     * const saleCar = await prisma.saleCar.updateManyAndReturn({
+     * // Update many SellCars
+     * const sellCar = await prisma.sellCar.updateManyAndReturn({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5831,8 +5984,8 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more SaleCars and only return the `id`
-     * const saleCarWithIdOnly = await prisma.saleCar.updateManyAndReturn({
+     * // Update zero or more SellCars and only return the `id`
+     * const sellCarWithIdOnly = await prisma.sellCar.updateManyAndReturn({
      *   select: { id: true },
      *   where: {
      *     // ... provide filter here
@@ -5845,56 +5998,56 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends SaleCarUpdateManyAndReturnArgs>(args: SelectSubset<T, SaleCarUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends SellCarUpdateManyAndReturnArgs>(args: SelectSubset<T, SellCarUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
-     * Create or update one SaleCar.
-     * @param {SaleCarUpsertArgs} args - Arguments to update or create a SaleCar.
+     * Create or update one SellCar.
+     * @param {SellCarUpsertArgs} args - Arguments to update or create a SellCar.
      * @example
-     * // Update or create a SaleCar
-     * const saleCar = await prisma.saleCar.upsert({
+     * // Update or create a SellCar
+     * const sellCar = await prisma.sellCar.upsert({
      *   create: {
-     *     // ... data to create a SaleCar
+     *     // ... data to create a SellCar
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the SaleCar we want to update
+     *     // ... the filter for the SellCar we want to update
      *   }
      * })
      */
-    upsert<T extends SaleCarUpsertArgs>(args: SelectSubset<T, SaleCarUpsertArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends SellCarUpsertArgs>(args: SelectSubset<T, SellCarUpsertArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
-     * Count the number of SaleCars.
+     * Count the number of SellCars.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarCountArgs} args - Arguments to filter SaleCars to count.
+     * @param {SellCarCountArgs} args - Arguments to filter SellCars to count.
      * @example
-     * // Count the number of SaleCars
-     * const count = await prisma.saleCar.count({
+     * // Count the number of SellCars
+     * const count = await prisma.sellCar.count({
      *   where: {
-     *     // ... the filter for the SaleCars we want to count
+     *     // ... the filter for the SellCars we want to count
      *   }
      * })
     **/
-    count<T extends SaleCarCountArgs>(
-      args?: Subset<T, SaleCarCountArgs>,
+    count<T extends SellCarCountArgs>(
+      args?: Subset<T, SellCarCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], SaleCarCountAggregateOutputType>
+          : GetScalarType<T['select'], SellCarCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a SaleCar.
+     * Allows you to perform aggregations operations on a SellCar.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {SellCarAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5914,13 +6067,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends SaleCarAggregateArgs>(args: Subset<T, SaleCarAggregateArgs>): Prisma.PrismaPromise<GetSaleCarAggregateType<T>>
+    aggregate<T extends SellCarAggregateArgs>(args: Subset<T, SellCarAggregateArgs>): Prisma.PrismaPromise<GetSellCarAggregateType<T>>
 
     /**
-     * Group by SaleCar.
+     * Group by SellCar.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SaleCarGroupByArgs} args - Group by arguments.
+     * @param {SellCarGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5935,14 +6088,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends SaleCarGroupByArgs,
+      T extends SellCarGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SaleCarGroupByArgs['orderBy'] }
-        : { orderBy?: SaleCarGroupByArgs['orderBy'] },
+        ? { orderBy: SellCarGroupByArgs['orderBy'] }
+        : { orderBy?: SellCarGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -5991,23 +6144,24 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, SaleCarGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSaleCarGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, SellCarGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSellCarGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the SaleCar model
+   * Fields of the SellCar model
    */
-  readonly fields: SaleCarFieldRefs;
+  readonly fields: SellCarFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for SaleCar.
+   * The delegate class that acts as a "Promise-like" for SellCar.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SaleCarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__SellCarClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    order<T extends SaleCar$orderArgs<ExtArgs> = {}>(args?: Subset<T, SaleCar$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    favouritedBy<T extends SaleCar$favouritedByArgs<ExtArgs> = {}>(args?: Subset<T, SaleCar$favouritedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    enquiries<T extends SellCar$enquiriesArgs<ExtArgs> = {}>(args?: Subset<T, SellCar$enquiriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    order<T extends SellCar$orderArgs<ExtArgs> = {}>(args?: Subset<T, SellCar$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    favouritedBy<T extends SellCar$favouritedByArgs<ExtArgs> = {}>(args?: Subset<T, SellCar$favouritedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     seller<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     car<T extends CarDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CarDefaultArgs<ExtArgs>>): Prisma__CarClient<$Result.GetResult<Prisma.$CarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
@@ -6036,419 +6190,443 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the SaleCar model
+   * Fields of the SellCar model
    */ 
-  interface SaleCarFieldRefs {
-    readonly id: FieldRef<"SaleCar", 'Int'>
-    readonly vin: FieldRef<"SaleCar", 'String'>
-    readonly sellerCognitoId: FieldRef<"SaleCar", 'String'>
-    readonly carId: FieldRef<"SaleCar", 'Int'>
-    readonly mileage: FieldRef<"SaleCar", 'Int'>
-    readonly price: FieldRef<"SaleCar", 'Float'>
-    readonly photoUrls: FieldRef<"SaleCar", 'String[]'>
-    readonly description: FieldRef<"SaleCar", 'String'>
-    readonly isPublic: FieldRef<"SaleCar", 'Boolean'>
-    readonly dateTimeCreated: FieldRef<"SaleCar", 'DateTime'>
-    readonly dateTimeUpdated: FieldRef<"SaleCar", 'DateTime'>
+  interface SellCarFieldRefs {
+    readonly id: FieldRef<"SellCar", 'Int'>
+    readonly vin: FieldRef<"SellCar", 'String'>
+    readonly sellerCognitoId: FieldRef<"SellCar", 'String'>
+    readonly carId: FieldRef<"SellCar", 'Int'>
+    readonly mileage: FieldRef<"SellCar", 'Int'>
+    readonly price: FieldRef<"SellCar", 'Float'>
+    readonly photoUrls: FieldRef<"SellCar", 'String[]'>
+    readonly description: FieldRef<"SellCar", 'String'>
+    readonly isPublic: FieldRef<"SellCar", 'Boolean'>
+    readonly dateTimeCreated: FieldRef<"SellCar", 'DateTime'>
+    readonly dateTimeUpdated: FieldRef<"SellCar", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * SaleCar findUnique
+   * SellCar findUnique
    */
-  export type SaleCarFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter, which SaleCar to fetch.
+     * Filter, which SellCar to fetch.
      */
-    where: SaleCarWhereUniqueInput
+    where: SellCarWhereUniqueInput
   }
 
   /**
-   * SaleCar findUniqueOrThrow
+   * SellCar findUniqueOrThrow
    */
-  export type SaleCarFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter, which SaleCar to fetch.
+     * Filter, which SellCar to fetch.
      */
-    where: SaleCarWhereUniqueInput
+    where: SellCarWhereUniqueInput
   }
 
   /**
-   * SaleCar findFirst
+   * SellCar findFirst
    */
-  export type SaleCarFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter, which SaleCar to fetch.
+     * Filter, which SellCar to fetch.
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SaleCars to fetch.
+     * Determine the order of SellCars to fetch.
      */
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for SaleCars.
+     * Sets the position for searching for SellCars.
      */
-    cursor?: SaleCarWhereUniqueInput
+    cursor?: SellCarWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SaleCars from the position of the cursor.
+     * Take `±n` SellCars from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SaleCars.
+     * Skip the first `n` SellCars.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of SaleCars.
+     * Filter by unique combinations of SellCars.
      */
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
-   * SaleCar findFirstOrThrow
+   * SellCar findFirstOrThrow
    */
-  export type SaleCarFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter, which SaleCar to fetch.
+     * Filter, which SellCar to fetch.
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SaleCars to fetch.
+     * Determine the order of SellCars to fetch.
      */
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for SaleCars.
+     * Sets the position for searching for SellCars.
      */
-    cursor?: SaleCarWhereUniqueInput
+    cursor?: SellCarWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SaleCars from the position of the cursor.
+     * Take `±n` SellCars from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SaleCars.
+     * Skip the first `n` SellCars.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of SaleCars.
+     * Filter by unique combinations of SellCars.
      */
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
-   * SaleCar findMany
+   * SellCar findMany
    */
-  export type SaleCarFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter, which SaleCars to fetch.
+     * Filter, which SellCars to fetch.
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of SaleCars to fetch.
+     * Determine the order of SellCars to fetch.
      */
-    orderBy?: SaleCarOrderByWithRelationInput | SaleCarOrderByWithRelationInput[]
+    orderBy?: SellCarOrderByWithRelationInput | SellCarOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing SaleCars.
+     * Sets the position for listing SellCars.
      */
-    cursor?: SaleCarWhereUniqueInput
+    cursor?: SellCarWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` SaleCars from the position of the cursor.
+     * Take `±n` SellCars from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` SaleCars.
+     * Skip the first `n` SellCars.
      */
     skip?: number
-    distinct?: SaleCarScalarFieldEnum | SaleCarScalarFieldEnum[]
+    distinct?: SellCarScalarFieldEnum | SellCarScalarFieldEnum[]
   }
 
   /**
-   * SaleCar create
+   * SellCar create
    */
-  export type SaleCarCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * The data needed to create a SaleCar.
+     * The data needed to create a SellCar.
      */
-    data: XOR<SaleCarCreateInput, SaleCarUncheckedCreateInput>
+    data: XOR<SellCarCreateInput, SellCarUncheckedCreateInput>
   }
 
   /**
-   * SaleCar createMany
+   * SellCar createMany
    */
-  export type SaleCarCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many SaleCars.
+     * The data used to create many SellCars.
      */
-    data: SaleCarCreateManyInput | SaleCarCreateManyInput[]
+    data: SellCarCreateManyInput | SellCarCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * SaleCar createManyAndReturn
+   * SellCar createManyAndReturn
    */
-  export type SaleCarCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelectCreateManyAndReturn<ExtArgs> | null
+    select?: SellCarSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
-     * The data used to create many SaleCars.
+     * The data used to create many SellCars.
      */
-    data: SaleCarCreateManyInput | SaleCarCreateManyInput[]
+    data: SellCarCreateManyInput | SellCarCreateManyInput[]
     skipDuplicates?: boolean
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: SellCarIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * SaleCar update
+   * SellCar update
    */
-  export type SaleCarUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * The data needed to update a SaleCar.
+     * The data needed to update a SellCar.
      */
-    data: XOR<SaleCarUpdateInput, SaleCarUncheckedUpdateInput>
+    data: XOR<SellCarUpdateInput, SellCarUncheckedUpdateInput>
     /**
-     * Choose, which SaleCar to update.
+     * Choose, which SellCar to update.
      */
-    where: SaleCarWhereUniqueInput
+    where: SellCarWhereUniqueInput
   }
 
   /**
-   * SaleCar updateMany
+   * SellCar updateMany
    */
-  export type SaleCarUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update SaleCars.
+     * The data used to update SellCars.
      */
-    data: XOR<SaleCarUpdateManyMutationInput, SaleCarUncheckedUpdateManyInput>
+    data: XOR<SellCarUpdateManyMutationInput, SellCarUncheckedUpdateManyInput>
     /**
-     * Filter which SaleCars to update
+     * Filter which SellCars to update
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
-     * Limit how many SaleCars to update.
+     * Limit how many SellCars to update.
      */
     limit?: number
   }
 
   /**
-   * SaleCar updateManyAndReturn
+   * SellCar updateManyAndReturn
    */
-  export type SaleCarUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: SellCarSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
-     * The data used to update SaleCars.
+     * The data used to update SellCars.
      */
-    data: XOR<SaleCarUpdateManyMutationInput, SaleCarUncheckedUpdateManyInput>
+    data: XOR<SellCarUpdateManyMutationInput, SellCarUncheckedUpdateManyInput>
     /**
-     * Filter which SaleCars to update
+     * Filter which SellCars to update
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
-     * Limit how many SaleCars to update.
+     * Limit how many SellCars to update.
      */
     limit?: number
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarIncludeUpdateManyAndReturn<ExtArgs> | null
+    include?: SellCarIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
-   * SaleCar upsert
+   * SellCar upsert
    */
-  export type SaleCarUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * The filter to search for the SaleCar to update in case it exists.
+     * The filter to search for the SellCar to update in case it exists.
      */
-    where: SaleCarWhereUniqueInput
+    where: SellCarWhereUniqueInput
     /**
-     * In case the SaleCar found by the `where` argument doesn't exist, create a new SaleCar with this data.
+     * In case the SellCar found by the `where` argument doesn't exist, create a new SellCar with this data.
      */
-    create: XOR<SaleCarCreateInput, SaleCarUncheckedCreateInput>
+    create: XOR<SellCarCreateInput, SellCarUncheckedCreateInput>
     /**
-     * In case the SaleCar was found with the provided `where` argument, update it with this data.
+     * In case the SellCar was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<SaleCarUpdateInput, SaleCarUncheckedUpdateInput>
+    update: XOR<SellCarUpdateInput, SellCarUncheckedUpdateInput>
   }
 
   /**
-   * SaleCar delete
+   * SellCar delete
    */
-  export type SaleCarDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
     /**
-     * Filter which SaleCar to delete.
+     * Filter which SellCar to delete.
      */
-    where: SaleCarWhereUniqueInput
+    where: SellCarWhereUniqueInput
   }
 
   /**
-   * SaleCar deleteMany
+   * SellCar deleteMany
    */
-  export type SaleCarDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which SaleCars to delete
+     * Filter which SellCars to delete
      */
-    where?: SaleCarWhereInput
+    where?: SellCarWhereInput
     /**
-     * Limit how many SaleCars to delete.
+     * Limit how many SellCars to delete.
      */
     limit?: number
   }
 
   /**
-   * SaleCar.order
+   * SellCar.enquiries
    */
-  export type SaleCar$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCar$enquiriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    where?: EnquiryWhereInput
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    cursor?: EnquiryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnquiryScalarFieldEnum | EnquiryScalarFieldEnum[]
+  }
+
+  /**
+   * SellCar.order
+   */
+  export type SellCar$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Order
      */
@@ -6465,9 +6643,9 @@ export namespace Prisma {
   }
 
   /**
-   * SaleCar.favouritedBy
+   * SellCar.favouritedBy
    */
-  export type SaleCar$favouritedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCar$favouritedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the User
      */
@@ -6489,21 +6667,1168 @@ export namespace Prisma {
   }
 
   /**
-   * SaleCar without action
+   * SellCar without action
    */
-  export type SaleCarDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type SellCarDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SaleCar
+     * Select specific fields to fetch from the SellCar
      */
-    select?: SaleCarSelect<ExtArgs> | null
+    select?: SellCarSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the SaleCar
+     * Omit specific fields from the SellCar
      */
-    omit?: SaleCarOmit<ExtArgs> | null
+    omit?: SellCarOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SaleCarInclude<ExtArgs> | null
+    include?: SellCarInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Enquiry
+   */
+
+  export type AggregateEnquiry = {
+    _count: EnquiryCountAggregateOutputType | null
+    _avg: EnquiryAvgAggregateOutputType | null
+    _sum: EnquirySumAggregateOutputType | null
+    _min: EnquiryMinAggregateOutputType | null
+    _max: EnquiryMaxAggregateOutputType | null
+  }
+
+  export type EnquiryAvgAggregateOutputType = {
+    id: number | null
+    sellCarId: number | null
+    offerPrice: number | null
+  }
+
+  export type EnquirySumAggregateOutputType = {
+    id: number | null
+    sellCarId: number | null
+    offerPrice: number | null
+  }
+
+  export type EnquiryMinAggregateOutputType = {
+    id: number | null
+    sellCarId: number | null
+    userCognitoId: string | null
+    offerPrice: number | null
+    message: string | null
+    status: $Enums.OrderStatus | null
+    dateTimeCreated: Date | null
+    dateTimeUpdated: Date | null
+  }
+
+  export type EnquiryMaxAggregateOutputType = {
+    id: number | null
+    sellCarId: number | null
+    userCognitoId: string | null
+    offerPrice: number | null
+    message: string | null
+    status: $Enums.OrderStatus | null
+    dateTimeCreated: Date | null
+    dateTimeUpdated: Date | null
+  }
+
+  export type EnquiryCountAggregateOutputType = {
+    id: number
+    sellCarId: number
+    userCognitoId: number
+    offerPrice: number
+    message: number
+    status: number
+    dateTimeCreated: number
+    dateTimeUpdated: number
+    _all: number
+  }
+
+
+  export type EnquiryAvgAggregateInputType = {
+    id?: true
+    sellCarId?: true
+    offerPrice?: true
+  }
+
+  export type EnquirySumAggregateInputType = {
+    id?: true
+    sellCarId?: true
+    offerPrice?: true
+  }
+
+  export type EnquiryMinAggregateInputType = {
+    id?: true
+    sellCarId?: true
+    userCognitoId?: true
+    offerPrice?: true
+    message?: true
+    status?: true
+    dateTimeCreated?: true
+    dateTimeUpdated?: true
+  }
+
+  export type EnquiryMaxAggregateInputType = {
+    id?: true
+    sellCarId?: true
+    userCognitoId?: true
+    offerPrice?: true
+    message?: true
+    status?: true
+    dateTimeCreated?: true
+    dateTimeUpdated?: true
+  }
+
+  export type EnquiryCountAggregateInputType = {
+    id?: true
+    sellCarId?: true
+    userCognitoId?: true
+    offerPrice?: true
+    message?: true
+    status?: true
+    dateTimeCreated?: true
+    dateTimeUpdated?: true
+    _all?: true
+  }
+
+  export type EnquiryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Enquiry to aggregate.
+     */
+    where?: EnquiryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enquiries to fetch.
+     */
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnquiryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enquiries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enquiries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Enquiries
+    **/
+    _count?: true | EnquiryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnquiryAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnquirySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnquiryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnquiryMaxAggregateInputType
+  }
+
+  export type GetEnquiryAggregateType<T extends EnquiryAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnquiry]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnquiry[P]>
+      : GetScalarType<T[P], AggregateEnquiry[P]>
+  }
+
+
+
+
+  export type EnquiryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnquiryWhereInput
+    orderBy?: EnquiryOrderByWithAggregationInput | EnquiryOrderByWithAggregationInput[]
+    by: EnquiryScalarFieldEnum[] | EnquiryScalarFieldEnum
+    having?: EnquiryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnquiryCountAggregateInputType | true
+    _avg?: EnquiryAvgAggregateInputType
+    _sum?: EnquirySumAggregateInputType
+    _min?: EnquiryMinAggregateInputType
+    _max?: EnquiryMaxAggregateInputType
+  }
+
+  export type EnquiryGroupByOutputType = {
+    id: number
+    sellCarId: number
+    userCognitoId: string
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated: Date
+    dateTimeUpdated: Date
+    _count: EnquiryCountAggregateOutputType | null
+    _avg: EnquiryAvgAggregateOutputType | null
+    _sum: EnquirySumAggregateOutputType | null
+    _min: EnquiryMinAggregateOutputType | null
+    _max: EnquiryMaxAggregateOutputType | null
+  }
+
+  type GetEnquiryGroupByPayload<T extends EnquiryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnquiryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnquiryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnquiryGroupByOutputType[P]>
+            : GetScalarType<T[P], EnquiryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnquirySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sellCarId?: boolean
+    userCognitoId?: boolean
+    offerPrice?: boolean
+    message?: boolean
+    status?: boolean
+    dateTimeCreated?: boolean
+    dateTimeUpdated?: boolean
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["enquiry"]>
+
+  export type EnquirySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sellCarId?: boolean
+    userCognitoId?: boolean
+    offerPrice?: boolean
+    message?: boolean
+    status?: boolean
+    dateTimeCreated?: boolean
+    dateTimeUpdated?: boolean
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["enquiry"]>
+
+  export type EnquirySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sellCarId?: boolean
+    userCognitoId?: boolean
+    offerPrice?: boolean
+    message?: boolean
+    status?: boolean
+    dateTimeCreated?: boolean
+    dateTimeUpdated?: boolean
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["enquiry"]>
+
+  export type EnquirySelectScalar = {
+    id?: boolean
+    sellCarId?: boolean
+    userCognitoId?: boolean
+    offerPrice?: boolean
+    message?: boolean
+    status?: boolean
+    dateTimeCreated?: boolean
+    dateTimeUpdated?: boolean
+  }
+
+  export type EnquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sellCarId" | "userCognitoId" | "offerPrice" | "message" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["enquiry"]>
+  export type EnquiryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EnquiryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type EnquiryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
+    buyer?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $EnquiryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Enquiry"
+    objects: {
+      sellCar: Prisma.$SellCarPayload<ExtArgs>
+      buyer: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      sellCarId: number
+      userCognitoId: string
+      offerPrice: number
+      message: string
+      status: $Enums.OrderStatus
+      dateTimeCreated: Date
+      dateTimeUpdated: Date
+    }, ExtArgs["result"]["enquiry"]>
+    composites: {}
+  }
+
+  type EnquiryGetPayload<S extends boolean | null | undefined | EnquiryDefaultArgs> = $Result.GetResult<Prisma.$EnquiryPayload, S>
+
+  type EnquiryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnquiryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnquiryCountAggregateInputType | true
+    }
+
+  export interface EnquiryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Enquiry'], meta: { name: 'Enquiry' } }
+    /**
+     * Find zero or one Enquiry that matches the filter.
+     * @param {EnquiryFindUniqueArgs} args - Arguments to find a Enquiry
+     * @example
+     * // Get one Enquiry
+     * const enquiry = await prisma.enquiry.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnquiryFindUniqueArgs>(args: SelectSubset<T, EnquiryFindUniqueArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Enquiry that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnquiryFindUniqueOrThrowArgs} args - Arguments to find a Enquiry
+     * @example
+     * // Get one Enquiry
+     * const enquiry = await prisma.enquiry.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnquiryFindUniqueOrThrowArgs>(args: SelectSubset<T, EnquiryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Enquiry that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryFindFirstArgs} args - Arguments to find a Enquiry
+     * @example
+     * // Get one Enquiry
+     * const enquiry = await prisma.enquiry.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnquiryFindFirstArgs>(args?: SelectSubset<T, EnquiryFindFirstArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Enquiry that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryFindFirstOrThrowArgs} args - Arguments to find a Enquiry
+     * @example
+     * // Get one Enquiry
+     * const enquiry = await prisma.enquiry.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnquiryFindFirstOrThrowArgs>(args?: SelectSubset<T, EnquiryFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Enquiries that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Enquiries
+     * const enquiries = await prisma.enquiry.findMany()
+     * 
+     * // Get first 10 Enquiries
+     * const enquiries = await prisma.enquiry.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const enquiryWithIdOnly = await prisma.enquiry.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnquiryFindManyArgs>(args?: SelectSubset<T, EnquiryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Enquiry.
+     * @param {EnquiryCreateArgs} args - Arguments to create a Enquiry.
+     * @example
+     * // Create one Enquiry
+     * const Enquiry = await prisma.enquiry.create({
+     *   data: {
+     *     // ... data to create a Enquiry
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnquiryCreateArgs>(args: SelectSubset<T, EnquiryCreateArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Enquiries.
+     * @param {EnquiryCreateManyArgs} args - Arguments to create many Enquiries.
+     * @example
+     * // Create many Enquiries
+     * const enquiry = await prisma.enquiry.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnquiryCreateManyArgs>(args?: SelectSubset<T, EnquiryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Enquiries and returns the data saved in the database.
+     * @param {EnquiryCreateManyAndReturnArgs} args - Arguments to create many Enquiries.
+     * @example
+     * // Create many Enquiries
+     * const enquiry = await prisma.enquiry.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Enquiries and only return the `id`
+     * const enquiryWithIdOnly = await prisma.enquiry.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnquiryCreateManyAndReturnArgs>(args?: SelectSubset<T, EnquiryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Enquiry.
+     * @param {EnquiryDeleteArgs} args - Arguments to delete one Enquiry.
+     * @example
+     * // Delete one Enquiry
+     * const Enquiry = await prisma.enquiry.delete({
+     *   where: {
+     *     // ... filter to delete one Enquiry
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnquiryDeleteArgs>(args: SelectSubset<T, EnquiryDeleteArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Enquiry.
+     * @param {EnquiryUpdateArgs} args - Arguments to update one Enquiry.
+     * @example
+     * // Update one Enquiry
+     * const enquiry = await prisma.enquiry.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnquiryUpdateArgs>(args: SelectSubset<T, EnquiryUpdateArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Enquiries.
+     * @param {EnquiryDeleteManyArgs} args - Arguments to filter Enquiries to delete.
+     * @example
+     * // Delete a few Enquiries
+     * const { count } = await prisma.enquiry.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnquiryDeleteManyArgs>(args?: SelectSubset<T, EnquiryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Enquiries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Enquiries
+     * const enquiry = await prisma.enquiry.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnquiryUpdateManyArgs>(args: SelectSubset<T, EnquiryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Enquiries and returns the data updated in the database.
+     * @param {EnquiryUpdateManyAndReturnArgs} args - Arguments to update many Enquiries.
+     * @example
+     * // Update many Enquiries
+     * const enquiry = await prisma.enquiry.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Enquiries and only return the `id`
+     * const enquiryWithIdOnly = await prisma.enquiry.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnquiryUpdateManyAndReturnArgs>(args: SelectSubset<T, EnquiryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Enquiry.
+     * @param {EnquiryUpsertArgs} args - Arguments to update or create a Enquiry.
+     * @example
+     * // Update or create a Enquiry
+     * const enquiry = await prisma.enquiry.upsert({
+     *   create: {
+     *     // ... data to create a Enquiry
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Enquiry we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnquiryUpsertArgs>(args: SelectSubset<T, EnquiryUpsertArgs<ExtArgs>>): Prisma__EnquiryClient<$Result.GetResult<Prisma.$EnquiryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Enquiries.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryCountArgs} args - Arguments to filter Enquiries to count.
+     * @example
+     * // Count the number of Enquiries
+     * const count = await prisma.enquiry.count({
+     *   where: {
+     *     // ... the filter for the Enquiries we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnquiryCountArgs>(
+      args?: Subset<T, EnquiryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnquiryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Enquiry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnquiryAggregateArgs>(args: Subset<T, EnquiryAggregateArgs>): Prisma.PrismaPromise<GetEnquiryAggregateType<T>>
+
+    /**
+     * Group by Enquiry.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnquiryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnquiryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnquiryGroupByArgs['orderBy'] }
+        : { orderBy?: EnquiryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnquiryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnquiryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Enquiry model
+   */
+  readonly fields: EnquiryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Enquiry.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnquiryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sellCar<T extends SellCarDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SellCarDefaultArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    buyer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Enquiry model
+   */ 
+  interface EnquiryFieldRefs {
+    readonly id: FieldRef<"Enquiry", 'Int'>
+    readonly sellCarId: FieldRef<"Enquiry", 'Int'>
+    readonly userCognitoId: FieldRef<"Enquiry", 'String'>
+    readonly offerPrice: FieldRef<"Enquiry", 'Float'>
+    readonly message: FieldRef<"Enquiry", 'String'>
+    readonly status: FieldRef<"Enquiry", 'OrderStatus'>
+    readonly dateTimeCreated: FieldRef<"Enquiry", 'DateTime'>
+    readonly dateTimeUpdated: FieldRef<"Enquiry", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Enquiry findUnique
+   */
+  export type EnquiryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter, which Enquiry to fetch.
+     */
+    where: EnquiryWhereUniqueInput
+  }
+
+  /**
+   * Enquiry findUniqueOrThrow
+   */
+  export type EnquiryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter, which Enquiry to fetch.
+     */
+    where: EnquiryWhereUniqueInput
+  }
+
+  /**
+   * Enquiry findFirst
+   */
+  export type EnquiryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter, which Enquiry to fetch.
+     */
+    where?: EnquiryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enquiries to fetch.
+     */
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Enquiries.
+     */
+    cursor?: EnquiryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enquiries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enquiries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Enquiries.
+     */
+    distinct?: EnquiryScalarFieldEnum | EnquiryScalarFieldEnum[]
+  }
+
+  /**
+   * Enquiry findFirstOrThrow
+   */
+  export type EnquiryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter, which Enquiry to fetch.
+     */
+    where?: EnquiryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enquiries to fetch.
+     */
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Enquiries.
+     */
+    cursor?: EnquiryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enquiries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enquiries.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Enquiries.
+     */
+    distinct?: EnquiryScalarFieldEnum | EnquiryScalarFieldEnum[]
+  }
+
+  /**
+   * Enquiry findMany
+   */
+  export type EnquiryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter, which Enquiries to fetch.
+     */
+    where?: EnquiryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Enquiries to fetch.
+     */
+    orderBy?: EnquiryOrderByWithRelationInput | EnquiryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Enquiries.
+     */
+    cursor?: EnquiryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Enquiries from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Enquiries.
+     */
+    skip?: number
+    distinct?: EnquiryScalarFieldEnum | EnquiryScalarFieldEnum[]
+  }
+
+  /**
+   * Enquiry create
+   */
+  export type EnquiryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Enquiry.
+     */
+    data: XOR<EnquiryCreateInput, EnquiryUncheckedCreateInput>
+  }
+
+  /**
+   * Enquiry createMany
+   */
+  export type EnquiryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Enquiries.
+     */
+    data: EnquiryCreateManyInput | EnquiryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Enquiry createManyAndReturn
+   */
+  export type EnquiryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * The data used to create many Enquiries.
+     */
+    data: EnquiryCreateManyInput | EnquiryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Enquiry update
+   */
+  export type EnquiryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Enquiry.
+     */
+    data: XOR<EnquiryUpdateInput, EnquiryUncheckedUpdateInput>
+    /**
+     * Choose, which Enquiry to update.
+     */
+    where: EnquiryWhereUniqueInput
+  }
+
+  /**
+   * Enquiry updateMany
+   */
+  export type EnquiryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Enquiries.
+     */
+    data: XOR<EnquiryUpdateManyMutationInput, EnquiryUncheckedUpdateManyInput>
+    /**
+     * Filter which Enquiries to update
+     */
+    where?: EnquiryWhereInput
+    /**
+     * Limit how many Enquiries to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Enquiry updateManyAndReturn
+   */
+  export type EnquiryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * The data used to update Enquiries.
+     */
+    data: XOR<EnquiryUpdateManyMutationInput, EnquiryUncheckedUpdateManyInput>
+    /**
+     * Filter which Enquiries to update
+     */
+    where?: EnquiryWhereInput
+    /**
+     * Limit how many Enquiries to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Enquiry upsert
+   */
+  export type EnquiryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Enquiry to update in case it exists.
+     */
+    where: EnquiryWhereUniqueInput
+    /**
+     * In case the Enquiry found by the `where` argument doesn't exist, create a new Enquiry with this data.
+     */
+    create: XOR<EnquiryCreateInput, EnquiryUncheckedCreateInput>
+    /**
+     * In case the Enquiry was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnquiryUpdateInput, EnquiryUncheckedUpdateInput>
+  }
+
+  /**
+   * Enquiry delete
+   */
+  export type EnquiryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
+    /**
+     * Filter which Enquiry to delete.
+     */
+    where: EnquiryWhereUniqueInput
+  }
+
+  /**
+   * Enquiry deleteMany
+   */
+  export type EnquiryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Enquiries to delete
+     */
+    where?: EnquiryWhereInput
+    /**
+     * Limit how many Enquiries to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Enquiry without action
+   */
+  export type EnquiryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Enquiry
+     */
+    select?: EnquirySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Enquiry
+     */
+    omit?: EnquiryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnquiryInclude<ExtArgs> | null
   }
 
 
@@ -6521,19 +7846,19 @@ export namespace Prisma {
 
   export type OrderAvgAggregateOutputType = {
     id: number | null
-    saleCarId: number | null
+    sellCarId: number | null
     totalAmount: number | null
   }
 
   export type OrderSumAggregateOutputType = {
     id: number | null
-    saleCarId: number | null
+    sellCarId: number | null
     totalAmount: number | null
   }
 
   export type OrderMinAggregateOutputType = {
     id: number | null
-    saleCarId: number | null
+    sellCarId: number | null
     buyerCognitoId: string | null
     totalAmount: number | null
     status: $Enums.OrderStatus | null
@@ -6543,7 +7868,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateOutputType = {
     id: number | null
-    saleCarId: number | null
+    sellCarId: number | null
     buyerCognitoId: string | null
     totalAmount: number | null
     status: $Enums.OrderStatus | null
@@ -6553,7 +7878,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateOutputType = {
     id: number
-    saleCarId: number
+    sellCarId: number
     buyerCognitoId: number
     totalAmount: number
     status: number
@@ -6565,19 +7890,19 @@ export namespace Prisma {
 
   export type OrderAvgAggregateInputType = {
     id?: true
-    saleCarId?: true
+    sellCarId?: true
     totalAmount?: true
   }
 
   export type OrderSumAggregateInputType = {
     id?: true
-    saleCarId?: true
+    sellCarId?: true
     totalAmount?: true
   }
 
   export type OrderMinAggregateInputType = {
     id?: true
-    saleCarId?: true
+    sellCarId?: true
     buyerCognitoId?: true
     totalAmount?: true
     status?: true
@@ -6587,7 +7912,7 @@ export namespace Prisma {
 
   export type OrderMaxAggregateInputType = {
     id?: true
-    saleCarId?: true
+    sellCarId?: true
     buyerCognitoId?: true
     totalAmount?: true
     status?: true
@@ -6597,7 +7922,7 @@ export namespace Prisma {
 
   export type OrderCountAggregateInputType = {
     id?: true
-    saleCarId?: true
+    sellCarId?: true
     buyerCognitoId?: true
     totalAmount?: true
     status?: true
@@ -6694,7 +8019,7 @@ export namespace Prisma {
 
   export type OrderGroupByOutputType = {
     id: number
-    saleCarId: number
+    sellCarId: number
     buyerCognitoId: string
     totalAmount: number
     status: $Enums.OrderStatus
@@ -6723,44 +8048,44 @@ export namespace Prisma {
 
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    saleCarId?: boolean
+    sellCarId?: boolean
     buyerCognitoId?: boolean
     totalAmount?: boolean
     status?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
     payment?: boolean | Order$paymentArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    saleCarId?: boolean
+    sellCarId?: boolean
     buyerCognitoId?: boolean
     totalAmount?: boolean
     status?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    saleCarId?: boolean
+    sellCarId?: boolean
     buyerCognitoId?: boolean
     totalAmount?: boolean
     status?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
   export type OrderSelectScalar = {
     id?: boolean
-    saleCarId?: boolean
+    sellCarId?: boolean
     buyerCognitoId?: boolean
     totalAmount?: boolean
     status?: boolean
@@ -6768,31 +8093,31 @@ export namespace Prisma {
     dateTimeUpdated?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "saleCarId" | "buyerCognitoId" | "totalAmount" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sellCarId" | "buyerCognitoId" | "totalAmount" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
     payment?: boolean | Order$paymentArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
   }
   export type OrderIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    saleCar?: boolean | SaleCarDefaultArgs<ExtArgs>
+    sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
   }
 
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
-      saleCar: Prisma.$SaleCarPayload<ExtArgs>
+      sellCar: Prisma.$SellCarPayload<ExtArgs>
       buyer: Prisma.$UserPayload<ExtArgs>
       payment: Prisma.$PaymentPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      saleCarId: number
+      sellCarId: number
       buyerCognitoId: string
       totalAmount: number
       status: $Enums.OrderStatus
@@ -7192,7 +8517,7 @@ export namespace Prisma {
    */
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    saleCar<T extends SaleCarDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SaleCarDefaultArgs<ExtArgs>>): Prisma__SaleCarClient<$Result.GetResult<Prisma.$SaleCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sellCar<T extends SellCarDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SellCarDefaultArgs<ExtArgs>>): Prisma__SellCarClient<$Result.GetResult<Prisma.$SellCarPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     buyer<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     payment<T extends Order$paymentArgs<ExtArgs> = {}>(args?: Subset<T, Order$paymentArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -7225,7 +8550,7 @@ export namespace Prisma {
    */ 
   interface OrderFieldRefs {
     readonly id: FieldRef<"Order", 'Int'>
-    readonly saleCarId: FieldRef<"Order", 'Int'>
+    readonly sellCarId: FieldRef<"Order", 'Int'>
     readonly buyerCognitoId: FieldRef<"Order", 'String'>
     readonly totalAmount: FieldRef<"Order", 'Float'>
     readonly status: FieldRef<"Order", 'OrderStatus'>
@@ -9982,7 +11307,7 @@ export namespace Prisma {
   export type CarScalarFieldEnum = (typeof CarScalarFieldEnum)[keyof typeof CarScalarFieldEnum]
 
 
-  export const SaleCarScalarFieldEnum: {
+  export const SellCarScalarFieldEnum: {
     id: 'id',
     vin: 'vin',
     sellerCognitoId: 'sellerCognitoId',
@@ -9996,12 +11321,26 @@ export namespace Prisma {
     dateTimeUpdated: 'dateTimeUpdated'
   };
 
-  export type SaleCarScalarFieldEnum = (typeof SaleCarScalarFieldEnum)[keyof typeof SaleCarScalarFieldEnum]
+  export type SellCarScalarFieldEnum = (typeof SellCarScalarFieldEnum)[keyof typeof SellCarScalarFieldEnum]
+
+
+  export const EnquiryScalarFieldEnum: {
+    id: 'id',
+    sellCarId: 'sellCarId',
+    userCognitoId: 'userCognitoId',
+    offerPrice: 'offerPrice',
+    message: 'message',
+    status: 'status',
+    dateTimeCreated: 'dateTimeCreated',
+    dateTimeUpdated: 'dateTimeUpdated'
+  };
+
+  export type EnquiryScalarFieldEnum = (typeof EnquiryScalarFieldEnum)[keyof typeof EnquiryScalarFieldEnum]
 
 
   export const OrderScalarFieldEnum: {
     id: 'id',
-    saleCarId: 'saleCarId',
+    sellCarId: 'sellCarId',
     buyerCognitoId: 'buyerCognitoId',
     totalAmount: 'totalAmount',
     status: 'status',
@@ -10275,12 +11614,13 @@ export namespace Prisma {
     isProfileSetup?: BoolFilter<"User"> | boolean
     dateTimeCreated?: DateTimeFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
-    favourites?: SaleCarListRelationFilter
-    carSales?: SaleCarListRelationFilter
+    favourites?: SellCarListRelationFilter
+    carSales?: SellCarListRelationFilter
     orders?: OrderListRelationFilter
     reviews?: ReviewListRelationFilter
     reviewer?: ReviewListRelationFilter
     location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
+    enquiries?: EnquiryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -10296,12 +11636,13 @@ export namespace Prisma {
     isProfileSetup?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
-    favourites?: SaleCarOrderByRelationAggregateInput
-    carSales?: SaleCarOrderByRelationAggregateInput
+    favourites?: SellCarOrderByRelationAggregateInput
+    carSales?: SellCarOrderByRelationAggregateInput
     orders?: OrderOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     reviewer?: ReviewOrderByRelationAggregateInput
     location?: LocationOrderByWithRelationInput
+    enquiries?: EnquiryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -10320,12 +11661,13 @@ export namespace Prisma {
     isProfileSetup?: BoolFilter<"User"> | boolean
     dateTimeCreated?: DateTimeFilter<"User"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
-    favourites?: SaleCarListRelationFilter
-    carSales?: SaleCarListRelationFilter
+    favourites?: SellCarListRelationFilter
+    carSales?: SellCarListRelationFilter
     orders?: OrderListRelationFilter
     reviews?: ReviewListRelationFilter
     reviewer?: ReviewListRelationFilter
     location?: XOR<LocationNullableScalarRelationFilter, LocationWhereInput> | null
+    enquiries?: EnquiryListRelationFilter
   }, "id" | "cognitoId">
 
   export type UserOrderByWithAggregationInput = {
@@ -10378,7 +11720,7 @@ export namespace Prisma {
     postalCode?: StringFilter<"Location"> | string
     dateTimeCreated?: DateTimeFilter<"Location"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Location"> | Date | string
-    Users?: UserListRelationFilter
+    users?: UserListRelationFilter
   }
 
   export type LocationOrderByWithRelationInput = {
@@ -10390,7 +11732,7 @@ export namespace Prisma {
     postalCode?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
-    Users?: UserOrderByRelationAggregateInput
+    users?: UserOrderByRelationAggregateInput
   }
 
   export type LocationWhereUniqueInput = Prisma.AtLeast<{
@@ -10405,7 +11747,7 @@ export namespace Prisma {
     postalCode?: StringFilter<"Location"> | string
     dateTimeCreated?: DateTimeFilter<"Location"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Location"> | Date | string
-    Users?: UserListRelationFilter
+    users?: UserListRelationFilter
   }, "id">
 
   export type LocationOrderByWithAggregationInput = {
@@ -10452,7 +11794,7 @@ export namespace Prisma {
     transmission?: EnumTransmissionFilter<"Car"> | $Enums.Transmission
     dateTimeCreated?: DateTimeFilter<"Car"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Car"> | Date | string
-    carSales?: SaleCarListRelationFilter
+    sellCars?: SellCarListRelationFilter
   }
 
   export type CarOrderByWithRelationInput = {
@@ -10466,7 +11808,7 @@ export namespace Prisma {
     transmission?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
-    carSales?: SaleCarOrderByRelationAggregateInput
+    sellCars?: SellCarOrderByRelationAggregateInput
   }
 
   export type CarWhereUniqueInput = Prisma.AtLeast<{
@@ -10484,7 +11826,7 @@ export namespace Prisma {
     transmission?: EnumTransmissionFilter<"Car"> | $Enums.Transmission
     dateTimeCreated?: DateTimeFilter<"Car"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Car"> | Date | string
-    carSales?: SaleCarListRelationFilter
+    sellCars?: SellCarListRelationFilter
   }, "id" | "make_model_year_type_fuel_drive_transmission">
 
   export type CarOrderByWithAggregationInput = {
@@ -10521,28 +11863,29 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeWithAggregatesFilter<"Car"> | Date | string
   }
 
-  export type SaleCarWhereInput = {
-    AND?: SaleCarWhereInput | SaleCarWhereInput[]
-    OR?: SaleCarWhereInput[]
-    NOT?: SaleCarWhereInput | SaleCarWhereInput[]
-    id?: IntFilter<"SaleCar"> | number
-    vin?: StringFilter<"SaleCar"> | string
-    sellerCognitoId?: StringFilter<"SaleCar"> | string
-    carId?: IntFilter<"SaleCar"> | number
-    mileage?: IntFilter<"SaleCar"> | number
-    price?: FloatFilter<"SaleCar"> | number
-    photoUrls?: StringNullableListFilter<"SaleCar">
-    description?: StringFilter<"SaleCar"> | string
-    isPublic?: BoolFilter<"SaleCar"> | boolean
-    dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
-    dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
+  export type SellCarWhereInput = {
+    AND?: SellCarWhereInput | SellCarWhereInput[]
+    OR?: SellCarWhereInput[]
+    NOT?: SellCarWhereInput | SellCarWhereInput[]
+    id?: IntFilter<"SellCar"> | number
+    vin?: StringFilter<"SellCar"> | string
+    sellerCognitoId?: StringFilter<"SellCar"> | string
+    carId?: IntFilter<"SellCar"> | number
+    mileage?: IntFilter<"SellCar"> | number
+    price?: FloatFilter<"SellCar"> | number
+    photoUrls?: StringNullableListFilter<"SellCar">
+    description?: StringFilter<"SellCar"> | string
+    isPublic?: BoolFilter<"SellCar"> | boolean
+    dateTimeCreated?: DateTimeFilter<"SellCar"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"SellCar"> | Date | string
+    enquiries?: EnquiryListRelationFilter
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     favouritedBy?: UserListRelationFilter
     seller?: XOR<UserScalarRelationFilter, UserWhereInput>
     car?: XOR<CarScalarRelationFilter, CarWhereInput>
   }
 
-  export type SaleCarOrderByWithRelationInput = {
+  export type SellCarOrderByWithRelationInput = {
     id?: SortOrder
     vin?: SortOrder
     sellerCognitoId?: SortOrder
@@ -10554,34 +11897,36 @@ export namespace Prisma {
     isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
+    enquiries?: EnquiryOrderByRelationAggregateInput
     order?: OrderOrderByWithRelationInput
     favouritedBy?: UserOrderByRelationAggregateInput
     seller?: UserOrderByWithRelationInput
     car?: CarOrderByWithRelationInput
   }
 
-  export type SaleCarWhereUniqueInput = Prisma.AtLeast<{
+  export type SellCarWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     vin?: string
-    AND?: SaleCarWhereInput | SaleCarWhereInput[]
-    OR?: SaleCarWhereInput[]
-    NOT?: SaleCarWhereInput | SaleCarWhereInput[]
-    sellerCognitoId?: StringFilter<"SaleCar"> | string
-    carId?: IntFilter<"SaleCar"> | number
-    mileage?: IntFilter<"SaleCar"> | number
-    price?: FloatFilter<"SaleCar"> | number
-    photoUrls?: StringNullableListFilter<"SaleCar">
-    description?: StringFilter<"SaleCar"> | string
-    isPublic?: BoolFilter<"SaleCar"> | boolean
-    dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
-    dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
+    AND?: SellCarWhereInput | SellCarWhereInput[]
+    OR?: SellCarWhereInput[]
+    NOT?: SellCarWhereInput | SellCarWhereInput[]
+    sellerCognitoId?: StringFilter<"SellCar"> | string
+    carId?: IntFilter<"SellCar"> | number
+    mileage?: IntFilter<"SellCar"> | number
+    price?: FloatFilter<"SellCar"> | number
+    photoUrls?: StringNullableListFilter<"SellCar">
+    description?: StringFilter<"SellCar"> | string
+    isPublic?: BoolFilter<"SellCar"> | boolean
+    dateTimeCreated?: DateTimeFilter<"SellCar"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"SellCar"> | Date | string
+    enquiries?: EnquiryListRelationFilter
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     favouritedBy?: UserListRelationFilter
     seller?: XOR<UserScalarRelationFilter, UserWhereInput>
     car?: XOR<CarScalarRelationFilter, CarWhereInput>
   }, "id" | "vin">
 
-  export type SaleCarOrderByWithAggregationInput = {
+  export type SellCarOrderByWithAggregationInput = {
     id?: SortOrder
     vin?: SortOrder
     sellerCognitoId?: SortOrder
@@ -10593,28 +11938,103 @@ export namespace Prisma {
     isPublic?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
-    _count?: SaleCarCountOrderByAggregateInput
-    _avg?: SaleCarAvgOrderByAggregateInput
-    _max?: SaleCarMaxOrderByAggregateInput
-    _min?: SaleCarMinOrderByAggregateInput
-    _sum?: SaleCarSumOrderByAggregateInput
+    _count?: SellCarCountOrderByAggregateInput
+    _avg?: SellCarAvgOrderByAggregateInput
+    _max?: SellCarMaxOrderByAggregateInput
+    _min?: SellCarMinOrderByAggregateInput
+    _sum?: SellCarSumOrderByAggregateInput
   }
 
-  export type SaleCarScalarWhereWithAggregatesInput = {
-    AND?: SaleCarScalarWhereWithAggregatesInput | SaleCarScalarWhereWithAggregatesInput[]
-    OR?: SaleCarScalarWhereWithAggregatesInput[]
-    NOT?: SaleCarScalarWhereWithAggregatesInput | SaleCarScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"SaleCar"> | number
-    vin?: StringWithAggregatesFilter<"SaleCar"> | string
-    sellerCognitoId?: StringWithAggregatesFilter<"SaleCar"> | string
-    carId?: IntWithAggregatesFilter<"SaleCar"> | number
-    mileage?: IntWithAggregatesFilter<"SaleCar"> | number
-    price?: FloatWithAggregatesFilter<"SaleCar"> | number
-    photoUrls?: StringNullableListFilter<"SaleCar">
-    description?: StringWithAggregatesFilter<"SaleCar"> | string
-    isPublic?: BoolWithAggregatesFilter<"SaleCar"> | boolean
-    dateTimeCreated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
-    dateTimeUpdated?: DateTimeWithAggregatesFilter<"SaleCar"> | Date | string
+  export type SellCarScalarWhereWithAggregatesInput = {
+    AND?: SellCarScalarWhereWithAggregatesInput | SellCarScalarWhereWithAggregatesInput[]
+    OR?: SellCarScalarWhereWithAggregatesInput[]
+    NOT?: SellCarScalarWhereWithAggregatesInput | SellCarScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SellCar"> | number
+    vin?: StringWithAggregatesFilter<"SellCar"> | string
+    sellerCognitoId?: StringWithAggregatesFilter<"SellCar"> | string
+    carId?: IntWithAggregatesFilter<"SellCar"> | number
+    mileage?: IntWithAggregatesFilter<"SellCar"> | number
+    price?: FloatWithAggregatesFilter<"SellCar"> | number
+    photoUrls?: StringNullableListFilter<"SellCar">
+    description?: StringWithAggregatesFilter<"SellCar"> | string
+    isPublic?: BoolWithAggregatesFilter<"SellCar"> | boolean
+    dateTimeCreated?: DateTimeWithAggregatesFilter<"SellCar"> | Date | string
+    dateTimeUpdated?: DateTimeWithAggregatesFilter<"SellCar"> | Date | string
+  }
+
+  export type EnquiryWhereInput = {
+    AND?: EnquiryWhereInput | EnquiryWhereInput[]
+    OR?: EnquiryWhereInput[]
+    NOT?: EnquiryWhereInput | EnquiryWhereInput[]
+    id?: IntFilter<"Enquiry"> | number
+    sellCarId?: IntFilter<"Enquiry"> | number
+    userCognitoId?: StringFilter<"Enquiry"> | string
+    offerPrice?: FloatFilter<"Enquiry"> | number
+    message?: StringFilter<"Enquiry"> | string
+    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
+    sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
+    buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type EnquiryOrderByWithRelationInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    userCognitoId?: SortOrder
+    offerPrice?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+    sellCar?: SellCarOrderByWithRelationInput
+    buyer?: UserOrderByWithRelationInput
+  }
+
+  export type EnquiryWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: EnquiryWhereInput | EnquiryWhereInput[]
+    OR?: EnquiryWhereInput[]
+    NOT?: EnquiryWhereInput | EnquiryWhereInput[]
+    sellCarId?: IntFilter<"Enquiry"> | number
+    userCognitoId?: StringFilter<"Enquiry"> | string
+    offerPrice?: FloatFilter<"Enquiry"> | number
+    message?: StringFilter<"Enquiry"> | string
+    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
+    sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
+    buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id">
+
+  export type EnquiryOrderByWithAggregationInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    userCognitoId?: SortOrder
+    offerPrice?: SortOrder
+    message?: SortOrder
+    status?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+    _count?: EnquiryCountOrderByAggregateInput
+    _avg?: EnquiryAvgOrderByAggregateInput
+    _max?: EnquiryMaxOrderByAggregateInput
+    _min?: EnquiryMinOrderByAggregateInput
+    _sum?: EnquirySumOrderByAggregateInput
+  }
+
+  export type EnquiryScalarWhereWithAggregatesInput = {
+    AND?: EnquiryScalarWhereWithAggregatesInput | EnquiryScalarWhereWithAggregatesInput[]
+    OR?: EnquiryScalarWhereWithAggregatesInput[]
+    NOT?: EnquiryScalarWhereWithAggregatesInput | EnquiryScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Enquiry"> | number
+    sellCarId?: IntWithAggregatesFilter<"Enquiry"> | number
+    userCognitoId?: StringWithAggregatesFilter<"Enquiry"> | string
+    offerPrice?: FloatWithAggregatesFilter<"Enquiry"> | number
+    message?: StringWithAggregatesFilter<"Enquiry"> | string
+    status?: EnumOrderStatusWithAggregatesFilter<"Enquiry"> | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
+    dateTimeUpdated?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
   }
 
   export type OrderWhereInput = {
@@ -10622,33 +12042,33 @@ export namespace Prisma {
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     id?: IntFilter<"Order"> | number
-    saleCarId?: IntFilter<"Order"> | number
+    sellCarId?: IntFilter<"Order"> | number
     buyerCognitoId?: StringFilter<"Order"> | string
     totalAmount?: FloatFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFilter<"Order"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Order"> | Date | string
-    saleCar?: XOR<SaleCarScalarRelationFilter, SaleCarWhereInput>
+    sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
     payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
   }
 
   export type OrderOrderByWithRelationInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
+    sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
-    saleCar?: SaleCarOrderByWithRelationInput
+    sellCar?: SellCarOrderByWithRelationInput
     buyer?: UserOrderByWithRelationInput
     payment?: PaymentOrderByWithRelationInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    saleCarId?: number
+    sellCarId?: number
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
@@ -10657,14 +12077,14 @@ export namespace Prisma {
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFilter<"Order"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Order"> | Date | string
-    saleCar?: XOR<SaleCarScalarRelationFilter, SaleCarWhereInput>
+    sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
     payment?: XOR<PaymentNullableScalarRelationFilter, PaymentWhereInput> | null
-  }, "id" | "saleCarId">
+  }, "id" | "sellCarId">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
+    sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
     totalAmount?: SortOrder
     status?: SortOrder
@@ -10682,7 +12102,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereWithAggregatesInput[]
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Order"> | number
-    saleCarId?: IntWithAggregatesFilter<"Order"> | number
+    sellCarId?: IntWithAggregatesFilter<"Order"> | number
     buyerCognitoId?: StringWithAggregatesFilter<"Order"> | string
     totalAmount?: FloatWithAggregatesFilter<"Order"> | number
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
@@ -10838,12 +12258,13 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -10859,11 +12280,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUpdateInput = {
@@ -10877,12 +12299,13 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -10898,11 +12321,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -10956,7 +12380,7 @@ export namespace Prisma {
     postalCode?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    Users?: UserUpdateManyWithoutLocationNestedInput
+    users?: UserUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationUncheckedUpdateInput = {
@@ -10968,7 +12392,7 @@ export namespace Prisma {
     postalCode?: StringFieldUpdateOperationsInput | string
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    Users?: UserUncheckedUpdateManyWithoutLocationNestedInput
+    users?: UserUncheckedUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationUpdateManyMutationInput = {
@@ -11002,7 +12426,7 @@ export namespace Prisma {
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    carSales?: SaleCarCreateNestedManyWithoutCarInput
+    sellCars?: SellCarCreateNestedManyWithoutCarInput
   }
 
   export type CarUncheckedCreateInput = {
@@ -11016,7 +12440,7 @@ export namespace Prisma {
     transmission: $Enums.Transmission
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutCarInput
+    sellCars?: SellCarUncheckedCreateNestedManyWithoutCarInput
   }
 
   export type CarUpdateInput = {
@@ -11029,7 +12453,7 @@ export namespace Prisma {
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    carSales?: SaleCarUpdateManyWithoutCarNestedInput
+    sellCars?: SellCarUpdateManyWithoutCarNestedInput
   }
 
   export type CarUncheckedUpdateInput = {
@@ -11043,7 +12467,7 @@ export namespace Prisma {
     transmission?: EnumTransmissionFieldUpdateOperationsInput | $Enums.Transmission
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    carSales?: SaleCarUncheckedUpdateManyWithoutCarNestedInput
+    sellCars?: SellCarUncheckedUpdateManyWithoutCarNestedInput
   }
 
   export type CarCreateManyInput = {
@@ -11084,103 +12508,179 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SaleCarCreateInput = {
+  export type SellCarCreateInput = {
     vin: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryCreateNestedManyWithoutSellCarInput
+    order?: OrderCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
     seller: UserCreateNestedOneWithoutCarSalesInput
-    car: CarCreateNestedOneWithoutCarSalesInput
+    car: CarCreateNestedOneWithoutSellCarsInput
   }
 
-  export type SaleCarUncheckedCreateInput = {
+  export type SellCarUncheckedCreateInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutSellCarInput
+    order?: OrderUncheckedCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
   }
 
-  export type SaleCarUpdateInput = {
+  export type SellCarUpdateInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUpdateManyWithoutSellCarNestedInput
+    order?: OrderUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
     seller?: UserUpdateOneRequiredWithoutCarSalesNestedInput
-    car?: CarUpdateOneRequiredWithoutCarSalesNestedInput
+    car?: CarUpdateOneRequiredWithoutSellCarsNestedInput
   }
 
-  export type SaleCarUncheckedUpdateInput = {
+  export type SellCarUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutSellCarNestedInput
+    order?: OrderUncheckedUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
   }
 
-  export type SaleCarCreateManyInput = {
+  export type SellCarCreateManyInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
 
-  export type SaleCarUpdateManyMutationInput = {
+  export type SellCarUpdateManyMutationInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SaleCarUncheckedUpdateManyInput = {
+  export type SellCarUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryCreateInput = {
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    sellCar: SellCarCreateNestedOneWithoutEnquiriesInput
+    buyer: UserCreateNestedOneWithoutEnquiriesInput
+  }
+
+  export type EnquiryUncheckedCreateInput = {
+    id?: number
+    sellCarId: number
+    userCognitoId: string
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+  }
+
+  export type EnquiryUpdateInput = {
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    sellCar?: SellCarUpdateOneRequiredWithoutEnquiriesNestedInput
+    buyer?: UserUpdateOneRequiredWithoutEnquiriesNestedInput
+  }
+
+  export type EnquiryUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
+    userCognitoId?: StringFieldUpdateOperationsInput | string
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryCreateManyInput = {
+    id?: number
+    sellCarId: number
+    userCognitoId: string
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+  }
+
+  export type EnquiryUpdateManyMutationInput = {
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
+    userCognitoId?: StringFieldUpdateOperationsInput | string
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -11190,14 +12690,14 @@ export namespace Prisma {
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    saleCar: SaleCarCreateNestedOneWithoutOrderInput
+    sellCar: SellCarCreateNestedOneWithoutOrderInput
     buyer: UserCreateNestedOneWithoutOrdersInput
     payment?: PaymentCreateNestedOneWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
     id?: number
-    saleCarId: number
+    sellCarId: number
     buyerCognitoId: string
     totalAmount: number
     status: $Enums.OrderStatus
@@ -11211,14 +12711,14 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    saleCar?: SaleCarUpdateOneRequiredWithoutOrderNestedInput
+    sellCar?: SellCarUpdateOneRequiredWithoutOrderNestedInput
     buyer?: UserUpdateOneRequiredWithoutOrdersNestedInput
     payment?: PaymentUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    saleCarId?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
@@ -11229,7 +12729,7 @@ export namespace Prisma {
 
   export type OrderCreateManyInput = {
     id?: number
-    saleCarId: number
+    sellCarId: number
     buyerCognitoId: string
     totalAmount: number
     status: $Enums.OrderStatus
@@ -11246,7 +12746,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    saleCarId?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
@@ -11445,10 +12945,10 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SaleCarListRelationFilter = {
-    every?: SaleCarWhereInput
-    some?: SaleCarWhereInput
-    none?: SaleCarWhereInput
+  export type SellCarListRelationFilter = {
+    every?: SellCarWhereInput
+    some?: SellCarWhereInput
+    none?: SellCarWhereInput
   }
 
   export type OrderListRelationFilter = {
@@ -11468,12 +12968,18 @@ export namespace Prisma {
     isNot?: LocationWhereInput | null
   }
 
+  export type EnquiryListRelationFilter = {
+    every?: EnquiryWhereInput
+    some?: EnquiryWhereInput
+    none?: EnquiryWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
-  export type SaleCarOrderByRelationAggregateInput = {
+  export type SellCarOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11482,6 +12988,10 @@ export namespace Prisma {
   }
 
   export type ReviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EnquiryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11851,7 +13361,7 @@ export namespace Prisma {
     isNot?: CarWhereInput
   }
 
-  export type SaleCarCountOrderByAggregateInput = {
+  export type SellCarCountOrderByAggregateInput = {
     id?: SortOrder
     vin?: SortOrder
     sellerCognitoId?: SortOrder
@@ -11865,27 +13375,14 @@ export namespace Prisma {
     dateTimeUpdated?: SortOrder
   }
 
-  export type SaleCarAvgOrderByAggregateInput = {
+  export type SellCarAvgOrderByAggregateInput = {
     id?: SortOrder
     carId?: SortOrder
     mileage?: SortOrder
     price?: SortOrder
   }
 
-  export type SaleCarMaxOrderByAggregateInput = {
-    id?: SortOrder
-    vin?: SortOrder
-    sellerCognitoId?: SortOrder
-    carId?: SortOrder
-    mileage?: SortOrder
-    price?: SortOrder
-    description?: SortOrder
-    isPublic?: SortOrder
-    dateTimeCreated?: SortOrder
-    dateTimeUpdated?: SortOrder
-  }
-
-  export type SaleCarMinOrderByAggregateInput = {
+  export type SellCarMaxOrderByAggregateInput = {
     id?: SortOrder
     vin?: SortOrder
     sellerCognitoId?: SortOrder
@@ -11898,7 +13395,20 @@ export namespace Prisma {
     dateTimeUpdated?: SortOrder
   }
 
-  export type SaleCarSumOrderByAggregateInput = {
+  export type SellCarMinOrderByAggregateInput = {
+    id?: SortOrder
+    vin?: SortOrder
+    sellerCognitoId?: SortOrder
+    carId?: SortOrder
+    mileage?: SortOrder
+    price?: SortOrder
+    description?: SortOrder
+    isPublic?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+  }
+
+  export type SellCarSumOrderByAggregateInput = {
     id?: SortOrder
     carId?: SortOrder
     mileage?: SortOrder
@@ -11928,56 +13438,54 @@ export namespace Prisma {
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
   }
 
-  export type SaleCarScalarRelationFilter = {
-    is?: SaleCarWhereInput
-    isNot?: SaleCarWhereInput
+  export type SellCarScalarRelationFilter = {
+    is?: SellCarWhereInput
+    isNot?: SellCarWhereInput
   }
 
-  export type PaymentNullableScalarRelationFilter = {
-    is?: PaymentWhereInput | null
-    isNot?: PaymentWhereInput | null
-  }
-
-  export type OrderCountOrderByAggregateInput = {
+  export type EnquiryCountOrderByAggregateInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
-    buyerCognitoId?: SortOrder
-    totalAmount?: SortOrder
+    sellCarId?: SortOrder
+    userCognitoId?: SortOrder
+    offerPrice?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
 
-  export type OrderAvgOrderByAggregateInput = {
+  export type EnquiryAvgOrderByAggregateInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
-    totalAmount?: SortOrder
+    sellCarId?: SortOrder
+    offerPrice?: SortOrder
   }
 
-  export type OrderMaxOrderByAggregateInput = {
+  export type EnquiryMaxOrderByAggregateInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
-    buyerCognitoId?: SortOrder
-    totalAmount?: SortOrder
+    sellCarId?: SortOrder
+    userCognitoId?: SortOrder
+    offerPrice?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
 
-  export type OrderMinOrderByAggregateInput = {
+  export type EnquiryMinOrderByAggregateInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
-    buyerCognitoId?: SortOrder
-    totalAmount?: SortOrder
+    sellCarId?: SortOrder
+    userCognitoId?: SortOrder
+    offerPrice?: SortOrder
+    message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
     dateTimeUpdated?: SortOrder
   }
 
-  export type OrderSumOrderByAggregateInput = {
+  export type EnquirySumOrderByAggregateInput = {
     id?: SortOrder
-    saleCarId?: SortOrder
-    totalAmount?: SortOrder
+    sellCarId?: SortOrder
+    offerPrice?: SortOrder
   }
 
   export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -11988,6 +13496,53 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
+  }
+
+  export type PaymentNullableScalarRelationFilter = {
+    is?: PaymentWhereInput | null
+    isNot?: PaymentWhereInput | null
+  }
+
+  export type OrderCountOrderByAggregateInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    buyerCognitoId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+  }
+
+  export type OrderAvgOrderByAggregateInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    totalAmount?: SortOrder
+  }
+
+  export type OrderMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    buyerCognitoId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+  }
+
+  export type OrderMinOrderByAggregateInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    buyerCognitoId?: SortOrder
+    totalAmount?: SortOrder
+    status?: SortOrder
+    dateTimeCreated?: SortOrder
+    dateTimeUpdated?: SortOrder
+  }
+
+  export type OrderSumOrderByAggregateInput = {
+    id?: SortOrder
+    sellCarId?: SortOrder
+    totalAmount?: SortOrder
   }
 
   export type EnumPaymentMethodFilter<$PrismaModel = never> = {
@@ -12111,17 +13666,17 @@ export namespace Prisma {
     rating?: SortOrder
   }
 
-  export type SaleCarCreateNestedManyWithoutFavouritedByInput = {
-    create?: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput> | SaleCarCreateWithoutFavouritedByInput[] | SaleCarUncheckedCreateWithoutFavouritedByInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutFavouritedByInput | SaleCarCreateOrConnectWithoutFavouritedByInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type SellCarCreateNestedManyWithoutFavouritedByInput = {
+    create?: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput> | SellCarCreateWithoutFavouritedByInput[] | SellCarUncheckedCreateWithoutFavouritedByInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutFavouritedByInput | SellCarCreateOrConnectWithoutFavouritedByInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
   }
 
-  export type SaleCarCreateNestedManyWithoutSellerInput = {
-    create?: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput> | SaleCarCreateWithoutSellerInput[] | SaleCarUncheckedCreateWithoutSellerInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutSellerInput | SaleCarCreateOrConnectWithoutSellerInput[]
-    createMany?: SaleCarCreateManySellerInputEnvelope
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type SellCarCreateNestedManyWithoutSellerInput = {
+    create?: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput> | SellCarCreateWithoutSellerInput[] | SellCarUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutSellerInput | SellCarCreateOrConnectWithoutSellerInput[]
+    createMany?: SellCarCreateManySellerInputEnvelope
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
   }
 
   export type OrderCreateNestedManyWithoutBuyerInput = {
@@ -12149,17 +13704,24 @@ export namespace Prisma {
     connect?: LocationWhereUniqueInput
   }
 
-  export type SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput = {
-    create?: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput> | SaleCarCreateWithoutFavouritedByInput[] | SaleCarUncheckedCreateWithoutFavouritedByInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutFavouritedByInput | SaleCarCreateOrConnectWithoutFavouritedByInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type EnquiryCreateNestedManyWithoutBuyerInput = {
+    create?: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput> | EnquiryCreateWithoutBuyerInput[] | EnquiryUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutBuyerInput | EnquiryCreateOrConnectWithoutBuyerInput[]
+    createMany?: EnquiryCreateManyBuyerInputEnvelope
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
   }
 
-  export type SaleCarUncheckedCreateNestedManyWithoutSellerInput = {
-    create?: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput> | SaleCarCreateWithoutSellerInput[] | SaleCarUncheckedCreateWithoutSellerInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutSellerInput | SaleCarCreateOrConnectWithoutSellerInput[]
-    createMany?: SaleCarCreateManySellerInputEnvelope
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type SellCarUncheckedCreateNestedManyWithoutFavouritedByInput = {
+    create?: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput> | SellCarCreateWithoutFavouritedByInput[] | SellCarUncheckedCreateWithoutFavouritedByInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutFavouritedByInput | SellCarCreateOrConnectWithoutFavouritedByInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+  }
+
+  export type SellCarUncheckedCreateNestedManyWithoutSellerInput = {
+    create?: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput> | SellCarCreateWithoutSellerInput[] | SellCarUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutSellerInput | SellCarCreateOrConnectWithoutSellerInput[]
+    createMany?: SellCarCreateManySellerInputEnvelope
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
   }
 
   export type OrderUncheckedCreateNestedManyWithoutBuyerInput = {
@@ -12183,6 +13745,13 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type EnquiryUncheckedCreateNestedManyWithoutBuyerInput = {
+    create?: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput> | EnquiryCreateWithoutBuyerInput[] | EnquiryUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutBuyerInput | EnquiryCreateOrConnectWithoutBuyerInput[]
+    createMany?: EnquiryCreateManyBuyerInputEnvelope
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -12199,31 +13768,31 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type SaleCarUpdateManyWithoutFavouritedByNestedInput = {
-    create?: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput> | SaleCarCreateWithoutFavouritedByInput[] | SaleCarUncheckedCreateWithoutFavouritedByInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutFavouritedByInput | SaleCarCreateOrConnectWithoutFavouritedByInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutFavouritedByInput | SaleCarUpsertWithWhereUniqueWithoutFavouritedByInput[]
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutFavouritedByInput | SaleCarUpdateWithWhereUniqueWithoutFavouritedByInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutFavouritedByInput | SaleCarUpdateManyWithWhereWithoutFavouritedByInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUpdateManyWithoutFavouritedByNestedInput = {
+    create?: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput> | SellCarCreateWithoutFavouritedByInput[] | SellCarUncheckedCreateWithoutFavouritedByInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutFavouritedByInput | SellCarCreateOrConnectWithoutFavouritedByInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutFavouritedByInput | SellCarUpsertWithWhereUniqueWithoutFavouritedByInput[]
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutFavouritedByInput | SellCarUpdateWithWhereUniqueWithoutFavouritedByInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutFavouritedByInput | SellCarUpdateManyWithWhereWithoutFavouritedByInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
-  export type SaleCarUpdateManyWithoutSellerNestedInput = {
-    create?: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput> | SaleCarCreateWithoutSellerInput[] | SaleCarUncheckedCreateWithoutSellerInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutSellerInput | SaleCarCreateOrConnectWithoutSellerInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutSellerInput | SaleCarUpsertWithWhereUniqueWithoutSellerInput[]
-    createMany?: SaleCarCreateManySellerInputEnvelope
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutSellerInput | SaleCarUpdateWithWhereUniqueWithoutSellerInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutSellerInput | SaleCarUpdateManyWithWhereWithoutSellerInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput> | SellCarCreateWithoutSellerInput[] | SellCarUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutSellerInput | SellCarCreateOrConnectWithoutSellerInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutSellerInput | SellCarUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: SellCarCreateManySellerInputEnvelope
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutSellerInput | SellCarUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutSellerInput | SellCarUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
   export type OrderUpdateManyWithoutBuyerNestedInput = {
@@ -12275,6 +13844,20 @@ export namespace Prisma {
     update?: XOR<XOR<LocationUpdateToOneWithWhereWithoutUsersInput, LocationUpdateWithoutUsersInput>, LocationUncheckedUpdateWithoutUsersInput>
   }
 
+  export type EnquiryUpdateManyWithoutBuyerNestedInput = {
+    create?: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput> | EnquiryCreateWithoutBuyerInput[] | EnquiryUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutBuyerInput | EnquiryCreateOrConnectWithoutBuyerInput[]
+    upsert?: EnquiryUpsertWithWhereUniqueWithoutBuyerInput | EnquiryUpsertWithWhereUniqueWithoutBuyerInput[]
+    createMany?: EnquiryCreateManyBuyerInputEnvelope
+    set?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    disconnect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    delete?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    update?: EnquiryUpdateWithWhereUniqueWithoutBuyerInput | EnquiryUpdateWithWhereUniqueWithoutBuyerInput[]
+    updateMany?: EnquiryUpdateManyWithWhereWithoutBuyerInput | EnquiryUpdateManyWithWhereWithoutBuyerInput[]
+    deleteMany?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -12291,31 +13874,31 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput = {
-    create?: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput> | SaleCarCreateWithoutFavouritedByInput[] | SaleCarUncheckedCreateWithoutFavouritedByInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutFavouritedByInput | SaleCarCreateOrConnectWithoutFavouritedByInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutFavouritedByInput | SaleCarUpsertWithWhereUniqueWithoutFavouritedByInput[]
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutFavouritedByInput | SaleCarUpdateWithWhereUniqueWithoutFavouritedByInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutFavouritedByInput | SaleCarUpdateManyWithWhereWithoutFavouritedByInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput = {
+    create?: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput> | SellCarCreateWithoutFavouritedByInput[] | SellCarUncheckedCreateWithoutFavouritedByInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutFavouritedByInput | SellCarCreateOrConnectWithoutFavouritedByInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutFavouritedByInput | SellCarUpsertWithWhereUniqueWithoutFavouritedByInput[]
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutFavouritedByInput | SellCarUpdateWithWhereUniqueWithoutFavouritedByInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutFavouritedByInput | SellCarUpdateManyWithWhereWithoutFavouritedByInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutSellerNestedInput = {
-    create?: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput> | SaleCarCreateWithoutSellerInput[] | SaleCarUncheckedCreateWithoutSellerInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutSellerInput | SaleCarCreateOrConnectWithoutSellerInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutSellerInput | SaleCarUpsertWithWhereUniqueWithoutSellerInput[]
-    createMany?: SaleCarCreateManySellerInputEnvelope
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutSellerInput | SaleCarUpdateWithWhereUniqueWithoutSellerInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutSellerInput | SaleCarUpdateManyWithWhereWithoutSellerInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUncheckedUpdateManyWithoutSellerNestedInput = {
+    create?: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput> | SellCarCreateWithoutSellerInput[] | SellCarUncheckedCreateWithoutSellerInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutSellerInput | SellCarCreateOrConnectWithoutSellerInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutSellerInput | SellCarUpsertWithWhereUniqueWithoutSellerInput[]
+    createMany?: SellCarCreateManySellerInputEnvelope
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutSellerInput | SellCarUpdateWithWhereUniqueWithoutSellerInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutSellerInput | SellCarUpdateManyWithWhereWithoutSellerInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
   export type OrderUncheckedUpdateManyWithoutBuyerNestedInput = {
@@ -12360,6 +13943,20 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
+  export type EnquiryUncheckedUpdateManyWithoutBuyerNestedInput = {
+    create?: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput> | EnquiryCreateWithoutBuyerInput[] | EnquiryUncheckedCreateWithoutBuyerInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutBuyerInput | EnquiryCreateOrConnectWithoutBuyerInput[]
+    upsert?: EnquiryUpsertWithWhereUniqueWithoutBuyerInput | EnquiryUpsertWithWhereUniqueWithoutBuyerInput[]
+    createMany?: EnquiryCreateManyBuyerInputEnvelope
+    set?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    disconnect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    delete?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    update?: EnquiryUpdateWithWhereUniqueWithoutBuyerInput | EnquiryUpdateWithWhereUniqueWithoutBuyerInput[]
+    updateMany?: EnquiryUpdateManyWithWhereWithoutBuyerInput | EnquiryUpdateManyWithWhereWithoutBuyerInput[]
+    deleteMany?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+  }
+
   export type UserUpdateManyWithoutLocationNestedInput = {
     create?: XOR<UserCreateWithoutLocationInput, UserUncheckedCreateWithoutLocationInput> | UserCreateWithoutLocationInput[] | UserUncheckedCreateWithoutLocationInput[]
     connectOrCreate?: UserCreateOrConnectWithoutLocationInput | UserCreateOrConnectWithoutLocationInput[]
@@ -12388,18 +13985,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type SaleCarCreateNestedManyWithoutCarInput = {
-    create?: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput> | SaleCarCreateWithoutCarInput[] | SaleCarUncheckedCreateWithoutCarInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutCarInput | SaleCarCreateOrConnectWithoutCarInput[]
-    createMany?: SaleCarCreateManyCarInputEnvelope
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type SellCarCreateNestedManyWithoutCarInput = {
+    create?: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput> | SellCarCreateWithoutCarInput[] | SellCarUncheckedCreateWithoutCarInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutCarInput | SellCarCreateOrConnectWithoutCarInput[]
+    createMany?: SellCarCreateManyCarInputEnvelope
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
   }
 
-  export type SaleCarUncheckedCreateNestedManyWithoutCarInput = {
-    create?: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput> | SaleCarCreateWithoutCarInput[] | SaleCarUncheckedCreateWithoutCarInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutCarInput | SaleCarCreateOrConnectWithoutCarInput[]
-    createMany?: SaleCarCreateManyCarInputEnvelope
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
+  export type SellCarUncheckedCreateNestedManyWithoutCarInput = {
+    create?: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput> | SellCarCreateWithoutCarInput[] | SellCarUncheckedCreateWithoutCarInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutCarInput | SellCarCreateOrConnectWithoutCarInput[]
+    createMany?: SellCarCreateManyCarInputEnvelope
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
   }
 
   export type EnumMakeFieldUpdateOperationsInput = {
@@ -12422,41 +14019,48 @@ export namespace Prisma {
     set?: $Enums.Transmission
   }
 
-  export type SaleCarUpdateManyWithoutCarNestedInput = {
-    create?: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput> | SaleCarCreateWithoutCarInput[] | SaleCarUncheckedCreateWithoutCarInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutCarInput | SaleCarCreateOrConnectWithoutCarInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutCarInput | SaleCarUpsertWithWhereUniqueWithoutCarInput[]
-    createMany?: SaleCarCreateManyCarInputEnvelope
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutCarInput | SaleCarUpdateWithWhereUniqueWithoutCarInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutCarInput | SaleCarUpdateManyWithWhereWithoutCarInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUpdateManyWithoutCarNestedInput = {
+    create?: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput> | SellCarCreateWithoutCarInput[] | SellCarUncheckedCreateWithoutCarInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutCarInput | SellCarCreateOrConnectWithoutCarInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutCarInput | SellCarUpsertWithWhereUniqueWithoutCarInput[]
+    createMany?: SellCarCreateManyCarInputEnvelope
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutCarInput | SellCarUpdateWithWhereUniqueWithoutCarInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutCarInput | SellCarUpdateManyWithWhereWithoutCarInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutCarNestedInput = {
-    create?: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput> | SaleCarCreateWithoutCarInput[] | SaleCarUncheckedCreateWithoutCarInput[]
-    connectOrCreate?: SaleCarCreateOrConnectWithoutCarInput | SaleCarCreateOrConnectWithoutCarInput[]
-    upsert?: SaleCarUpsertWithWhereUniqueWithoutCarInput | SaleCarUpsertWithWhereUniqueWithoutCarInput[]
-    createMany?: SaleCarCreateManyCarInputEnvelope
-    set?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    disconnect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    delete?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    connect?: SaleCarWhereUniqueInput | SaleCarWhereUniqueInput[]
-    update?: SaleCarUpdateWithWhereUniqueWithoutCarInput | SaleCarUpdateWithWhereUniqueWithoutCarInput[]
-    updateMany?: SaleCarUpdateManyWithWhereWithoutCarInput | SaleCarUpdateManyWithWhereWithoutCarInput[]
-    deleteMany?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
+  export type SellCarUncheckedUpdateManyWithoutCarNestedInput = {
+    create?: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput> | SellCarCreateWithoutCarInput[] | SellCarUncheckedCreateWithoutCarInput[]
+    connectOrCreate?: SellCarCreateOrConnectWithoutCarInput | SellCarCreateOrConnectWithoutCarInput[]
+    upsert?: SellCarUpsertWithWhereUniqueWithoutCarInput | SellCarUpsertWithWhereUniqueWithoutCarInput[]
+    createMany?: SellCarCreateManyCarInputEnvelope
+    set?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    disconnect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    delete?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    connect?: SellCarWhereUniqueInput | SellCarWhereUniqueInput[]
+    update?: SellCarUpdateWithWhereUniqueWithoutCarInput | SellCarUpdateWithWhereUniqueWithoutCarInput[]
+    updateMany?: SellCarUpdateManyWithWhereWithoutCarInput | SellCarUpdateManyWithWhereWithoutCarInput[]
+    deleteMany?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
   }
 
-  export type SaleCarCreatephotoUrlsInput = {
+  export type SellCarCreatephotoUrlsInput = {
     set: string[]
   }
 
-  export type OrderCreateNestedOneWithoutSaleCarInput = {
-    create?: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutSaleCarInput
+  export type EnquiryCreateNestedManyWithoutSellCarInput = {
+    create?: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput> | EnquiryCreateWithoutSellCarInput[] | EnquiryUncheckedCreateWithoutSellCarInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutSellCarInput | EnquiryCreateOrConnectWithoutSellCarInput[]
+    createMany?: EnquiryCreateManySellCarInputEnvelope
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+  }
+
+  export type OrderCreateNestedOneWithoutSellCarInput = {
+    create?: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutSellCarInput
     connect?: OrderWhereUniqueInput
   }
 
@@ -12472,15 +14076,22 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type CarCreateNestedOneWithoutCarSalesInput = {
-    create?: XOR<CarCreateWithoutCarSalesInput, CarUncheckedCreateWithoutCarSalesInput>
-    connectOrCreate?: CarCreateOrConnectWithoutCarSalesInput
+  export type CarCreateNestedOneWithoutSellCarsInput = {
+    create?: XOR<CarCreateWithoutSellCarsInput, CarUncheckedCreateWithoutSellCarsInput>
+    connectOrCreate?: CarCreateOrConnectWithoutSellCarsInput
     connect?: CarWhereUniqueInput
   }
 
-  export type OrderUncheckedCreateNestedOneWithoutSaleCarInput = {
-    create?: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutSaleCarInput
+  export type EnquiryUncheckedCreateNestedManyWithoutSellCarInput = {
+    create?: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput> | EnquiryCreateWithoutSellCarInput[] | EnquiryUncheckedCreateWithoutSellCarInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutSellCarInput | EnquiryCreateOrConnectWithoutSellCarInput[]
+    createMany?: EnquiryCreateManySellCarInputEnvelope
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+  }
+
+  export type OrderUncheckedCreateNestedOneWithoutSellCarInput = {
+    create?: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutSellCarInput
     connect?: OrderWhereUniqueInput
   }
 
@@ -12498,19 +14109,33 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type SaleCarUpdatephotoUrlsInput = {
+  export type SellCarUpdatephotoUrlsInput = {
     set?: string[]
     push?: string | string[]
   }
 
-  export type OrderUpdateOneWithoutSaleCarNestedInput = {
-    create?: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutSaleCarInput
-    upsert?: OrderUpsertWithoutSaleCarInput
+  export type EnquiryUpdateManyWithoutSellCarNestedInput = {
+    create?: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput> | EnquiryCreateWithoutSellCarInput[] | EnquiryUncheckedCreateWithoutSellCarInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutSellCarInput | EnquiryCreateOrConnectWithoutSellCarInput[]
+    upsert?: EnquiryUpsertWithWhereUniqueWithoutSellCarInput | EnquiryUpsertWithWhereUniqueWithoutSellCarInput[]
+    createMany?: EnquiryCreateManySellCarInputEnvelope
+    set?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    disconnect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    delete?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    update?: EnquiryUpdateWithWhereUniqueWithoutSellCarInput | EnquiryUpdateWithWhereUniqueWithoutSellCarInput[]
+    updateMany?: EnquiryUpdateManyWithWhereWithoutSellCarInput | EnquiryUpdateManyWithWhereWithoutSellCarInput[]
+    deleteMany?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+  }
+
+  export type OrderUpdateOneWithoutSellCarNestedInput = {
+    create?: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutSellCarInput
+    upsert?: OrderUpsertWithoutSellCarInput
     disconnect?: OrderWhereInput | boolean
     delete?: OrderWhereInput | boolean
     connect?: OrderWhereUniqueInput
-    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutSaleCarInput, OrderUpdateWithoutSaleCarInput>, OrderUncheckedUpdateWithoutSaleCarInput>
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutSellCarInput, OrderUpdateWithoutSellCarInput>, OrderUncheckedUpdateWithoutSellCarInput>
   }
 
   export type UserUpdateManyWithoutFavouritesNestedInput = {
@@ -12534,22 +14159,36 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCarSalesInput, UserUpdateWithoutCarSalesInput>, UserUncheckedUpdateWithoutCarSalesInput>
   }
 
-  export type CarUpdateOneRequiredWithoutCarSalesNestedInput = {
-    create?: XOR<CarCreateWithoutCarSalesInput, CarUncheckedCreateWithoutCarSalesInput>
-    connectOrCreate?: CarCreateOrConnectWithoutCarSalesInput
-    upsert?: CarUpsertWithoutCarSalesInput
+  export type CarUpdateOneRequiredWithoutSellCarsNestedInput = {
+    create?: XOR<CarCreateWithoutSellCarsInput, CarUncheckedCreateWithoutSellCarsInput>
+    connectOrCreate?: CarCreateOrConnectWithoutSellCarsInput
+    upsert?: CarUpsertWithoutSellCarsInput
     connect?: CarWhereUniqueInput
-    update?: XOR<XOR<CarUpdateToOneWithWhereWithoutCarSalesInput, CarUpdateWithoutCarSalesInput>, CarUncheckedUpdateWithoutCarSalesInput>
+    update?: XOR<XOR<CarUpdateToOneWithWhereWithoutSellCarsInput, CarUpdateWithoutSellCarsInput>, CarUncheckedUpdateWithoutSellCarsInput>
   }
 
-  export type OrderUncheckedUpdateOneWithoutSaleCarNestedInput = {
-    create?: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutSaleCarInput
-    upsert?: OrderUpsertWithoutSaleCarInput
+  export type EnquiryUncheckedUpdateManyWithoutSellCarNestedInput = {
+    create?: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput> | EnquiryCreateWithoutSellCarInput[] | EnquiryUncheckedCreateWithoutSellCarInput[]
+    connectOrCreate?: EnquiryCreateOrConnectWithoutSellCarInput | EnquiryCreateOrConnectWithoutSellCarInput[]
+    upsert?: EnquiryUpsertWithWhereUniqueWithoutSellCarInput | EnquiryUpsertWithWhereUniqueWithoutSellCarInput[]
+    createMany?: EnquiryCreateManySellCarInputEnvelope
+    set?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    disconnect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    delete?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    connect?: EnquiryWhereUniqueInput | EnquiryWhereUniqueInput[]
+    update?: EnquiryUpdateWithWhereUniqueWithoutSellCarInput | EnquiryUpdateWithWhereUniqueWithoutSellCarInput[]
+    updateMany?: EnquiryUpdateManyWithWhereWithoutSellCarInput | EnquiryUpdateManyWithWhereWithoutSellCarInput[]
+    deleteMany?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+  }
+
+  export type OrderUncheckedUpdateOneWithoutSellCarNestedInput = {
+    create?: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutSellCarInput
+    upsert?: OrderUpsertWithoutSellCarInput
     disconnect?: OrderWhereInput | boolean
     delete?: OrderWhereInput | boolean
     connect?: OrderWhereUniqueInput
-    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutSaleCarInput, OrderUpdateWithoutSaleCarInput>, OrderUncheckedUpdateWithoutSaleCarInput>
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutSellCarInput, OrderUpdateWithoutSellCarInput>, OrderUncheckedUpdateWithoutSellCarInput>
   }
 
   export type UserUncheckedUpdateManyWithoutFavouritesNestedInput = {
@@ -12565,10 +14204,42 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type SaleCarCreateNestedOneWithoutOrderInput = {
-    create?: XOR<SaleCarCreateWithoutOrderInput, SaleCarUncheckedCreateWithoutOrderInput>
-    connectOrCreate?: SaleCarCreateOrConnectWithoutOrderInput
-    connect?: SaleCarWhereUniqueInput
+  export type SellCarCreateNestedOneWithoutEnquiriesInput = {
+    create?: XOR<SellCarCreateWithoutEnquiriesInput, SellCarUncheckedCreateWithoutEnquiriesInput>
+    connectOrCreate?: SellCarCreateOrConnectWithoutEnquiriesInput
+    connect?: SellCarWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutEnquiriesInput = {
+    create?: XOR<UserCreateWithoutEnquiriesInput, UserUncheckedCreateWithoutEnquiriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEnquiriesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OrderStatus
+  }
+
+  export type SellCarUpdateOneRequiredWithoutEnquiriesNestedInput = {
+    create?: XOR<SellCarCreateWithoutEnquiriesInput, SellCarUncheckedCreateWithoutEnquiriesInput>
+    connectOrCreate?: SellCarCreateOrConnectWithoutEnquiriesInput
+    upsert?: SellCarUpsertWithoutEnquiriesInput
+    connect?: SellCarWhereUniqueInput
+    update?: XOR<XOR<SellCarUpdateToOneWithWhereWithoutEnquiriesInput, SellCarUpdateWithoutEnquiriesInput>, SellCarUncheckedUpdateWithoutEnquiriesInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutEnquiriesNestedInput = {
+    create?: XOR<UserCreateWithoutEnquiriesInput, UserUncheckedCreateWithoutEnquiriesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutEnquiriesInput
+    upsert?: UserUpsertWithoutEnquiriesInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEnquiriesInput, UserUpdateWithoutEnquiriesInput>, UserUncheckedUpdateWithoutEnquiriesInput>
+  }
+
+  export type SellCarCreateNestedOneWithoutOrderInput = {
+    create?: XOR<SellCarCreateWithoutOrderInput, SellCarUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: SellCarCreateOrConnectWithoutOrderInput
+    connect?: SellCarWhereUniqueInput
   }
 
   export type UserCreateNestedOneWithoutOrdersInput = {
@@ -12589,16 +14260,12 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput
   }
 
-  export type EnumOrderStatusFieldUpdateOperationsInput = {
-    set?: $Enums.OrderStatus
-  }
-
-  export type SaleCarUpdateOneRequiredWithoutOrderNestedInput = {
-    create?: XOR<SaleCarCreateWithoutOrderInput, SaleCarUncheckedCreateWithoutOrderInput>
-    connectOrCreate?: SaleCarCreateOrConnectWithoutOrderInput
-    upsert?: SaleCarUpsertWithoutOrderInput
-    connect?: SaleCarWhereUniqueInput
-    update?: XOR<XOR<SaleCarUpdateToOneWithWhereWithoutOrderInput, SaleCarUpdateWithoutOrderInput>, SaleCarUncheckedUpdateWithoutOrderInput>
+  export type SellCarUpdateOneRequiredWithoutOrderNestedInput = {
+    create?: XOR<SellCarCreateWithoutOrderInput, SellCarUncheckedCreateWithoutOrderInput>
+    connectOrCreate?: SellCarCreateOrConnectWithoutOrderInput
+    upsert?: SellCarUpsertWithoutOrderInput
+    connect?: SellCarWhereUniqueInput
+    update?: XOR<XOR<SellCarUpdateToOneWithWhereWithoutOrderInput, SellCarUpdateWithoutOrderInput>, SellCarUncheckedUpdateWithoutOrderInput>
   }
 
   export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
@@ -12993,76 +14660,80 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
-  export type SaleCarCreateWithoutFavouritedByInput = {
+  export type SellCarCreateWithoutFavouritedByInput = {
     vin: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryCreateNestedManyWithoutSellCarInput
+    order?: OrderCreateNestedOneWithoutSellCarInput
     seller: UserCreateNestedOneWithoutCarSalesInput
-    car: CarCreateNestedOneWithoutCarSalesInput
+    car: CarCreateNestedOneWithoutSellCarsInput
   }
 
-  export type SaleCarUncheckedCreateWithoutFavouritedByInput = {
+  export type SellCarUncheckedCreateWithoutFavouritedByInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutSellCarInput
+    order?: OrderUncheckedCreateNestedOneWithoutSellCarInput
   }
 
-  export type SaleCarCreateOrConnectWithoutFavouritedByInput = {
-    where: SaleCarWhereUniqueInput
-    create: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput>
+  export type SellCarCreateOrConnectWithoutFavouritedByInput = {
+    where: SellCarWhereUniqueInput
+    create: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput>
   }
 
-  export type SaleCarCreateWithoutSellerInput = {
+  export type SellCarCreateWithoutSellerInput = {
     vin: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryCreateNestedManyWithoutSellCarInput
+    order?: OrderCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
-    car: CarCreateNestedOneWithoutCarSalesInput
+    car: CarCreateNestedOneWithoutSellCarsInput
   }
 
-  export type SaleCarUncheckedCreateWithoutSellerInput = {
+  export type SellCarUncheckedCreateWithoutSellerInput = {
     id?: number
     vin: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutSellCarInput
+    order?: OrderUncheckedCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
   }
 
-  export type SaleCarCreateOrConnectWithoutSellerInput = {
-    where: SaleCarWhereUniqueInput
-    create: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput>
+  export type SellCarCreateOrConnectWithoutSellerInput = {
+    where: SellCarWhereUniqueInput
+    create: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput>
   }
 
-  export type SaleCarCreateManySellerInputEnvelope = {
-    data: SaleCarCreateManySellerInput | SaleCarCreateManySellerInput[]
+  export type SellCarCreateManySellerInputEnvelope = {
+    data: SellCarCreateManySellerInput | SellCarCreateManySellerInput[]
     skipDuplicates?: boolean
   }
 
@@ -13071,13 +14742,13 @@ export namespace Prisma {
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    saleCar: SaleCarCreateNestedOneWithoutOrderInput
+    sellCar: SellCarCreateNestedOneWithoutOrderInput
     payment?: PaymentCreateNestedOneWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutBuyerInput = {
     id?: number
-    saleCarId: number
+    sellCarId: number
     totalAmount: number
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
@@ -13149,53 +14820,82 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SaleCarUpsertWithWhereUniqueWithoutFavouritedByInput = {
-    where: SaleCarWhereUniqueInput
-    update: XOR<SaleCarUpdateWithoutFavouritedByInput, SaleCarUncheckedUpdateWithoutFavouritedByInput>
-    create: XOR<SaleCarCreateWithoutFavouritedByInput, SaleCarUncheckedCreateWithoutFavouritedByInput>
+  export type EnquiryCreateWithoutBuyerInput = {
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    sellCar: SellCarCreateNestedOneWithoutEnquiriesInput
   }
 
-  export type SaleCarUpdateWithWhereUniqueWithoutFavouritedByInput = {
-    where: SaleCarWhereUniqueInput
-    data: XOR<SaleCarUpdateWithoutFavouritedByInput, SaleCarUncheckedUpdateWithoutFavouritedByInput>
+  export type EnquiryUncheckedCreateWithoutBuyerInput = {
+    id?: number
+    sellCarId: number
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
   }
 
-  export type SaleCarUpdateManyWithWhereWithoutFavouritedByInput = {
-    where: SaleCarScalarWhereInput
-    data: XOR<SaleCarUpdateManyMutationInput, SaleCarUncheckedUpdateManyWithoutFavouritedByInput>
+  export type EnquiryCreateOrConnectWithoutBuyerInput = {
+    where: EnquiryWhereUniqueInput
+    create: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput>
   }
 
-  export type SaleCarScalarWhereInput = {
-    AND?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
-    OR?: SaleCarScalarWhereInput[]
-    NOT?: SaleCarScalarWhereInput | SaleCarScalarWhereInput[]
-    id?: IntFilter<"SaleCar"> | number
-    vin?: StringFilter<"SaleCar"> | string
-    sellerCognitoId?: StringFilter<"SaleCar"> | string
-    carId?: IntFilter<"SaleCar"> | number
-    mileage?: IntFilter<"SaleCar"> | number
-    price?: FloatFilter<"SaleCar"> | number
-    photoUrls?: StringNullableListFilter<"SaleCar">
-    description?: StringFilter<"SaleCar"> | string
-    isPublic?: BoolFilter<"SaleCar"> | boolean
-    dateTimeCreated?: DateTimeFilter<"SaleCar"> | Date | string
-    dateTimeUpdated?: DateTimeFilter<"SaleCar"> | Date | string
+  export type EnquiryCreateManyBuyerInputEnvelope = {
+    data: EnquiryCreateManyBuyerInput | EnquiryCreateManyBuyerInput[]
+    skipDuplicates?: boolean
   }
 
-  export type SaleCarUpsertWithWhereUniqueWithoutSellerInput = {
-    where: SaleCarWhereUniqueInput
-    update: XOR<SaleCarUpdateWithoutSellerInput, SaleCarUncheckedUpdateWithoutSellerInput>
-    create: XOR<SaleCarCreateWithoutSellerInput, SaleCarUncheckedCreateWithoutSellerInput>
+  export type SellCarUpsertWithWhereUniqueWithoutFavouritedByInput = {
+    where: SellCarWhereUniqueInput
+    update: XOR<SellCarUpdateWithoutFavouritedByInput, SellCarUncheckedUpdateWithoutFavouritedByInput>
+    create: XOR<SellCarCreateWithoutFavouritedByInput, SellCarUncheckedCreateWithoutFavouritedByInput>
   }
 
-  export type SaleCarUpdateWithWhereUniqueWithoutSellerInput = {
-    where: SaleCarWhereUniqueInput
-    data: XOR<SaleCarUpdateWithoutSellerInput, SaleCarUncheckedUpdateWithoutSellerInput>
+  export type SellCarUpdateWithWhereUniqueWithoutFavouritedByInput = {
+    where: SellCarWhereUniqueInput
+    data: XOR<SellCarUpdateWithoutFavouritedByInput, SellCarUncheckedUpdateWithoutFavouritedByInput>
   }
 
-  export type SaleCarUpdateManyWithWhereWithoutSellerInput = {
-    where: SaleCarScalarWhereInput
-    data: XOR<SaleCarUpdateManyMutationInput, SaleCarUncheckedUpdateManyWithoutSellerInput>
+  export type SellCarUpdateManyWithWhereWithoutFavouritedByInput = {
+    where: SellCarScalarWhereInput
+    data: XOR<SellCarUpdateManyMutationInput, SellCarUncheckedUpdateManyWithoutFavouritedByInput>
+  }
+
+  export type SellCarScalarWhereInput = {
+    AND?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
+    OR?: SellCarScalarWhereInput[]
+    NOT?: SellCarScalarWhereInput | SellCarScalarWhereInput[]
+    id?: IntFilter<"SellCar"> | number
+    vin?: StringFilter<"SellCar"> | string
+    sellerCognitoId?: StringFilter<"SellCar"> | string
+    carId?: IntFilter<"SellCar"> | number
+    mileage?: IntFilter<"SellCar"> | number
+    price?: FloatFilter<"SellCar"> | number
+    photoUrls?: StringNullableListFilter<"SellCar">
+    description?: StringFilter<"SellCar"> | string
+    isPublic?: BoolFilter<"SellCar"> | boolean
+    dateTimeCreated?: DateTimeFilter<"SellCar"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"SellCar"> | Date | string
+  }
+
+  export type SellCarUpsertWithWhereUniqueWithoutSellerInput = {
+    where: SellCarWhereUniqueInput
+    update: XOR<SellCarUpdateWithoutSellerInput, SellCarUncheckedUpdateWithoutSellerInput>
+    create: XOR<SellCarCreateWithoutSellerInput, SellCarUncheckedCreateWithoutSellerInput>
+  }
+
+  export type SellCarUpdateWithWhereUniqueWithoutSellerInput = {
+    where: SellCarWhereUniqueInput
+    data: XOR<SellCarUpdateWithoutSellerInput, SellCarUncheckedUpdateWithoutSellerInput>
+  }
+
+  export type SellCarUpdateManyWithWhereWithoutSellerInput = {
+    where: SellCarScalarWhereInput
+    data: XOR<SellCarUpdateManyMutationInput, SellCarUncheckedUpdateManyWithoutSellerInput>
   }
 
   export type OrderUpsertWithWhereUniqueWithoutBuyerInput = {
@@ -13219,7 +14919,7 @@ export namespace Prisma {
     OR?: OrderScalarWhereInput[]
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
     id?: IntFilter<"Order"> | number
-    saleCarId?: IntFilter<"Order"> | number
+    sellCarId?: IntFilter<"Order"> | number
     buyerCognitoId?: StringFilter<"Order"> | string
     totalAmount?: FloatFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
@@ -13298,6 +14998,36 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnquiryUpsertWithWhereUniqueWithoutBuyerInput = {
+    where: EnquiryWhereUniqueInput
+    update: XOR<EnquiryUpdateWithoutBuyerInput, EnquiryUncheckedUpdateWithoutBuyerInput>
+    create: XOR<EnquiryCreateWithoutBuyerInput, EnquiryUncheckedCreateWithoutBuyerInput>
+  }
+
+  export type EnquiryUpdateWithWhereUniqueWithoutBuyerInput = {
+    where: EnquiryWhereUniqueInput
+    data: XOR<EnquiryUpdateWithoutBuyerInput, EnquiryUncheckedUpdateWithoutBuyerInput>
+  }
+
+  export type EnquiryUpdateManyWithWhereWithoutBuyerInput = {
+    where: EnquiryScalarWhereInput
+    data: XOR<EnquiryUpdateManyMutationInput, EnquiryUncheckedUpdateManyWithoutBuyerInput>
+  }
+
+  export type EnquiryScalarWhereInput = {
+    AND?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+    OR?: EnquiryScalarWhereInput[]
+    NOT?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
+    id?: IntFilter<"Enquiry"> | number
+    sellCarId?: IntFilter<"Enquiry"> | number
+    userCognitoId?: StringFilter<"Enquiry"> | string
+    offerPrice?: FloatFilter<"Enquiry"> | number
+    message?: StringFilter<"Enquiry"> | string
+    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
+    dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
+  }
+
   export type UserCreateWithoutLocationInput = {
     cognitoId: string
     firstName?: string
@@ -13309,11 +15039,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutLocationInput = {
@@ -13328,11 +15059,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutLocationInput = {
@@ -13379,62 +15111,93 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFilter<"User"> | Date | string
   }
 
-  export type SaleCarCreateWithoutCarInput = {
+  export type SellCarCreateWithoutCarInput = {
     vin: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryCreateNestedManyWithoutSellCarInput
+    order?: OrderCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
     seller: UserCreateNestedOneWithoutCarSalesInput
   }
 
-  export type SaleCarUncheckedCreateWithoutCarInput = {
+  export type SellCarUncheckedCreateWithoutCarInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    order?: OrderUncheckedCreateNestedOneWithoutSaleCarInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutSellCarInput
+    order?: OrderUncheckedCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
   }
 
-  export type SaleCarCreateOrConnectWithoutCarInput = {
-    where: SaleCarWhereUniqueInput
-    create: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput>
+  export type SellCarCreateOrConnectWithoutCarInput = {
+    where: SellCarWhereUniqueInput
+    create: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput>
   }
 
-  export type SaleCarCreateManyCarInputEnvelope = {
-    data: SaleCarCreateManyCarInput | SaleCarCreateManyCarInput[]
+  export type SellCarCreateManyCarInputEnvelope = {
+    data: SellCarCreateManyCarInput | SellCarCreateManyCarInput[]
     skipDuplicates?: boolean
   }
 
-  export type SaleCarUpsertWithWhereUniqueWithoutCarInput = {
-    where: SaleCarWhereUniqueInput
-    update: XOR<SaleCarUpdateWithoutCarInput, SaleCarUncheckedUpdateWithoutCarInput>
-    create: XOR<SaleCarCreateWithoutCarInput, SaleCarUncheckedCreateWithoutCarInput>
+  export type SellCarUpsertWithWhereUniqueWithoutCarInput = {
+    where: SellCarWhereUniqueInput
+    update: XOR<SellCarUpdateWithoutCarInput, SellCarUncheckedUpdateWithoutCarInput>
+    create: XOR<SellCarCreateWithoutCarInput, SellCarUncheckedCreateWithoutCarInput>
   }
 
-  export type SaleCarUpdateWithWhereUniqueWithoutCarInput = {
-    where: SaleCarWhereUniqueInput
-    data: XOR<SaleCarUpdateWithoutCarInput, SaleCarUncheckedUpdateWithoutCarInput>
+  export type SellCarUpdateWithWhereUniqueWithoutCarInput = {
+    where: SellCarWhereUniqueInput
+    data: XOR<SellCarUpdateWithoutCarInput, SellCarUncheckedUpdateWithoutCarInput>
   }
 
-  export type SaleCarUpdateManyWithWhereWithoutCarInput = {
-    where: SaleCarScalarWhereInput
-    data: XOR<SaleCarUpdateManyMutationInput, SaleCarUncheckedUpdateManyWithoutCarInput>
+  export type SellCarUpdateManyWithWhereWithoutCarInput = {
+    where: SellCarScalarWhereInput
+    data: XOR<SellCarUpdateManyMutationInput, SellCarUncheckedUpdateManyWithoutCarInput>
   }
 
-  export type OrderCreateWithoutSaleCarInput = {
+  export type EnquiryCreateWithoutSellCarInput = {
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    buyer: UserCreateNestedOneWithoutEnquiriesInput
+  }
+
+  export type EnquiryUncheckedCreateWithoutSellCarInput = {
+    id?: number
+    userCognitoId: string
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+  }
+
+  export type EnquiryCreateOrConnectWithoutSellCarInput = {
+    where: EnquiryWhereUniqueInput
+    create: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput>
+  }
+
+  export type EnquiryCreateManySellCarInputEnvelope = {
+    data: EnquiryCreateManySellCarInput | EnquiryCreateManySellCarInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrderCreateWithoutSellCarInput = {
     totalAmount: number
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
@@ -13443,7 +15206,7 @@ export namespace Prisma {
     payment?: PaymentCreateNestedOneWithoutOrderInput
   }
 
-  export type OrderUncheckedCreateWithoutSaleCarInput = {
+  export type OrderUncheckedCreateWithoutSellCarInput = {
     id?: number
     buyerCognitoId: string
     totalAmount: number
@@ -13453,9 +15216,9 @@ export namespace Prisma {
     payment?: PaymentUncheckedCreateNestedOneWithoutOrderInput
   }
 
-  export type OrderCreateOrConnectWithoutSaleCarInput = {
+  export type OrderCreateOrConnectWithoutSellCarInput = {
     where: OrderWhereUniqueInput
-    create: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
+    create: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
   }
 
   export type UserCreateWithoutFavouritesInput = {
@@ -13469,11 +15232,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutFavouritesInput = {
@@ -13489,10 +15253,11 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutFavouritesInput = {
@@ -13511,11 +15276,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutCarSalesInput = {
@@ -13531,10 +15297,11 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutCarSalesInput = {
@@ -13542,7 +15309,7 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutCarSalesInput, UserUncheckedCreateWithoutCarSalesInput>
   }
 
-  export type CarCreateWithoutCarSalesInput = {
+  export type CarCreateWithoutSellCarsInput = {
     make: $Enums.Make
     model: string
     year: number
@@ -13554,7 +15321,7 @@ export namespace Prisma {
     dateTimeUpdated?: Date | string
   }
 
-  export type CarUncheckedCreateWithoutCarSalesInput = {
+  export type CarUncheckedCreateWithoutSellCarsInput = {
     id?: number
     make: $Enums.Make
     model: string
@@ -13567,23 +15334,39 @@ export namespace Prisma {
     dateTimeUpdated?: Date | string
   }
 
-  export type CarCreateOrConnectWithoutCarSalesInput = {
+  export type CarCreateOrConnectWithoutSellCarsInput = {
     where: CarWhereUniqueInput
-    create: XOR<CarCreateWithoutCarSalesInput, CarUncheckedCreateWithoutCarSalesInput>
+    create: XOR<CarCreateWithoutSellCarsInput, CarUncheckedCreateWithoutSellCarsInput>
   }
 
-  export type OrderUpsertWithoutSaleCarInput = {
-    update: XOR<OrderUpdateWithoutSaleCarInput, OrderUncheckedUpdateWithoutSaleCarInput>
-    create: XOR<OrderCreateWithoutSaleCarInput, OrderUncheckedCreateWithoutSaleCarInput>
+  export type EnquiryUpsertWithWhereUniqueWithoutSellCarInput = {
+    where: EnquiryWhereUniqueInput
+    update: XOR<EnquiryUpdateWithoutSellCarInput, EnquiryUncheckedUpdateWithoutSellCarInput>
+    create: XOR<EnquiryCreateWithoutSellCarInput, EnquiryUncheckedCreateWithoutSellCarInput>
+  }
+
+  export type EnquiryUpdateWithWhereUniqueWithoutSellCarInput = {
+    where: EnquiryWhereUniqueInput
+    data: XOR<EnquiryUpdateWithoutSellCarInput, EnquiryUncheckedUpdateWithoutSellCarInput>
+  }
+
+  export type EnquiryUpdateManyWithWhereWithoutSellCarInput = {
+    where: EnquiryScalarWhereInput
+    data: XOR<EnquiryUpdateManyMutationInput, EnquiryUncheckedUpdateManyWithoutSellCarInput>
+  }
+
+  export type OrderUpsertWithoutSellCarInput = {
+    update: XOR<OrderUpdateWithoutSellCarInput, OrderUncheckedUpdateWithoutSellCarInput>
+    create: XOR<OrderCreateWithoutSellCarInput, OrderUncheckedCreateWithoutSellCarInput>
     where?: OrderWhereInput
   }
 
-  export type OrderUpdateToOneWithWhereWithoutSaleCarInput = {
+  export type OrderUpdateToOneWithWhereWithoutSellCarInput = {
     where?: OrderWhereInput
-    data: XOR<OrderUpdateWithoutSaleCarInput, OrderUncheckedUpdateWithoutSaleCarInput>
+    data: XOR<OrderUpdateWithoutSellCarInput, OrderUncheckedUpdateWithoutSellCarInput>
   }
 
-  export type OrderUpdateWithoutSaleCarInput = {
+  export type OrderUpdateWithoutSellCarInput = {
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13592,7 +15375,7 @@ export namespace Prisma {
     payment?: PaymentUpdateOneWithoutOrderNestedInput
   }
 
-  export type OrderUncheckedUpdateWithoutSaleCarInput = {
+  export type OrderUncheckedUpdateWithoutSellCarInput = {
     id?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
@@ -13640,11 +15423,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCarSalesInput = {
@@ -13660,24 +15444,25 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
-  export type CarUpsertWithoutCarSalesInput = {
-    update: XOR<CarUpdateWithoutCarSalesInput, CarUncheckedUpdateWithoutCarSalesInput>
-    create: XOR<CarCreateWithoutCarSalesInput, CarUncheckedCreateWithoutCarSalesInput>
+  export type CarUpsertWithoutSellCarsInput = {
+    update: XOR<CarUpdateWithoutSellCarsInput, CarUncheckedUpdateWithoutSellCarsInput>
+    create: XOR<CarCreateWithoutSellCarsInput, CarUncheckedCreateWithoutSellCarsInput>
     where?: CarWhereInput
   }
 
-  export type CarUpdateToOneWithWhereWithoutCarSalesInput = {
+  export type CarUpdateToOneWithWhereWithoutSellCarsInput = {
     where?: CarWhereInput
-    data: XOR<CarUpdateWithoutCarSalesInput, CarUncheckedUpdateWithoutCarSalesInput>
+    data: XOR<CarUpdateWithoutSellCarsInput, CarUncheckedUpdateWithoutSellCarsInput>
   }
 
-  export type CarUpdateWithoutCarSalesInput = {
+  export type CarUpdateWithoutSellCarsInput = {
     make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
     year?: IntFieldUpdateOperationsInput | number
@@ -13689,7 +15474,7 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type CarUncheckedUpdateWithoutCarSalesInput = {
+  export type CarUncheckedUpdateWithoutSellCarsInput = {
     id?: IntFieldUpdateOperationsInput | number
     make?: EnumMakeFieldUpdateOperationsInput | $Enums.Make
     model?: StringFieldUpdateOperationsInput | string
@@ -13702,38 +15487,212 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SaleCarCreateWithoutOrderInput = {
+  export type SellCarCreateWithoutEnquiriesInput = {
     vin: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
+    order?: OrderCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
     seller: UserCreateNestedOneWithoutCarSalesInput
-    car: CarCreateNestedOneWithoutCarSalesInput
+    car: CarCreateNestedOneWithoutSellCarsInput
   }
 
-  export type SaleCarUncheckedCreateWithoutOrderInput = {
+  export type SellCarUncheckedCreateWithoutEnquiriesInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
+    order?: OrderUncheckedCreateNestedOneWithoutSellCarInput
     favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
   }
 
-  export type SaleCarCreateOrConnectWithoutOrderInput = {
-    where: SaleCarWhereUniqueInput
-    create: XOR<SaleCarCreateWithoutOrderInput, SaleCarUncheckedCreateWithoutOrderInput>
+  export type SellCarCreateOrConnectWithoutEnquiriesInput = {
+    where: SellCarWhereUniqueInput
+    create: XOR<SellCarCreateWithoutEnquiriesInput, SellCarUncheckedCreateWithoutEnquiriesInput>
+  }
+
+  export type UserCreateWithoutEnquiriesInput = {
+    cognitoId: string
+    firstName?: string
+    lastName?: string
+    email: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
+    orders?: OrderCreateNestedManyWithoutBuyerInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
+    reviewer?: ReviewCreateNestedManyWithoutReviewerInput
+    location?: LocationCreateNestedOneWithoutUsersInput
+  }
+
+  export type UserUncheckedCreateWithoutEnquiriesInput = {
+    id?: number
+    cognitoId: string
+    locationId?: number | null
+    firstName?: string
+    lastName?: string
+    email: string
+    phone?: string
+    avatarUrl?: string
+    preferredContactMethod?: $Enums.PreferredContactMethod
+    isProfileSetup?: boolean
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
+    orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+  }
+
+  export type UserCreateOrConnectWithoutEnquiriesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutEnquiriesInput, UserUncheckedCreateWithoutEnquiriesInput>
+  }
+
+  export type SellCarUpsertWithoutEnquiriesInput = {
+    update: XOR<SellCarUpdateWithoutEnquiriesInput, SellCarUncheckedUpdateWithoutEnquiriesInput>
+    create: XOR<SellCarCreateWithoutEnquiriesInput, SellCarUncheckedCreateWithoutEnquiriesInput>
+    where?: SellCarWhereInput
+  }
+
+  export type SellCarUpdateToOneWithWhereWithoutEnquiriesInput = {
+    where?: SellCarWhereInput
+    data: XOR<SellCarUpdateWithoutEnquiriesInput, SellCarUncheckedUpdateWithoutEnquiriesInput>
+  }
+
+  export type SellCarUpdateWithoutEnquiriesInput = {
+    vin?: StringFieldUpdateOperationsInput | string
+    mileage?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutSellCarNestedInput
+    favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
+    seller?: UserUpdateOneRequiredWithoutCarSalesNestedInput
+    car?: CarUpdateOneRequiredWithoutSellCarsNestedInput
+  }
+
+  export type SellCarUncheckedUpdateWithoutEnquiriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    vin?: StringFieldUpdateOperationsInput | string
+    sellerCognitoId?: StringFieldUpdateOperationsInput | string
+    carId?: IntFieldUpdateOperationsInput | number
+    mileage?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
+    description?: StringFieldUpdateOperationsInput | string
+    isPublic?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUncheckedUpdateOneWithoutSellCarNestedInput
+    favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
+  }
+
+  export type UserUpsertWithoutEnquiriesInput = {
+    update: XOR<UserUpdateWithoutEnquiriesInput, UserUncheckedUpdateWithoutEnquiriesInput>
+    create: XOR<UserCreateWithoutEnquiriesInput, UserUncheckedCreateWithoutEnquiriesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutEnquiriesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutEnquiriesInput, UserUncheckedUpdateWithoutEnquiriesInput>
+  }
+
+  export type UserUpdateWithoutEnquiriesInput = {
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
+    orders?: OrderUpdateManyWithoutBuyerNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+    reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
+    location?: LocationUpdateOneWithoutUsersNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutEnquiriesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    cognitoId?: StringFieldUpdateOperationsInput | string
+    locationId?: NullableIntFieldUpdateOperationsInput | number | null
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    avatarUrl?: StringFieldUpdateOperationsInput | string
+    preferredContactMethod?: EnumPreferredContactMethodFieldUpdateOperationsInput | $Enums.PreferredContactMethod
+    isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
+    orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+  }
+
+  export type SellCarCreateWithoutOrderInput = {
+    vin: string
+    mileage: number
+    price: number
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
+    description: string
+    isPublic?: boolean
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    enquiries?: EnquiryCreateNestedManyWithoutSellCarInput
+    favouritedBy?: UserCreateNestedManyWithoutFavouritesInput
+    seller: UserCreateNestedOneWithoutCarSalesInput
+    car: CarCreateNestedOneWithoutSellCarsInput
+  }
+
+  export type SellCarUncheckedCreateWithoutOrderInput = {
+    id?: number
+    vin: string
+    sellerCognitoId: string
+    carId: number
+    mileage: number
+    price: number
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
+    description: string
+    isPublic?: boolean
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutSellCarInput
+    favouritedBy?: UserUncheckedCreateNestedManyWithoutFavouritesInput
+  }
+
+  export type SellCarCreateOrConnectWithoutOrderInput = {
+    where: SellCarWhereUniqueInput
+    create: XOR<SellCarCreateWithoutOrderInput, SellCarUncheckedCreateWithoutOrderInput>
   }
 
   export type UserCreateWithoutOrdersInput = {
@@ -13747,11 +15706,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutOrdersInput = {
@@ -13767,10 +15727,11 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutOrdersInput = {
@@ -13800,43 +15761,45 @@ export namespace Prisma {
     create: XOR<PaymentCreateWithoutOrderInput, PaymentUncheckedCreateWithoutOrderInput>
   }
 
-  export type SaleCarUpsertWithoutOrderInput = {
-    update: XOR<SaleCarUpdateWithoutOrderInput, SaleCarUncheckedUpdateWithoutOrderInput>
-    create: XOR<SaleCarCreateWithoutOrderInput, SaleCarUncheckedCreateWithoutOrderInput>
-    where?: SaleCarWhereInput
+  export type SellCarUpsertWithoutOrderInput = {
+    update: XOR<SellCarUpdateWithoutOrderInput, SellCarUncheckedUpdateWithoutOrderInput>
+    create: XOR<SellCarCreateWithoutOrderInput, SellCarUncheckedCreateWithoutOrderInput>
+    where?: SellCarWhereInput
   }
 
-  export type SaleCarUpdateToOneWithWhereWithoutOrderInput = {
-    where?: SaleCarWhereInput
-    data: XOR<SaleCarUpdateWithoutOrderInput, SaleCarUncheckedUpdateWithoutOrderInput>
+  export type SellCarUpdateToOneWithWhereWithoutOrderInput = {
+    where?: SellCarWhereInput
+    data: XOR<SellCarUpdateWithoutOrderInput, SellCarUncheckedUpdateWithoutOrderInput>
   }
 
-  export type SaleCarUpdateWithoutOrderInput = {
+  export type SellCarUpdateWithoutOrderInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    enquiries?: EnquiryUpdateManyWithoutSellCarNestedInput
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
     seller?: UserUpdateOneRequiredWithoutCarSalesNestedInput
-    car?: CarUpdateOneRequiredWithoutCarSalesNestedInput
+    car?: CarUpdateOneRequiredWithoutSellCarsNestedInput
   }
 
-  export type SaleCarUncheckedUpdateWithoutOrderInput = {
+  export type SellCarUncheckedUpdateWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    enquiries?: EnquiryUncheckedUpdateManyWithoutSellCarNestedInput
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
   }
 
@@ -13862,11 +15825,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrdersInput = {
@@ -13882,10 +15846,11 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
   export type PaymentUpsertWithoutOrderInput = {
@@ -13921,13 +15886,13 @@ export namespace Prisma {
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    saleCar: SaleCarCreateNestedOneWithoutOrderInput
+    sellCar: SellCarCreateNestedOneWithoutOrderInput
     buyer: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutPaymentInput = {
     id?: number
-    saleCarId: number
+    sellCarId: number
     buyerCognitoId: string
     totalAmount: number
     status: $Enums.OrderStatus
@@ -13956,13 +15921,13 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    saleCar?: SaleCarUpdateOneRequiredWithoutOrderNestedInput
+    sellCar?: SellCarUpdateOneRequiredWithoutOrderNestedInput
     buyer?: UserUpdateOneRequiredWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutPaymentInput = {
     id?: IntFieldUpdateOperationsInput | number
-    saleCarId?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
@@ -13981,11 +15946,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviewer?: ReviewCreateNestedManyWithoutReviewerInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -14001,10 +15967,11 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviewer?: ReviewUncheckedCreateNestedManyWithoutReviewerInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -14023,11 +15990,12 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarCreateNestedManyWithoutSellerInput
+    favourites?: SellCarCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarCreateNestedManyWithoutSellerInput
     orders?: OrderCreateNestedManyWithoutBuyerInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
     location?: LocationCreateNestedOneWithoutUsersInput
+    enquiries?: EnquiryCreateNestedManyWithoutBuyerInput
   }
 
   export type UserUncheckedCreateWithoutReviewerInput = {
@@ -14043,10 +16011,11 @@ export namespace Prisma {
     isProfileSetup?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
-    favourites?: SaleCarUncheckedCreateNestedManyWithoutFavouritedByInput
-    carSales?: SaleCarUncheckedCreateNestedManyWithoutSellerInput
+    favourites?: SellCarUncheckedCreateNestedManyWithoutFavouritedByInput
+    carSales?: SellCarUncheckedCreateNestedManyWithoutSellerInput
     orders?: OrderUncheckedCreateNestedManyWithoutBuyerInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    enquiries?: EnquiryUncheckedCreateNestedManyWithoutBuyerInput
   }
 
   export type UserCreateOrConnectWithoutReviewerInput = {
@@ -14076,11 +16045,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -14096,10 +16066,11 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUpsertWithoutReviewerInput = {
@@ -14124,11 +16095,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewerInput = {
@@ -14144,19 +16116,20 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
-  export type SaleCarCreateManySellerInput = {
+  export type SellCarCreateManySellerInput = {
     id?: number
     vin: string
     carId: number
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
@@ -14165,7 +16138,7 @@ export namespace Prisma {
 
   export type OrderCreateManyBuyerInput = {
     id?: number
-    saleCarId: number
+    sellCarId: number
     totalAmount: number
     status: $Enums.OrderStatus
     dateTimeCreated?: Date | string
@@ -14190,85 +16163,99 @@ export namespace Prisma {
     dateTimeUpdated?: Date | string
   }
 
-  export type SaleCarUpdateWithoutFavouritedByInput = {
+  export type EnquiryCreateManyBuyerInput = {
+    id?: number
+    sellCarId: number
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+  }
+
+  export type SellCarUpdateWithoutFavouritedByInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUpdateManyWithoutSellCarNestedInput
+    order?: OrderUpdateOneWithoutSellCarNestedInput
     seller?: UserUpdateOneRequiredWithoutCarSalesNestedInput
-    car?: CarUpdateOneRequiredWithoutCarSalesNestedInput
+    car?: CarUpdateOneRequiredWithoutSellCarsNestedInput
   }
 
-  export type SaleCarUncheckedUpdateWithoutFavouritedByInput = {
+  export type SellCarUncheckedUpdateWithoutFavouritedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutSellCarNestedInput
+    order?: OrderUncheckedUpdateOneWithoutSellCarNestedInput
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutFavouritedByInput = {
+  export type SellCarUncheckedUpdateManyWithoutFavouritedByInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SaleCarUpdateWithoutSellerInput = {
+  export type SellCarUpdateWithoutSellerInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUpdateManyWithoutSellCarNestedInput
+    order?: OrderUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
-    car?: CarUpdateOneRequiredWithoutCarSalesNestedInput
+    car?: CarUpdateOneRequiredWithoutSellCarsNestedInput
   }
 
-  export type SaleCarUncheckedUpdateWithoutSellerInput = {
+  export type SellCarUncheckedUpdateWithoutSellerInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutSellCarNestedInput
+    order?: OrderUncheckedUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutSellerInput = {
+  export type SellCarUncheckedUpdateManyWithoutSellerInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     carId?: IntFieldUpdateOperationsInput | number
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14280,13 +16267,13 @@ export namespace Prisma {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    saleCar?: SaleCarUpdateOneRequiredWithoutOrderNestedInput
+    sellCar?: SellCarUpdateOneRequiredWithoutOrderNestedInput
     payment?: PaymentUpdateOneWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutBuyerInput = {
     id?: IntFieldUpdateOperationsInput | number
-    saleCarId?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14296,7 +16283,7 @@ export namespace Prisma {
 
   export type OrderUncheckedUpdateManyWithoutBuyerInput = {
     id?: IntFieldUpdateOperationsInput | number
-    saleCarId?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
     totalAmount?: FloatFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14355,6 +16342,35 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnquiryUpdateWithoutBuyerInput = {
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    sellCar?: SellCarUpdateOneRequiredWithoutEnquiriesNestedInput
+  }
+
+  export type EnquiryUncheckedUpdateWithoutBuyerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryUncheckedUpdateManyWithoutBuyerInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    sellCarId?: IntFieldUpdateOperationsInput | number
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserUpdateWithoutLocationInput = {
     cognitoId?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
@@ -14366,11 +16382,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLocationInput = {
@@ -14385,11 +16402,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    favourites?: SaleCarUncheckedUpdateManyWithoutFavouritedByNestedInput
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    favourites?: SellCarUncheckedUpdateManyWithoutFavouritedByNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserCreateManyLocationInput = {
@@ -14420,57 +16438,98 @@ export namespace Prisma {
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type SaleCarCreateManyCarInput = {
+  export type SellCarCreateManyCarInput = {
     id?: number
     vin: string
     sellerCognitoId: string
     mileage: number
     price: number
-    photoUrls?: SaleCarCreatephotoUrlsInput | string[]
+    photoUrls?: SellCarCreatephotoUrlsInput | string[]
     description: string
     isPublic?: boolean
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
 
-  export type SaleCarUpdateWithoutCarInput = {
+  export type SellCarUpdateWithoutCarInput = {
     vin?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUpdateManyWithoutSellCarNestedInput
+    order?: OrderUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUpdateManyWithoutFavouritesNestedInput
     seller?: UserUpdateOneRequiredWithoutCarSalesNestedInput
   }
 
-  export type SaleCarUncheckedUpdateWithoutCarInput = {
+  export type SellCarUncheckedUpdateWithoutCarInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    order?: OrderUncheckedUpdateOneWithoutSaleCarNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutSellCarNestedInput
+    order?: OrderUncheckedUpdateOneWithoutSellCarNestedInput
     favouritedBy?: UserUncheckedUpdateManyWithoutFavouritesNestedInput
   }
 
-  export type SaleCarUncheckedUpdateManyWithoutCarInput = {
+  export type SellCarUncheckedUpdateManyWithoutCarInput = {
     id?: IntFieldUpdateOperationsInput | number
     vin?: StringFieldUpdateOperationsInput | string
     sellerCognitoId?: StringFieldUpdateOperationsInput | string
     mileage?: IntFieldUpdateOperationsInput | number
     price?: FloatFieldUpdateOperationsInput | number
-    photoUrls?: SaleCarUpdatephotoUrlsInput | string[]
+    photoUrls?: SellCarUpdatephotoUrlsInput | string[]
     description?: StringFieldUpdateOperationsInput | string
     isPublic?: BoolFieldUpdateOperationsInput | boolean
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryCreateManySellCarInput = {
+    id?: number
+    userCognitoId: string
+    offerPrice: number
+    message: string
+    status: $Enums.OrderStatus
+    dateTimeCreated?: Date | string
+    dateTimeUpdated?: Date | string
+  }
+
+  export type EnquiryUpdateWithoutSellCarInput = {
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+    buyer?: UserUpdateOneRequiredWithoutEnquiriesNestedInput
+  }
+
+  export type EnquiryUncheckedUpdateWithoutSellCarInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userCognitoId?: StringFieldUpdateOperationsInput | string
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnquiryUncheckedUpdateManyWithoutSellCarInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userCognitoId?: StringFieldUpdateOperationsInput | string
+    offerPrice?: FloatFieldUpdateOperationsInput | number
+    message?: StringFieldUpdateOperationsInput | string
+    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14486,11 +16545,12 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    carSales?: SaleCarUpdateManyWithoutSellerNestedInput
+    carSales?: SellCarUpdateManyWithoutSellerNestedInput
     orders?: OrderUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUpdateManyWithoutReviewerNestedInput
     location?: LocationUpdateOneWithoutUsersNestedInput
+    enquiries?: EnquiryUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFavouritesInput = {
@@ -14506,10 +16566,11 @@ export namespace Prisma {
     isProfileSetup?: BoolFieldUpdateOperationsInput | boolean
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
-    carSales?: SaleCarUncheckedUpdateManyWithoutSellerNestedInput
+    carSales?: SellCarUncheckedUpdateManyWithoutSellerNestedInput
     orders?: OrderUncheckedUpdateManyWithoutBuyerNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
     reviewer?: ReviewUncheckedUpdateManyWithoutReviewerNestedInput
+    enquiries?: EnquiryUncheckedUpdateManyWithoutBuyerNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutFavouritesInput = {

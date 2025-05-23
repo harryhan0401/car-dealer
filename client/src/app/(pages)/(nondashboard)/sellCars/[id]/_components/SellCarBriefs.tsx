@@ -2,15 +2,15 @@ import ContactSellerModal from "@/components/ContactSellerModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { formatNumber } from "@/lib/utils";
-import { SaleCar } from "@/types/prismaTypes";
+import { SellCar } from "@/types/prismaTypes";
 import { Bolt, Fuel, Phone } from "lucide-react";
 import { GiStoneWheel } from "react-icons/gi";
 import { IoSpeedometerOutline } from "react-icons/io5";
 
-const SaleCarBriefs = ({ saleCar }: { saleCar: SaleCar }) => {
-  const { price, description, mileage } = saleCar;
-  const { fuel, drive } = saleCar.car;
-  const { firstName, lastName, email, phone, avatarUrl } = saleCar.seller;
+const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
+  const { price, description, mileage } = sellCar;
+  const { fuel, drive } = sellCar.car;
+  const { firstName, lastName, email, phone, avatarUrl } = sellCar.seller;
   const sellerName = firstName + " " + lastName;
   return (
     <div className="h-full w-full flex flex-col">
@@ -89,4 +89,4 @@ const SaleCarBriefs = ({ saleCar }: { saleCar: SaleCar }) => {
     </div>
   );
 };
-export default SaleCarBriefs;
+export default SellCarBriefs;

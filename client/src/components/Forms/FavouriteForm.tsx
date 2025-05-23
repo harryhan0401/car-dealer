@@ -1,6 +1,6 @@
 "use client";
 import { setFavourites } from "@/state";
-import { useAddSaleCarFavouriteMutation } from "@/state/api";
+import { useAddSellCarFavouriteMutation } from "@/state/api";
 import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
@@ -8,14 +8,14 @@ import { useState } from "react";
 
 const FavouriteForm = ({
   authUser,
-  saleCarId,
+  sellCarId,
 }: {
   authUser: AppUser;
-  saleCarId: number;
+  sellCarId: number;
 }) => {
   const dispatch = useAppDispatch();
   const [updateUserFavourites, { isLoading }] =
-    useAddSaleCarFavouriteMutation();
+    useAddSellCarFavouriteMutation();
 
   let userFavourites: number[] = useAppSelector(
     ({ global }) => global.favourites
@@ -28,7 +28,7 @@ const FavouriteForm = ({
   }
 
   const [isFavourite, setIsFavourite] = useState<boolean>(
-    userFavourites.includes(saleCarId)
+    userFavourites.includes(sellCarId)
   );
 
   const handleClick = async () => {
@@ -36,11 +36,11 @@ const FavouriteForm = ({
       const cognitoId = authUser.cognitoInfo.userId;
       const res: User = await updateUserFavourites({
         cognitoId,
-        saleCarId,
+        sellCarId,
       }).unwrap();
       if (res) {
         const favourites = res.favourites.map((fav: { id: number }) => fav.id);
-        if (favourites.includes(saleCarId)) {
+        if (favourites.includes(sellCarId)) {
           setIsFavourite(true);
         } else {
           setIsFavourite(false);

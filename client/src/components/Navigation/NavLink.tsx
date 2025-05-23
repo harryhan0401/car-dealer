@@ -10,9 +10,9 @@ const NavLink = ({ path, label }: NavLinkProps) => {
   const pathname = usePathname();
   
   const isMatchingPath = pathname === path;
-  const isSaleCarPath = pathname.includes("salecar") && path !== "/sell";
+  const isSellCarPath = pathname.includes("sellCar") && path !== "/sell";
   
-  const isActive = isMatchingPath || isSaleCarPath ? "active text-primary" : "";
+  const isActive = isMatchingPath || isSellCarPath ? "active text-primary" : "";
 
   return (
     <Link className={`navLink ${isActive}`} href={path} scroll={false}>

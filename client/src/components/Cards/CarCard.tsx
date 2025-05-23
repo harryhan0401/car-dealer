@@ -3,18 +3,19 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiStoneWheel } from "react-icons/gi";
 import { Bolt, Flame, Fuel, MapPin, Phone } from "lucide-react";
 import { Button } from "../ui/button";
-import { SaleCar, User } from "@/types/prismaTypes";
+import { SellCar, User } from "@/types/prismaTypes";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
+import ContactSellerModal from "../ContactSellerModal";
 
 type CarCardProps = {
   id: number;
   mileage: number;
   price: number;
   description: string;
-  car: SaleCar;
+  car: SellCar;
   seller: User;
   index: number;
   isHighlight?: boolean;
@@ -45,7 +46,7 @@ const CarCard = ({
       <div
         className={`grid ${isHighlight && "lg:grid-cols-2 lg:gap-10 lg:items-center"}`}
       >
-        <Link href={`/salecars/${id}`}>
+        <Link href={`/sellCars/${id}`}>
           <Image
             // src={`/${photoUrls[0]}`}
             src={
@@ -137,15 +138,17 @@ const CarCard = ({
               id="car-interaction-group"
               className={`flex ${authUser && "gap-5"}`}
             >
-              <Button className="flex-1" aria-label="Contact Seller">
-                <span>
-                  <Phone />
-                </span>
-                Contact Seller
-              </Button>
+              <ContactSellerModal>
+                <Button className="flex-1" aria-label="Contact Seller">
+                  <span>
+                    <Phone />
+                  </span>
+                  Contact Seller
+                </Button>
+              </ContactSellerModal>
               {authUser && (
                 <div>
-                  <FavouriteForm authUser={authUser} saleCarId={id} />
+                  <FavouriteForm authUser={authUser} sellCarId={id} />
                 </div>
               )}
             </section>

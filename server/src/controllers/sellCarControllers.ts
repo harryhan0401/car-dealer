@@ -4,9 +4,9 @@ import { Prisma, PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 
-export const getAllSaleCars = async (_req: Request, res: Response): Promise<void> => {
+export const getAllSellCars = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const saleCars = await prisma.saleCar.findMany({
+        const sellCars = await prisma.sellCar.findMany({
             where: { "isPublic": true },
             orderBy: { "dateTimeUpdated": "desc" },
             include: {
@@ -19,8 +19,8 @@ export const getAllSaleCars = async (_req: Request, res: Response): Promise<void
             },
         });
 
-        if (saleCars) {
-            res.json(saleCars);
+        if (sellCars) {
+            res.json(sellCars);
         } else {
             res.status(404).json({ message: "There is no available sale car" });
         }
@@ -30,11 +30,11 @@ export const getAllSaleCars = async (_req: Request, res: Response): Promise<void
     }
 }
 
-export const getSaleCars = async (req: Request, res: Response): Promise<void> => {
+export const getSellCars = async (req: Request, res: Response): Promise<void> => {
     const take = parseInt(req.query.take as string) || 40;
     const skip = parseInt(req.query.skip as string) || 0;
     try {
-        const saleCars = await prisma.saleCar.findMany({
+        const sellCars = await prisma.sellCar.findMany({
             include: {
                 car: true,
                 seller: {
@@ -47,8 +47,8 @@ export const getSaleCars = async (req: Request, res: Response): Promise<void> =>
             , skip
         });
 
-        if (saleCars.length > 0) {
-            res.json(saleCars);
+        if (sellCars.length > 0) {
+            res.json(sellCars);
         } else {
             res.status(404).json({ message: "There is no available sale car" });
         }
@@ -57,19 +57,19 @@ export const getSaleCars = async (req: Request, res: Response): Promise<void> =>
         res.status(500).json({ message: `Error retrieving all sale cars: ${error.message}` });
     }
 }
-export const getSaleCarById = async (req: Request, res: Response): Promise<void> => {
+export const getSellCarById = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { saleCarId } = req.params;
-        const saleCar = await prisma.saleCar.findUnique({
-            where: { id: +saleCarId },
+        const { sellCarId } = req.params;
+        const sellCar = await prisma.sellCar.findUnique({
+            where: { id: +sellCarId },
             include: {
                 car: true,
                 seller: true,
             },
         });
 
-        if (saleCar) {
-            res.json(saleCar)
+        if (sellCar) {
+            res.json(sellCar)
         }
         else {
             res.status(404).json({ message: "Sale car not found" });
@@ -78,7 +78,7 @@ export const getSaleCarById = async (req: Request, res: Response): Promise<void>
         res.status(500).json({ message: `Error retrieving sale car: ${error.message}` });
     }
 }
-export const createSaleCar = async (req: Request, res: Response): Promise<void> => {
+export const createSellCar = async (req: Request, res: Response): Promise<void> => {
     try {
         const files = req.files as Express.Multer.File[];
         let carId = -1;
@@ -127,7 +127,7 @@ export const createSaleCar = async (req: Request, res: Response): Promise<void> 
             carId = newCar.id
         }
 
-        const newSaleCar = await prisma.saleCar.create({
+        const newSellCar = await prisma.sellCar.create({
             data: {
                 vin,
                 sellerCognitoId: cognitoId,
@@ -142,44 +142,44 @@ export const createSaleCar = async (req: Request, res: Response): Promise<void> 
                 car: true,
             },
         })
-        res.status(201).json(newSaleCar);
+        res.status(201).json(newSellCar);
     } catch (error: any) {
         res.status(500).json({ message: `Error creating sale car: ${error.message}` });
 
     }
 }
 
-export async function deleteSaleCar(req: Request, res: Response): Promise<void> {
+export async function deleteSellCar(req: Request, res: Response): Promise<void> {
     try {
         if (!req.user) {
             res.status(401).json({ message: "Unauthorized: User not found" });
             return;
         }
-        const { saleCarId } = req.params;
+        const { sellCarId } = req.params;
 
         // First check if the sale car exists and belongs to the user
-        const saleCar = await prisma.saleCar.findUnique({
-            where: { id: +saleCarId },
+        const sellCar = await prisma.sellCar.findUnique({
+            where: { id: +sellCarId },
             include: { seller: true }
         });
 
-        if (!saleCar) {
+        if (!sellCar) {
             res.status(404).json({ message: "Sale car not found" });
             return;
         }
 
-        if (saleCar.sellerCognitoId !== req.user?.id) {
+        if (sellCar.sellerCognitoId !== req.user?.id) {
             res.status(403).json({ message: "Unauthorized: You can only delete your own listings" });
             return;
         }
 
         // If checks pass, proceed with deletion
-        const deletedSaleCar = await prisma.saleCar.delete({
-            where: { id: +saleCarId },
+        const deletedSellCars = await prisma.sellCar.delete({
+            where: { id: +sellCarId },
             include: { seller: true }
         });
 
-        res.status(200).json(deletedSaleCar.seller.id);
+        res.status(200).json(deletedSellCars.seller.id);
     } catch (error: any) {
         console.error("Error deleting sale car:", error);
         res.status(500).json({ message: `Error deleting sale car: ${error.message}` });

@@ -1,14 +1,13 @@
 "use client";
 import { useGetAuthUserQuery } from "@/state/api";
-import Notification from "./Notification";
-import Favourite from "./Favourite";
+import Notification from "../Notification";
+import Favourite from "../Favourite";
 import Profile from "./Profile";
-import { Button } from "./ui/button";
-import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setFavourites } from "@/state";
 import { useIsMobile } from "@/lib/hooks";
+import SignInSignUp from "./SignInSignUp";
 
 const Authentication = () => {
   const isMobile = useIsMobile();
@@ -17,15 +16,12 @@ const Authentication = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (authUser && authUser.userInfo.favourites) {
-      dispatch(
-        setFavourites(authUser.userInfo.favourites)
-      );
+      dispatch(setFavourites(authUser.userInfo.favourites));
     }
   }, [authUser]);
 
-  if (isLoading) {
-    return null;
-  }
+  if (isLoading) return <SignInSignUp />;
+
   return (
     <>
       {authUser ? (
@@ -43,18 +39,7 @@ const Authentication = () => {
           />
         </>
       ) : (
-        <>
-          <Button variant={"signIn"} asChild>
-            <Link className="text-[16px]" href={"/signin"}>
-              Sign in
-            </Link>
-          </Button>
-          <Button asChild>
-            <Link className="text-[16px]" href={"/signup"}>
-              Sign up
-            </Link>
-          </Button>
-        </>
+        <SignInSignUp />
       )}
     </>
   );

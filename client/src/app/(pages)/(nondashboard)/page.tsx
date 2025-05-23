@@ -5,7 +5,7 @@ import Filters from "@/components/Filters/Filters";
 import { useAppSelector } from "@/state/redux";
 
 export default function Home() {
-  const totalSaleCars = useAppSelector(({ global }) => global.saleCarCount);
+  const totalSellCars = useAppSelector(({ global }) => global.sellCarCount);
 
   return (
     <div className="w-full flex flex-col gap-10 px-10 py-8">
@@ -13,7 +13,7 @@ export default function Home() {
         <div className="flex lg:flex-start items-center lg:items-start gap-5">
           <div className="me-auto lg:me-0 text-6xl">Buy a car</div>
           <div className="min-w-[50px] w-[100px] lg:min-w-0 text-center lg:max-w-fit lg:mt-2 py-2 px-3 bg-primary text-white font-light rounded-lg text-2xl lg:text-sm">
-            {totalSaleCars}
+            {totalSellCars}
           </div>
         </div>
         <div className="hidden lg:flex lg:items-center lg:space-x-2">

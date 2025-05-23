@@ -80,7 +80,7 @@ async function main() {
     "car.json", // No dependencies
     "location.json", //No dependencies
     "user.json", // Depends on location
-    "saleCar.json", // Depends on car and user
+    "sellCar.json", // Depends on car and user
     "order.json", // Depends on user
   ];
 

@@ -1,5 +1,5 @@
-import { SaleCar } from "@/types/prismaTypes";
-import { avatarData, CarData, locationData, SaleCarData, userData } from "./schemas";
+import { SellCar } from "@/types/prismaTypes";
+import { avatarData, CarData, locationData, SellCarData, userData } from "./schemas";
 
 export type NotificationListItemProps = {
     id: number;
@@ -41,7 +41,7 @@ export type FilterMakesModels = {
 export type StepType = {
     selectedMakesModels: FilterMakesModels[];
     setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
-    saleCars: SaleCar[];
+    sellCars: SellCar[];
 }
 
 export type TNavLink = {
@@ -54,7 +54,7 @@ export interface SellCarFormStepProps {
     handleFormSubmit?: any;
     cb: (name: string) => void;
 }
-export type TSellCarFormData = SaleCarData & CarData;
+export type TSellCarFormData = SellCarData & CarData;
 
 export type TProfileSetupSteps = {
     step: number;

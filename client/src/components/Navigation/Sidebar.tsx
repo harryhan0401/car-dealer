@@ -1,5 +1,14 @@
 "use client";
-import { Car, Heart, Home, LogOut, Settings, User } from "lucide-react";
+import {
+  Car,
+  Heart,
+  Home,
+  Inbox,
+  LogOut,
+  MessageSquare,
+  Settings,
+  User,
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -26,8 +35,8 @@ const items = [
     icon: User,
   },
   {
-    title: "Orders",
-    url: "/users/orders",
+    title: "Listings",
+    url: "/users/listings",
     icon: Car,
   },
   {
@@ -36,7 +45,7 @@ const items = [
     icon: Heart,
   },
   {
-    title: "Settings",
+    title: "Account Settings",
     url: "/users/settings",
     icon: Settings,
   },

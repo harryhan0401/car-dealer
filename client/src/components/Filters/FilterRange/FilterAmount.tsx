@@ -43,12 +43,8 @@ export default function FilterAmount({
   };
 
   const handleMinInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newMin = Math.max(Number(e.target.value), minAmount);
-    if (newMin >= localMax) {
-      setLocalMax(newMin + 50);
-    }
-    setLocalMin(newMin);
-    setRange(`${newMin}-${localMax}`);
+    setLocalMin(Number(e.target.value));
+    setRange(`${e.target.value}-${localMax}`);
   };
 
   const handleMaxInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +84,6 @@ export default function FilterAmount({
             <Input
               name="Minimum Amount"
               type="number"
-              step={50}
               placeholder={`$${minAmount}`}
               value={localMin}
               onChange={handleMinInputChange}
@@ -99,7 +94,6 @@ export default function FilterAmount({
             <Input
               name="Maximum Amount"
               type="number"
-              step={50}
               placeholder={`$${maxAmount}`}
               value={localMax}
               onChange={handleMaxInputChange}

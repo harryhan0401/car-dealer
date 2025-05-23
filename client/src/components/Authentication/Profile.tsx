@@ -7,9 +7,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { DropdownMenuItem } from "@radix-ui/react-dropdown-menu";
 import { useRouter } from "next/navigation";
-import { Avatar } from "./ui/avatar";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { handleSignOut } from "@/lib/utils";
+import { Avatar } from "../ui/avatar";
 
 const Profile = ({
   userRole,

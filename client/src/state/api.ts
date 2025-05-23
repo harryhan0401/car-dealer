@@ -1,5 +1,5 @@
 import { createNewUserInDatabase, saveProfileSetupStatus } from "@/lib/utils";
-import { SaleCar, User } from "@/types/prismaTypes";
+import { SellCar, User } from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
@@ -16,8 +16,13 @@ export const api = createApi({
     }
   }),
   reducerPath: "api",
-  tagTypes: ["Users", "SaleCars"],
+  tagTypes: ["Users", "SellCars"],
   endpoints: (build) => ({
+    //Auth related endpoints
+    /*
+    This endpoint fetches the authenticated user's data
+    and returns the user information along with their role.
+    */
     getAuthUser: build.query<AppUser, void>({
       queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
         try {
@@ -55,48 +60,49 @@ export const api = createApi({
       providesTags: (result) =>
         result?.userInfo ? [{ type: "Users", id: result.userInfo.id }] : [],
     }),
-    //sale cars related endpoints
-    getSaleCars: build.query<SaleCar[], { take: number; skip: number; }>({
+
+    //Sell cars related endpoints
+    getSellCars: build.query<SellCar[], { take: number; skip: number; }>({
       query: ({ take, skip }) => {
 
-        let url = `/saleCars?take=${take}&skip=${skip}`;
+        let url = `/sellCars?take=${take}&skip=${skip}`;
         return url;
       }
     }),
-    getSaleCarById: build.query<SaleCar, number>({
-      query: (id) => `/saleCars/${id}`,
-      providesTags: (id) => [{ type: "SaleCars", id }],
+    getSellCarById: build.query<SellCar, number>({
+      query: (id) => `/sellCars/${id}`,
+      providesTags: (id) => [{ type: "SellCars", id }],
     }),
-    getAllSaleCars: build.query<SaleCar[], void>({
-      query: () => "/saleCars/all",
+    getAllSellCars: build.query<SellCar[], void>({
+      query: () => "/sellCars/all",
       providesTags: (result) =>
         result
           ? [
-            ...result.map(({ id }) => ({ type: "SaleCars" as const, id })),
-            { type: "SaleCars", id: "LIST" },
+            ...result.map(({ id }) => ({ type: "SellCars" as const, id })),
+            { type: "SellCars", id: "LIST" },
           ]
-          : [{ type: "SaleCars", id: "LIST" }],
+          : [{ type: "SellCars", id: "LIST" }],
     }),
-    createSaleCar: build.mutation<SaleCar, FormData>({
-      query: (newSaleCar) => ({
-        url: `/saleCars`,
+    createSellCar: build.mutation<SellCar, FormData>({
+      query: (newSellCar) => ({
+        url: `/sellCars`,
         method: 'POST',
-        body: newSaleCar,
+        body: newSellCar,
       }),
       invalidatesTags: (result) => [
         { type: "Users", id: result?.seller.id },
-        { type: "SaleCars", id: "LIST" },
+        { type: "SellCars", id: "LIST" },
       ]
     }),
-    deleteSaleCar: build.mutation<number, number>({
+    deleteSellCar: build.mutation<number, number>({
       query: (id) => ({
-        url: `/saleCars/${id}`,
+        url: `/sellCars/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result) => [{ type: "Users", id: result }, { type: "SaleCars", id: "LIST" }],
+      invalidatesTags: (result) => [{ type: "Users", id: result }, { type: "SellCars", id: "LIST" }],
     }),
 
-    //user related endpoints
+    //User related endpoints
     updateUserProfile: build.mutation<User, { cognitoId: string, userProfileData: FormData }>({
       query: ({ cognitoId, userProfileData }) => ({
         url: `/users/${cognitoId}`,
@@ -105,23 +111,23 @@ export const api = createApi({
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }]
     }),
-    addSaleCarFavourite: build.mutation<User, { cognitoId: string; saleCarId: number }>({
-      query: ({ cognitoId, saleCarId }) => ({
+    addSellCarFavourite: build.mutation<User, { cognitoId: string; sellCarId: number }>({
+      query: ({ cognitoId, sellCarId }) => ({
         url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
         method: 'PATCH',  // Using PATCH for partial updates
-        body: { saleCarId },
+        body: { sellCarId },
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
     }),
-    removeSaleCarFavourite: build.mutation<User, { cognitoId: string; saleCarId: number }>({
-      query: ({ cognitoId, saleCarId }) => ({
+    removeSellCarFavourite: build.mutation<User, { cognitoId: string; sellCarId: number }>({
+      query: ({ cognitoId, sellCarId }) => ({
         url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
         method: 'DELETE',  // Using DELETE for removing a favourite
-        body: { saleCarId },
+        body: { sellCarId },
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
     }),
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSaleCarsQuery, useGetSaleCarByIdQuery, useGetAllSaleCarsQuery, useCreateSaleCarMutation, useDeleteSaleCarMutation, useUpdateUserProfileMutation, useAddSaleCarFavouriteMutation, useRemoveSaleCarFavouriteMutation } = api;
+export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useGetAllSellCarsQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;

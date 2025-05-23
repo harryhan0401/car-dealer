@@ -123,9 +123,15 @@ enum Transmission {
 
 enum OrderStatus {
   Pending
-  Denied
+  Declined
   Confirmed
   Paid
+}
+
+enum EnquiryStatus {
+  Received
+  Accepted
+  Declined
 }
 
 enum PaymentMethod {
@@ -142,7 +148,7 @@ enum PaymentMethod {
 enum PaymentStatus {
   Pending
   Paid
-  Denied
+  Declined
 }
 
 enum PreferredContactMethod {
@@ -165,12 +171,13 @@ model User {
   dateTimeCreated        DateTime               @default(now())
   dateTimeUpdated        DateTime               @default(now()) @updatedAt
 
-  favourites SaleCar[] @relation("UserFavourites")
-  carSales   SaleCar[]
+  favourites SellCar[] @relation("UserFavourites")
+  carSales   SellCar[]
   orders     Order[]
   reviews    Review[]  @relation("UserReview")
   reviewer   Review[]  @relation("ReviewerReview")
   location   Location? @relation(fields: [locationId], references: [id])
+  enquiries  Enquiry[]
 }
 
 model Location {
@@ -184,7 +191,7 @@ model Location {
   dateTimeUpdated DateTime @default(now()) @updatedAt
 
   coordinates Unsupported("geography(Point, 4326)")
-  Users       User[]
+  users       User[]
 }
 
 model Car {
@@ -199,12 +206,12 @@ model Car {
   dateTimeCreated DateTime     @default(now())
   dateTimeUpdated DateTime     @default(now()) @updatedAt
 
-  carSales SaleCar[]
+  sellCars SellCar[]
 
   @@unique([make, model, year, type, fuel, drive, transmission])
 }
 
-model SaleCar {
+model SellCar {
   id              Int      @id @default(autoincrement())
   vin             String   @unique @db.VarChar(17)
   sellerCognitoId String
@@ -217,22 +224,37 @@ model SaleCar {
   dateTimeCreated DateTime @default(now())
   dateTimeUpdated DateTime @default(now()) @updatedAt
 
+  enquiries    Enquiry[]
   order        Order?
-  favouritedBy User[] @relation("UserFavourites")
-  seller       User   @relation(fields: [sellerCognitoId], references: [cognitoId])
-  car          Car    @relation(fields: [carId], references: [id])
+  favouritedBy User[]    @relation("UserFavourites")
+  seller       User      @relation(fields: [sellerCognitoId], references: [cognitoId])
+  car          Car       @relation(fields: [carId], references: [id])
+}
+
+model Enquiry {
+  id              Int         @id @default(autoincrement())
+  sellCarId       Int
+  userCognitoId   String
+  offerPrice      Float
+  message         String
+  status          OrderStatus
+  dateTimeCreated DateTime    @default(now())
+  dateTimeUpdated DateTime    @default(now()) @updatedAt
+
+  sellCar SellCar @relation(fields: [sellCarId], references: [id])
+  buyer   User    @relation(fields: [userCognitoId], references: [cognitoId])
 }
 
 model Order {
   id              Int         @id @default(autoincrement())
-  saleCarId       Int         @unique
+  sellCarId       Int         @unique
   buyerCognitoId  String
   totalAmount     Float
   status          OrderStatus
   dateTimeCreated DateTime    @default(now())
   dateTimeUpdated DateTime    @default(now()) @updatedAt
 
-  saleCar SaleCar  @relation(fields: [saleCarId], references: [id])
+  sellCar SellCar  @relation(fields: [sellCarId], references: [id])
   buyer   User     @relation(fields: [buyerCognitoId], references: [cognitoId])
   payment Payment?
 }

@@ -1,52 +1,49 @@
+"use client";
+import { useGetAuthUserQuery } from "@/state/api";
+import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import Image from "next/image";
 
-interface UserDetailsProps {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  preferredContactMethod: string;
-  completeAddress: string;
-}
-const UserDetails = ({
-  firstName,
-  lastName,
-  email,
-  phone,
-  preferredContactMethod,
-  completeAddress,
-}: UserDetailsProps) => {
+const UserDetails = () => {
+  const { data: authUser, isLoading } = useGetAuthUserQuery();
+
+  if (isLoading) return <p>Loading...</p>;
+  if (!authUser) return <p>You are not authorized to view this page!</p>;
+
+  const { firstName, lastName, email, phone, location } = authUser.userInfo;
+  const completeAddress =
+    location.address +
+    ", " +
+    location.city +
+    " " +
+    location.state +
+    ", " +
+    location.postalCode +
+    ", " +
+    location.country;
   return (
-    <section className="flex gap-10">
+    <section className="card flex gap-10">
       <div className="relative h-40 w-50">
         <Image src="https://github.com/shadcn.png" fill alt="Avatar" />
       </div>
-      <div className=" grid space-y-2 w-full">
+      <div className="grid w-full">
         <section id="fullname">
-          <p>
-            <span className="font-semibold">Fullname:</span>{" "}
+          <h2 className="text-xl font-semibold">
             {firstName + " " + lastName}
-          </p>
+          </h2>
         </section>
         <section id="email">
-          <p>
-            <span className="font-semibold">Email:</span> {email}
+          <p className="text-base flex items-center gap-1">
+            <MailIcon size={16} /> {email}
           </p>
         </section>
-        <section id="email">
-          <p>
-            <span className="font-semibold">Phone:</span> {phone}
+        <section id="phone">
+          <p className="text-base flex items-center gap-1">
+            <PhoneIcon size={16} /> {phone}
           </p>
         </section>
         <section id="address">
-          <p>
-            <span className="font-semibold">Address:</span> {completeAddress}
-          </p>
-        </section>
-        <section id="preferredContactMethod">
-          <p>
-            <span className="font-semibold">Preferred Contact Method:</span>{" "}
-            {preferredContactMethod}
+          <p className="text-base flex items-center gap-1">
+            <MapPinIcon size={16} /> {completeAddress}
           </p>
         </section>
       </div>

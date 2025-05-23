@@ -7,7 +7,7 @@ import { StepType } from "@/lib/types";
 const SelectMakes = ({
   selectedMakesModels,
   setSelectedMakesModels,
-  saleCars,
+  sellCars,
 }: StepType) => {
   const uniqueMakes = useAppSelector(({ global }) => global.uniqueMakes);
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
@@ -18,7 +18,7 @@ const SelectMakes = ({
           selectedMakesModels.filter((makeModel) => makeModel.make !== value)
         );
       } else {
-        const modelOptions = getUniqueModelsByMake(saleCars, value);
+        const modelOptions = getUniqueModelsByMake(sellCars, value);
         setSelectedMakesModels([
           ...selectedMakesModels,
           { make: value, models: modelOptions },

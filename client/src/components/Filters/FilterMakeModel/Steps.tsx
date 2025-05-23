@@ -8,18 +8,18 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { useQueryState } from "nuqs";
 import { convertToMakeModelsString } from "@/lib/utils";
 import { FilterMakesModels } from "@/lib/types";
-import { SaleCar } from "@/types/prismaTypes";
+import { SellCar } from "@/types/prismaTypes";
 
 interface StepsProps {
   step: number;
   setStep: (step: number) => void;
-  saleCars: SaleCar[];
+  sellCars: SellCar[];
   filteredMakesModels: FilterMakesModels[];
 }
 const Steps = ({
   step,
   setStep,
-  saleCars,
+  sellCars,
   filteredMakesModels,
 }: StepsProps) => {
   const [selectedMakesModels, setSelectedMakesModels] =
@@ -35,14 +35,14 @@ const Steps = ({
         <SelectMakes
           selectedMakesModels={selectedMakesModels}
           setSelectedMakesModels={setSelectedMakesModels}
-          saleCars={saleCars}
+          sellCars={sellCars}
         />
       )}
       {step === 2 && (
         <SelectModels
           selectedMakesModels={selectedMakesModels}
           setSelectedMakesModels={setSelectedMakesModels}
-          saleCars={saleCars}
+          sellCars={sellCars}
         />
       )}
       <DialogFooter>

@@ -8,7 +8,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 
 /* ROUTE IMPORT */
 import userRoutes from "./routes/userRoutes";
-import saleCarRoutes from "./routes/saleCarRoutes";
+import sellCarRoutes from "./routes/sellCarRoutes";
 import carRoutes from "./routes/carRoutes";
 
 /* CONFIGURATIONS */
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
 app.use("/users", authMiddleware(["user"]), userRoutes);
 app.use("/admins", authMiddleware(["admin"]), userRoutes);
-app.use("/saleCars", saleCarRoutes);
+app.use("/sellCars", sellCarRoutes);
 app.use("/cars", authMiddleware(["user", "admin"]), carRoutes);
 
 /* SERVER */

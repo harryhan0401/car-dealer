@@ -111,7 +111,7 @@ export const addUserProfile = async (req: Request, res: Response): Promise<void>
 }
 export const addFavourite = async (req: Request, res: Response): Promise<void> => {
     const { cognitoId } = req.params;
-    const { saleCarId } = req.body;
+    const { sellCarId } = req.body;
     try {
         // Find the user by cognitoId
         const user = await prisma.user.findUnique({
@@ -125,12 +125,12 @@ export const addFavourite = async (req: Request, res: Response): Promise<void> =
 
         if (user) {
             // Check if the car is already in the favourites array
-            const isFavourite = user.favourites.map(fav => fav.id).includes(saleCarId);
+            const isFavourite = user.favourites.map(fav => fav.id).includes(sellCarId);
 
             // If the car is already in favourites, remove it, otherwise add it
             const newUserFavourites = isFavourite
-                ? user.favourites.filter(fav => fav.id !== saleCarId) // Remove the car
-                : [...user.favourites, { id: saleCarId }]; // Add the car
+                ? user.favourites.filter(fav => fav.id !== sellCarId) // Remove the car
+                : [...user.favourites, { id: sellCarId }]; // Add the car
 
             // Update the user's favourites field with the new array
             const updatedUser = await prisma.user.update({
@@ -161,7 +161,7 @@ export const addFavourite = async (req: Request, res: Response): Promise<void> =
 
 export const removeFavourite = async (req: Request, res: Response): Promise<void> => {
     const { cognitoId } = req.params;
-    const { saleCarId } = req.body;
+    const { sellCarId } = req.body;
     try {
         // Find the user by cognitoId
         const user = await prisma.user.findUnique({
@@ -174,7 +174,7 @@ export const removeFavourite = async (req: Request, res: Response): Promise<void
         });
 
         if (user) {
-            const newUserFavourites = user.favourites.filter(fav => fav.id !== saleCarId) // Remove the car
+            const newUserFavourites = user.favourites.filter(fav => fav.id !== sellCarId) // Remove the car
 
             // Update the user's favourites field with the new array
             const updatedUser = await prisma.user.update({

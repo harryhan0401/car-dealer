@@ -14,7 +14,7 @@ import { TSellCarFormData } from "@/lib/types";
 import SellCarFormPartFour from "./SellCarFormPartFour";
 import { AccordionHeader } from "@radix-ui/react-accordion";
 import { useGetAuthUserQuery } from "@/state/api";
-import Authentication from "@/components/Authentication";
+import Authentication from "@/components/Authentication/Authentication";
 
 import { Angry } from "lucide-react";
 

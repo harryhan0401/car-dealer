@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import Location from "../Location";
 import Link from "next/link";
-import Authentication from "../Authentication";
+import Authentication from "../Authentication/Authentication";
 const NavbarMobile = ({
   children,
   navLinks,

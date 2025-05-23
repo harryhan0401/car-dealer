@@ -5,12 +5,12 @@ import FilterLayout from "../FilterLayout";
 import FilterAmount from "./FilterAmount";
 import { FilterRangeProps } from "./FilterPrice";
 import { useRangeQueryParams } from "@/lib/hooks";
-const FilterYear = ({ saleCars }: FilterRangeProps) => {
+const FilterYear = ({ sellCars }: FilterRangeProps) => {
   //Filter Year
   const [minYear, maxYear] = useMemo(() => {
-    const amounts = saleCars.map((saleCar) => saleCar.car.year);
+    const amounts = sellCars.map((sellCar) => sellCar.car.year);
     return [Math.min(...amounts), Math.max(...amounts)];
-  }, [saleCars]);
+  }, [sellCars]);
   const { query: yearRange, setQuery: setYearRange } = useRangeQueryParams(
     "year",
     minYear,

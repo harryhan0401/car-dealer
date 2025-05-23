@@ -8,10 +8,10 @@ import CarCard from "./Cards/CarCard";
 import { useEffect, useMemo } from "react";
 import ProductPagination from "./Pagination";
 import { useQueryState } from "nuqs";
-import { useGetAllSaleCarsQuery } from "@/state/api";
+import { useGetAllSellCarsQuery } from "@/state/api";
 import { Skeleton } from "./ui/skeleton";
 import { useDispatch } from "react-redux";
-import { setSaleCarCount } from "@/state";
+import { setSellCarCount } from "@/state";
 import { useAppSelector } from "@/state/redux";
 
 interface CarsListProps {
@@ -21,9 +21,9 @@ const CarsList = ({
   itemsPerPage = 6, //If don't pass nay value to itemsPerPage prop, its default value is 6
 }: CarsListProps) => {
   //Fetch Car List
-  const { data: saleCars, isFetching: carFetching } = useGetAllSaleCarsQuery();
+  const { data: sellCars, isFetching: carFetching } = useGetAllSellCarsQuery();
   const dispatch = useDispatch();
-  const totalSaleCars = useAppSelector(({ global }) => global.saleCarCount);
+  const totalSellCars = useAppSelector(({ global }) => global.sellCarCount);
 
   const [currentPage] = useQueryState("page");
 
@@ -33,7 +33,7 @@ const CarsList = ({
 
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
-  const [makes, models] = useMakeModelsParam("makeModels", saleCars!);
+  const [makes, models] = useMakeModelsParam("makeModels", sellCars!);
   const [minPrice, maxPrice] = useAmountRangeParam("price_range");
   const [minMileage, maxMileage] = useAmountRangeParam("mileage_range");
   const fuel = useSelectParam("fuel");
@@ -48,30 +48,30 @@ const CarsList = ({
    */
 
   const filteredCars = useMemo(() => {
-    if (saleCars) {
-      return saleCars.filter(
-        (saleCar) =>
-          (!type || saleCar.car.type.toLowerCase() === type.toLowerCase()) &&
-          (!makes.length || makes.includes(saleCar.car.make)) &&
-          (!models.length || models.includes(saleCar.car.model)) &&
-          (!minPrice || saleCar.price >= Number(minPrice)) &&
-          (!maxPrice || saleCar.price <= Number(maxPrice)) &&
-          (!minMileage || saleCar.mileage >= Number(minMileage)) &&
-          (!maxMileage || saleCar.mileage <= Number(maxMileage)) &&
-          (!fuel || fuel.includes(saleCar.car.fuel.toLowerCase())) &&
+    if (sellCars) {
+      return sellCars.filter(
+        (sellCar) =>
+          (!type || sellCar.car.type.toLowerCase() === type.toLowerCase()) &&
+          (!makes.length || makes.includes(sellCar.car.make)) &&
+          (!models.length || models.includes(sellCar.car.model)) &&
+          (!minPrice || sellCar.price >= Number(minPrice)) &&
+          (!maxPrice || sellCar.price <= Number(maxPrice)) &&
+          (!minMileage || sellCar.mileage >= Number(minMileage)) &&
+          (!maxMileage || sellCar.mileage <= Number(maxMileage)) &&
+          (!fuel || fuel.includes(sellCar.car.fuel.toLowerCase())) &&
           (!transmission ||
-            transmission.includes(saleCar.car.transmission.toLowerCase())) &&
+            transmission.includes(sellCar.car.transmission.toLowerCase())) &&
           (!drive ||
-            drive.includes(saleCar.car.drive) ||
+            drive.includes(sellCar.car.drive) ||
             (drive.includes("4WD") &&
-              saleCar.car.drive.toLowerCase() === "fourwd")) &&
-          (!minYear || saleCar.car.year >= Number(minYear)) &&
-          (!maxYear || saleCar.car.year <= Number(maxYear))
+              sellCar.car.drive.toLowerCase() === "fourwd")) &&
+          (!minYear || sellCar.car.year >= Number(minYear)) &&
+          (!maxYear || sellCar.car.year <= Number(maxYear))
       );
     }
     return []; // Return an empty array instead of undefined
   }, [
-    saleCars, // Ensure saleCars is included in the dependency array
+    sellCars, // Ensure sellCars is included in the dependency array
     type,
     makes,
     models,
@@ -87,7 +87,7 @@ const CarsList = ({
   ]);
 
   useEffect(() => {
-    if (!carFetching) dispatch(setSaleCarCount(filteredCars.length));
+    if (!carFetching) dispatch(setSellCarCount(filteredCars.length));
   }, [filteredCars]);
 
   return (
@@ -114,7 +114,7 @@ const CarsList = ({
           </div>
           <div className="mt-5 me-2">
             <ProductPagination
-              numOfItems={totalSaleCars}
+              numOfItems={totalSellCars}
               itemsPerPage={itemsPerPage}
             />
           </div>
@@ -129,42 +129,42 @@ export default CarsList;
 // const [skip, setSkip] = useState(0);
 
 //Fetch Car List
-// const { data: saleCars, isFetching } = useGetSaleCarsQuery({
+// const { data: sellCars, isFetching } = useGetSellCarsQuery({
 //   take,
 //   skip,
 // });
 
-// const [displaySaleCars, setDisplaySaleCars] = useState<SaleCar[]>([]);
+// const [displaySellCars, setDisplaySellCars] = useState<SellCar[]>([]);
 
 // useEffect(() => {
 //   // Add more sale car data to the display list whenever fetching new set of sale car data
-//   if (saleCars) {
-//     setDisplaySaleCars((prev) => [...prev, ...saleCars]); // Concatenate the new sale car data with the existing display list
+//   if (sellCars) {
+//     setDisplaySellCars((prev) => [...prev, ...sellCars]); // Concatenate the new sale car data with the existing display list
 //   }
-// }, [saleCars]);
+// }, [sellCars]);
 
 // useEffect(() => {
 //   // Check if the number of displayed sale cars is already equal or greater than the total sale cars.
 //   // If so, skip further data fetching.
-//   if (displaySaleCars.length >= totalSaleCars) return;
+//   if (displaySellCars.length >= totalSellCars) return;
 //   const page = Number(currentPage);
 
 //   // Ensure that we are on a valid page where additional data is needed.
 //   // This checks if the current page is nearing the limit of the already displayed cars
 //   // and that no fetching operation is currently in progress.
 //   if (
-//     displaySaleCars.length > 0 &&
-//     Math.ceil((page * itemsPerPage) / 10) * 10 >= displaySaleCars.length &&
+//     displaySellCars.length > 0 &&
+//     Math.ceil((page * itemsPerPage) / 10) * 10 >= displaySellCars.length &&
 //     !isFetching
 //   ) {
 //     // If there are more sale cars to load and not already fetching, initiate the next data request.
-//     // Increase the skip value to load the next chunk of data and trigger the `getSaleCars` API.
-//     if (skip + take < totalSaleCars) {
+//     // Increase the skip value to load the next chunk of data and trigger the `getSellCars` API.
+//     if (skip + take < totalSellCars) {
 //       setSkip((prevSkip) => {
 //         const newSkip = prevSkip + take;
 //         // Trigger an API call to fetch additional sale cars based on the updated `skip` and `take`.
 
-//         api.endpoints.getSaleCars.initiate({
+//         api.endpoints.getSellCars.initiate({
 //           skip: newSkip,
 //           take,
 //         });
@@ -174,4 +174,4 @@ export default CarsList;
 //       });
 //     }
 //   }
-// }, [currentPage, displaySaleCars]); // The effect runs every time the `currentPage` value changes.
+// }, [currentPage, displaySellCars]); // The effect runs every time the `currentPage` value changes.

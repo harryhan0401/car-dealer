@@ -3,8 +3,8 @@ import NavLink from "./NavLink";
 import CompanyLogo from "../CompanyLogo";
 import NavbarMobile from "./NavbarMobile";
 import Location from "../Location";
-import Authentication from "../Authentication";
 import { TNavLink } from "@/lib/types";
+import Authentication from "../Authentication/Authentication";
 
 const Navbar = () => {
   const navLinks: TNavLink[] = [
