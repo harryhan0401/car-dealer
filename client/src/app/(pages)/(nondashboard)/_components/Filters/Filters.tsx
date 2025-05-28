@@ -1,9 +1,11 @@
-import FilterMakesModels from "@/components/Filters/FilterMakeModel/FilterMakesModels";
-import FilterPrice from "@/components/Filters/FilterRange/FilterPrice";
-import FilterMileage from "@/components/Filters/FilterRange/FilterMileage";
-import FilterFuel from "@/components/Filters/FilterSelect/FilterFuel";
-import FilterDrive from "@/components/Filters/FilterSelect/FilterDrive";
-import FilterYear from "@/components/Filters/FilterRange/FilterYear";
+"use client";
+
+import FilterMakesModels from "./FilterMakeModel/FilterMakesModels";
+import FilterMileage from "./FilterRange/FilterMileage";
+import FilterPrice from "./FilterRange/FilterPrice";
+import FilterYear from "./FilterRange/FilterYear";
+import FilterDrive from "./FilterSelect/FilterDrive";
+import FilterFuel from "./FilterSelect/FilterFuel";
 import FilterTransmission from "./FilterSelect/FilterTransmission";
 import ResetAll from "./ResetAll";
 import { useGetAllSellCarsQuery } from "@/state/api";

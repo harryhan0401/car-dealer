@@ -1,5 +1,5 @@
 import { useQueryState } from "nuqs";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 
 const ResetAll = () => {
   //Check if any filter is applied. If not disable Reset All button. Else enable Reset All button

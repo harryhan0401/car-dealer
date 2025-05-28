@@ -1,14 +1,14 @@
 "use client";
-import { CarTypes } from "@/lib/constants";
 import Image from "next/image";
 import { useQueryState } from "nuqs";
 import { MouseEvent } from "react";
+import { CarTypes as Types } from "@/lib/constants";
 
-export default function FilterType() {
+export default function CarTypes() {
   const [type, setType] = useQueryState("type", {
     defaultValue: "",
     parse: (value) =>
-      CarTypes.find((carType) => carType.name === value) ? value : "",
+      Types.find((carType) => carType.name === value) ? value : "",
     serialize: (value) => value,
   });
 
@@ -27,7 +27,7 @@ export default function FilterType() {
   };
   return (
     <div className="flex items-center space-x-2">
-      {CarTypes.map(({ name, image }) => (
+      {Types.map(({ name, image }) => (
         <button
           key={name}
           value={name}

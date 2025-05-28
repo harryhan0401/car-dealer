@@ -4,12 +4,12 @@ import {
   useMakeModelsParam,
   useSelectParam,
 } from "@/lib/hooks";
-import CarCard from "./Cards/CarCard";
+import CarCard from "@/components/Cards/CarCard";
 import { useEffect, useMemo } from "react";
-import ProductPagination from "./Pagination";
+import ProductPagination from "@/components/Pagination";
 import { useQueryState } from "nuqs";
 import { useGetAllSellCarsQuery } from "@/state/api";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useDispatch } from "react-redux";
 import { setSellCarCount } from "@/state";
 import { useAppSelector } from "@/state/redux";

@@ -1,7 +1,6 @@
 "use client";
 import { Plus, X } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../../ui/button";
 import FilterHeader from "../FilterHeader";
 import FilterLayout from "../FilterLayout";
 import Modal from "./Modal";
@@ -15,6 +14,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { SellCar } from "@/types/prismaTypes";
 import { setUniqueMakes } from "@/state";
+import { Button } from "@/components/ui/button";
 
 export default function FilterMakesModels({
   sellCars,
