@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Prisma, PrismaClient } from "@prisma/client";
+import { wktToGeoJSON } from "@terraformer/wkt";
 
 const prisma = new PrismaClient();
 
@@ -18,9 +19,28 @@ export const getAllSellCars = async (_req: Request, res: Response): Promise<void
                 },
             },
         });
+        // Attach coordinates to each sellCar
+        const sellCarsWithCoordinates = await Promise.all(
+            sellCars.map(async (sellCar) => {
+                if (sellCar.seller && sellCar.seller.location) {
+                    const coordinates = await prisma.$queryRaw<{ coordinates: string }[]>(
+                        Prisma.sql`SELECT ST_asText(coordinates) as coordinates from "Location" where id = ${sellCar.seller.location.id}`
+                    );
+                    if (coordinates.length > 0) {
+                        const geoJSON: any = wktToGeoJSON(coordinates[0].coordinates);
+                        return {
+                            ...sellCar,
+                            longitude: geoJSON.coordinates[0],
+                            latitude: geoJSON.coordinates[1],
+                        };
+                    }
+                }
+                return sellCar;
+            })
+        );
 
-        if (sellCars) {
-            res.json(sellCars);
+        if (sellCarsWithCoordinates) {
+            res.json(sellCarsWithCoordinates);
         } else {
             res.status(404).json({ message: "There is no available sale car" });
         }

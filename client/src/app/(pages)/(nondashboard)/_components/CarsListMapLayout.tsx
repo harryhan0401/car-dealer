@@ -7,6 +7,7 @@ import { useGetAuthUserQuery } from "@/state/api";
 import { Libraries, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "@/state/redux";
 import { SellCar } from "@/types/prismaTypes";
+import { formatNumber } from "@/lib/utils";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 const libraries = ["places"] as Libraries;
@@ -14,6 +15,7 @@ const libraries = ["places"] as Libraries;
 const CarsListMapLayout = () => {
   //Get Auth User
   const { data: authUser } = useGetAuthUserQuery();
+
   let defaultLocationAddress = "";
   if (authUser?.userInfo.location) {
     const { address, city, state, country } = authUser.userInfo.location;
@@ -79,15 +81,6 @@ const CarsListMapLayout = () => {
       autocomplete.addListener("place_changed", () =>
         handlePlaceChanged(autocomplete)
       );
-
-      const locationSearchIcon = document.getElementById(
-        "location-search-icon"
-      );
-      if (locationSearchIcon) {
-        locationSearchIcon.addEventListener("click", () => {
-          handlePlaceChanged(autocomplete);
-        });
-      }
     }
 
     // Mapbox Map
@@ -98,6 +91,13 @@ const CarsListMapLayout = () => {
         center: centerCoordinates,
         zoom: 12,
       });
+      filteredSellCars.forEach((sellCar) => {
+        const marker = createSellCarMarker(sellCar, map);
+        const markerElement = marker.getElement();
+        const path = markerElement.querySelector("path[fill='#3FB1CE']");
+        if (path) path.setAttribute("fill", "#000000");
+      });
+
       return () => map.remove();
     }
   }, [isLoaded, loadError, centerCoordinates]);
@@ -117,19 +117,34 @@ const CarsListMapLayout = () => {
           placeholder="Search location..."
           defaultValue={defaultLocationAddress}
         />
-        <svg
-          id="location-search-icon"
-          className="w-5 h-5 text-gray-500 ml-2"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          viewBox="0 0 24 24"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
       </div>
     </div>
   );
+};
+
+const createSellCarMarker = (sellCar: SellCar, map: mapboxgl.Map) => {
+  const { make, model, year } = sellCar.car;
+  const customMake =
+    make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
+  const title = customMake + " " + model + " " + year;
+  const marker = new mapboxgl.Marker()
+    .setLngLat([sellCar.longitude, sellCar.latitude])
+    .setPopup(
+      new mapboxgl.Popup().setHTML(
+        `
+        <div class="marker-popup">
+          <div class="marker-popup-image"></div>
+          <div>
+            <a href="/sellCars/${sellCar.id}" target="_blank" class="marker-popup-title">${title}</a>
+            <p class="marker-popup-price">
+              $${formatNumber(sellCar.price)}
+            </p>
+          </div>
+        </div>
+        `
+      )
+    )
+    .addTo(map);
+  return marker;
 };
 export default CarsListMapLayout;

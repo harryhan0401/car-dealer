@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { PrismaClient, Prisma, Location } from "@prisma/client";
+import { wktToGeoJSON } from "@terraformer/wkt";
 
 const prisma = new PrismaClient();
 
@@ -26,7 +27,29 @@ export const getUser = async (req: Request, res: Response): Promise<void> => {
         });
 
         if (user) {
-            res.json(user)
+            if (user.location) {
+                const coordinates: { coordinates: string }[] =
+                    await prisma.$queryRaw`SELECT ST_asText(coordinates) as coordinates from "Location" where id = ${user.location.id}`;
+
+                const geoJSON: any = wktToGeoJSON(coordinates[0]?.coordinates || "");
+                const longitude = geoJSON.coordinates[0];
+                const latitude = geoJSON.coordinates[1];
+
+                const userWithCoordinates = {
+                    ...user,
+                    location: {
+                        ...user.location,
+                        coordinates: [
+                            longitude,
+                            latitude,
+                        ],
+                    },
+                };
+                res.json(userWithCoordinates);
+            }
+            else {
+                res.json(user)
+            }
         }
         else {
             res.status(404).json({ message: "User not found" });
