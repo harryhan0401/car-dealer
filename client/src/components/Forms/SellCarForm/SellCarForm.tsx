@@ -16,8 +16,6 @@ import { AccordionHeader } from "@radix-ui/react-accordion";
 import { useGetAuthUserQuery } from "@/state/api";
 import Authentication from "@/components/Authentication/Authentication";
 
-import { Angry } from "lucide-react";
-
 const SellCarForm = () => {
   const { data: authUser } = useGetAuthUserQuery();
   const [sellCarFormData, setSellCarFormData] = useState<TSellCarFormData>();
@@ -112,12 +110,9 @@ const SellCarForm = () => {
         </Accordion>
       ) : (
         <div className="flex  justify-center w-full">
-          <div className="grid gap-10 items-center w-1/2">
+          <div className="grid gap-5 items-center w-1/2">
             <div className="text-center text-2xl font-semibold flex flex-col items-center gap-2">
               Please sign in to sell your car
-              <span>
-                <Angry className="text-primary" size={50} />
-              </span>
             </div>
             <Authentication />
           </div>

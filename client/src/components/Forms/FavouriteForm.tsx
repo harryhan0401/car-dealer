@@ -1,7 +1,5 @@
 "use client";
-import { setFavourites } from "@/state";
 import { useAddSellCarFavouriteMutation } from "@/state/api";
-import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
@@ -13,22 +11,13 @@ const FavouriteForm = ({
   authUser: AppUser;
   sellCarId: number;
 }) => {
-  const dispatch = useAppDispatch();
   const [updateUserFavourites, { isLoading }] =
     useAddSellCarFavouriteMutation();
 
-  let userFavourites: number[] = useAppSelector(
-    ({ global }) => global.favourites
-  );
-
-  if (userFavourites.length == 0 && authUser.userInfo.favourites) {
-    userFavourites = authUser.userInfo.favourites.map(
-      (fav: { id: number }) => fav.id
-    );
-  }
-
   const [isFavourite, setIsFavourite] = useState<boolean>(
-    userFavourites.includes(sellCarId)
+    authUser.userInfo.favourites.some(
+      (fav: { id: number }) => fav.id === sellCarId
+    )
   );
 
   const handleClick = async () => {
@@ -45,7 +34,6 @@ const FavouriteForm = ({
         } else {
           setIsFavourite(false);
         }
-        dispatch(setFavourites(favourites));
       } else {
         throw new Error("Unable to add new favourite. Please try again later.");
       }
@@ -53,6 +41,7 @@ const FavouriteForm = ({
       console.error("Error adding favourite:", error);
     }
   };
+
   return (
     <button
       className={`flex justify-center items-center border w-[40px] h-full ${isFavourite ? "bg-primary" : "border-primary"} rounded-sm `}

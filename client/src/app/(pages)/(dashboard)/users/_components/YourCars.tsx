@@ -1,24 +1,24 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useDeleteSaleCarMutation, useGetAuthUserQuery } from "@/state/api";
+import { useDeleteSellCarMutation, useGetAuthUserQuery } from "@/state/api";
 import { FaCarAlt } from "react-icons/fa";
 import { Edit, Eye, Globe, Lock, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import SellCarModal from "./SellCarModal";
-import { SaleCar } from "@/types/prismaTypes";
+import { SellCar } from "@/types/prismaTypes";
 
 const YourCars = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();
-  const [deleteSaleCar] = useDeleteSaleCarMutation();
+  const [deleteSellCar] = useDeleteSellCarMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (!authUser) return <p>You are not authorized to view this page!</p>;
 
-  const carSales = authUser.userInfo.carSales as SaleCar[];
+  const carSales = authUser.userInfo.carSales as SellCar[];
 
   const handleDelete = async (id: number) => {
-    await deleteSaleCar(id);
+    await deleteSellCar(id);
   };
 
   return (
@@ -82,7 +82,7 @@ const YourCars = () => {
                 <td className="p-4">
                   <div className="flex flex-col items-center gap-2">
                     <Button asChild>
-                      <Link href={`/salecars/${id}`} className="w-full h-full">
+                      <Link href={`/sellCars/${id}`} className="w-full h-full">
                         <span>
                           <Eye className="w-4 h-4" />
                         </span>

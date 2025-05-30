@@ -1,11 +1,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { SaleCar, User } from "@/types/prismaTypes";
-import { Eye, Heart, Trash, X } from "lucide-react";
-import ViewCarModal from "./ViewCarModal";
+import { SellCar, User } from "@/types/prismaTypes";
+import { Heart, X } from "lucide-react";
 import {
   useGetAuthUserQuery,
-  useRemoveSaleCarFavouriteMutation,
+  useRemoveSellCarFavouriteMutation,
 } from "@/state/api";
 import { useAppDispatch } from "@/state/redux";
 import { setFavourites } from "@/state";
@@ -14,24 +13,24 @@ import Link from "next/link";
 const Favourites = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();
   const dispatch = useAppDispatch();
-  const [removeFavourite] = useRemoveSaleCarFavouriteMutation();
+  const [removeFavourite] = useRemoveSellCarFavouriteMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (!authUser) return <p>You are not authorized to view this page!</p>;
 
-  const favourites = authUser.userInfo.favourites as SaleCar[];
+  const favourites = authUser.userInfo.favourites as SellCar[];
 
-  const handleRemoveFavourite = async (saleCarId: number) => {
+  const handleRemoveFavourite = async (sellCarId: number) => {
     try {
       if (!authUser) return;
       const cognitoId = authUser.cognitoInfo.userId;
       const res: User = await removeFavourite({
         cognitoId,
-        saleCarId,
+        sellCarId,
       }).unwrap();
       if (res) {
         const favourites = res.favourites.filter(
-          (favourite: SaleCar) => favourite.id !== saleCarId
+          (favourite: SellCar) => favourite.id !== sellCarId
         );
         dispatch(setFavourites(favourites));
       } else {
@@ -73,7 +72,7 @@ const Favourites = () => {
                           <Link
                             target="_blank"
                             rel="noopener noreferrer"
-                            href={`/salecars/${id}`}
+                            href={`/sellCars/${id}`}
                           >
                             {title}
                           </Link>

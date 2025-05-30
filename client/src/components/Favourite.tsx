@@ -1,9 +1,8 @@
-import { useAppSelector } from "@/state/redux";
+import { SellCar } from "@/types/prismaTypes";
 import { Heart } from "lucide-react";
 
 import Link from "next/link";
-const Favourite = () => {
-  const favourites = useAppSelector(({ global }) => global.favourites);
+const Favourite = ({ favourites }: { favourites: Array<SellCar> }) => {
   return (
     <Link
       href={`/users/favourites`}
