@@ -6,7 +6,6 @@ import { locationData, locationSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-
 import { useLoadScript, type Libraries } from "@react-google-maps/api";
 import { TAddressComponentMap, TUserProfileFormData } from "@/lib/types";
 
@@ -23,34 +22,25 @@ const AddressInfo = ({
   handleSubmit: (data: Partial<TUserProfileFormData>) => void;
   authUser: AppUser;
 }) => {
+  // Load Google Maps Places API
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",
     libraries,
   });
 
-  const inputRef = useRef(null);
-  const handlePlaceChanged = async (
-    address: google.maps.places.Autocomplete
-  ) => {
-    if (!isLoaded) return;
-    const place = address.getPlace();
+  // Ref for the address input
+  const addressInputRef = useRef<HTMLInputElement>(null);
 
-    if (!place || !place.geometry) {
-      locationForm.reset();
-      return;
-    }
-    formData(place);
-  };
-
+  // React Hook Form setup
   const locationForm = useForm<locationData>({
     defaultValues: profileData,
     resolver: zodResolver(locationSchema),
   });
 
-  const formData = useCallback(
-    (data: google.maps.places.PlaceResult) => {
-      const addressComponents = data?.address_components;
-
+  // Extract and set address data from Google Places result
+  const setFormDataFromPlace = useCallback(
+    (place: google.maps.places.PlaceResult) => {
+      const addressComponents = place?.address_components;
       const componentMap: TAddressComponentMap = {
         subPremise: "",
         premise: "",
@@ -64,41 +54,48 @@ const AddressInfo = ({
 
       if (addressComponents) {
         for (const component of addressComponents) {
-          const componentType = component
-            .types[0] as keyof TAddressComponentMap;
-          if (componentMap.hasOwnProperty(componentType)) {
-            componentMap[componentType] = component.long_name;
+          const type = component.types[0] as keyof TAddressComponentMap;
+          if (componentMap.hasOwnProperty(type)) {
+            componentMap[type] = component.long_name;
           }
         }
 
         const formattedAddress =
-          data.formatted_address ||
+          place.formatted_address ||
           `${componentMap.subPremise} ${componentMap.premise} ${componentMap.street_number} ${componentMap.route}`.trim();
-        const latitude = data?.geometry?.location?.lat();
-        const longitude = data?.geometry?.location?.lng();
+        const latitude = place?.geometry?.location?.lat();
+        const longitude = place?.geometry?.location?.lng();
 
-        const newInputValue: Partial<locationData> = {
-          address: formattedAddress,
-          city: componentMap.locality,
-          state: componentMap.administrative_area_level_1,
-          country: componentMap.country,
-          postalCode: componentMap.postal_code,
-          latitude: latitude,
-          longitude: longitude,
-        };
-
-        locationForm.setValue("address", newInputValue.address || "");
-        locationForm.setValue("city", newInputValue.city || "");
-        locationForm.setValue("state", newInputValue.state || "");
-        locationForm.setValue("country", newInputValue.country || "");
-        locationForm.setValue("postalCode", newInputValue.postalCode || "");
-        locationForm.setValue("latitude", newInputValue.latitude);
-        locationForm.setValue("longitude", newInputValue.longitude);
+        locationForm.setValue("address", formattedAddress || "");
+        locationForm.setValue("city", componentMap.locality || "");
+        locationForm.setValue(
+          "state",
+          componentMap.administrative_area_level_1 || ""
+        );
+        locationForm.setValue("country", componentMap.country || "");
+        locationForm.setValue("postalCode", componentMap.postal_code || "");
+        locationForm.setValue("latitude", latitude);
+        locationForm.setValue("longitude", longitude);
       }
     },
     [locationForm]
   );
 
+  // Handle place selection from autocomplete
+  const handlePlaceChanged = useCallback(
+    (autocomplete: google.maps.places.Autocomplete) => {
+      if (!isLoaded) return;
+      const place = autocomplete.getPlace();
+      if (!place || !place.geometry) {
+        locationForm.reset();
+        return;
+      }
+      setFormDataFromPlace(place);
+    },
+    [isLoaded, setFormDataFromPlace, locationForm]
+  );
+
+  // Handle form submission
   const onSubmit = useCallback(
     async (data: locationData) => {
       if (!authUser.cognitoInfo?.userId) {
@@ -107,9 +104,10 @@ const AddressInfo = ({
       handleSubmit(data);
       cb(3);
     },
-    [authUser]
+    [authUser, handleSubmit, cb]
   );
 
+  // Initialize Google Places Autocomplete
   useEffect(() => {
     if (!isLoaded || loadError) return;
 
@@ -118,16 +116,16 @@ const AddressInfo = ({
       fields: ["address_components", "geometry"],
     };
 
-    if (inputRef.current) {
+    if (addressInputRef.current) {
       const autocomplete = new google.maps.places.Autocomplete(
-        inputRef.current,
+        addressInputRef.current,
         options
       );
       autocomplete.addListener("place_changed", () =>
         handlePlaceChanged(autocomplete)
       );
     }
-  }, [isLoaded, loadError, inputRef.current]);
+  }, [isLoaded, loadError, handlePlaceChanged]);
 
   return (
     <div className="card w-full form">
@@ -137,10 +135,11 @@ const AddressInfo = ({
           className="p-4 space-y-8"
         >
           <div className="grid sm:grid-cols-2 gap-10 items-baseline">
+            {/* Pass inputRef as prop if CustomFormField supports it */}
             <CustomFormField
               type="placesAutocomplete"
               name="address"
-              ref={inputRef}
+              ref={addressInputRef}
               label="Address"
             />
             <CustomFormField name="city" label="City*" />
@@ -152,7 +151,7 @@ const AddressInfo = ({
           <div className="grid sm:grid-cols-8 gap-10 items-baseline">
             <CustomFormField name="postalCode" label="Postal Code*" />
           </div>
-          <div className=" max-w-5/6 mx-auto flex justify-between mt-16">
+          <div className="max-w-5/6 mx-auto flex justify-between mt-16">
             <Button type="button" onClick={() => cb(1)} variant="back">
               Back
             </Button>
@@ -163,4 +162,5 @@ const AddressInfo = ({
     </div>
   );
 };
+
 export default AddressInfo;

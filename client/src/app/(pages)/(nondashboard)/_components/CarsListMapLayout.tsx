@@ -10,97 +10,139 @@ import { SellCar } from "@/types/prismaTypes";
 import { formatNumber } from "@/lib/utils";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
-const libraries = ["places"] as Libraries;
+const libraries: Libraries = ["places"];
+
+// Function to create a marker for a SellCar
+function createSellCarMarker(sellCar: SellCar, map: mapboxgl.Map) {
+  const { make, model, year } = sellCar.car;
+  const displayMake =
+    make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
+  const title = `${displayMake} ${model} ${year}`;
+  return new mapboxgl.Marker()
+    .setLngLat([sellCar.longitude, sellCar.latitude])
+    .setPopup(
+      new mapboxgl.Popup().setHTML(
+        `
+        <a href="/sellCars/${sellCar.id}" target="_blank">
+          <h1 class="font-semibold text-lg">${title}</h1>
+          <p class="text-sm text-gray-500">
+            $${formatNumber(sellCar.price)}
+          </p>
+          <p class="text-sm text-gray-500">
+            ${formatNumber(sellCar.mileage)} km
+          </p>
+        </a>
+        `
+      )
+    )
+    .addTo(map);
+}
 
 const CarsListMapLayout = () => {
-  //Get Auth User
+  // Get authenticated user
   const { data: authUser } = useGetAuthUserQuery();
-
-  let defaultLocationAddress = "";
-  if (authUser?.userInfo.location) {
-    const { address, city, state, country } = authUser.userInfo.location;
-    defaultLocationAddress =
-      address + ", " + city + " " + state + ", " + country;
-  }
-
-  // Create a ref for the map container
-  // and set initial center coordinates based on user's location or default to Melbourne
-  const mapContainerRef = useRef(null);
-  const [centerCoordinates, setCenterCoordinates] = useState<[number, number]>(
-    authUser?.userInfo.location?.coordinates || [144.9631, -37.8136]
-  );
-
-  // Load Google Maps API script
-  // This is used for the search input functionality
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",
-    libraries,
-  });
-  const locationInputRef = useRef(null);
-
-  const handlePlaceChanged = async (
-    address: google.maps.places.Autocomplete
-  ) => {
-    if (!isLoaded) return;
-    const place = address.getPlace();
-
-    if (!place || !place.geometry) {
-      return;
-    }
-    formData(place);
-  };
-
-  const formData = (data: google.maps.places.PlaceResult) => {
-    const addressComponents = data?.address_components;
-
-    if (addressComponents) {
-      const latitude = data?.geometry?.location?.lat() || 0;
-      const longitude = data?.geometry?.location?.lng() || 0;
-      setCenterCoordinates([longitude, latitude]);
-    }
-  };
-
-  // Retrieve filtered sell cars
+  const isFiltering = useAppSelector(
+    ({ global }) => global.isFiltering
+  ) as boolean;
   const filteredSellCars = useAppSelector(
     ({ global }) => global.filteredSellCars
   ) as SellCar[];
 
-  useEffect(() => {
-    if (!isLoaded || loadError) return;
+  // Default location
+  const userLocation = authUser?.userInfo.location;
+  const defaultLocationAddress = userLocation
+    ? `${userLocation.address}, ${userLocation.city} ${userLocation.state}, ${userLocation.country}`
+    : "";
 
-    // Google Maps Autocomplete
-    if (locationInputRef.current && window.google && window.google.maps) {
-      const options = {
+  // Map and input refs
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<mapboxgl.Map | null>(null);
+  const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const locationInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Center coordinates state
+  const [centerCoordinates, setCenterCoordinates] = useState<[number, number]>(
+    userLocation?.coordinates || [144.9631, -37.8136]
+  );
+
+  // Google Maps API script
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",
+    libraries,
+  });
+
+  // Handle Google Places Autocomplete
+  useEffect(() => {
+    if (
+      !isLoaded ||
+      loadError ||
+      !locationInputRef.current ||
+      !window.google?.maps
+    )
+      return;
+
+    const autocomplete = new window.google.maps.places.Autocomplete(
+      locationInputRef.current,
+      {
         componentRestrictions: { country: "au" },
         fields: ["address_components", "geometry"],
-      };
-      const autocomplete = new window.google.maps.places.Autocomplete(
-        locationInputRef.current as HTMLInputElement,
-        options
-      );
-      autocomplete.addListener("place_changed", () =>
-        handlePlaceChanged(autocomplete)
-      );
-    }
+      }
+    );
 
-    // Mapbox Map
-    if (mapContainerRef.current) {
-      const map = new mapboxgl.Map({
-        container: mapContainerRef.current as HTMLElement,
-        style: "mapbox://styles/harryhan0401/cmb8pa6lj00nu01swcrus3y71",
-        center: centerCoordinates,
-        zoom: 12,
-      });
+    autocomplete.addListener("place_changed", () => {
+      const place = autocomplete.getPlace();
+      if (place?.geometry?.location) {
+        setCenterCoordinates([
+          place.geometry.location.lng(),
+          place.geometry.location.lat(),
+        ]);
+      }
+    });
+  }, [isLoaded, loadError]);
+
+  // Initialize map
+  useEffect(() => {
+    mapRef.current = new mapboxgl.Map({
+      container: mapContainerRef.current as HTMLDivElement,
+      style: "mapbox://styles/harryhan0401/cmb8pa6lj00nu01swcrus3y71",
+      center: centerCoordinates,
+      zoom: 12,
+    });
+
+    return () => {
+      mapRef.current?.remove();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Resize map on filter change
+  useEffect(() => {
+    setTimeout(() => {
+      if (mapRef.current) mapRef.current.resize();
+    }, 100);
+  }, [isFiltering]);
+
+  // Update map center when coordinates change
+  useEffect(() => {
+    mapRef.current?.setCenter(centerCoordinates);
+    mapRef.current?.setZoom(12);
+  }, [centerCoordinates]);
+
+  useEffect(() => {
+    // Remove existing markers
+    markersRef.current.forEach((marker) => marker.remove());
+    markersRef.current = [];
+
+    if (filteredSellCars.length > 0) {
       filteredSellCars.forEach((sellCar) => {
-        const marker = createSellCarMarker(sellCar, map);
+        const marker = createSellCarMarker(sellCar, mapRef.current!);
         const markerElement = marker.getElement();
         const path = markerElement.querySelector("path[fill='#3FB1CE']");
         if (path) path.setAttribute("fill", "#000000");
+        markersRef.current.push(marker);
       });
-
-      return () => map.remove();
     }
-  }, [isLoaded, loadError, centerCoordinates]);
+  }, [filteredSellCars]);
 
   return (
     <div className="h-[calc(100vh-325px)] w-full basis-5/12 grow relative rounded-xl">
@@ -122,29 +164,4 @@ const CarsListMapLayout = () => {
   );
 };
 
-const createSellCarMarker = (sellCar: SellCar, map: mapboxgl.Map) => {
-  const { make, model, year } = sellCar.car;
-  const customMake =
-    make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
-  const title = customMake + " " + model + " " + year;
-  const marker = new mapboxgl.Marker()
-    .setLngLat([sellCar.longitude, sellCar.latitude])
-    .setPopup(
-      new mapboxgl.Popup().setHTML(
-        `
-        <div class="marker-popup">
-          <div class="marker-popup-image"></div>
-          <div>
-            <a href="/sellCars/${sellCar.id}" target="_blank" class="marker-popup-title">${title}</a>
-            <p class="marker-popup-price">
-              $${formatNumber(sellCar.price)}
-            </p>
-          </div>
-        </div>
-        `
-      )
-    )
-    .addTo(map);
-  return marker;
-};
 export default CarsListMapLayout;

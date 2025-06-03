@@ -6,20 +6,25 @@ import CarsListMapLayout from "./CarsListMapLayout";
 import { Button } from "@/components/ui/button";
 import { GridIcon, MapIcon } from "lucide-react";
 import { useGetAllSellCarsQuery } from "@/state/api";
-import { useAppDispatch } from "@/state/redux";
+import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { useQueryState } from "nuqs";
 import {
   useAmountRangeParam,
   useMakeModelsParam,
   useSelectParam,
 } from "@/lib/hooks";
-import { setFilteredSellCars, setSellCarCount } from "@/state";
+import { setFilteredSellCars, setIsFiltering, setSellCarCount } from "@/state";
 
 const CarsList = () => {
-  const [viewMode, setViewMode] = useState("grid");
+  // State to manage the view mode (grid or map)
+  const [viewMode, setViewMode] = useState<"grid" | "maps">("grid");
+
   //Fetch Car List
   const { data: sellCars, isFetching: carFetching } = useGetAllSellCarsQuery();
+
+  //Redux toolkit
   const dispatch = useAppDispatch();
+  const isFiltering = useAppSelector((state) => state.global.isFiltering);
 
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
@@ -83,30 +88,40 @@ const CarsList = () => {
     }
   }, [filteredCars]);
   return (
-    <div className="card">
-      <div className="flex justify-end items-center mb-4">
+    <div className="card w-full">
+      <div className="flex justify-between items-center mb-4">
         <Button
-          onClick={() => setViewMode("grid")}
-          variant={"outline"}
-          className={`rounded-none rounded-l-lg ${
-            viewMode === "grid" && "bg-gray-200"
-          }`}
+          onClick={() => {
+            dispatch(setIsFiltering(!isFiltering));
+          }}
+          variant="outline"
         >
-          Views in grid
-          <GridIcon />
+          {isFiltering ? "Hide Filters" : "Show Filters"}
         </Button>
-        <Button
-          onClick={() => setViewMode("maps")}
-          variant={"outline"}
-          className={`rounded-none rounded-r-lg ${
-            viewMode !== "grid" && "bg-gray-200"
-          }`}
-        >
-          Views in map
-          <MapIcon />
-        </Button>
+        <div className="flex items-center">
+          <Button
+            onClick={() => setViewMode("grid")}
+            variant={"outline"}
+            className={`rounded-none rounded-l-lg ${
+              viewMode === "grid" && "bg-gray-200"
+            }`}
+          >
+            Views in grid
+            <GridIcon />
+          </Button>
+          <Button
+            onClick={() => setViewMode("maps")}
+            variant={"outline"}
+            className={`rounded-none rounded-r-lg ${
+              viewMode !== "grid" && "bg-gray-200"
+            }`}
+          >
+            Views in map
+            <MapIcon />
+          </Button>
+        </div>
       </div>
-      {viewMode === "grid" ? <CarsListGridLayout /> : <CarsListMapLayout />}
+      {viewMode === "grid" ? <CarsListGridLayout itemsPerPage={7} /> : <CarsListMapLayout />}
     </div>
   );
 };

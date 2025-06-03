@@ -1,7 +1,6 @@
-import CarsList from "./_components/CarsList";
 import CarsType from "./_components/CarsType";
 import CarsTotal from "./_components/CarsTotal";
-import Filters from "./_components/Filters/Filters";
+import CarsDisplay from "./_components/CarsDisplay";
 
 export default function Home() {
   return (
@@ -15,14 +14,7 @@ export default function Home() {
           <CarsType />
         </div>
       </div>
-      <div className="lg:flex lg:gap-10">
-        <div className="hidden lg:block lg:flex-1/3 xl:flex-1/4">
-          <Filters />
-        </div>
-        <div className="lg:flex-2/3 xl:flex-3/4">
-          <CarsList />
-        </div>
-      </div>
+      <CarsDisplay />
     </div>
   );
 }

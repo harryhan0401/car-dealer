@@ -1,7 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { AuthUser, signOut } from "aws-amplify/auth";
-import { SaleCar } from "@/types/prismaTypes";
 import { FilterMakesModels } from "./types";
 import Cookies from "js-cookie";
 
@@ -15,7 +14,7 @@ export function capitalizeFirstLetter(word: string) {
 }
 
 export function formatNumber(number: number): string {
-  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 export function getValuesForKey<T, K extends keyof T>(arr: T[], key: K): T[K][] {
