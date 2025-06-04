@@ -4,13 +4,7 @@ import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
 
-const FavouriteForm = ({
-  authUser,
-  sellCarId,
-}: {
-  authUser: AppUser;
-  sellCarId: number;
-}) => {
+const FavouriteForm = ({ authUser, sellCarId }: FavouriteFormProps) => {
   const [updateUserFavourites, { isLoading }] =
     useAddSellCarFavouriteMutation();
 

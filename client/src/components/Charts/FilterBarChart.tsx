@@ -7,12 +7,6 @@ import {
   TooltipProps,
 } from "recharts";
 
-interface FilterBarChartProps {
-  data: { range: string; count: number; isInRange?: boolean }[];
-  localMin: number;
-  localMax: number;
-}
-
 const FilterBarChart = ({ data, localMin, localMax }: FilterBarChartProps) => {
   const CustomTooltip = ({
     active,

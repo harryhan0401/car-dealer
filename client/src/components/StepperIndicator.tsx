@@ -4,10 +4,6 @@ import clsx from "clsx";
 import { Check } from "lucide-react";
 import React, { Fragment } from "react";
 
-interface StepperIndicatorProps {
-  activeStep: number;
-}
-
 const StepperIndicator = ({ activeStep }: StepperIndicatorProps) => {
   return (
     <div className="flex justify-center items-center w-[70px] sm:w-[170px] lg:w-[250px] xl:w-[300px]">

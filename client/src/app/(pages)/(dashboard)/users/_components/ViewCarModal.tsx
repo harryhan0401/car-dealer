@@ -6,16 +6,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { SaleCar } from "@/types/prismaTypes";
+import { SellCar } from "@/types/prismaTypes";
 
 const ViewCarModal = ({
   children,
-  saleCar,
+  sellCar,
 }: {
   children: React.ReactNode;
-  saleCar: SaleCar;
+  sellCar: SellCar;
 }) => {
-  console.log(saleCar);
+  console.log(sellCar);
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -23,7 +23,7 @@ const ViewCarModal = ({
         <DialogHeader>
           <DialogTitle className="sr-only">View Sale Car</DialogTitle>
         </DialogHeader>
-        <CarCard {...saleCar} index={0} />
+        <CarCard {...sellCar} index={0} />
       </DialogContent>
     </Dialog>
   );

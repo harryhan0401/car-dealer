@@ -11,10 +11,7 @@ import Authentication from "../Authentication/Authentication";
 const NavbarMobile = ({
   children,
   navLinks,
-}: {
-  children: React.ReactNode;
-  navLinks: TNavLink[];
-}) => {
+}: NavbarMobileProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>

@@ -101,10 +101,10 @@ CREATE TABLE "SellCar" (
 CREATE TABLE "Enquiry" (
     "id" SERIAL NOT NULL,
     "sellCarId" INTEGER NOT NULL,
-    "userCognitoId" TEXT NOT NULL,
+    "buyerCognitoId" TEXT NOT NULL,
     "offerPrice" DOUBLE PRECISION NOT NULL,
     "message" TEXT NOT NULL,
-    "status" "OrderStatus" NOT NULL,
+    "status" "EnquiryStatus" NOT NULL DEFAULT 'Received',
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -117,7 +117,7 @@ CREATE TABLE "Order" (
     "sellCarId" INTEGER NOT NULL,
     "buyerCognitoId" TEXT NOT NULL,
     "totalAmount" DOUBLE PRECISION NOT NULL,
-    "status" "OrderStatus" NOT NULL,
+    "status" "OrderStatus" NOT NULL DEFAULT 'Pending',
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -129,7 +129,7 @@ CREATE TABLE "Payment" (
     "id" SERIAL NOT NULL,
     "orderId" INTEGER NOT NULL,
     "paymentMethod" "PaymentMethod" NOT NULL,
-    "paymentStatus" "PaymentStatus" NOT NULL,
+    "paymentStatus" "PaymentStatus" NOT NULL DEFAULT 'Pending',
     "amount" DOUBLE PRECISION NOT NULL,
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -168,6 +168,9 @@ CREATE UNIQUE INDEX "Car_make_model_year_type_fuel_drive_transmission_key" ON "C
 CREATE UNIQUE INDEX "SellCar_vin_key" ON "SellCar"("vin");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Enquiry_sellCarId_buyerCognitoId_key" ON "Enquiry"("sellCarId", "buyerCognitoId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Order_sellCarId_key" ON "Order"("sellCarId");
 
 -- CreateIndex
@@ -189,7 +192,7 @@ ALTER TABLE "SellCar" ADD CONSTRAINT "SellCar_carId_fkey" FOREIGN KEY ("carId") 
 ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_sellCarId_fkey" FOREIGN KEY ("sellCarId") REFERENCES "SellCar"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_userCognitoId_fkey" FOREIGN KEY ("userCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_buyerCognitoId_fkey" FOREIGN KEY ("buyerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_sellCarId_fkey" FOREIGN KEY ("sellCarId") REFERENCES "SellCar"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

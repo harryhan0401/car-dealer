@@ -15,12 +15,7 @@ const ProfileSetupConfirm = ({
   profileData,
   avatarUrl,
   authUser,
-}: {
-  cb: (step: number) => void;
-  profileData: TUserProfileFormData;
-  avatarUrl: string;
-  authUser: AppUser;
-}) => {
+}: ProfileSetupConfirmProps) => {
   const router = useRouter();
   const [updateUserProfile] = useUpdateUserProfileMutation();
 

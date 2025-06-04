@@ -1,5 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { NotificationListItemProps } from "@/lib/types";
 
 const NotificationListItem = ({
   // id,

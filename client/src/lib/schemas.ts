@@ -1,5 +1,6 @@
 // schemas/sellCarSchema.ts
 import { Fuel, Drive, Transmission, Type, Make, PreferContactMethods } from "@/lib/constants";
+import { off } from "process";
 import { z } from "zod";
 
 const imageSchema = z
@@ -97,9 +98,18 @@ export const userSchema = z.object({
         .min(10, "Phone number must be at least 10 digits")
         .max(15, "Phone number can't exceed 15 digits")
         .regex(/^\+?[0-9]+$/, "Phone number must contain only digits and an optional leading +"),
+});
+
+export const profileSchema = z.object(userSchema.shape).extend({
     preferredContactMethod: z.enum(Object.keys(PreferContactMethods) as [string, ...string[]], {
         invalid_type_error: "Preferred Contact Method must be selected"
     }),
+});
+
+export const enquirySchema = z.object({
+    cognitoId: z.string().min(1, "Cognito ID is required"),
+    offerPrice: z.coerce.number().min(0, "Offer Price must be a positive number"),
+    message: z.string().min(10, "Message must be at least 10 characters"),
 });
 
 export const locationSchema = z.object({
@@ -127,7 +137,8 @@ export const avatarSchema = z.object({
 })
 
 export type locationData = z.infer<typeof locationSchema>;
-export type userData = z.infer<typeof userSchema>;
+export type profileData = z.infer<typeof profileSchema>;
+export type enquiryData = z.infer<typeof enquirySchema>;
 export type avatarData = z.infer<typeof avatarSchema>;
 
 

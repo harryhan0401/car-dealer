@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import Providers from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 const sfProDisplay = localFont({
   src: [
     {
@@ -66,6 +67,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sfProDisplay.className} antialiased`}>
         <Providers>{children}</Providers>
+        <Toaster closeButton />
       </body>
     </html>
   );

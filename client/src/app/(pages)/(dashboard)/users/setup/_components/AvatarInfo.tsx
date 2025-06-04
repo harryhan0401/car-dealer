@@ -6,8 +6,6 @@ import { avatarData, avatarSchema } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
-
-import { TUserProfileFormData } from "@/lib/types";
 import "./styles.css";
 
 const AvatarInfo = ({
@@ -16,13 +14,7 @@ const AvatarInfo = ({
   handleSubmit,
   handleAvatarUpload,
   authUser,
-}: {
-  profileData: TUserProfileFormData;
-  cb: (step: number) => void;
-  handleSubmit: (data: Partial<TUserProfileFormData>) => void;
-  handleAvatarUpload: (url: string) => void;
-  authUser: AppUser;
-}) => {
+}: AvatarInfoProps) => {
   const avatarForm = useForm<avatarData>({
     defaultValues: profileData,
     resolver: zodResolver(avatarSchema),

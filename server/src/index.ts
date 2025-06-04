@@ -10,6 +10,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 import userRoutes from "./routes/userRoutes";
 import sellCarRoutes from "./routes/sellCarRoutes";
 import carRoutes from "./routes/carRoutes";
+import enquiryRoutes from "./routes/enquiryRoutes";
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
 app.use("/users", authMiddleware(["user"]), userRoutes);
 app.use("/admins", authMiddleware(["admin"]), userRoutes);
 app.use("/sellCars", sellCarRoutes);
+app.use("/enquiries", authMiddleware(["user", "admin"]), enquiryRoutes);
 app.use("/cars", authMiddleware(["user", "admin"]), carRoutes);
 
 /* SERVER */

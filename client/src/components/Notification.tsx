@@ -9,7 +9,7 @@ import {
 
 import NotificationListItem from "./NotificationListItem";
 const Notification = () => {
-  const notificationListItem: NotificationListItem[] = [
+  const notificationListItem: TNotificationListItem[] = [
     {
       id: 1,
       avatar: "https://randomuser.me/api/portraits",

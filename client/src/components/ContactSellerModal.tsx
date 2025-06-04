@@ -7,8 +7,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import ContactSellerForm from "./Forms/ContactSellerForm";
+import SignInSignUp from "./Authentication/SignInSignUp";
 
-const ContactSellerModal = ({ children }: { children: React.ReactNode }) => {
+const ContactSellerModal = ({
+  children,
+  sellCarId,
+  authUser,
+}: ContactSellerModalProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
@@ -16,11 +21,16 @@ const ContactSellerModal = ({ children }: { children: React.ReactNode }) => {
         <DialogHeader>
           <DialogTitle>Contact Seller</DialogTitle>
           <DialogDescription>
-            Fill out the form below to contact the seller directly.
+            {authUser
+              ? "Fill out the form below to contact the seller directly."
+              : "Please log in to contact the seller."}
           </DialogDescription>
         </DialogHeader>
-        
-        <ContactSellerForm />
+        {authUser ? (
+          <ContactSellerForm user={authUser} sellCarId={sellCarId} />
+        ) : (
+          <SignInSignUp />
+        )}
       </DialogContent>
     </Dialog>
   );

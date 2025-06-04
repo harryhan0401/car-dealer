@@ -11,15 +11,7 @@ import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { handleSignOut } from "@/lib/utils";
 import { Avatar } from "../ui/avatar";
 
-const Profile = ({
-  userRole,
-  userImage,
-  username,
-}: {
-  userRole: string;
-  userImage: string;
-  username: string;
-}) => {
+const Profile = ({ userRole, userImage, username }: ProfileProps) => {
   const router = useRouter();
 
   return (

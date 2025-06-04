@@ -1,26 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiStoneWheel } from "react-icons/gi";
 import { Bolt, Flame, Fuel, MapPin, Phone } from "lucide-react";
 import { Button } from "../ui/button";
-import { SellCar, User } from "@/types/prismaTypes";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
 import ContactSellerModal from "../ContactSellerModal";
-
-type CarCardProps = {
-  id: number;
-  mileage: number;
-  price: number;
-  description: string;
-  car: SellCar;
-  seller: User;
-  index: number;
-  isHighlight?: boolean;
-  isReview?: boolean;
-};
 
 const CarCard = ({
   id,
@@ -138,7 +127,7 @@ const CarCard = ({
               id="car-interaction-group"
               className={`flex ${authUser && "gap-5"}`}
             >
-              <ContactSellerModal>
+              <ContactSellerModal authUser={authUser} sellCarId={id}>
                 <Button className="flex-1" aria-label="Contact Seller">
                   <span>
                     <Phone />

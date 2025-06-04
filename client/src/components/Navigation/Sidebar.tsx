@@ -3,9 +3,7 @@ import {
   Car,
   Heart,
   Home,
-  Inbox,
   LogOut,
-  MessageSquare,
   Settings,
   User,
 } from "lucide-react";

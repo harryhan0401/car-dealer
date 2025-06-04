@@ -1,7 +1,8 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { AuthUser, signOut } from "aws-amplify/auth";
-import { FilterMakesModels } from "./types";
+import { FilterMakesModels, MutationMessages } from "./types";
+import { toast } from "sonner"
 import Cookies from "js-cookie";
 
 
@@ -148,4 +149,20 @@ export const saveProfileSetupStatus = (isProfileSetup: boolean) => {
     secure: process.env.NODE_ENV === "production", // Ensure secure cookie in production
     sameSite: "Strict", // for better CSRF protection
   });
+};
+
+export const withToast = async <T>(
+  mutationFn: Promise<T>,
+  messages: Partial<MutationMessages>
+) => {
+  const { success, error } = messages;
+
+  try {
+    const result = await mutationFn;
+    if (success) toast.success(success);
+    return result;
+  } catch (err) {
+    if (error) toast.error(error);
+    throw err;
+  }
 };

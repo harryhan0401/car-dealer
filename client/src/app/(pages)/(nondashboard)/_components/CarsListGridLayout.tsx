@@ -4,13 +4,11 @@ import ProductPagination from "@/components/Pagination";
 import { useQueryState } from "nuqs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAppSelector } from "@/state/redux";
-import { SellCar } from "@/types/prismaTypes";
+import { Car, SellCar } from "@/types/prismaTypes";
 
 export default function CarsListGridLayout({
   itemsPerPage = 6, //If don't pass nay value to itemsPerPage prop, its default value is 6
-}: {
-  itemsPerPage?: number;
-}) {
+}: CarsListGridLayoutProps) {
   const filteredSellCars = useAppSelector(
     ({ global }) => global.filteredSellCars
   ) as SellCar[];

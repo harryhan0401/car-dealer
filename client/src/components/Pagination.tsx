@@ -8,13 +8,7 @@ import { useEffect } from "react";
 function scrollToTop() {
   window.scroll({ top: 0, behavior: "instant" });
 }
-const ProductPagination = ({
-  numOfItems,
-  itemsPerPage,
-}: {
-  numOfItems: number;
-  itemsPerPage: number;
-}) => {
+const Pagination = ({ numOfItems, itemsPerPage }: PaginationProps) => {
   const totalPages = Math.ceil(numOfItems / itemsPerPage);
 
   const [currentPage, setCurrentPage] = useQueryState("page", {
@@ -85,4 +79,4 @@ const ProductPagination = ({
   );
 };
 
-export default ProductPagination;
+export default Pagination;

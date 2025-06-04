@@ -7,7 +7,6 @@ import {
   useRemoveSellCarFavouriteMutation,
 } from "@/state/api";
 import { useAppDispatch } from "@/state/redux";
-import { setFavourites } from "@/state";
 import Link from "next/link";
 
 const Favourites = () => {

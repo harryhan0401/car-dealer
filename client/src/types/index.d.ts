@@ -1,6 +1,7 @@
 import { AuthUser } from "aws-amplify/auth";
 import { MotionProps as OzriginalMotionProps } from "framer-motion";
-import { User } from "./prismaTypes";
+import { SellCar, User } from "./prismaTypes";
+import { avatarData, CarData, locationData, SellCarData, userData } from "./schemas";
 
 declare module "framer-motion" {
   interface MotionProps extends OriginalMotionProps {
@@ -9,62 +10,175 @@ declare module "framer-motion" {
 }
 
 declare global {
-  // enum Fuel {
-  //   Petrol = "Petrol",
-  //   Diesel = "Diesel",
-  //   Hybrid = "Hybrid",
-  //   Electric = "Electric",
-  //   Ethanol = "Ethanol",
-  //   Unleaded = "Unleaded",
-  //   E10 = "E10",
-  //   PremiumUnleaded95 = "PremiumUnleaded95",
-  //   PremiumUnleaded98 = "PremiumUnleaded98",
-  //   Biofuels = "Biofuels",
-  //   E85 = "E85",
-  //   Hydrogen = "Hydrogen",
-  //   NaturalGas = "NaturalGas",
-  //   Biodiesel = "Biodiesel",
-  //   LPG = "LPG"
-  // }
+  //Types
+  type TCarType = {
+    id: number;
+    title: string;
+    type: string;
+    make: string;
+    model: string;
+    year: number;
+    price: number;
+    mileage: number;
+    fuel: string,
+    transmission: string,
+    horsePower: number,
+    drive: string,
+    location: string,
+    description: string,
+    image: string,
+  }
 
-  // enum Drive {
-  //   FWD = "FWD",
-  //   AWD = "AWD",
-  //   RWD = "RWD",
-  //   FourWD = "FourWD"
-  // }
+  type TFilterSelect = {
+    query: string;
+    selections: string[];
+    setValue: (value: string | null) => void;
+  }
 
-  // enum Transmission {
-  //   Manual = "Manual",
-  //   Automatic = "Automatic",
-  //   SemiAutomatic = "SemiAutomatic",
-  //   CVT = "CVT",
-  //   DualClutch = "DualClutch",
-  //   Tiptronic = "Tiptronic",
-  //   STronic = "STronic",
-  //   SevenSpeedAutomatic = "SevenSpeedAutomatic",
-  //   SixSpeedAutomatic = "SixSpeedAutomatic",
-  //   EightSpeedAutomatic = "EightSpeedAutomatic"
-  // }
+  type TFilterMakesModels = {
+    make: string;
+    models: string[]
+  }
 
-  // enum OrderStatus {
-  //   Pending = "Pending",
-  //   Denied = "Denied",
-  //   Confirmed = "Confirmed",
-  //   Paid = "Paid"
-  // }
+  type TStepType = {
+    selectedMakesModels: FilterMakesModels[];
+    setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
+    sellCars: SellCar[];
+  }
 
-  // enum PaymentMethod {
-  //   Cash = "Cash",
-  //   CreditCard = "CreditCard",
-  //   DebitCard = "DebitCard",
-  //   Paypal = "Paypal",
-  //   BankTransfer = "BankTransfer",
-  //   Bitcoin = "Bitcoin",
-  //   ApplePay = "ApplePay",
-  //   GooglePay = "GooglePay"
-  // }
+  type TNavLink = {
+    label: string;
+    path: string;
+  }
 
+  type TNotificationListItem = {
+    id: number;
+    avatar: string;
+    title: string;
+    message: string;
+    read: boolean;
+  }
+
+  type TSellCarFormData = SellCarData & CarData;
+
+  type TProfileSetupSteps = {
+    step: number;
+    title: string;
+  }
+
+  type TOption = { value: string; label: string }
+
+  type TAddressComponentMap = {
+    subPremise: string;
+    premise: string;
+    street_number: string;
+    route: string;
+    country: string;
+    postal_code: string;
+    locality: string;
+    administrative_area_level_1: string;
+  };
+
+  type TMutationMessages = {
+    success?: string;
+    error: string;
+  }
+
+  type TUserProfileFormData = userData & locationData & avatarData
+
+  //Interfaces
+
+  interface NotificationListItemProps {
+    avatar: string;
+    title: string;
+    message: string;
+  }
+  interface PaginationProps {
+    numOfItems: number;
+    itemsPerPage: number;
+  }
+  interface StepDisplayProps {
+    stepNumber: number;
+    title: string;
+  }
+  interface StepperIndicatorProps {
+    activeStep: number;
+  }
+  interface NavLinkProps {
+    path: string;
+    label: string;
+  }
+  interface ContactSellerFormProps {
+    user: AppUser;
+    sellCarId: number;
+  }
+  interface FavouriteFormProps {
+    authUser: AppUser;
+    sellCarId: number;
+  }
+  interface FilterBarChartProps {
+    data: { range: string; count: number; isInRange?: boolean }[];
+    localMin: number;
+    localMax: number;
+  }
+  interface CarCardProps {
+    id: number;
+    mileage: number;
+    price: number;
+    description: string;
+    car: SellCar;
+    seller: User;
+    index: number;
+    isHighlight?: boolean;
+    isReview?: boolean;
+  }
+  interface ProfileProps {
+    userRole: string;
+    userImage: string;
+    username: string;
+  }
+  interface CarsListGridLayoutProps {
+    itemsPerPage?: number;
+  }
+  interface FilterHeaderProps {
+    filterTitle: string;
+    isDisabled: boolean;
+    handleResetClick?: () => void;
+  }
+  interface AddressInfoProps {
+    profileData: TUserProfileFormData;
+    cb: (step: number) => void;
+    handleSubmit: (data: Partial<TUserProfileFormData>) => void;
+    authUser: AppUser;
+  }
+  interface NavbarMobileProps {
+    children: React.ReactNode;
+    navLinks: TNavLink[];
+  }
+  interface ContactSellerModalProps {
+    children: React.ReactNode;
+    sellCarId: number;
+    authUser?: AppUser;
+  }
+  interface SellCarFormStepProps {
+    sellCarFormData: TSellCarFormData;
+    handleFormSubmit?: any;
+    cb: (name: string) => void;
+  }
+
+  interface AvatarInfoProps {
+    profileData: TUserProfileFormData;
+    cb: (step: number) => void;
+    handleSubmit: (data: Partial<TUserProfileFormData>) => void;
+    handleAvatarUpload: (url: string) => void;
+    authUser: AppUser;
+  }
+  interface ProfileSetupConfirmProps {
+    cb: (step: number) => void;
+    profileData: TUserProfileFormData;
+    avatarUrl: string;
+    authUser: AppUser;
+  }
   interface AppUser {
     cognitoInfo: AuthUser;
     userInfo: User;

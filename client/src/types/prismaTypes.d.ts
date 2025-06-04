@@ -6712,10 +6712,10 @@ export namespace Prisma {
   export type EnquiryMinAggregateOutputType = {
     id: number | null
     sellCarId: number | null
-    userCognitoId: string | null
+    buyerCognitoId: string | null
     offerPrice: number | null
     message: string | null
-    status: $Enums.OrderStatus | null
+    status: $Enums.EnquiryStatus | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -6723,10 +6723,10 @@ export namespace Prisma {
   export type EnquiryMaxAggregateOutputType = {
     id: number | null
     sellCarId: number | null
-    userCognitoId: string | null
+    buyerCognitoId: string | null
     offerPrice: number | null
     message: string | null
-    status: $Enums.OrderStatus | null
+    status: $Enums.EnquiryStatus | null
     dateTimeCreated: Date | null
     dateTimeUpdated: Date | null
   }
@@ -6734,7 +6734,7 @@ export namespace Prisma {
   export type EnquiryCountAggregateOutputType = {
     id: number
     sellCarId: number
-    userCognitoId: number
+    buyerCognitoId: number
     offerPrice: number
     message: number
     status: number
@@ -6759,7 +6759,7 @@ export namespace Prisma {
   export type EnquiryMinAggregateInputType = {
     id?: true
     sellCarId?: true
-    userCognitoId?: true
+    buyerCognitoId?: true
     offerPrice?: true
     message?: true
     status?: true
@@ -6770,7 +6770,7 @@ export namespace Prisma {
   export type EnquiryMaxAggregateInputType = {
     id?: true
     sellCarId?: true
-    userCognitoId?: true
+    buyerCognitoId?: true
     offerPrice?: true
     message?: true
     status?: true
@@ -6781,7 +6781,7 @@ export namespace Prisma {
   export type EnquiryCountAggregateInputType = {
     id?: true
     sellCarId?: true
-    userCognitoId?: true
+    buyerCognitoId?: true
     offerPrice?: true
     message?: true
     status?: true
@@ -6879,10 +6879,10 @@ export namespace Prisma {
   export type EnquiryGroupByOutputType = {
     id: number
     sellCarId: number
-    userCognitoId: string
+    buyerCognitoId: string
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status: $Enums.EnquiryStatus
     dateTimeCreated: Date
     dateTimeUpdated: Date
     _count: EnquiryCountAggregateOutputType | null
@@ -6909,7 +6909,7 @@ export namespace Prisma {
   export type EnquirySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sellCarId?: boolean
-    userCognitoId?: boolean
+    buyerCognitoId?: boolean
     offerPrice?: boolean
     message?: boolean
     status?: boolean
@@ -6922,7 +6922,7 @@ export namespace Prisma {
   export type EnquirySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sellCarId?: boolean
-    userCognitoId?: boolean
+    buyerCognitoId?: boolean
     offerPrice?: boolean
     message?: boolean
     status?: boolean
@@ -6935,7 +6935,7 @@ export namespace Prisma {
   export type EnquirySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sellCarId?: boolean
-    userCognitoId?: boolean
+    buyerCognitoId?: boolean
     offerPrice?: boolean
     message?: boolean
     status?: boolean
@@ -6948,7 +6948,7 @@ export namespace Prisma {
   export type EnquirySelectScalar = {
     id?: boolean
     sellCarId?: boolean
-    userCognitoId?: boolean
+    buyerCognitoId?: boolean
     offerPrice?: boolean
     message?: boolean
     status?: boolean
@@ -6956,7 +6956,7 @@ export namespace Prisma {
     dateTimeUpdated?: boolean
   }
 
-  export type EnquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sellCarId" | "userCognitoId" | "offerPrice" | "message" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["enquiry"]>
+  export type EnquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sellCarId" | "buyerCognitoId" | "offerPrice" | "message" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["enquiry"]>
   export type EnquiryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
@@ -6979,10 +6979,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       sellCarId: number
-      userCognitoId: string
+      buyerCognitoId: string
       offerPrice: number
       message: string
-      status: $Enums.OrderStatus
+      status: $Enums.EnquiryStatus
       dateTimeCreated: Date
       dateTimeUpdated: Date
     }, ExtArgs["result"]["enquiry"]>
@@ -7412,10 +7412,10 @@ export namespace Prisma {
   interface EnquiryFieldRefs {
     readonly id: FieldRef<"Enquiry", 'Int'>
     readonly sellCarId: FieldRef<"Enquiry", 'Int'>
-    readonly userCognitoId: FieldRef<"Enquiry", 'String'>
+    readonly buyerCognitoId: FieldRef<"Enquiry", 'String'>
     readonly offerPrice: FieldRef<"Enquiry", 'Float'>
     readonly message: FieldRef<"Enquiry", 'String'>
-    readonly status: FieldRef<"Enquiry", 'OrderStatus'>
+    readonly status: FieldRef<"Enquiry", 'EnquiryStatus'>
     readonly dateTimeCreated: FieldRef<"Enquiry", 'DateTime'>
     readonly dateTimeUpdated: FieldRef<"Enquiry", 'DateTime'>
   }
@@ -11327,7 +11327,7 @@ export namespace Prisma {
   export const EnquiryScalarFieldEnum: {
     id: 'id',
     sellCarId: 'sellCarId',
-    userCognitoId: 'userCognitoId',
+    buyerCognitoId: 'buyerCognitoId',
     offerPrice: 'offerPrice',
     message: 'message',
     status: 'status',
@@ -11550,6 +11550,20 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'EnquiryStatus'
+   */
+  export type EnumEnquiryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnquiryStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'EnquiryStatus[]'
+   */
+  export type ListEnumEnquiryStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EnquiryStatus[]'>
     
 
 
@@ -11968,10 +11982,10 @@ export namespace Prisma {
     NOT?: EnquiryWhereInput | EnquiryWhereInput[]
     id?: IntFilter<"Enquiry"> | number
     sellCarId?: IntFilter<"Enquiry"> | number
-    userCognitoId?: StringFilter<"Enquiry"> | string
+    buyerCognitoId?: StringFilter<"Enquiry"> | string
     offerPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
-    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
     sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
@@ -11981,7 +11995,7 @@ export namespace Prisma {
   export type EnquiryOrderByWithRelationInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    userCognitoId?: SortOrder
+    buyerCognitoId?: SortOrder
     offerPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
@@ -11993,24 +12007,25 @@ export namespace Prisma {
 
   export type EnquiryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    enquiryId?: EnquiryEnquiryIdCompoundUniqueInput
     AND?: EnquiryWhereInput | EnquiryWhereInput[]
     OR?: EnquiryWhereInput[]
     NOT?: EnquiryWhereInput | EnquiryWhereInput[]
     sellCarId?: IntFilter<"Enquiry"> | number
-    userCognitoId?: StringFilter<"Enquiry"> | string
+    buyerCognitoId?: StringFilter<"Enquiry"> | string
     offerPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
-    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
     sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
+  }, "id" | "enquiryId">
 
   export type EnquiryOrderByWithAggregationInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    userCognitoId?: SortOrder
+    buyerCognitoId?: SortOrder
     offerPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
@@ -12029,10 +12044,10 @@ export namespace Prisma {
     NOT?: EnquiryScalarWhereWithAggregatesInput | EnquiryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Enquiry"> | number
     sellCarId?: IntWithAggregatesFilter<"Enquiry"> | number
-    userCognitoId?: StringWithAggregatesFilter<"Enquiry"> | string
+    buyerCognitoId?: StringWithAggregatesFilter<"Enquiry"> | string
     offerPrice?: FloatWithAggregatesFilter<"Enquiry"> | number
     message?: StringWithAggregatesFilter<"Enquiry"> | string
-    status?: EnumOrderStatusWithAggregatesFilter<"Enquiry"> | $Enums.OrderStatus
+    status?: EnumEnquiryStatusWithAggregatesFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
     dateTimeUpdated?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
   }
@@ -12616,7 +12631,7 @@ export namespace Prisma {
   export type EnquiryCreateInput = {
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     sellCar: SellCarCreateNestedOneWithoutEnquiriesInput
@@ -12626,10 +12641,10 @@ export namespace Prisma {
   export type EnquiryUncheckedCreateInput = {
     id?: number
     sellCarId: number
-    userCognitoId: string
+    buyerCognitoId: string
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -12637,7 +12652,7 @@ export namespace Prisma {
   export type EnquiryUpdateInput = {
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     sellCar?: SellCarUpdateOneRequiredWithoutEnquiriesNestedInput
@@ -12647,10 +12662,10 @@ export namespace Prisma {
   export type EnquiryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     sellCarId?: IntFieldUpdateOperationsInput | number
-    userCognitoId?: StringFieldUpdateOperationsInput | string
+    buyerCognitoId?: StringFieldUpdateOperationsInput | string
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12658,10 +12673,10 @@ export namespace Prisma {
   export type EnquiryCreateManyInput = {
     id?: number
     sellCarId: number
-    userCognitoId: string
+    buyerCognitoId: string
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -12669,7 +12684,7 @@ export namespace Prisma {
   export type EnquiryUpdateManyMutationInput = {
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12677,17 +12692,17 @@ export namespace Prisma {
   export type EnquiryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     sellCarId?: IntFieldUpdateOperationsInput | number
-    userCognitoId?: StringFieldUpdateOperationsInput | string
+    buyerCognitoId?: StringFieldUpdateOperationsInput | string
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderCreateInput = {
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     sellCar: SellCarCreateNestedOneWithoutOrderInput
@@ -12700,7 +12715,7 @@ export namespace Prisma {
     sellCarId: number
     buyerCognitoId: string
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     payment?: PaymentUncheckedCreateNestedOneWithoutOrderInput
@@ -12732,7 +12747,7 @@ export namespace Prisma {
     sellCarId: number
     buyerCognitoId: string
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -12756,7 +12771,7 @@ export namespace Prisma {
 
   export type PaymentCreateInput = {
     paymentMethod: $Enums.PaymentMethod
-    paymentStatus: $Enums.PaymentStatus
+    paymentStatus?: $Enums.PaymentStatus
     amount: number
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
@@ -12767,7 +12782,7 @@ export namespace Prisma {
     id?: number
     orderId: number
     paymentMethod: $Enums.PaymentMethod
-    paymentStatus: $Enums.PaymentStatus
+    paymentStatus?: $Enums.PaymentStatus
     amount: number
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
@@ -12796,7 +12811,7 @@ export namespace Prisma {
     id?: number
     orderId: number
     paymentMethod: $Enums.PaymentMethod
-    paymentStatus: $Enums.PaymentStatus
+    paymentStatus?: $Enums.PaymentStatus
     amount: number
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
@@ -13431,11 +13446,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type EnumOrderStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
+  export type EnumEnquiryStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnquiryStatus | EnumEnquiryStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnquiryStatusFilter<$PrismaModel> | $Enums.EnquiryStatus
   }
 
   export type SellCarScalarRelationFilter = {
@@ -13443,10 +13458,15 @@ export namespace Prisma {
     isNot?: SellCarWhereInput
   }
 
+  export type EnquiryEnquiryIdCompoundUniqueInput = {
+    sellCarId: number
+    buyerCognitoId: string
+  }
+
   export type EnquiryCountOrderByAggregateInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    userCognitoId?: SortOrder
+    buyerCognitoId?: SortOrder
     offerPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
@@ -13463,7 +13483,7 @@ export namespace Prisma {
   export type EnquiryMaxOrderByAggregateInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    userCognitoId?: SortOrder
+    buyerCognitoId?: SortOrder
     offerPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
@@ -13474,7 +13494,7 @@ export namespace Prisma {
   export type EnquiryMinOrderByAggregateInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    userCognitoId?: SortOrder
+    buyerCognitoId?: SortOrder
     offerPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
@@ -13488,14 +13508,21 @@ export namespace Prisma {
     offerPrice?: SortOrder
   }
 
-  export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+  export type EnumEnquiryStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnquiryStatus | EnumEnquiryStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnquiryStatusWithAggregatesFilter<$PrismaModel> | $Enums.EnquiryStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEnquiryStatusFilter<$PrismaModel>
+    _max?: NestedEnumEnquiryStatusFilter<$PrismaModel>
+  }
+
+  export type EnumOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
-    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
+    not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
   }
 
   export type PaymentNullableScalarRelationFilter = {
@@ -13543,6 +13570,16 @@ export namespace Prisma {
     id?: SortOrder
     sellCarId?: SortOrder
     totalAmount?: SortOrder
+  }
+
+  export type EnumOrderStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOrderStatusWithAggregatesFilter<$PrismaModel> | $Enums.OrderStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOrderStatusFilter<$PrismaModel>
+    _max?: NestedEnumOrderStatusFilter<$PrismaModel>
   }
 
   export type EnumPaymentMethodFilter<$PrismaModel = never> = {
@@ -14216,8 +14253,8 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type EnumOrderStatusFieldUpdateOperationsInput = {
-    set?: $Enums.OrderStatus
+  export type EnumEnquiryStatusFieldUpdateOperationsInput = {
+    set?: $Enums.EnquiryStatus
   }
 
   export type SellCarUpdateOneRequiredWithoutEnquiriesNestedInput = {
@@ -14258,6 +14295,10 @@ export namespace Prisma {
     create?: XOR<PaymentCreateWithoutOrderInput, PaymentUncheckedCreateWithoutOrderInput>
     connectOrCreate?: PaymentCreateOrConnectWithoutOrderInput
     connect?: PaymentWhereUniqueInput
+  }
+
+  export type EnumOrderStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OrderStatus
   }
 
   export type SellCarUpdateOneRequiredWithoutOrderNestedInput = {
@@ -14609,6 +14650,23 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedEnumEnquiryStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnquiryStatus | EnumEnquiryStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnquiryStatusFilter<$PrismaModel> | $Enums.EnquiryStatus
+  }
+
+  export type NestedEnumEnquiryStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.EnquiryStatus | EnumEnquiryStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.EnquiryStatus[] | ListEnumEnquiryStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumEnquiryStatusWithAggregatesFilter<$PrismaModel> | $Enums.EnquiryStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumEnquiryStatusFilter<$PrismaModel>
+    _max?: NestedEnumEnquiryStatusFilter<$PrismaModel>
+  }
+
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.OrderStatus | EnumOrderStatusFieldRefInput<$PrismaModel>
     in?: $Enums.OrderStatus[] | ListEnumOrderStatusFieldRefInput<$PrismaModel>
@@ -14739,7 +14797,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutBuyerInput = {
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     sellCar: SellCarCreateNestedOneWithoutOrderInput
@@ -14750,7 +14808,7 @@ export namespace Prisma {
     id?: number
     sellCarId: number
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     payment?: PaymentUncheckedCreateNestedOneWithoutOrderInput
@@ -14823,7 +14881,7 @@ export namespace Prisma {
   export type EnquiryCreateWithoutBuyerInput = {
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     sellCar: SellCarCreateNestedOneWithoutEnquiriesInput
@@ -14834,7 +14892,7 @@ export namespace Prisma {
     sellCarId: number
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -15020,10 +15078,10 @@ export namespace Prisma {
     NOT?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
     id?: IntFilter<"Enquiry"> | number
     sellCarId?: IntFilter<"Enquiry"> | number
-    userCognitoId?: StringFilter<"Enquiry"> | string
+    buyerCognitoId?: StringFilter<"Enquiry"> | string
     offerPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
-    status?: EnumOrderStatusFilter<"Enquiry"> | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
   }
@@ -15171,7 +15229,7 @@ export namespace Prisma {
   export type EnquiryCreateWithoutSellCarInput = {
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     buyer: UserCreateNestedOneWithoutEnquiriesInput
@@ -15179,10 +15237,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedCreateWithoutSellCarInput = {
     id?: number
-    userCognitoId: string
+    buyerCognitoId: string
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -15199,7 +15257,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutSellCarInput = {
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     buyer: UserCreateNestedOneWithoutOrdersInput
@@ -15210,7 +15268,7 @@ export namespace Prisma {
     id?: number
     buyerCognitoId: string
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     payment?: PaymentUncheckedCreateNestedOneWithoutOrderInput
@@ -15741,7 +15799,7 @@ export namespace Prisma {
 
   export type PaymentCreateWithoutOrderInput = {
     paymentMethod: $Enums.PaymentMethod
-    paymentStatus: $Enums.PaymentStatus
+    paymentStatus?: $Enums.PaymentStatus
     amount: number
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
@@ -15750,7 +15808,7 @@ export namespace Prisma {
   export type PaymentUncheckedCreateWithoutOrderInput = {
     id?: number
     paymentMethod: $Enums.PaymentMethod
-    paymentStatus: $Enums.PaymentStatus
+    paymentStatus?: $Enums.PaymentStatus
     amount: number
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
@@ -15883,7 +15941,7 @@ export namespace Prisma {
 
   export type OrderCreateWithoutPaymentInput = {
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
     sellCar: SellCarCreateNestedOneWithoutOrderInput
@@ -15895,7 +15953,7 @@ export namespace Prisma {
     sellCarId: number
     buyerCognitoId: string
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -16140,7 +16198,7 @@ export namespace Prisma {
     id?: number
     sellCarId: number
     totalAmount: number
-    status: $Enums.OrderStatus
+    status?: $Enums.OrderStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -16168,7 +16226,7 @@ export namespace Prisma {
     sellCarId: number
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -16345,7 +16403,7 @@ export namespace Prisma {
   export type EnquiryUpdateWithoutBuyerInput = {
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     sellCar?: SellCarUpdateOneRequiredWithoutEnquiriesNestedInput
@@ -16356,7 +16414,7 @@ export namespace Prisma {
     sellCarId?: IntFieldUpdateOperationsInput | number
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16366,7 +16424,7 @@ export namespace Prisma {
     sellCarId?: IntFieldUpdateOperationsInput | number
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16497,10 +16555,10 @@ export namespace Prisma {
 
   export type EnquiryCreateManySellCarInput = {
     id?: number
-    userCognitoId: string
+    buyerCognitoId: string
     offerPrice: number
     message: string
-    status: $Enums.OrderStatus
+    status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
     dateTimeUpdated?: Date | string
   }
@@ -16508,7 +16566,7 @@ export namespace Prisma {
   export type EnquiryUpdateWithoutSellCarInput = {
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
     buyer?: UserUpdateOneRequiredWithoutEnquiriesNestedInput
@@ -16516,20 +16574,20 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateWithoutSellCarInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userCognitoId?: StringFieldUpdateOperationsInput | string
+    buyerCognitoId?: StringFieldUpdateOperationsInput | string
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type EnquiryUncheckedUpdateManyWithoutSellCarInput = {
     id?: IntFieldUpdateOperationsInput | number
-    userCognitoId?: StringFieldUpdateOperationsInput | string
+    buyerCognitoId?: StringFieldUpdateOperationsInput | string
     offerPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
-    status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
+    status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
     dateTimeUpdated?: DateTimeFieldUpdateOperationsInput | Date | string
   }

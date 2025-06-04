@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useCallback, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useLoadScript, type Libraries } from "@react-google-maps/api";
-import { TAddressComponentMap, TUserProfileFormData } from "@/lib/types";
 
 const libraries = ["places"] as Libraries;
 
@@ -16,12 +15,7 @@ const AddressInfo = ({
   cb,
   handleSubmit,
   authUser,
-}: {
-  profileData: TUserProfileFormData;
-  cb: (step: number) => void;
-  handleSubmit: (data: Partial<TUserProfileFormData>) => void;
-  authUser: AppUser;
-}) => {
+}: AddressInfoProps) => {
   // Load Google Maps Places API
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || "",

@@ -232,25 +232,27 @@ model SellCar {
 }
 
 model Enquiry {
-  id              Int         @id @default(autoincrement())
+  id              Int           @id @default(autoincrement())
   sellCarId       Int
-  userCognitoId   String
+  buyerCognitoId  String
   offerPrice      Float
   message         String
-  status          OrderStatus
-  dateTimeCreated DateTime    @default(now())
-  dateTimeUpdated DateTime    @default(now()) @updatedAt
+  status          EnquiryStatus @default(Received)
+  dateTimeCreated DateTime      @default(now())
+  dateTimeUpdated DateTime      @default(now()) @updatedAt
 
   sellCar SellCar @relation(fields: [sellCarId], references: [id])
-  buyer   User    @relation(fields: [userCognitoId], references: [cognitoId])
+  buyer   User    @relation(fields: [buyerCognitoId], references: [cognitoId])
+
+  @@unique(name: "enquiryId", [sellCarId, buyerCognitoId]) // Ensure a user can only make one enquiry per car
 }
 
 model Order {
   id              Int         @id @default(autoincrement())
-  sellCarId       Int         @unique
+  sellCarId       Int         @unique // Each car can only have one order
   buyerCognitoId  String
   totalAmount     Float
-  status          OrderStatus
+  status          OrderStatus @default(Pending)
   dateTimeCreated DateTime    @default(now())
   dateTimeUpdated DateTime    @default(now()) @updatedAt
 
@@ -263,7 +265,7 @@ model Payment {
   id              Int           @id @default(autoincrement())
   orderId         Int           @unique
   paymentMethod   PaymentMethod
-  paymentStatus   PaymentStatus
+  paymentStatus   PaymentStatus @default(Pending)
   amount          Float
   dateTimeCreated DateTime      @default(now())
   dateTimeUpdated DateTime      @default(now()) @updatedAt

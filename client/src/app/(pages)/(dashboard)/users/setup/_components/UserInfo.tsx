@@ -2,8 +2,8 @@
 import { CustomFormField } from "@/components/FormField";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
-import { preferContactMethods, PreferContactMethods } from "@/lib/constants";
-import { userData, userSchema } from "@/lib/schemas";
+import { preferContactMethods } from "@/lib/constants";
+import { profileData, profileSchema } from "@/lib/schemas";
 import { TUserProfileFormData } from "@/lib/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -24,12 +24,12 @@ const UserInfo = ({
   const router = useRouter();
 
   profileData.email = authUser.userInfo.email;
-  const profileForm = useForm<userData>({
+  const profileForm = useForm<profileData>({
     defaultValues: profileData,
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(profileSchema),
   });
   const onSubmit = useCallback(
-    async (data: userData) => {
+    async (data: profileData) => {
       if (!authUser.cognitoInfo?.userId) {
         throw new Error("No seller ID found");
       }

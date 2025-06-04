@@ -2,12 +2,14 @@ import ContactSellerModal from "@/components/ContactSellerModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { formatNumber } from "@/lib/utils";
+import { useGetAuthUserQuery } from "@/state/api";
 import { SellCar } from "@/types/prismaTypes";
 import { Bolt, Fuel, Phone } from "lucide-react";
 import { GiStoneWheel } from "react-icons/gi";
 import { IoSpeedometerOutline } from "react-icons/io5";
 
 const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
+  const { data: authUser } = useGetAuthUserQuery();
   const { price, description, mileage } = sellCar;
   const { fuel, drive } = sellCar.car;
   const { firstName, lastName, email, phone, avatarUrl } = sellCar.seller;
@@ -20,7 +22,7 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
           className="flex gap-5 items-center"
         >
           <div className="font-semibold text-2xl">${formatNumber(price)}</div>
-          <ContactSellerModal>
+          <ContactSellerModal authUser={authUser} sellCarId={sellCar.id}>
             <Button>
               <span>
                 <Phone />
@@ -66,10 +68,7 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
           {description}
         </p>
       </section>
-      <section
-        id="seller-details"
-        className="py-5 rounded-lg bg-neutral-300"
-      >
+      <section id="seller-details" className="py-5 rounded-lg bg-neutral-300">
         <div className="flex flex-col gap-1 items-center">
           <Avatar className="rounded-sm z-10">
             <AvatarImage src={avatarUrl} />

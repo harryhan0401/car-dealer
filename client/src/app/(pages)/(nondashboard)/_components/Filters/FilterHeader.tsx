@@ -1,8 +1,3 @@
-interface FilterHeaderProps {
-  filterTitle: string;
-  isDisabled: boolean;
-  handleResetClick?: () => void;
-}
 const FilterHeader = ({
   filterTitle,
   isDisabled,
