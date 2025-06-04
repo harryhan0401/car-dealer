@@ -1,3 +1,4 @@
+import ContactSellerButton from "@/components/ContactSellerButton";
 import ContactSellerModal from "@/components/ContactSellerModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -22,14 +23,11 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
           className="flex gap-5 items-center"
         >
           <div className="font-semibold text-2xl">${formatNumber(price)}</div>
-          <ContactSellerModal authUser={authUser} sellCarId={sellCar.id}>
-            <Button>
-              <span>
-                <Phone />
-              </span>
-              Contact Seller
-            </Button>
-          </ContactSellerModal>
+          <ContactSellerButton
+            authUser={authUser}
+            sellCarId={sellCar.id}
+            enquiries={sellCar.enquiries}
+          />
         </section>
         <section
           id="car-statistics"

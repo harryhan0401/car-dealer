@@ -5,7 +5,7 @@ import CarsListGridLayout from "./CarsListGridLayout";
 import CarsListMapLayout from "./CarsListMapLayout";
 import { Button } from "@/components/ui/button";
 import { GridIcon, MapIcon } from "lucide-react";
-import { useGetAllSellCarsQuery } from "@/state/api";
+import { useGetSellCarsQuery } from "@/state/api";
 import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { useQueryState } from "nuqs";
 import {
@@ -20,7 +20,7 @@ const CarsList = () => {
   const [viewMode, setViewMode] = useState<"grid" | "maps">("grid");
 
   //Fetch Car List
-  const { data: sellCars, isFetching: carFetching } = useGetAllSellCarsQuery();
+  const { data: sellCars, isFetching: carFetching } = useGetSellCarsQuery();
 
   //Redux toolkit
   const dispatch = useAppDispatch();
@@ -121,7 +121,11 @@ const CarsList = () => {
           </Button>
         </div>
       </div>
-      {viewMode === "grid" ? <CarsListGridLayout itemsPerPage={7} /> : <CarsListMapLayout />}
+      {viewMode === "grid" ? (
+        <CarsListGridLayout itemsPerPage={7} />
+      ) : (
+        <CarsListMapLayout />
+      )}
     </div>
   );
 };

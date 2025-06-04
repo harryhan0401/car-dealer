@@ -32,10 +32,10 @@ export default function CarsListGridLayout({
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {filteredSellCars
               ?.slice(startIndex, endIndex)
-              .map((car, index) => (
+              .map((sellCar, index) => (
                 <CarCard
-                  key={car.id}
-                  {...car}
+                  key={sellCar.id}
+                  {...sellCar}
                   index={index}
                   isHighlight={index === 2 ? true : false}
                 />

@@ -1,6 +1,6 @@
 import { AuthUser } from "aws-amplify/auth";
 import { MotionProps as OzriginalMotionProps } from "framer-motion";
-import { SellCar, User } from "./prismaTypes";
+import { Enquiry, SellCar, User } from "./prismaTypes";
 import { avatarData, CarData, locationData, SellCarData, userData } from "./schemas";
 
 declare module "framer-motion" {
@@ -126,6 +126,7 @@ declare global {
     mileage: number;
     price: number;
     description: string;
+    enquiries: Enquiry[];
     car: SellCar;
     seller: User;
     index: number;
@@ -178,6 +179,11 @@ declare global {
     profileData: TUserProfileFormData;
     avatarUrl: string;
     authUser: AppUser;
+  }
+  interface ContactSellerButtonProps {
+    authUser?: AppUser;
+    sellCarId: number;
+    enquiries: Enquiry[];
   }
   interface AppUser {
     cognitoInfo: AuthUser;

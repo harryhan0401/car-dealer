@@ -1,5 +1,6 @@
 "use client";
 
+import { useGetSellCarsQuery } from "@/state/api";
 import FilterMakesModels from "./FilterMakeModel/FilterMakesModels";
 import FilterMileage from "./FilterRange/FilterMileage";
 import FilterPrice from "./FilterRange/FilterPrice";
@@ -8,10 +9,9 @@ import FilterDrive from "./FilterSelect/FilterDrive";
 import FilterFuel from "./FilterSelect/FilterFuel";
 import FilterTransmission from "./FilterSelect/FilterTransmission";
 import ResetAll from "./ResetAll";
-import { useGetAllSellCarsQuery } from "@/state/api";
 
 const Filters = () => {
-  const { data: sellCars, isFetching: carFetching } = useGetAllSellCarsQuery();
+  const { data: sellCars, isFetching: carFetching } = useGetSellCarsQuery();
   return (
     <>
       {!carFetching && sellCars && (

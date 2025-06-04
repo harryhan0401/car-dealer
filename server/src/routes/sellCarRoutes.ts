@@ -2,7 +2,6 @@ import express from "express"
 import {
     getSellCars,
     getSellCarById,
-    getAllSellCars,
     createSellCar,
     deleteSellCar
 } from "../controllers/sellCarControllers"
@@ -15,7 +14,6 @@ const upload = multer({ storage: storage });
 const router = express.Router();
 
 router.get("/", getSellCars);
-router.get("/all", getAllSellCars);
 router.get("/:sellCarId", getSellCarById);
 router.post("/", authMiddleware(["user", "admin"]), upload.array("photos"), createSellCar);
 //Delete sale car

@@ -3,19 +3,21 @@
 import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiStoneWheel } from "react-icons/gi";
-import { Bolt, Flame, Fuel, MapPin, Phone } from "lucide-react";
+import { Bolt, Check, Eye, Flame, Fuel, MapPin, Phone } from "lucide-react";
 import { Button } from "../ui/button";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
 import ContactSellerModal from "../ContactSellerModal";
+import ContactSellerButton from "../ContactSellerButton";
 
 const CarCard = ({
   id,
   mileage,
   price,
   description,
+  enquiries,
   car,
   seller,
   index,
@@ -127,14 +129,12 @@ const CarCard = ({
               id="car-interaction-group"
               className={`flex ${authUser && "gap-5"}`}
             >
-              <ContactSellerModal authUser={authUser} sellCarId={id}>
-                <Button className="flex-1" aria-label="Contact Seller">
-                  <span>
-                    <Phone />
-                  </span>
-                  Contact Seller
-                </Button>
-              </ContactSellerModal>
+              <ContactSellerButton
+                authUser={authUser}
+                sellCarId={id}
+                enquiries={enquiries}
+              />
+
               {authUser && (
                 <div>
                   <FavouriteForm authUser={authUser} sellCarId={id} />

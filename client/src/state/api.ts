@@ -64,19 +64,12 @@ export const api = createApi({
     }),
 
     //Sell cars related endpoints
-    getSellCars: build.query<SellCar[], { take: number; skip: number; }>({
-      query: ({ take, skip }) => {
-
-        let url = `/sellCars?take=${take}&skip=${skip}`;
-        return url;
-      }
-    }),
     getSellCarById: build.query<SellCar, number>({
       query: (id) => `/sellCars/${id}`,
       providesTags: (id) => [{ type: "SellCars", id }],
     }),
-    getAllSellCars: build.query<SellCar[], void>({
-      query: () => "/sellCars/all",
+    getSellCars: build.query<SellCar[], void>({
+      query: () => "/sellCars",
       providesTags: (result) =>
         result
           ? [
@@ -177,4 +170,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useGetAllSellCarsQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useCreateEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;
+export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useCreateEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;

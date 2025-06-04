@@ -5,7 +5,7 @@ import { wktToGeoJSON } from "@terraformer/wkt";
 const prisma = new PrismaClient();
 
 
-export const getAllSellCars = async (_req: Request, res: Response): Promise<void> => {
+export const getSellCars = async (_req: Request, res: Response): Promise<void> => {
     try {
         const sellCars = await prisma.sellCar.findMany({
             where: { "isPublic": true },
@@ -17,6 +17,12 @@ export const getAllSellCars = async (_req: Request, res: Response): Promise<void
                         location: true, // Include location object inside seller
                     },
                 },
+                enquiries: {
+                    select: {
+                        id: true,
+                        buyerCognitoId: true
+                    }
+                }
             },
         });
         // Attach coordinates to each sellCar
@@ -50,33 +56,6 @@ export const getAllSellCars = async (_req: Request, res: Response): Promise<void
     }
 }
 
-export const getSellCars = async (req: Request, res: Response): Promise<void> => {
-    const take = parseInt(req.query.take as string) || 40;
-    const skip = parseInt(req.query.skip as string) || 0;
-    try {
-        const sellCars = await prisma.sellCar.findMany({
-            include: {
-                car: true,
-                seller: {
-                    include: {
-                        location: true // Include location object inside seller
-                    }
-                }
-            }
-            , take
-            , skip
-        });
-
-        if (sellCars.length > 0) {
-            res.json(sellCars);
-        } else {
-            res.status(404).json({ message: "There is no available sale car" });
-        }
-    } catch (error: any) {
-        console.error("Error retrieving all sale cars:", error);
-        res.status(500).json({ message: `Error retrieving all sale cars: ${error.message}` });
-    }
-}
 export const getSellCarById = async (req: Request, res: Response): Promise<void> => {
     try {
         const { sellCarId } = req.params;
@@ -85,6 +64,12 @@ export const getSellCarById = async (req: Request, res: Response): Promise<void>
             include: {
                 car: true,
                 seller: true,
+                enquiries: {
+                    select: {
+                        id: true,
+                        buyerCognitoId: true
+                    }
+                }
             },
         });
 
