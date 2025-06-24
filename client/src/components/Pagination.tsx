@@ -5,6 +5,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 
+let renderCount = 1;
+
 function scrollToTop() {
   window.scroll({ top: 0, behavior: "instant" });
 }
@@ -32,9 +34,11 @@ const Pagination = ({ numOfItems, itemsPerPage }: PaginationProps) => {
     serialize: (value) => String(value),
   });
 
-  /*Reset Page param to 1 if the total pages after filtering is changed  */
   useEffect(() => {
-    setCurrentPage(1);
+    if (renderCount > 2) {
+      setCurrentPage(1);
+    }
+    renderCount++;
   }, [totalPages]);
 
   return (

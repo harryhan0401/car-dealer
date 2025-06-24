@@ -3,7 +3,6 @@ import { createNewUserInDatabase, saveProfileSetupStatus, withToast } from "@/li
 import { Enquiry, SellCar, User } from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
-import { get } from "http";
 
 export const api = createApi({
   baseQuery: fetchBaseQuery({
@@ -18,7 +17,7 @@ export const api = createApi({
     }
   }),
   reducerPath: "api",
-  tagTypes: ["Users", "SellCars"],
+  tagTypes: ["Users", "SellCars", "Enquiries"],
   endpoints: (build) => ({
     //Auth related endpoints
     /*
@@ -110,16 +109,62 @@ export const api = createApi({
     }),
 
     //Enquiries related endpoints
-    createEnquiry: build.mutation<Enquiry, { sellCarId: number, enquiryData: enquiryData }>({
+    getEnquiries: build.query<Enquiry[], { cognitoId: string }>({
+      query: ({ cognitoId }) => ({
+        url: "/enquiries",
+        method: "POST",
+        body: { cognitoId },
+      }),
+      providesTags: ["Enquiries"],
+      async onQueryStarted(_, { queryFulfilled }) {
+        await withToast(queryFulfilled, {
+          error: "Failed to fetch enquiries.",
+        });
+      },
+    }),
+
+    createEnquiry: build.mutation<Enquiry, { sellCarId: number; enquiryData: enquiryData }>({
       query: ({ sellCarId, enquiryData }) => ({
         url: `/enquiries/${sellCarId}`,
-        method: 'POST',
+        method: "POST",
+        body: enquiryData,
+      }),
+      async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
+        try {
+          const { data: newEnquiry } = await queryFulfilled;
+
+          dispatch(
+            api.util.updateQueryData("getSellCars", undefined, (draft) => {
+              const car = draft.find((c: SellCar) => c.id === sellCarId);
+              if (car) {
+                if (!Array.isArray(car.enquiries)) {
+                  car.enquiries = [];
+                }
+                car.enquiries.push(newEnquiry);
+              }
+            })
+          );
+
+          await withToast(Promise.resolve({ data: newEnquiry }), {
+            success: "Enquiry has been received!",
+          });
+        } catch (err) {
+          await withToast(Promise.reject(err), {
+            error: "Failed to send enquiry! Please try again.",
+          });
+        }
+      },
+    }),
+    updateEnquiry: build.mutation<Enquiry, { enquiryId: number, enquiryData: enquiryData }>({
+      query: ({ enquiryId, enquiryData }) => ({
+        url: `/enquiries/${enquiryId}`,
+        method: 'PUT',
         body: enquiryData,
       }),
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
-          success: "Enquiry has been received!",
-          error: "Failed to send enquiry! Please try again.",
+          success: "Enquiry has been updated!",
+          error: "Failed to update enquiry! Please try again.",
         });
       },
     }),
@@ -147,8 +192,9 @@ export const api = createApi({
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
       async onQueryStarted(_, { queryFulfilled }) {
-        await withToast(queryFulfilled, {
-          success: "Added to favourites!",
+        const { data } = await queryFulfilled;
+        await withToast(Promise.resolve({ data }), {
+          success: data?.message || "Added to favourites!",
           error: "Failed to add to favourites! Please try again.",
         });
       },
@@ -170,4 +216,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useCreateEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;
+export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useGetEnquiriesQuery, useCreateEnquiryMutation, useUpdateEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;

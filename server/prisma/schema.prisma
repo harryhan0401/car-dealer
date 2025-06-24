@@ -129,7 +129,7 @@ enum OrderStatus {
 }
 
 enum EnquiryStatus {
-  Received
+  Pending
   Accepted
   Declined
 }
@@ -237,7 +237,7 @@ model Enquiry {
   buyerCognitoId  String
   offerPrice      Float
   message         String
-  status          EnquiryStatus @default(Received)
+  status          EnquiryStatus @default(Pending)
   dateTimeCreated DateTime      @default(now())
   dateTimeUpdated DateTime      @default(now()) @updatedAt
 

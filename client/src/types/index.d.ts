@@ -111,6 +111,8 @@ declare global {
   interface ContactSellerFormProps {
     user: AppUser;
     sellCarId: number;
+    listPrice: number;
+    cb: () => void;
   }
   interface FavouriteFormProps {
     authUser: AppUser;
@@ -159,6 +161,7 @@ declare global {
   interface ContactSellerModalProps {
     children: React.ReactNode;
     sellCarId: number;
+    listPrice: number;
     authUser?: AppUser;
   }
   interface SellCarFormStepProps {
@@ -166,7 +169,6 @@ declare global {
     handleFormSubmit?: any;
     cb: (name: string) => void;
   }
-
   interface AvatarInfoProps {
     profileData: TUserProfileFormData;
     cb: (step: number) => void;
@@ -183,7 +185,12 @@ declare global {
   interface ContactSellerButtonProps {
     authUser?: AppUser;
     sellCarId: number;
+    listPrice: number;
     enquiries: Enquiry[];
+  }
+  interface ViewEnquiryModalProps {
+    children: React.ReactNode;
+    enquiry: Enquiry;
   }
   interface AppUser {
     cognitoInfo: AuthUser;

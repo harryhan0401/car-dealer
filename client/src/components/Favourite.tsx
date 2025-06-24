@@ -2,7 +2,7 @@ import { SellCar } from "@/types/prismaTypes";
 import { Heart } from "lucide-react";
 
 import Link from "next/link";
-const Favourite = ({ favourites }: { favourites: Array<SellCar> }) => {
+const Favourite = ({ favourites }: { favourites: SellCar[] }) => {
   return (
     <Link
       href={`/users/favourites`}

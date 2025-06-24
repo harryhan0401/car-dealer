@@ -31,17 +31,27 @@ export default function CarTypes() {
         <button
           key={name}
           value={name}
-          className={`flex flex-col items-center border-[1.6px] rounded-lg hover:border-black p-2 ${type === name ? "border-black" : ""} `}
-          onClick={(event) => handleTypeClick(event)}
+          className={`flex flex-col items-center border-2 rounded-xl transition-all duration-200 shadow-sm px-3 py-2
+            ${
+              type === name
+                ? "border-primary bg-primary/10 shadow-lg scale-105 ring-2 ring-primary/20"
+                : "border-gray-300 bg-white hover:border-primary hover:bg-primary/10"
+            }
+          `}
+          onClick={handleTypeClick}
         >
           <Image
             src={image}
             height={50}
             width={100}
             alt={name}
-            className="pointer-events-none h-[50px] object-contain object-center"
+            className="pointer-events-none h-[50px] object-contain object-center mb-1"
           />
-          <div className="text-sm pointer-events-none">{name}</div>
+          <div
+            className={`text-sm font-medium pointer-events-none ${type === name ? "text-primary" : "text-gray-700"}`}
+          >
+            {name}
+          </div>
         </button>
       ))}
     </div>

@@ -170,9 +170,15 @@ export const addFavourite = async (req: Request, res: Response): Promise<void> =
                 },
             });
 
-            // Return the updated user
-            if (updatedUser)
-                res.status(200).json(updatedUser);
+            // Return the updated user with a specific message
+            if (updatedUser) {
+                res.status(200).json({
+                    message: isFavourite
+                        ? "Removed from favourites!"
+                        : "Added to favourites!",
+                    user: updatedUser
+                });
+            }
         } else {
             res.status(404).json({ message: 'User not found' });
         }

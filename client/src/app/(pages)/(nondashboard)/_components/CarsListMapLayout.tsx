@@ -151,11 +151,11 @@ const CarsListMapLayout = () => {
         ref={mapContainerRef}
         style={{ height: "100%", width: "100%" }}
       />
-      <div className="absolute w-3/4 top-5 left-5 flex items-center bg-white bg-opacity-70 px-4 py-2 rounded shadow z-10">
+      <div className="absolute z-10 flex items-center w-3/4 px-4 py-2 bg-white rounded shadow top-5 left-5 bg-opacity-70">
         <input
           type="text"
           ref={locationInputRef}
-          className="bg-transparent outline-none text-black font-bold w-full"
+          className="w-full font-bold text-black bg-transparent outline-none"
           placeholder="Search location..."
           defaultValue={defaultLocationAddress}
         />

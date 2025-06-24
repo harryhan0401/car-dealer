@@ -20,7 +20,7 @@ CREATE TYPE "Transmission" AS ENUM ('Manual', 'Automatic', 'SemiAutomatic', 'CVT
 CREATE TYPE "OrderStatus" AS ENUM ('Pending', 'Declined', 'Confirmed', 'Paid');
 
 -- CreateEnum
-CREATE TYPE "EnquiryStatus" AS ENUM ('Received', 'Accepted', 'Declined');
+CREATE TYPE "EnquiryStatus" AS ENUM ('Pending', 'Accepted', 'Declined');
 
 -- CreateEnum
 CREATE TYPE "PaymentMethod" AS ENUM ('Cash', 'CreditCard', 'DebitCard', 'Paypal', 'BankTransfer', 'Bitcoin', 'ApplePay', 'GooglePay');
@@ -104,7 +104,7 @@ CREATE TABLE "Enquiry" (
     "buyerCognitoId" TEXT NOT NULL,
     "offerPrice" DOUBLE PRECISION NOT NULL,
     "message" TEXT NOT NULL,
-    "status" "EnquiryStatus" NOT NULL DEFAULT 'Received',
+    "status" "EnquiryStatus" NOT NULL DEFAULT 'Pending',
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 

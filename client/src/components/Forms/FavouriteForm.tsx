@@ -22,7 +22,9 @@ const FavouriteForm = ({ authUser, sellCarId }: FavouriteFormProps) => {
         sellCarId,
       }).unwrap();
       if (res) {
-        const favourites = res.favourites.map((fav: { id: number }) => fav.id);
+        const favourites = res.user.favourites.map(
+          (fav: { id: number }) => fav.id
+        );
         if (favourites.includes(sellCarId)) {
           setIsFavourite(true);
         } else {

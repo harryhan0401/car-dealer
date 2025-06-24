@@ -11,7 +11,7 @@ import { IoSpeedometerOutline } from "react-icons/io5";
 
 const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
   const { data: authUser } = useGetAuthUserQuery();
-  const { price, description, mileage } = sellCar;
+  const { id, price, description, mileage, enquiries } = sellCar;
   const { fuel, drive } = sellCar.car;
   const { firstName, lastName, email, phone, avatarUrl } = sellCar.seller;
   const sellerName = firstName + " " + lastName;
@@ -25,8 +25,9 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
           <div className="font-semibold text-2xl">${formatNumber(price)}</div>
           <ContactSellerButton
             authUser={authUser}
-            sellCarId={sellCar.id}
-            enquiries={sellCar.enquiries}
+            sellCarId={id}
+            listPrice={price}
+            enquiries={enquiries}
           />
         </section>
         <section

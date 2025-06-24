@@ -1,6 +1,7 @@
 "use client";
 import {
   Car,
+  FileText,
   Heart,
   Home,
   LogOut,
@@ -19,10 +20,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import CompanyLogo from "../CompanyLogo";
+import CompanyLogo from "@/components/CompanyLogo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { handleSignOut } from "@/lib/utils";
 
 // Menu items.
@@ -36,6 +37,11 @@ const items = [
     title: "Listings",
     url: "/users/listings",
     icon: Car,
+  },
+  {
+    title: "Enquiries",
+    url: "/users/enquiries",
+    icon: FileText,
   },
   {
     title: "Favourites",

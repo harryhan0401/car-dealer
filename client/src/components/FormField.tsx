@@ -57,6 +57,7 @@ interface FormFieldProps {
   labelClassName?: string;
   inputClassName?: string;
   value?: string;
+  min?: number;
   disabled?: boolean;
   multiple?: boolean;
   isIcon?: boolean;
@@ -85,6 +86,7 @@ export const CustomFormField = ({
   multiple = false,
   isIcon = false,
   initialValue,
+  min = 0,
   stylePanelLayout = "integrated",
   filePondLabelIdle,
   isOptionalPhotoField = false,
@@ -195,6 +197,7 @@ export const CustomFormField = ({
           <Input
             type="number"
             placeholder={placeholder}
+            min={min}
             {...field}
             className={`border-gray-200 p-4 ${inputClassName}`}
             disabled={disabled}
@@ -245,7 +248,7 @@ export const CustomFormField = ({
           } relative ${className}`}
         >
           {type !== "switch" && type !== "file" && (
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <FormLabel
                 className={`text-sm ${labelClassName}`}
                 asChild={type === "select" || type === "radio"}

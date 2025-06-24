@@ -196,7 +196,7 @@ export type OrderStatus = (typeof OrderStatus)[keyof typeof OrderStatus]
 
 
 export const EnquiryStatus: {
-  Received: 'Received',
+  Pending: 'Pending',
   Accepted: 'Accepted',
   Declined: 'Declined'
 };

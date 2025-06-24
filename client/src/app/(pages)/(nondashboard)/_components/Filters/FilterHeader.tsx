@@ -4,10 +4,10 @@ const FilterHeader = ({
   handleResetClick,
 }: FilterHeaderProps) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex items-center justify-between">
       <div className="text-xl">{filterTitle}</div>
       <button
-        className="text-primary hover:text-primary/90 cursor-pointer disabled:text-primary/50 disabled:pointer-events-none"
+        className="cursor-pointer text-primary hover:text-primary/90 disabled:text-primary/50 disabled:pointer-events-none"
         disabled={isDisabled}
         onClick={handleResetClick}
       >

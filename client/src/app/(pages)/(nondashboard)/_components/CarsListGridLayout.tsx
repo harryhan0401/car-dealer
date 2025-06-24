@@ -1,6 +1,6 @@
 "use client";
 import CarCard from "@/components/Cards/CarCard";
-import ProductPagination from "@/components/Pagination";
+import Pagination from "@/components/Pagination";
 import { useQueryState } from "nuqs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAppSelector } from "@/state/redux";
@@ -22,14 +22,14 @@ export default function CarsListGridLayout({
   return (
     <>
       {filteredSellCars?.length == 0 ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           {Array.from({ length: 6 }, (_, index) => (
             <Skeleton key={index} className="h-[900px] lg:h-[500px] w-full" />
           ))}
         </div>
       ) : (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
             {filteredSellCars
               ?.slice(startIndex, endIndex)
               .map((sellCar, index) => (
@@ -42,7 +42,7 @@ export default function CarsListGridLayout({
               ))}
           </div>
           <div className="mt-5 me-2">
-            <ProductPagination
+            <Pagination
               numOfItems={filteredSellCars.length}
               itemsPerPage={itemsPerPage}
             />

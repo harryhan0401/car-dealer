@@ -4,7 +4,7 @@ export const initialState = {
   uniqueMakes: [],
   sellCarCount: 0,
   filteredSellCars: [],
-  isFiltering: false,
+  isFiltersOpen: false,
   isMapLayout: false,
 };
 
@@ -21,8 +21,8 @@ export const globalSlice = createSlice({
     setFilteredSellCars: (state, action) => {
       state.filteredSellCars = action.payload;
     },
-    setIsFiltering: (state, action) => {
-      state.isFiltering = action.payload;
+    setIsFiltersOpen: (state, action) => {
+      state.isFiltersOpen = action.payload;
     },
     setIsMapLayout: (state, action) => {
       state.isMapLayout = action.payload;
@@ -30,6 +30,6 @@ export const globalSlice = createSlice({
   },
 });
 
-export const { setUniqueMakes, setSellCarCount, setFilteredSellCars, setIsFiltering, setIsMapLayout } = globalSlice.actions;
+export const { setUniqueMakes, setSellCarCount, setFilteredSellCars, setIsFiltersOpen, setIsMapLayout } = globalSlice.actions;
 
 export default globalSlice.reducer;

@@ -17,12 +17,8 @@ export const getSellCars = async (_req: Request, res: Response): Promise<void> =
                         location: true, // Include location object inside seller
                     },
                 },
-                enquiries: {
-                    select: {
-                        id: true,
-                        buyerCognitoId: true
-                    }
-                }
+                enquiries: true
+
             },
         });
         // Attach coordinates to each sellCar
@@ -64,12 +60,7 @@ export const getSellCarById = async (req: Request, res: Response): Promise<void>
             include: {
                 car: true,
                 seller: true,
-                enquiries: {
-                    select: {
-                        id: true,
-                        buyerCognitoId: true
-                    }
-                }
+                enquiries: true
             },
         });
 

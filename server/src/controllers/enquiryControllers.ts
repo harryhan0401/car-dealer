@@ -1,30 +1,27 @@
 import { Request, Response } from "express";
-
 import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
-export const getEnquiryBySellCarId = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const { sellCarId } = req.params;
 
-        if (!sellCarId) {
-            res.status(400).json({ error: "Sell car ID is required." });
-            return;
-        }
+const prisma = new PrismaClient();
+
+
+export  const getEnquiries = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { cognitoId } = req.body;
 
         const enquiries = await prisma.enquiry.findMany({
-            where: {
-                sellCarId: Number(sellCarId),
+            where: { buyerCognitoId: cognitoId },
+            include: {
+                sellCar: {
+                    include: {
+                        car: true,
+                        seller: true
+                    }
+                }
             },
         });
-
-        if (enquiries.length === 0) {
-            res.status(404).json({ message: "No enquiries found for this sell car ID." });
-            return;
-        }
-
         res.status(200).json(enquiries);
     } catch (error) {
-        res.status(500).json({ error: "Failed to retrieve enquiries." });
+        res.status(500).json({ error: "Failed to fetch enquiries." });
     }
 }
 export const createEnquiry = async (req: Request, res: Response): Promise<void> => {
@@ -59,6 +56,25 @@ export const createEnquiry = async (req: Request, res: Response): Promise<void> 
         res.status(201).json(enquiry);
     } catch (error) {
         res.status(500).json({ error: "Failed to create enquiry." });
+    }
+}
+
+export const updateEnquiry = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { enquiryId } = req.params;
+        const { offerPrice, message } = req.body;
+
+        const enquiry = await prisma.enquiry.update({
+            where: { id: +enquiryId },
+            data: {
+                offerPrice: +offerPrice,
+                message,
+            },
+        });
+
+        res.status(200).json(enquiry);
+    } catch (error) {
+        res.status(500).json({ error: "Failed to update enquiry." });
     }
 }
 

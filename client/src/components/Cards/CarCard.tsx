@@ -9,7 +9,6 @@ import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
-import ContactSellerModal from "../ContactSellerModal";
 import ContactSellerButton from "../ContactSellerButton";
 
 const CarCard = ({
@@ -51,16 +50,16 @@ const CarCard = ({
             }
             height={250}
             width={500}
-            className="w-full object-cover object-center rounded-2xl"
+            className="object-cover object-center w-full rounded-2xl"
             alt="Car"
             quality={[0, 1, 2, 3, 4].includes(index) ? 0 : 100}
             priority={[0, 1, 2, 3, 4].includes(index)}
           />
         </Link>
-        <div className="py-3 px-4 flex flex-col gap-3">
+        <div className="flex flex-col gap-3 px-4 py-3">
           <section
             id="car-title"
-            className="flex flex-wrap justify-between items-center text-lg"
+            className="flex flex-wrap items-center justify-between text-lg"
           >
             <p>{title}</p>
             <p
@@ -80,12 +79,12 @@ const CarCard = ({
           >
             <section
               id="car_mileage"
-              className="border rounded-lg p-2 bg-neutral"
+              className="p-2 border rounded-lg bg-neutral"
             >
               <IoSpeedometerOutline size={24} />
               <p>{mileage} km</p>
             </section>
-            <section id="car_fuel" className="border rounded-lg p-2 bg-neutral">
+            <section id="car_fuel" className="p-2 border rounded-lg bg-neutral">
               {fuel.toLowerCase() === "petrol" ||
               fuel.toLowerCase() === "diesel" ? (
                 <p>
@@ -101,14 +100,14 @@ const CarCard = ({
             </section>
             {/* <section
               id="car-horse-power"
-              className="border rounded-lg p-2 bg-neutral"
+              className="p-2 border rounded-lg bg-neutral"
             >
               <PiEngineLight size={24} />
               <p>{horsePower} kW</p>
             </section> */}
             <section
               id="car-drive"
-              className="border rounded-lg p-2 bg-neutral"
+              className="p-2 border rounded-lg bg-neutral"
             >
               <GiStoneWheel size={24} />
               <p>{drive.toLowerCase() === "fourwd" ? "4WD" : drive}</p>
@@ -132,6 +131,7 @@ const CarCard = ({
               <ContactSellerButton
                 authUser={authUser}
                 sellCarId={id}
+                listPrice={price}
                 enquiries={enquiries}
               />
 
