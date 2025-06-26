@@ -65,7 +65,7 @@ export const api = createApi({
     //Sell cars related endpoints
     getSellCarById: build.query<SellCar, number>({
       query: (id) => `/sellCars/${id}`,
-      providesTags: (id) => [{ type: "SellCars", id }],
+      providesTags: (_result, _error, id) => [{ type: "SellCars", id }],
     }),
     getSellCars: build.query<SellCar[], void>({
       query: () => "/sellCars",
@@ -115,7 +115,7 @@ export const api = createApi({
         method: "POST",
         body: { cognitoId },
       }),
-      providesTags: ["Enquiries"],
+      providesTags: [{ type: "Enquiries", id: "LIST" }],
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
           error: "Failed to fetch enquiries.",
@@ -123,16 +123,17 @@ export const api = createApi({
       },
     }),
 
-    createEnquiry: build.mutation<Enquiry, { sellCarId: number; enquiryData: enquiryData }>({
-      query: ({ sellCarId, enquiryData }) => ({
-        url: `/enquiries/${sellCarId}`,
-        method: "POST",
-        body: enquiryData,
-      }),
-      async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
-        try {
-          const { data: newEnquiry } = await queryFulfilled;
+    upsertEnquiry: build.mutation<Enquiry, { sellCarId: number; enquiryData: enquiryData }>(
+      {
+        query: ({ sellCarId, enquiryData }) => ({
+          url: `/enquiries/${sellCarId}`,
+          method: 'PUT',
+          body: enquiryData,
+        }),
+        async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
+          const { data: enquiry, meta } = await queryFulfilled;
 
+          // Update getSellCars
           dispatch(
             api.util.updateQueryData("getSellCars", undefined, (draft) => {
               const car = draft.find((c: SellCar) => c.id === sellCarId);
@@ -140,33 +141,71 @@ export const api = createApi({
                 if (!Array.isArray(car.enquiries)) {
                   car.enquiries = [];
                 }
-                car.enquiries.push(newEnquiry);
+                const index = car.enquiries.findIndex((e: Enquiry) => e.id === enquiry.id);
+                if (index !== -1) {
+                  car.enquiries[index] = enquiry;
+                } else {
+                  car.enquiries.push(enquiry);
+                }
               }
             })
           );
 
-          await withToast(Promise.resolve({ data: newEnquiry }), {
-            success: "Enquiry has been received!",
+          // Update getSellCarById
+          dispatch(
+            api.util.updateQueryData("getSellCarById", sellCarId, (draft) => {
+              if (!Array.isArray(draft.enquiries)) {
+                draft.enquiries = [];
+              }
+              const index = draft.enquiries.findIndex((e: Enquiry) => e.id === enquiry.id);
+              if (index !== -1) {
+                draft.enquiries[index] = enquiry;
+              } else {
+                draft.enquiries.push(enquiry);
+              }
+            })
+          );
+          const status = meta?.response?.status;
+          let successMessage;
+          if (status === 200) {
+            successMessage = "Enquiry has been updated!";
+          } else if (status === 201) {
+            successMessage = "Enquiry has been sent!";
+          }
+          await withToast(queryFulfilled, {
+            success: successMessage,
+            error: "Failed to send/update enquiry! Please try again.",
           });
-        } catch (err) {
-          await withToast(Promise.reject(err), {
-            error: "Failed to send enquiry! Please try again.",
-          });
-        }
-      },
-    }),
-    updateEnquiry: build.mutation<Enquiry, { enquiryId: number, enquiryData: enquiryData }>({
-      query: ({ enquiryId, enquiryData }) => ({
-        url: `/enquiries/${enquiryId}`,
-        method: 'PUT',
-        body: enquiryData,
+        },
+      }
+    ),
+    deleteEnquiry: build.mutation<Enquiry, { referenceCode: string, sellCarId: number }>({
+      query: ({ referenceCode }) => ({
+        url: `/enquiries/${referenceCode}`,
+        method: 'DELETE',
       }),
-      async onQueryStarted(_, { queryFulfilled }) {
+      async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
+        const { data: deletedEnquiry } = await queryFulfilled;
+        dispatch(
+          api.util.updateQueryData("getSellCars", undefined, (draft) => {
+            const sellCar = draft.find((c: SellCar) => c.id === sellCarId);
+            if (sellCar && Array.isArray(sellCar.enquiries)) {
+              sellCar.enquiries = sellCar.enquiries.filter((e: Enquiry) => e.id !== deletedEnquiry.id);
+            }
+          })
+        );
+        dispatch(
+          api.util.updateQueryData("getSellCarById", sellCarId, (draft) => {
+            if (Array.isArray(draft.enquiries)) {
+              draft.enquiries = draft.enquiries.filter((e: Enquiry) => e.id !== deletedEnquiry.id);
+            }
+          })
+        );
         await withToast(queryFulfilled, {
-          success: "Enquiry has been updated!",
-          error: "Failed to update enquiry! Please try again.",
+          success: "Enquiry has been deleted!",
+          error: "Failed to delete enquiry! Please try again.",
         });
-      },
+      }
     }),
 
     //User related endpoints
@@ -216,4 +255,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useGetEnquiriesQuery, useCreateEnquiryMutation, useUpdateEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;
+export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useGetEnquiriesQuery, useUpsertEnquiryMutation, useDeleteEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;

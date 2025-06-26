@@ -108,12 +108,6 @@ declare global {
     path: string;
     label: string;
   }
-  interface ContactSellerFormProps {
-    user: AppUser;
-    sellCarId: number;
-    listPrice: number;
-    cb: () => void;
-  }
   interface FavouriteFormProps {
     authUser: AppUser;
     sellCarId: number;
@@ -133,7 +127,6 @@ declare global {
     seller: User;
     index: number;
     isHighlight?: boolean;
-    isReview?: boolean;
   }
   interface ProfileProps {
     userRole: string;
@@ -158,12 +151,6 @@ declare global {
     children: React.ReactNode;
     navLinks: TNavLink[];
   }
-  interface ContactSellerModalProps {
-    children: React.ReactNode;
-    sellCarId: number;
-    listPrice: number;
-    authUser?: AppUser;
-  }
   interface SellCarFormStepProps {
     sellCarFormData: TSellCarFormData;
     handleFormSubmit?: any;
@@ -183,14 +170,42 @@ declare global {
     authUser: AppUser;
   }
   interface ContactSellerButtonProps {
-    authUser?: AppUser;
     sellCarId: number;
+    offer?: number;
     listPrice: number;
     enquiries: Enquiry[];
+  }
+
+  interface EnquiryModalProps {
+    children: React.ReactNode;
+    sellCarId: number;
+    offer?: number;
+    listPrice: number;
+    authUser?: AppUser;
+    isEditing: boolean;
+  }
+  interface EnquiryFormProps {
+    user: AppUser;
+    sellCarId: number;
+    offer?: number;
+    listPrice: number;
+    cb: () => void;
+    isEditing: boolean;
   }
   interface ViewEnquiryModalProps {
     children: React.ReactNode;
     enquiry: Enquiry;
+  }
+  interface WithdrawButtonProps {
+    cb: () => void;
+    referenceCode: string;
+    sellCarId: number;
+  }
+  interface WithdrawConfirmationModalProps {
+    children: React.ReactNode;
+    cb: () => void;
+    referenceCode: string;
+    sellCarId: number;
   }
   interface AppUser {
     cognitoInfo: AuthUser;

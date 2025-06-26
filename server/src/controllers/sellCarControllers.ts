@@ -147,10 +147,6 @@ export const createSellCar = async (req: Request, res: Response): Promise<void> 
 
 export async function deleteSellCar(req: Request, res: Response): Promise<void> {
     try {
-        if (!req.user) {
-            res.status(401).json({ message: "Unauthorized: User not found" });
-            return;
-        }
         const { sellCarId } = req.params;
 
         // First check if the sale car exists and belongs to the user

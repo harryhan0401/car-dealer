@@ -108,8 +108,20 @@ export const profileSchema = z.object(userSchema.shape).extend({
 
 export const enquirySchema = z.object({
     cognitoId: z.string().min(1, "Cognito ID is required"),
-    offerPrice: z.coerce.number().min(0, "Offer Price must be a positive number"),
+    offer: z.coerce.number().min(0, "Offer must be a positive number"),
+    listPrice: z.coerce.number().min(0, "List Price must be a positive number"),
     message: z.string().min(10, "Message must be at least 10 characters"),
+}).superRefine((data, ctx) => {
+    if (data.listPrice > 0) {
+        const pct = data.offer / data.listPrice;
+        if (pct < 0.6) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                message: "Offer must be at least 60% of the list price",
+                path: ["offer"],
+            });
+        }
+    }
 });
 
 export const locationSchema = z.object({

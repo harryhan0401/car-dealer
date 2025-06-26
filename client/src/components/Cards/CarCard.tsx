@@ -3,13 +3,12 @@
 import Image from "next/image";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiStoneWheel } from "react-icons/gi";
-import { Bolt, Check, Eye, Flame, Fuel, MapPin, Phone } from "lucide-react";
-import { Button } from "../ui/button";
+import { Bolt, Flame, Fuel, MapPin } from "lucide-react";
 import { useGetAuthUserQuery } from "@/state/api";
 import FavouriteForm from "../Forms/FavouriteForm";
 import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
-import ContactSellerButton from "../ContactSellerButton";
+import ContactSellerButton from "../Enquiry/ContactSellerButton";
 
 const CarCard = ({
   id,
@@ -21,7 +20,6 @@ const CarCard = ({
   seller,
   index,
   isHighlight = false,
-  isReview = false,
 }: CarCardProps) => {
   const { make, model, year, fuel, drive } = car;
   const { city } = seller.location ? seller.location : "";
@@ -123,25 +121,22 @@ const CarCard = ({
           <section id="car-description">
             <p className="line-clamp-2">{description}</p>
           </section>
-          {!isReview && (
-            <section
-              id="car-interaction-group"
-              className={`flex ${authUser && "gap-5"}`}
-            >
-              <ContactSellerButton
-                authUser={authUser}
-                sellCarId={id}
-                listPrice={price}
-                enquiries={enquiries}
-              />
+          <section
+            id="car-interaction-group"
+            className={`flex ${authUser && "gap-5"}`}
+          >
+            <ContactSellerButton
+              sellCarId={id}
+              listPrice={price}
+              enquiries={enquiries}
+            />
 
-              {authUser && (
-                <div>
-                  <FavouriteForm authUser={authUser} sellCarId={id} />
-                </div>
-              )}
-            </section>
-          )}
+            {authUser && (
+              <div>
+                <FavouriteForm authUser={authUser} sellCarId={id} />
+              </div>
+            )}
+          </section>
         </div>
       </div>
     </div>

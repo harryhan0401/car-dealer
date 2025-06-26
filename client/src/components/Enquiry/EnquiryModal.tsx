@@ -7,16 +7,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import ContactSellerForm from "./Forms/ContactSellerForm";
-import SignInSignUp from "./Authentication/SignInSignUp";
 import { useCallback, useState } from "react";
+import EnquiryForm from "../Forms/EnquiryForm";
+import SignInSignUp from "../Authentication/SignInSignUp";
 
-const ContactSellerModal = ({
+const EnquiryModal = ({
   children,
+  offer,
   listPrice,
   sellCarId,
   authUser,
-}: ContactSellerModalProps) => {
+  isEditing,
+}: EnquiryModalProps) => {
   const [open, setOpen] = useState(false);
 
   const handleDialogOpen = useCallback(() => setOpen(false), []);
@@ -25,19 +27,23 @@ const ContactSellerModal = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Contact Seller</DialogTitle>
+          <DialogTitle>
+            {isEditing ? "Update offer" : "Contact Seller"}
+          </DialogTitle>
           <DialogDescription>
-            {authUser
+            {!isEditing && authUser
               ? "Fill out the form below to send an offer to seller."
               : "Please log in to contact the seller."}
           </DialogDescription>
         </DialogHeader>
         {authUser ? (
-          <ContactSellerForm
+          <EnquiryForm
+            offer={offer}
             listPrice={listPrice}
             user={authUser}
             sellCarId={sellCarId}
             cb={handleDialogOpen}
+            isEditing={isEditing}
           />
         ) : (
           <SignInSignUp />
@@ -46,4 +52,4 @@ const ContactSellerModal = ({
     </Dialog>
   );
 };
-export default ContactSellerModal;
+export default EnquiryModal;

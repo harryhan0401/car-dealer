@@ -6,35 +6,38 @@ import { useForm } from "react-hook-form";
 import { Form } from "../ui/form";
 import { CustomFormField } from "../FormField";
 import { Button } from "../ui/button";
-import { useCreateEnquiryMutation } from "@/state/api";
+import { useUpsertEnquiryMutation } from "@/state/api";
 import { Send } from "lucide-react";
 import { Slider } from "../ui/slider";
 import { useState } from "react";
 
-const ContactSellerForm = ({
+const EnquiryForm = ({
   user,
   sellCarId,
+  offer,
   listPrice,
   cb,
-}: ContactSellerFormProps) => {
-  const [createEnquiry, { isLoading }] = useCreateEnquiryMutation();
+  isEditing,
+}: EnquiryFormProps) => {
+  const [createEnquiry, { isLoading }] = useUpsertEnquiryMutation();
 
-  const [offer, setOffer] = useState(listPrice);
+  const [offerValue, setOfferValue] = useState(offer || listPrice);
 
   const defaultMessage = `Hi,\nI'm interested in your vehicle listing. I would like to know more details about this vehicle. Please contact me at your earliest convenience.\n\nBest regards`;
 
   const enquiryForm = useForm<enquiryData>({
     defaultValues: {
       cognitoId: user?.cognitoInfo.userId || "",
-      offerPrice: listPrice,
+      offer: offer || listPrice,
+      listPrice: listPrice,
       message: defaultMessage,
     },
     resolver: zodResolver(enquirySchema),
   });
 
   const updateOffer = (value: number) => {
-    setOffer(value);
-    enquiryForm.setValue("offerPrice", value);
+    setOfferValue(value);
+    enquiryForm.setValue("offer", value);
   };
 
   const onSubmit = async (enquiryData: enquiryData) => {
@@ -52,10 +55,7 @@ const ContactSellerForm = ({
         onSubmit={enquiryForm.handleSubmit(onSubmit)}
         className="mt-4 space-y-4"
       >
-        <label
-          htmlFor="offerPrice"
-          className="text-sm font-medium text-gray-700"
-        >
+        <label htmlFor="offer" className="text-sm font-medium text-gray-700">
           Offer Price*
         </label>
         {/* Offer Display */}
@@ -63,7 +63,7 @@ const ContactSellerForm = ({
           <div className="flex items-baseline justify-center space-x-1">
             <p className="text-gray-600 text-xl font-semibold">$</p>
             <p className="text-3xl font-bold text-orange-500">
-              {offer.toLocaleString()}
+              {offerValue.toLocaleString()}
             </p>
           </div>
 
@@ -73,7 +73,7 @@ const ContactSellerForm = ({
               min={Math.round(0.6 * listPrice)}
               max={Math.round(1.8 * listPrice)}
               step={500}
-              value={[offer]}
+              value={[offerValue]}
               onValueChange={(value) => updateOffer(value[0])}
               className="[&_[data-slot='slider-track']]:bg-[#e0e0e0] w-full"
             />
@@ -92,7 +92,7 @@ const ContactSellerForm = ({
                   key={value}
                   type="button"
                   className={`border-2 rounded-md p-3 text-sm font-medium flex flex-col items-center 
-            ${offer === value ? "bg-orange-500 text-white border-orange-500" : "border-gray-200 bg-white text-gray-800"}
+            ${offerValue === value ? "bg-orange-500 text-white border-orange-500" : "border-gray-200 bg-white text-gray-800"}
           `}
                   onClick={() => updateOffer(value)}
                 >
@@ -118,10 +118,18 @@ const ContactSellerForm = ({
           <span>
             <Send />
           </span>
-          {isLoading ? <p className="text-muted">Sending...</p> : "Send offer"}
+          {isLoading ? (
+            <p className="text-muted">
+              {isEditing ? "Updating..." : "Sending..."}
+            </p>
+          ) : isEditing ? (
+            "Update offer"
+          ) : (
+            "Send offer"
+          )}
         </Button>
       </form>
     </Form>
   );
 };
-export default ContactSellerForm;
+export default EnquiryForm;

@@ -6700,20 +6700,24 @@ export namespace Prisma {
   export type EnquiryAvgAggregateOutputType = {
     id: number | null
     sellCarId: number | null
-    offerPrice: number | null
+    offer: number | null
+    listPrice: number | null
   }
 
   export type EnquirySumAggregateOutputType = {
     id: number | null
     sellCarId: number | null
-    offerPrice: number | null
+    offer: number | null
+    listPrice: number | null
   }
 
   export type EnquiryMinAggregateOutputType = {
     id: number | null
+    referenceCode: string | null
     sellCarId: number | null
     buyerCognitoId: string | null
-    offerPrice: number | null
+    offer: number | null
+    listPrice: number | null
     message: string | null
     status: $Enums.EnquiryStatus | null
     dateTimeCreated: Date | null
@@ -6722,9 +6726,11 @@ export namespace Prisma {
 
   export type EnquiryMaxAggregateOutputType = {
     id: number | null
+    referenceCode: string | null
     sellCarId: number | null
     buyerCognitoId: string | null
-    offerPrice: number | null
+    offer: number | null
+    listPrice: number | null
     message: string | null
     status: $Enums.EnquiryStatus | null
     dateTimeCreated: Date | null
@@ -6733,9 +6739,11 @@ export namespace Prisma {
 
   export type EnquiryCountAggregateOutputType = {
     id: number
+    referenceCode: number
     sellCarId: number
     buyerCognitoId: number
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: number
     status: number
     dateTimeCreated: number
@@ -6747,20 +6755,24 @@ export namespace Prisma {
   export type EnquiryAvgAggregateInputType = {
     id?: true
     sellCarId?: true
-    offerPrice?: true
+    offer?: true
+    listPrice?: true
   }
 
   export type EnquirySumAggregateInputType = {
     id?: true
     sellCarId?: true
-    offerPrice?: true
+    offer?: true
+    listPrice?: true
   }
 
   export type EnquiryMinAggregateInputType = {
     id?: true
+    referenceCode?: true
     sellCarId?: true
     buyerCognitoId?: true
-    offerPrice?: true
+    offer?: true
+    listPrice?: true
     message?: true
     status?: true
     dateTimeCreated?: true
@@ -6769,9 +6781,11 @@ export namespace Prisma {
 
   export type EnquiryMaxAggregateInputType = {
     id?: true
+    referenceCode?: true
     sellCarId?: true
     buyerCognitoId?: true
-    offerPrice?: true
+    offer?: true
+    listPrice?: true
     message?: true
     status?: true
     dateTimeCreated?: true
@@ -6780,9 +6794,11 @@ export namespace Prisma {
 
   export type EnquiryCountAggregateInputType = {
     id?: true
+    referenceCode?: true
     sellCarId?: true
     buyerCognitoId?: true
-    offerPrice?: true
+    offer?: true
+    listPrice?: true
     message?: true
     status?: true
     dateTimeCreated?: true
@@ -6878,9 +6894,11 @@ export namespace Prisma {
 
   export type EnquiryGroupByOutputType = {
     id: number
+    referenceCode: string
     sellCarId: number
     buyerCognitoId: string
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status: $Enums.EnquiryStatus
     dateTimeCreated: Date
@@ -6908,9 +6926,11 @@ export namespace Prisma {
 
   export type EnquirySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    referenceCode?: boolean
     sellCarId?: boolean
     buyerCognitoId?: boolean
-    offerPrice?: boolean
+    offer?: boolean
+    listPrice?: boolean
     message?: boolean
     status?: boolean
     dateTimeCreated?: boolean
@@ -6921,9 +6941,11 @@ export namespace Prisma {
 
   export type EnquirySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    referenceCode?: boolean
     sellCarId?: boolean
     buyerCognitoId?: boolean
-    offerPrice?: boolean
+    offer?: boolean
+    listPrice?: boolean
     message?: boolean
     status?: boolean
     dateTimeCreated?: boolean
@@ -6934,9 +6956,11 @@ export namespace Prisma {
 
   export type EnquirySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    referenceCode?: boolean
     sellCarId?: boolean
     buyerCognitoId?: boolean
-    offerPrice?: boolean
+    offer?: boolean
+    listPrice?: boolean
     message?: boolean
     status?: boolean
     dateTimeCreated?: boolean
@@ -6947,16 +6971,18 @@ export namespace Prisma {
 
   export type EnquirySelectScalar = {
     id?: boolean
+    referenceCode?: boolean
     sellCarId?: boolean
     buyerCognitoId?: boolean
-    offerPrice?: boolean
+    offer?: boolean
+    listPrice?: boolean
     message?: boolean
     status?: boolean
     dateTimeCreated?: boolean
     dateTimeUpdated?: boolean
   }
 
-  export type EnquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sellCarId" | "buyerCognitoId" | "offerPrice" | "message" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["enquiry"]>
+  export type EnquiryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "referenceCode" | "sellCarId" | "buyerCognitoId" | "offer" | "listPrice" | "message" | "status" | "dateTimeCreated" | "dateTimeUpdated", ExtArgs["result"]["enquiry"]>
   export type EnquiryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sellCar?: boolean | SellCarDefaultArgs<ExtArgs>
     buyer?: boolean | UserDefaultArgs<ExtArgs>
@@ -6978,9 +7004,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      referenceCode: string
       sellCarId: number
       buyerCognitoId: string
-      offerPrice: number
+      offer: number
+      listPrice: number
       message: string
       status: $Enums.EnquiryStatus
       dateTimeCreated: Date
@@ -7411,9 +7439,11 @@ export namespace Prisma {
    */ 
   interface EnquiryFieldRefs {
     readonly id: FieldRef<"Enquiry", 'Int'>
+    readonly referenceCode: FieldRef<"Enquiry", 'String'>
     readonly sellCarId: FieldRef<"Enquiry", 'Int'>
     readonly buyerCognitoId: FieldRef<"Enquiry", 'String'>
-    readonly offerPrice: FieldRef<"Enquiry", 'Float'>
+    readonly offer: FieldRef<"Enquiry", 'Float'>
+    readonly listPrice: FieldRef<"Enquiry", 'Float'>
     readonly message: FieldRef<"Enquiry", 'String'>
     readonly status: FieldRef<"Enquiry", 'EnquiryStatus'>
     readonly dateTimeCreated: FieldRef<"Enquiry", 'DateTime'>
@@ -11326,9 +11356,11 @@ export namespace Prisma {
 
   export const EnquiryScalarFieldEnum: {
     id: 'id',
+    referenceCode: 'referenceCode',
     sellCarId: 'sellCarId',
     buyerCognitoId: 'buyerCognitoId',
-    offerPrice: 'offerPrice',
+    offer: 'offer',
+    listPrice: 'listPrice',
     message: 'message',
     status: 'status',
     dateTimeCreated: 'dateTimeCreated',
@@ -11981,9 +12013,11 @@ export namespace Prisma {
     OR?: EnquiryWhereInput[]
     NOT?: EnquiryWhereInput | EnquiryWhereInput[]
     id?: IntFilter<"Enquiry"> | number
+    referenceCode?: StringFilter<"Enquiry"> | string
     sellCarId?: IntFilter<"Enquiry"> | number
     buyerCognitoId?: StringFilter<"Enquiry"> | string
-    offerPrice?: FloatFilter<"Enquiry"> | number
+    offer?: FloatFilter<"Enquiry"> | number
+    listPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
     status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
@@ -11994,9 +12028,11 @@ export namespace Prisma {
 
   export type EnquiryOrderByWithRelationInput = {
     id?: SortOrder
+    referenceCode?: SortOrder
     sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
@@ -12007,26 +12043,30 @@ export namespace Prisma {
 
   export type EnquiryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    referenceCode?: string
     enquiryId?: EnquiryEnquiryIdCompoundUniqueInput
     AND?: EnquiryWhereInput | EnquiryWhereInput[]
     OR?: EnquiryWhereInput[]
     NOT?: EnquiryWhereInput | EnquiryWhereInput[]
     sellCarId?: IntFilter<"Enquiry"> | number
     buyerCognitoId?: StringFilter<"Enquiry"> | string
-    offerPrice?: FloatFilter<"Enquiry"> | number
+    offer?: FloatFilter<"Enquiry"> | number
+    listPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
     status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
     dateTimeUpdated?: DateTimeFilter<"Enquiry"> | Date | string
     sellCar?: XOR<SellCarScalarRelationFilter, SellCarWhereInput>
     buyer?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "enquiryId">
+  }, "id" | "referenceCode" | "enquiryId">
 
   export type EnquiryOrderByWithAggregationInput = {
     id?: SortOrder
+    referenceCode?: SortOrder
     sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
@@ -12043,9 +12083,11 @@ export namespace Prisma {
     OR?: EnquiryScalarWhereWithAggregatesInput[]
     NOT?: EnquiryScalarWhereWithAggregatesInput | EnquiryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Enquiry"> | number
+    referenceCode?: StringWithAggregatesFilter<"Enquiry"> | string
     sellCarId?: IntWithAggregatesFilter<"Enquiry"> | number
     buyerCognitoId?: StringWithAggregatesFilter<"Enquiry"> | string
-    offerPrice?: FloatWithAggregatesFilter<"Enquiry"> | number
+    offer?: FloatWithAggregatesFilter<"Enquiry"> | number
+    listPrice?: FloatWithAggregatesFilter<"Enquiry"> | number
     message?: StringWithAggregatesFilter<"Enquiry"> | string
     status?: EnumEnquiryStatusWithAggregatesFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeWithAggregatesFilter<"Enquiry"> | Date | string
@@ -12629,7 +12671,9 @@ export namespace Prisma {
   }
 
   export type EnquiryCreateInput = {
-    offerPrice: number
+    referenceCode: string
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -12640,9 +12684,11 @@ export namespace Prisma {
 
   export type EnquiryUncheckedCreateInput = {
     id?: number
+    referenceCode: string
     sellCarId: number
     buyerCognitoId: string
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -12650,7 +12696,9 @@ export namespace Prisma {
   }
 
   export type EnquiryUpdateInput = {
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12661,9 +12709,11 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     sellCarId?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12672,9 +12722,11 @@ export namespace Prisma {
 
   export type EnquiryCreateManyInput = {
     id?: number
+    referenceCode: string
     sellCarId: number
     buyerCognitoId: string
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -12682,7 +12734,9 @@ export namespace Prisma {
   }
 
   export type EnquiryUpdateManyMutationInput = {
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12691,9 +12745,11 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     sellCarId?: IntFieldUpdateOperationsInput | number
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13465,9 +13521,11 @@ export namespace Prisma {
 
   export type EnquiryCountOrderByAggregateInput = {
     id?: SortOrder
+    referenceCode?: SortOrder
     sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
@@ -13477,14 +13535,17 @@ export namespace Prisma {
   export type EnquiryAvgOrderByAggregateInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
   }
 
   export type EnquiryMaxOrderByAggregateInput = {
     id?: SortOrder
+    referenceCode?: SortOrder
     sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
@@ -13493,9 +13554,11 @@ export namespace Prisma {
 
   export type EnquiryMinOrderByAggregateInput = {
     id?: SortOrder
+    referenceCode?: SortOrder
     sellCarId?: SortOrder
     buyerCognitoId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
     message?: SortOrder
     status?: SortOrder
     dateTimeCreated?: SortOrder
@@ -13505,7 +13568,8 @@ export namespace Prisma {
   export type EnquirySumOrderByAggregateInput = {
     id?: SortOrder
     sellCarId?: SortOrder
-    offerPrice?: SortOrder
+    offer?: SortOrder
+    listPrice?: SortOrder
   }
 
   export type EnumEnquiryStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -14879,7 +14943,9 @@ export namespace Prisma {
   }
 
   export type EnquiryCreateWithoutBuyerInput = {
-    offerPrice: number
+    referenceCode: string
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -14889,8 +14955,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedCreateWithoutBuyerInput = {
     id?: number
+    referenceCode: string
     sellCarId: number
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -15077,9 +15145,11 @@ export namespace Prisma {
     OR?: EnquiryScalarWhereInput[]
     NOT?: EnquiryScalarWhereInput | EnquiryScalarWhereInput[]
     id?: IntFilter<"Enquiry"> | number
+    referenceCode?: StringFilter<"Enquiry"> | string
     sellCarId?: IntFilter<"Enquiry"> | number
     buyerCognitoId?: StringFilter<"Enquiry"> | string
-    offerPrice?: FloatFilter<"Enquiry"> | number
+    offer?: FloatFilter<"Enquiry"> | number
+    listPrice?: FloatFilter<"Enquiry"> | number
     message?: StringFilter<"Enquiry"> | string
     status?: EnumEnquiryStatusFilter<"Enquiry"> | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFilter<"Enquiry"> | Date | string
@@ -15227,7 +15297,9 @@ export namespace Prisma {
   }
 
   export type EnquiryCreateWithoutSellCarInput = {
-    offerPrice: number
+    referenceCode: string
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -15237,8 +15309,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedCreateWithoutSellCarInput = {
     id?: number
+    referenceCode: string
     buyerCognitoId: string
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -16223,8 +16297,10 @@ export namespace Prisma {
 
   export type EnquiryCreateManyBuyerInput = {
     id?: number
+    referenceCode: string
     sellCarId: number
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -16401,7 +16477,9 @@ export namespace Prisma {
   }
 
   export type EnquiryUpdateWithoutBuyerInput = {
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16411,8 +16489,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateWithoutBuyerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     sellCarId?: IntFieldUpdateOperationsInput | number
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16421,8 +16501,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateManyWithoutBuyerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     sellCarId?: IntFieldUpdateOperationsInput | number
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16555,8 +16637,10 @@ export namespace Prisma {
 
   export type EnquiryCreateManySellCarInput = {
     id?: number
+    referenceCode: string
     buyerCognitoId: string
-    offerPrice: number
+    offer: number
+    listPrice: number
     message: string
     status?: $Enums.EnquiryStatus
     dateTimeCreated?: Date | string
@@ -16564,7 +16648,9 @@ export namespace Prisma {
   }
 
   export type EnquiryUpdateWithoutSellCarInput = {
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16574,8 +16660,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateWithoutSellCarInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16584,8 +16672,10 @@ export namespace Prisma {
 
   export type EnquiryUncheckedUpdateManyWithoutSellCarInput = {
     id?: IntFieldUpdateOperationsInput | number
+    referenceCode?: StringFieldUpdateOperationsInput | string
     buyerCognitoId?: StringFieldUpdateOperationsInput | string
-    offerPrice?: FloatFieldUpdateOperationsInput | number
+    offer?: FloatFieldUpdateOperationsInput | number
+    listPrice?: FloatFieldUpdateOperationsInput | number
     message?: StringFieldUpdateOperationsInput | string
     status?: EnumEnquiryStatusFieldUpdateOperationsInput | $Enums.EnquiryStatus
     dateTimeCreated?: DateTimeFieldUpdateOperationsInput | Date | string

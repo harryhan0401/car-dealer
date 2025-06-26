@@ -1,13 +1,13 @@
 import express from "express"
 import {
+    deleteEnquiry,
     getEnquiries,
-    createEnquiry,
-    updateEnquiry
+    upsertEnquiry,
 } from "../controllers/enquiryControllers"
 const router = express.Router();
 
 router.post("/", getEnquiries)
-router.post("/:sellCarId", createEnquiry);
-router.put("/:enquiryId", updateEnquiry);
+router.put("/:sellCarId", upsertEnquiry);
+router.delete("/:referenceCode", deleteEnquiry);
 
 export default router;

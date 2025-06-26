@@ -100,9 +100,11 @@ CREATE TABLE "SellCar" (
 -- CreateTable
 CREATE TABLE "Enquiry" (
     "id" SERIAL NOT NULL,
+    "referenceCode" TEXT NOT NULL,
     "sellCarId" INTEGER NOT NULL,
     "buyerCognitoId" TEXT NOT NULL,
-    "offerPrice" DOUBLE PRECISION NOT NULL,
+    "offer" DOUBLE PRECISION NOT NULL,
+    "listPrice" DOUBLE PRECISION NOT NULL,
     "message" TEXT NOT NULL,
     "status" "EnquiryStatus" NOT NULL DEFAULT 'Pending',
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -166,6 +168,9 @@ CREATE UNIQUE INDEX "Car_make_model_year_type_fuel_drive_transmission_key" ON "C
 
 -- CreateIndex
 CREATE UNIQUE INDEX "SellCar_vin_key" ON "SellCar"("vin");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Enquiry_referenceCode_key" ON "Enquiry"("referenceCode");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Enquiry_sellCarId_buyerCognitoId_key" ON "Enquiry"("sellCarId", "buyerCognitoId");

@@ -233,9 +233,11 @@ model SellCar {
 
 model Enquiry {
   id              Int           @id @default(autoincrement())
+  referenceCode   String        @unique
   sellCarId       Int
   buyerCognitoId  String
-  offerPrice      Float
+  offer           Float
+  listPrice       Float
   message         String
   status          EnquiryStatus @default(Pending)
   dateTimeCreated DateTime      @default(now())

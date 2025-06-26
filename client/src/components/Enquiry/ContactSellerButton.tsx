@@ -1,14 +1,17 @@
+"use client";
+
 import { Eye, Phone } from "lucide-react";
-import { Button } from "./ui/button";
-import ContactSellerModal from "./ContactSellerModal";
+import { Button } from "../ui/button";
 import ViewEnquiryModal from "./ViewEnquiryModal";
+import { useGetAuthUserQuery } from "@/state/api";
+import EnquiryModal from "./EnquiryModal";
 
 const ContactSellerButton = ({
-  authUser,
   sellCarId,
   listPrice,
   enquiries,
 }: ContactSellerButtonProps) => {
+  const { data: authUser } = useGetAuthUserQuery();
   const enquiryIndex = enquiries.findIndex(
     (enquiry) => enquiry.buyerCognitoId === authUser?.cognitoInfo.userId
   );
@@ -28,10 +31,11 @@ const ContactSellerButton = ({
           </Button>
         </ViewEnquiryModal>
       ) : (
-        <ContactSellerModal
+        <EnquiryModal
           authUser={authUser}
           sellCarId={sellCarId}
           listPrice={listPrice}
+          isEditing={false}
         >
           <Button
             className="flex items-center flex-1"
@@ -42,7 +46,7 @@ const ContactSellerButton = ({
             </span>
             Contact Seller
           </Button>
-        </ContactSellerModal>
+        </EnquiryModal>
       )}
     </>
   );
