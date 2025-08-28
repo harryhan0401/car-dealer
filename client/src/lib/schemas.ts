@@ -1,6 +1,5 @@
 // schemas/sellCarSchema.ts
 import { Fuel, Drive, Transmission, Type, Make, PreferContactMethods } from "@/lib/constants";
-import { off } from "process";
 import { z } from "zod";
 
 const imageSchema = z

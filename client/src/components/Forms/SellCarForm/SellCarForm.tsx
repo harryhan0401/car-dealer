@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/accordion";
 import StepDisplay from "@/components/StepDisplay";
 import SellCarFormPartThree from "./SellCarFormPartThree";
-import { TSellCarFormData } from "@/lib/types";
 import SellCarFormPartFour from "./SellCarFormPartFour";
 import { AccordionHeader } from "@radix-ui/react-accordion";
 import { useGetAuthUserQuery } from "@/state/api";

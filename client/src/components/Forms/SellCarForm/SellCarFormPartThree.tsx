@@ -1,13 +1,12 @@
 "use client";
-import { saleCarSchema2, SaleCarData2 } from "@/lib/schemas";
+import { sellCarSchema2, SellCarData2 } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "../../ui/button";
+import { Button } from "@/components/ui/button";
 import React, { useCallback } from "react";
-import { CustomFormField } from "../../FormField";
+import { CustomFormField } from "@/components/FormField";
 import { useGetAuthUserQuery } from "@/state/api";
-import { Form } from "../../ui/form";
-import { SellCarFormStepProps } from "@/lib/types";
+import { Form } from "@/components/ui/form";
 
 const plusSymbolSVG = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="54" height="54" stroke="gray" stroke-width="2" stroke-dasharray="4,4" fill="none" rx="6"/><line x1="30" y1="15" x2="30" y2="45" stroke="gray" stroke-width="4"/><line x1="15" y1="30" x2="45" y2="30" stroke="gray" stroke-width="4"/></svg>`;
 
@@ -15,7 +14,7 @@ const SellCarFormPartThree = React.memo(
   ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
 
-    const saleForm = useForm<SaleCarData2>({
+    const sellForm = useForm<SellCarData2>({
       defaultValues: {
         photo: sellCarFormData.photo,
         optionalPhoto1: sellCarFormData.optionalPhoto1,
@@ -24,11 +23,11 @@ const SellCarFormPartThree = React.memo(
         optionalPhoto4: sellCarFormData.optionalPhoto4,
         optionalPhoto5: sellCarFormData.optionalPhoto5,
       },
-      resolver: zodResolver(saleCarSchema2),
+      resolver: zodResolver(sellCarSchema2),
     });
 
     const onSubmit = useCallback(
-      async (data: SaleCarData2) => {
+      async (data: SellCarData2) => {
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
@@ -39,9 +38,9 @@ const SellCarFormPartThree = React.memo(
     );
 
     return (
-      <Form {...saleForm}>
+      <Form {...sellForm}>
         <form
-          onSubmit={saleForm.handleSubmit(onSubmit)}
+          onSubmit={sellForm.handleSubmit(onSubmit)}
           className="p-4 space-y-10"
         >
           <div id="upload-image">

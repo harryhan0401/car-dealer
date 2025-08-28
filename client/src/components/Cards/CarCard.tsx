@@ -20,6 +20,7 @@ const CarCard = ({
   seller,
   index,
   isHighlight = false,
+  isReview = false,
 }: CarCardProps) => {
   const { make, model, year, fuel, drive } = car;
   const { city } = seller.location ? seller.location : "";
@@ -121,22 +122,24 @@ const CarCard = ({
           <section id="car-description">
             <p className="line-clamp-2">{description}</p>
           </section>
-          <section
-            id="car-interaction-group"
-            className={`flex ${authUser && "gap-5"}`}
-          >
-            <ContactSellerButton
-              sellCarId={id}
-              listPrice={price}
-              enquiries={enquiries}
-            />
+          {!isReview && (
+            <section
+              id="car-interaction-group"
+              className={`flex ${authUser && "gap-5"}`}
+            >
+              <ContactSellerButton
+                sellCarId={id}
+                listPrice={price}
+                enquiries={enquiries}
+              />
 
-            {authUser && (
-              <div>
-                <FavouriteForm authUser={authUser} sellCarId={id} />
-              </div>
-            )}
-          </section>
+              {authUser && (
+                <div>
+                  <FavouriteForm authUser={authUser} sellCarId={id} />
+                </div>
+              )}
+            </section>
+          )}
         </div>
       </div>
     </div>

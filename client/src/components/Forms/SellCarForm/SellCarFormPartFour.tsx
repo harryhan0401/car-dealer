@@ -3,8 +3,7 @@ import CarCard from "@/components/Cards/CarCard";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { SellCarFormData, sellCarSchema } from "@/lib/schemas";
-import { SellCarFormStepProps } from "@/lib/types";
-import { useCreateSaleCarMutation, useGetAuthUserQuery } from "@/state/api";
+import { useCreateSellCarMutation, useGetAuthUserQuery } from "@/state/api";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,7 +14,7 @@ const SellCarFormPartFour = ({ sellCarFormData, cb }: SellCarFormStepProps) => {
   const router = useRouter();
 
   const { data: authUser } = useGetAuthUserQuery();
-  const [createSaleCar] = useCreateSaleCarMutation();
+  const [createSellCar] = useCreateSellCarMutation();
   const { make, model, year, fuel, drive, price, mileage, description } =
     sellCarFormData;
 
@@ -43,8 +42,9 @@ const SellCarFormPartFour = ({ sellCarFormData, cb }: SellCarFormStepProps) => {
           formData.append(key, String(value));
         }
       });
-      formData.append("cognitoId", authUser.cognitoInfo.userId);
-      const res = await createSaleCar(formData);
+     
+
+      const res = await createSellCar(formData);
       if (!res.error) {
         router.push("/users");
       }

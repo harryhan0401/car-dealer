@@ -64,7 +64,7 @@ const ImageSlider = ({ make, title, photoUrls }: ImageSliderProps) => {
             />
           </div>
         </div>
-        {photoUrls.map((url: string, index: Key) => {
+        {photoUrls.map((url: string, index) => {
           return (
             <div key={index} className="p-1.5 bg-white rounded-lg">
               <div className="relative w-[100px] h-[75px]">

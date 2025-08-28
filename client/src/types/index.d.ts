@@ -1,7 +1,7 @@
 import { AuthUser } from "aws-amplify/auth";
 import { MotionProps as OzriginalMotionProps } from "framer-motion";
 import { Enquiry, SellCar, User } from "./prismaTypes";
-import { avatarData, CarData, locationData, SellCarData, userData } from "./schemas";
+import { avatarData, CarData, locationData, SellCarData, userData } from "@/lib/schemas";
 
 declare module "framer-motion" {
   interface MotionProps extends OriginalMotionProps {
@@ -127,6 +127,7 @@ declare global {
     seller: User;
     index: number;
     isHighlight?: boolean;
+    isReview: boolean;
   }
   interface ProfileProps {
     userRole: string;
