@@ -7,15 +7,15 @@ import { FilterRangeProps } from "./FilterPrice";
 import { useRangeQueryParams } from "@/lib/hooks";
 import { useMemo } from "react";
 
-const FilterMileage = ({ sellCars }: FilterRangeProps) => {
+const FilterMileage = ({ carListings }: FilterRangeProps) => {
   //Filter Mileage
   const [minMileage, maxMileage] = useMemo(() => {
-    const amounts = sellCars.map((car) => car.mileage);
+    const amounts = carListings.map((car) => car.mileage);
     return [Math.floor(Math.min(...amounts)), Math.ceil(Math.max(...amounts))];
-  }, [sellCars]);
+  }, [carListings]);
   const { query: mileageRange, setQuery: setMileageRange } =
     useRangeQueryParams("mileage_range", minMileage, maxMileage);
-  const data = getValuesForKey(sellCars, "mileage");
+  const data = getValuesForKey(carListings, "mileage");
   const distributionData = getHistogramData(15, data);
   return (
     <FilterLayout>

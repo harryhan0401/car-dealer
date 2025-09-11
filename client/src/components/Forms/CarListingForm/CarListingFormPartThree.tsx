@@ -1,5 +1,5 @@
 "use client";
-import { sellCarSchema2, SellCarData2 } from "@/lib/schemas";
+import { carListingSchema2, CarListingData2 } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
@@ -10,28 +10,28 @@ import { Form } from "@/components/ui/form";
 
 const plusSymbolSVG = `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="3" width="54" height="54" stroke="gray" stroke-width="2" stroke-dasharray="4,4" fill="none" rx="6"/><line x1="30" y1="15" x2="30" y2="45" stroke="gray" stroke-width="4"/><line x1="15" y1="30" x2="45" y2="30" stroke="gray" stroke-width="4"/></svg>`;
 
-const SellCarFormPartThree = React.memo(
-  ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
+const CarListingFormPartThree = React.memo(
+  ({ carListingFormData, handleFormSubmit, cb }: CarListingFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
 
-    const sellForm = useForm<SellCarData2>({
+    const sellForm = useForm<CarListingData2>({
       defaultValues: {
-        photo: sellCarFormData.photo,
-        optionalPhoto1: sellCarFormData.optionalPhoto1,
-        optionalPhoto2: sellCarFormData.optionalPhoto2,
-        optionalPhoto3: sellCarFormData.optionalPhoto3,
-        optionalPhoto4: sellCarFormData.optionalPhoto4,
-        optionalPhoto5: sellCarFormData.optionalPhoto5,
+        photo: carListingFormData.photo,
+        optionalPhoto1: carListingFormData.optionalPhoto1,
+        optionalPhoto2: carListingFormData.optionalPhoto2,
+        optionalPhoto3: carListingFormData.optionalPhoto3,
+        optionalPhoto4: carListingFormData.optionalPhoto4,
+        optionalPhoto5: carListingFormData.optionalPhoto5,
       },
-      resolver: zodResolver(sellCarSchema2),
+      resolver: zodResolver(carListingSchema2),
     });
 
     const onSubmit = useCallback(
-      async (data: SellCarData2) => {
+      async (data: CarListingData2) => {
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-        handleFormSubmit({ ...sellCarFormData, ...data });
+        handleFormSubmit({ ...carListingFormData, ...data });
         cb("item-4");
       },
       [authUser]
@@ -99,4 +99,4 @@ const SellCarFormPartThree = React.memo(
     );
   }
 );
-export default SellCarFormPartThree;
+export default CarListingFormPartThree;

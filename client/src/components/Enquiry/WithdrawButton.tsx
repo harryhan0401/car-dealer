@@ -7,13 +7,13 @@ import WithdrawConfirmationModal from "./WithdrawConfirmationModal";
 const WithdrawButton = ({
   cb,
   referenceCode,
-  sellCarId,
+  carListingId,
 }: WithdrawButtonProps) => {
   return (
     <WithdrawConfirmationModal
       cb={cb}
       referenceCode={referenceCode}
-      sellCarId={sellCarId}
+      carListingId={carListingId}
     >
       <Button className="h-full" variant={"destructive"}>
         <Trash2 className="size-4" />

@@ -1,21 +1,21 @@
 "use client";
 import { useState } from "react";
 
-const saleCarSections = [
+const carListingSections = [
   { title: "Specifications", id: "specifications" },
   { title: "Vehicle History", id: "vehicle-history" },
   { title: "Services", id: "services" },
 ];
 
-const SaleCarSection = () => {
-  const [section, setSection] = useState(saleCarSections[0].title);
+const CarListingSection = () => {
+  const [section, setSection] = useState(carListingSections[0].title);
   return (
     <>
       <section className="my-5 flex gap-10">
-        {saleCarSections.map(({ title, id }) => (
+        {carListingSections.map(({ title, id }) => (
           <h1
             key={id}
-            className={`h-fit font-semibold text-lg saleCarSection ${section === title && "active"} cursor-pointer`}
+            className={`h-fit font-semibold text-lg carListingSection ${section === title && "active"} cursor-pointer`}
             onClick={() => setSection(title)}
           >
             {title}
@@ -44,4 +44,4 @@ const SaleCarSection = () => {
     </>
   );
 };
-export default SaleCarSection;
+export default CarListingSection;

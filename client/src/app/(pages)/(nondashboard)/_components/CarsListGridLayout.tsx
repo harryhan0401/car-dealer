@@ -4,14 +4,14 @@ import Pagination from "@/components/Pagination";
 import { useQueryState } from "nuqs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAppSelector } from "@/state/redux";
-import { Car, SellCar } from "@/types/prismaTypes";
+import { Car, CarListing } from "@/types/prismaTypes";
 
 export default function CarsListGridLayout({
   itemsPerPage = 6, //If don't pass nay value to itemsPerPage prop, its default value is 6
 }: CarsListGridLayoutProps) {
-  const filteredSellCars = useAppSelector(
-    ({ global }) => global.filteredSellCars
-  ) as SellCar[];
+  const filteredCarListings = useAppSelector(
+    ({ global }) => global.filteredCarListings
+  ) as CarListing[];
 
   const [currentPage] = useQueryState("page");
 
@@ -21,7 +21,7 @@ export default function CarsListGridLayout({
 
   return (
     <>
-      {filteredSellCars?.length == 0 ? (
+      {filteredCarListings?.length == 0 ? (
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
           {Array.from({ length: 6 }, (_, index) => (
             <Skeleton key={index} className="h-[900px] lg:h-[500px] w-full" />
@@ -30,12 +30,12 @@ export default function CarsListGridLayout({
       ) : (
         <>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-            {filteredSellCars
+            {filteredCarListings
               ?.slice(startIndex, endIndex)
-              .map((sellCar, index) => (
+              .map((carListing, index) => (
                 <CarCard
-                  key={sellCar.id}
-                  {...sellCar}
+                  key={carListing.id}
+                  {...carListing}
                   index={index}
                   isHighlight={index === 2 ? true : false}
                 />
@@ -43,7 +43,7 @@ export default function CarsListGridLayout({
           </div>
           <div className="mt-5 me-2">
             <Pagination
-              numOfItems={filteredSellCars.length}
+              numOfItems={filteredCarListings.length}
               itemsPerPage={itemsPerPage}
             />
           </div>

@@ -12,14 +12,14 @@ import {
 import { useQueryState } from "nuqs";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { SellCar } from "@/types/prismaTypes";
+import { CarListing } from "@/types/prismaTypes";
 import { setUniqueMakes } from "@/state";
 import { Button } from "@/components/ui/button";
 
 export default function FilterMakesModels({
-  sellCars,
+  carListings,
 }: {
-  sellCars: SellCar[];
+  carListings: CarListing[];
 }) {
   const dispatch = useDispatch();
   //Filter Make and Model
@@ -28,7 +28,7 @@ export default function FilterMakesModels({
   });
 
   let filteredMakesModels = makeModels
-    ? parseFilterMakeModels(makeModels, sellCars)
+    ? parseFilterMakeModels(makeModels, carListings)
     : [];
 
   const removeFilteredMake = (make: string) => {
@@ -39,13 +39,13 @@ export default function FilterMakesModels({
   };
 
   useEffect(() => {
-    if (sellCars) {
+    if (carListings) {
       const uniqueMakes = Array.from(
-        new Set(sellCars.map((sellCar) => sellCar.car.make))
+        new Set(carListings.map((carListing) => carListing.car.make))
       );
       dispatch(setUniqueMakes(uniqueMakes));
     }
-  }, [sellCars]);
+  }, [carListings]);
   return (
     <FilterLayout>
       <FilterHeader
@@ -82,7 +82,7 @@ export default function FilterMakesModels({
             </div>
           </div>
         ))}
-        <Modal sellCars={sellCars} filteredMakesModels={filteredMakesModels}>
+        <Modal carListings={carListings} filteredMakesModels={filteredMakesModels}>
           <Button className="w-full font-light">
             <span>
               <Plus />

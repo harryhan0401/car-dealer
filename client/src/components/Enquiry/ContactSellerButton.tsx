@@ -7,7 +7,7 @@ import { useGetAuthUserQuery } from "@/state/api";
 import EnquiryModal from "./EnquiryModal";
 
 const ContactSellerButton = ({
-  sellCarId,
+  carListingId,
   listPrice,
   enquiries,
 }: ContactSellerButtonProps) => {
@@ -33,7 +33,7 @@ const ContactSellerButton = ({
       ) : (
         <EnquiryModal
           authUser={authUser}
-          sellCarId={sellCarId}
+          carListingId={carListingId}
           listPrice={listPrice}
           isEditing={false}
         >

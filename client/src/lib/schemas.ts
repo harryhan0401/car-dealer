@@ -1,11 +1,11 @@
-// schemas/sellCarSchema.ts
+// schemas/carListingSchema.ts
 import { Fuel, Drive, Transmission, Type, Make, PreferContactMethods } from "@/lib/constants";
 import { z } from "zod";
 
 const imageSchema = z
     .instanceof(File, { message: "Invalid file type" });
 
-export const sellCarSchema1 = z.object({
+export const carListingSchema1 = z.object({
     vin: z.string().length(17, { message: "VIN must be 17 characters" }),
     mileage: z.coerce.number().min(0, { message: "Mileage must be a positive number" }),
     price: z.coerce.number().min(0, { message: "Price must be a positive number" }),
@@ -15,7 +15,7 @@ export const sellCarSchema1 = z.object({
     ),
 });
 
-export const baseSellCarSchema2 = z.object({
+export const baseCarListingSchema2 = z.object({
     photo: z.array(imageSchema).min(1, { message: "Main photo is required" }),
     optionalPhoto1: z.array(imageSchema).optional(),
     optionalPhoto2: z.array(imageSchema).optional(),
@@ -24,7 +24,7 @@ export const baseSellCarSchema2 = z.object({
     optionalPhoto5: z.array(imageSchema).optional()
 })
 
-export const sellCarSchema2 = baseSellCarSchema2.superRefine((data, ctx) => {
+export const carListingSchema2 = baseCarListingSchema2.superRefine((data, ctx) => {
     if (data.photo.length && data.photo[0].size > 5 * 1024 * 1024) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -66,7 +66,7 @@ export const carSchema = z.object({
     }),
 });
 
-export const sellCarSchema = carSchema.extend(sellCarSchema1.shape).extend(baseSellCarSchema2.shape).superRefine((data, ctx) => {
+export const carListingSchema = carSchema.extend(carListingSchema1.shape).extend(baseCarListingSchema2.shape).superRefine((data, ctx) => {
     if (data.photo.length && data.photo[0].size > 5 * 1024 * 1024) {
         ctx.addIssue({
             code: z.ZodIssueCode.custom,
@@ -153,8 +153,8 @@ export type enquiryData = z.infer<typeof enquirySchema>;
 export type avatarData = z.infer<typeof avatarSchema>;
 
 
-export type SellCarData1 = z.infer<typeof sellCarSchema1>;
-export type SellCarData2 = z.infer<typeof sellCarSchema2>;
+export type CarListingData1 = z.infer<typeof carListingSchema1>;
+export type CarListingData2 = z.infer<typeof carListingSchema2>;
 export type CarData = z.infer<typeof carSchema>;
-export type SellCarData = SellCarData1 & SellCarData2
-export type SellCarFormData = z.infer<typeof sellCarSchema>;
+export type CarListingData = CarListingData1 & CarListingData2
+export type CarListingFormData = z.infer<typeof carListingSchema>;

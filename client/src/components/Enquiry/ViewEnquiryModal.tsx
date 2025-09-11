@@ -23,7 +23,7 @@ const ViewEnquiryModal = ({ children, enquiry }: ViewEnquiryModalProps) => {
     offer,
     listPrice,
     message,
-    sellCarId,
+    carListingId,
     referenceCode,
     dateTimeCreated,
     dateTimeUpdated,
@@ -121,12 +121,12 @@ const ViewEnquiryModal = ({ children, enquiry }: ViewEnquiryModalProps) => {
         <div className="grid grid-cols-2 gap-3 mb-4">
           <WithdrawButton
             cb={() => setIsOpen(false)}
-            sellCarId={sellCarId}
+            carListingId={carListingId}
             referenceCode={referenceCode}
           />
           <EnquiryModal
             authUser={authUser}
-            sellCarId={sellCarId}
+            carListingId={carListingId}
             offer={offer}
             listPrice={listPrice}
             isEditing={true}

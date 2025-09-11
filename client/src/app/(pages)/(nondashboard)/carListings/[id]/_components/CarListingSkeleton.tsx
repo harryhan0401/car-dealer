@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const SellCarSkeleton = () => {
+const CarListingSkeleton = () => {
   return (
     <div className="flex flex-col p-4 h-screen">
       <section id="car-header">
@@ -14,4 +14,4 @@ const SellCarSkeleton = () => {
     </div>
   );
 };
-export default SellCarSkeleton;
+export default CarListingSkeleton;

@@ -83,7 +83,7 @@ export const addUserProfile = async (req: Request, res: Response): Promise<void>
     try {
         const { cognitoId } = req.params
 
-        let locationId = -1;
+        let locationId;
         const { address, city, state, postalCode, country, longitude, latitude, ...userProfileData } = req.body;
         const query = Prisma.sql`
             SELECT id 
@@ -132,102 +132,42 @@ export const addUserProfile = async (req: Request, res: Response): Promise<void>
         res.status(500).json({ message: `Error updating user profile: ${error.message}` });
     }
 }
-export const addFavourite = async (req: Request, res: Response): Promise<void> => {
+export const updateFavourite = async (req: Request, res: Response): Promise<void> => {
     const { cognitoId } = req.params;
-    const { sellCarId } = req.body;
+    const { carListingId } = req.body;
     try {
-        // Find the user by cognitoId
         const user = await prisma.user.findUnique({
             where: { cognitoId },
             select: {
-                favourites: {
-                    select: { id: true }, // Only get the 'id' field from the favourites relation
-                }
+                favourites: { select: { id: true } }
             }
         });
 
-        if (user) {
-            // Check if the car is already in the favourites array
-            const isFavourite = user.favourites.map(fav => fav.id).includes(sellCarId);
-
-            // If the car is already in favourites, remove it, otherwise add it
-            const newUserFavourites = isFavourite
-                ? user.favourites.filter(fav => fav.id !== sellCarId) // Remove the car
-                : [...user.favourites, { id: sellCarId }]; // Add the car
-
-            // Update the user's favourites field with the new array
-            const updatedUser = await prisma.user.update({
-                where: { cognitoId },
-                data: {
-                    favourites: {
-                        set: newUserFavourites // Use 'set' to replace the favourites array
-                    },
-                },
-                include: {
-                    favourites: {
-                        select: { id: true }, // Only get the 'id' field from the favourites relation
-                    }
-                },
-            });
-
-            // Return the updated user with a specific message
-            if (updatedUser) {
-                res.status(200).json({
-                    message: isFavourite
-                        ? "Removed from favourites!"
-                        : "Added to favourites!",
-                    user: updatedUser
-                });
-            }
-        } else {
+        if (!user) {
             res.status(404).json({ message: 'User not found' });
+            return;
         }
+
+        const isFavourite = user.favourites.some(fav => fav.id === carListingId);
+
+        const updatedUser = await prisma.user.update({
+            where: { cognitoId },
+            data: {
+                favourites: isFavourite
+                    ? { disconnect: { id: carListingId } }
+                    : { connect: { id: carListingId } }
+            },
+            include: { favourites: { select: { id: true } } }
+        });
+
+        res.status(200).json({
+            message: isFavourite ? "Removed from favourites!" : "Added to favourites!",
+            user: updatedUser
+        });
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to update favourites' });
     }
-}
+};
 
-export const removeFavourite = async (req: Request, res: Response): Promise<void> => {
-    const { cognitoId } = req.params;
-    const { sellCarId } = req.body;
-    try {
-        // Find the user by cognitoId
-        const user = await prisma.user.findUnique({
-            where: { cognitoId },
-            select: {
-                favourites: {
-                    select: { id: true }, // Only get the 'id' field from the favourites relation
-                }
-            }
-        });
-
-        if (user) {
-            const newUserFavourites = user.favourites.filter(fav => fav.id !== sellCarId) // Remove the car
-
-            // Update the user's favourites field with the new array
-            const updatedUser = await prisma.user.update({
-                where: { cognitoId },
-                data: {
-                    favourites: {
-                        set: newUserFavourites // Use 'set' to replace the favourites array
-                    },
-                },
-                include: {
-                    favourites: {
-                        select: { id: true }, // Only get the 'id' field from the favourites relation
-                    }
-                },
-            });
-
-            // Return the updated user
-            if (updatedUser)
-                res.status(200).json(updatedUser);
-        } else {
-            res.status(404).json({ message: 'User not found' });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Failed to update favourites' });
-    }
-}

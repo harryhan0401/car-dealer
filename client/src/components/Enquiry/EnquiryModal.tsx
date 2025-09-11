@@ -15,7 +15,7 @@ const EnquiryModal = ({
   children,
   offer,
   listPrice,
-  sellCarId,
+  carListingId,
   authUser,
   isEditing,
 }: EnquiryModalProps) => {
@@ -41,7 +41,7 @@ const EnquiryModal = ({
             offer={offer}
             listPrice={listPrice}
             user={authUser}
-            sellCarId={sellCarId}
+            carListingId={carListingId}
             cb={handleDialogOpen}
             isEditing={isEditing}
           />

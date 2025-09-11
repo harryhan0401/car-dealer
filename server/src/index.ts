@@ -8,7 +8,7 @@ import { authMiddleware } from "./middleware/authMiddleware";
 
 /* ROUTE IMPORT */
 import userRoutes from "./routes/userRoutes";
-import sellCarRoutes from "./routes/sellCarRoutes";
+import carListingRoutes from "./routes/carListingRoutes";
 import carRoutes from "./routes/carRoutes";
 import enquiryRoutes from "./routes/enquiryRoutes";
 
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.use("/users", authMiddleware(["user"]), userRoutes);
 app.use("/admins", authMiddleware(["admin"]), userRoutes);
-app.use("/sellCars", sellCarRoutes);
+app.use("/carListings", carListingRoutes);
 app.use("/enquiries", authMiddleware(["user", "admin"]), enquiryRoutes);
 app.use("/cars", authMiddleware(["user", "admin"]), carRoutes);
 

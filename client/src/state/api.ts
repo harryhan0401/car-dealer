@@ -1,6 +1,6 @@
 import { enquiryData } from "@/lib/schemas";
 import { createNewUserInDatabase, saveProfileSetupStatus, withToast } from "@/lib/utils";
-import { Enquiry, SellCar, User } from "@/types/prismaTypes";
+import { Enquiry, CarListing, User } from "@/types/prismaTypes";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
 
@@ -17,7 +17,7 @@ export const api = createApi({
     }
   }),
   reducerPath: "api",
-  tagTypes: ["Users", "SellCars", "Enquiries"],
+  tagTypes: ["Users", "CarListings", "Enquiries"],
   endpoints: (build) => ({
     //Auth related endpoints
     /*
@@ -62,30 +62,30 @@ export const api = createApi({
         result?.userInfo ? [{ type: "Users", id: result.userInfo.id }] : [],
     }),
 
-    //Sell cars related endpoints
-    getSellCarById: build.query<SellCar, number>({
-      query: (id) => `/sellCars/${id}`,
-      providesTags: (_result, _error, id) => [{ type: "SellCars", id }],
+    //Car Listings related endpoints
+    getCarListingById: build.query<CarListing, string>({
+      query: (id) => `/carListings/${id}`,
+      providesTags: (_result, _error, id) => [{ type: "CarListings", id }],
     }),
-    getSellCars: build.query<SellCar[], void>({
-      query: () => "/sellCars",
+    getCarListings: build.query<CarListing[], void>({
+      query: () => "/carListings",
       providesTags: (result) =>
         result
           ? [
-            ...result.map(({ id }) => ({ type: "SellCars" as const, id })),
-            { type: "SellCars", id: "LIST" },
+            ...result.map(({ id }) => ({ type: "CarListings" as const, id })),
+            { type: "CarListings", id: "LIST" },
           ]
-          : [{ type: "SellCars", id: "LIST" }],
+          : [{ type: "CarListings", id: "LIST" }],
     }),
-    createSellCar: build.mutation<SellCar, FormData>({
-      query: (newSellCar) => ({
-        url: `/sellCars`,
+    createCarListing: build.mutation<CarListing, FormData>({
+      query: (newCarListing) => ({
+        url: `/carListings`,
         method: 'POST',
-        body: newSellCar,
+        body: newCarListing,
       }),
       invalidatesTags: (result) => [
         { type: "Users", id: result?.seller.id },
-        { type: "SellCars", id: "LIST" },
+        { type: "CarListings", id: "LIST" },
       ],
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
@@ -94,12 +94,12 @@ export const api = createApi({
         });
       },
     }),
-    deleteSellCar: build.mutation<number, number>({
+    deleteCarListing: build.mutation<string, string>({
       query: (id) => ({
-        url: `/sellCars/${id}`,
+        url: `/carListings/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (result) => [{ type: "Users", id: result }, { type: "SellCars", id: "LIST" }],
+      invalidatesTags: (result) => [{ type: "Users", id: result }, { type: "CarListings", id: "LIST" }],
       async onQueryStarted(_, { queryFulfilled }) {
         await withToast(queryFulfilled, {
           success: "Car has been deleted!",
@@ -123,20 +123,20 @@ export const api = createApi({
       },
     }),
 
-    upsertEnquiry: build.mutation<Enquiry, { sellCarId: number; enquiryData: enquiryData }>(
+    upsertEnquiry: build.mutation<Enquiry, { carListingId: string; enquiryData: enquiryData }>(
       {
-        query: ({ sellCarId, enquiryData }) => ({
-          url: `/enquiries/${sellCarId}`,
+        query: ({ carListingId, enquiryData }) => ({
+          url: `/enquiries/${carListingId}`,
           method: 'PUT',
           body: enquiryData,
         }),
-        async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
+        async onQueryStarted({ carListingId }, { dispatch, queryFulfilled }) {
           const { data: enquiry, meta } = await queryFulfilled;
 
-          // Update getSellCars
+          // Update getCarListings
           dispatch(
-            api.util.updateQueryData("getSellCars", undefined, (draft) => {
-              const car = draft.find((c: SellCar) => c.id === sellCarId);
+            api.util.updateQueryData("getCarListings", undefined, (draft) => {
+              const car = draft.find((c: CarListing) => c.id === carListingId);
               if (car) {
                 if (!Array.isArray(car.enquiries)) {
                   car.enquiries = [];
@@ -151,9 +151,9 @@ export const api = createApi({
             })
           );
 
-          // Update getSellCarById
+          // Update getCarListingById
           dispatch(
-            api.util.updateQueryData("getSellCarById", sellCarId, (draft) => {
+            api.util.updateQueryData("getCarListingById", carListingId, (draft) => {
               if (!Array.isArray(draft.enquiries)) {
                 draft.enquiries = [];
               }
@@ -179,23 +179,23 @@ export const api = createApi({
         },
       }
     ),
-    deleteEnquiry: build.mutation<Enquiry, { referenceCode: string, sellCarId: number }>({
+    deleteEnquiry: build.mutation<Enquiry, { referenceCode: string, carListingId: string }>({
       query: ({ referenceCode }) => ({
         url: `/enquiries/${referenceCode}`,
         method: 'DELETE',
       }),
-      async onQueryStarted({ sellCarId }, { dispatch, queryFulfilled }) {
+      async onQueryStarted({ carListingId }, { dispatch, queryFulfilled }) {
         const { data: deletedEnquiry } = await queryFulfilled;
         dispatch(
-          api.util.updateQueryData("getSellCars", undefined, (draft) => {
-            const sellCar = draft.find((c: SellCar) => c.id === sellCarId);
-            if (sellCar && Array.isArray(sellCar.enquiries)) {
-              sellCar.enquiries = sellCar.enquiries.filter((e: Enquiry) => e.id !== deletedEnquiry.id);
+          api.util.updateQueryData("getCarListings", undefined, (draft) => {
+            const carListing = draft.find((c: CarListing) => c.id === carListingId);
+            if (carListing && Array.isArray(carListing.enquiries)) {
+              carListing.enquiries = carListing.enquiries.filter((e: Enquiry) => e.id !== deletedEnquiry.id);
             }
           })
         );
         dispatch(
-          api.util.updateQueryData("getSellCarById", sellCarId, (draft) => {
+          api.util.updateQueryData("getCarListingById", carListingId, (draft) => {
             if (Array.isArray(draft.enquiries)) {
               draft.enquiries = draft.enquiries.filter((e: Enquiry) => e.id !== deletedEnquiry.id);
             }
@@ -223,11 +223,11 @@ export const api = createApi({
         });
       },
     }),
-    addSellCarFavourite: build.mutation<User, { cognitoId: string; sellCarId: number }>({
-      query: ({ cognitoId, sellCarId }) => ({
+    addCarListingFavourite: build.mutation<User, { cognitoId: string; carListingId: string }>({
+      query: ({ cognitoId, carListingId }) => ({
         url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
         method: 'PATCH',  // Using PATCH for partial updates
-        body: { sellCarId },
+        body: { carListingId },
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
       async onQueryStarted(_, { queryFulfilled }) {
@@ -238,11 +238,11 @@ export const api = createApi({
         });
       },
     }),
-    removeSellCarFavourite: build.mutation<User, { cognitoId: string; sellCarId: number }>({
-      query: ({ cognitoId, sellCarId }) => ({
+    removeCarListingFavourite: build.mutation<User, { cognitoId: string; carListingId: string }>({
+      query: ({ cognitoId, carListingId }) => ({
         url: `/users/${cognitoId}/favourites`,  // Adjust URL path if necessary
         method: 'DELETE',  // Using DELETE for removing a favourite
-        body: { sellCarId },
+        body: { carListingId },
       }),
       invalidatesTags: (result) => [{ type: "Users", id: result?.id }],
       async onQueryStarted(_, { queryFulfilled }) {
@@ -255,4 +255,4 @@ export const api = createApi({
   }),
 });
 
-export const { useGetAuthUserQuery, useGetSellCarsQuery, useGetSellCarByIdQuery, useCreateSellCarMutation, useDeleteSellCarMutation, useGetEnquiriesQuery, useUpsertEnquiryMutation, useDeleteEnquiryMutation, useUpdateUserProfileMutation, useAddSellCarFavouriteMutation, useRemoveSellCarFavouriteMutation } = api;
+export const { useGetAuthUserQuery, useGetCarListingsQuery, useGetCarListingByIdQuery, useCreateCarListingMutation, useDeleteCarListingMutation, useGetEnquiriesQuery, useUpsertEnquiryMutation, useDeleteEnquiryMutation, useUpdateUserProfileMutation, useAddCarListingFavouriteMutation, useRemoveCarListingFavouriteMutation } = api;

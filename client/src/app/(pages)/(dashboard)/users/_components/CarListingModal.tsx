@@ -7,9 +7,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SellCarForm from "@/components/Forms/SellCarForm/SellCarForm";
+import CarListingForm from "@/components/Forms/CarListingForm/CarListingForm";
 
-export default function SellCarModal({
+export default function CarListingModal({
   children,
 }: {
   children: React.ReactNode;
@@ -22,7 +22,7 @@ export default function SellCarModal({
           <DialogTitle className="sr-only">Sell Car Form</DialogTitle>
         </DialogHeader>
         <div className="mt-5">
-          <SellCarForm />
+          <CarListingForm />
         </div>
       </DialogContent>
     </Dialog>

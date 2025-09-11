@@ -1,5 +1,5 @@
 "use client";
-import { sellCarSchema1, SellCarData1 } from "@/lib/schemas";
+import { carListingSchema1, CarListingData1 } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "../../ui/button";
@@ -8,27 +8,27 @@ import { CustomFormField } from "../../FormField";
 import { useGetAuthUserQuery } from "@/state/api";
 import { Form } from "../../ui/form";
 
-const SellCarFormPartTwo = React.memo(
-  ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
+const CarListingFormPartTwo = React.memo(
+  ({ carListingFormData, handleFormSubmit, cb }: CarListingFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
-    const { vin, mileage, price, description } = sellCarFormData;
+    const { vin, mileage, price, description } = carListingFormData;
 
-    const sellForm = useForm<SellCarData1>({
+    const sellForm = useForm<CarListingData1>({
       defaultValues: {
         vin: vin ? vin : "",
         mileage: mileage ? mileage : 0,
         price: price ? price : 2000,
         description: description ? description : "",
       },
-      resolver: zodResolver(sellCarSchema1),
+      resolver: zodResolver(carListingSchema1),
     });
 
     const onSubmit = useCallback(
-      async (data: SellCarData1) => {
+      async (data: CarListingData1) => {
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-        handleFormSubmit({ ...sellCarFormData, ...data });
+        handleFormSubmit({ ...carListingFormData, ...data });
         cb("item-3");
       },
       [authUser]
@@ -40,18 +40,18 @@ const SellCarFormPartTwo = React.memo(
           onSubmit={sellForm.handleSubmit(onSubmit)}
           className="p-4 space-y-10"
         >
-          {/* SellCar VIN field */}
+          {/* CarListing VIN field */}
           <CustomFormField name="vin" label="VIN*" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-baseline">
-            {/*SellCar Mileage field */}
+            {/*CarListing Mileage field */}
             <CustomFormField name="mileage" label="Mileage*" type="number" />
 
-            {/*SellCar Mileage field */}
+            {/*CarListing Mileage field */}
             <CustomFormField name="price" label="Price*" type="number" />
           </div>
 
-          {/*SellCar Description field */}
+          {/*CarListing Description field */}
           <CustomFormField
             name="description"
             label="Description*"
@@ -69,4 +69,4 @@ const SellCarFormPartTwo = React.memo(
     );
   }
 );
-export default SellCarFormPartTwo;
+export default CarListingFormPartTwo;

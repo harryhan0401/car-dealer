@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   uniqueMakes: [],
-  sellCarCount: 0,
-  filteredSellCars: [],
+  carListingCount: 0,
+  filteredCarListings: [],
   isFiltersOpen: false,
   isMapLayout: false,
 };
@@ -15,11 +15,11 @@ export const globalSlice = createSlice({
     setUniqueMakes: (state, action) => {
       state.uniqueMakes = action.payload;
     },
-    setSellCarCount: (state, action) => {
-      state.sellCarCount = action.payload;
+    setCarListingCount: (state, action) => {
+      state.carListingCount = action.payload;
     },
-    setFilteredSellCars: (state, action) => {
-      state.filteredSellCars = action.payload;
+    setFilteredCarListings: (state, action) => {
+      state.filteredCarListings = action.payload;
     },
     setIsFiltersOpen: (state, action) => {
       state.isFiltersOpen = action.payload;
@@ -30,6 +30,6 @@ export const globalSlice = createSlice({
   },
 });
 
-export const { setUniqueMakes, setSellCarCount, setFilteredSellCars, setIsFiltersOpen, setIsMapLayout } = globalSlice.actions;
+export const { setUniqueMakes, setCarListingCount, setFilteredCarListings, setIsFiltersOpen, setIsMapLayout } = globalSlice.actions;
 
 export default globalSlice.reducer;

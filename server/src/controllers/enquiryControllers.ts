@@ -12,7 +12,7 @@ export const getEnquiries = async (req: Request, res: Response): Promise<void> =
         const enquiries = await prisma.enquiry.findMany({
             where: { buyerCognitoId: cognitoId },
             include: {
-                sellCar: {
+                carListing: {
                     include: {
                         car: true,
                         seller: true
@@ -27,13 +27,13 @@ export const getEnquiries = async (req: Request, res: Response): Promise<void> =
 }
 export const upsertEnquiry = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { sellCarId } = req.params;
+        const { carListingId } = req.params;
         const { cognitoId, offer, listPrice, message } = req.body;
         // Try to find existing enquiry by composite key
         const existingEnquiry = await prisma.enquiry.findUnique({
             where: {
                 enquiryId: {
-                    sellCarId: +sellCarId,
+                    carListingId,
                     buyerCognitoId: cognitoId,
                 },
             },
@@ -44,7 +44,7 @@ export const upsertEnquiry = async (req: Request, res: Response): Promise<void> 
             const updatedEnquiry = await prisma.enquiry.update({
                 where: {
                     enquiryId: {
-                        sellCarId: +sellCarId,
+                        carListingId,
                         buyerCognitoId: cognitoId,
                     },
                 },
@@ -60,7 +60,7 @@ export const upsertEnquiry = async (req: Request, res: Response): Promise<void> 
             // Create new enquiry
             const newEnquiry = await prisma.enquiry.create({
                 data: {
-                    sellCar: { connect: { id: +sellCarId } },
+                    carListing: { connect: { id: carListingId } },
                     buyer: { connect: { cognitoId } },
                     referenceCode: newCode,
                     offer: +offer,

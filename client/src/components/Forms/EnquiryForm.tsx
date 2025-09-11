@@ -13,7 +13,7 @@ import { useState } from "react";
 
 const EnquiryForm = ({
   user,
-  sellCarId,
+  carListingId,
   offer,
   listPrice,
   cb,
@@ -42,7 +42,7 @@ const EnquiryForm = ({
 
   const onSubmit = async (enquiryData: enquiryData) => {
     const res = await createEnquiry({
-      sellCarId: sellCarId,
+      carListingId: carListingId,
       enquiryData,
     });
     if (!res.error) {

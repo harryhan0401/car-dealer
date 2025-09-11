@@ -1,7 +1,7 @@
 import { AuthUser } from "aws-amplify/auth";
 import { MotionProps as OzriginalMotionProps } from "framer-motion";
-import { Enquiry, SellCar, User } from "./prismaTypes";
-import { avatarData, CarData, locationData, SellCarData, userData } from "@/lib/schemas";
+import { Enquiry, CarListing, User } from "./prismaTypes";
+import { avatarData, CarData, locationData, CarListingData, userData } from "@/lib/schemas";
 
 declare module "framer-motion" {
   interface MotionProps extends OriginalMotionProps {
@@ -43,7 +43,7 @@ declare global {
   type TStepType = {
     selectedMakesModels: FilterMakesModels[];
     setSelectedMakesModels: (filter: FilterMakesModels[]) => void;
-    sellCars: SellCar[];
+    carListings: CarListing[];
   }
 
   type TNavLink = {
@@ -59,7 +59,7 @@ declare global {
     read: boolean;
   }
 
-  type TSellCarFormData = SellCarData & CarData;
+  type TCarListingFormData = CarListingData & CarData;
 
   type TProfileSetupSteps = {
     step: number;
@@ -110,7 +110,7 @@ declare global {
   }
   interface FavouriteFormProps {
     authUser: AppUser;
-    sellCarId: number;
+    carListingId: string
   }
   interface FilterBarChartProps {
     data: { range: string; count: number; isInRange?: boolean }[];
@@ -118,12 +118,12 @@ declare global {
     localMax: number;
   }
   interface CarCardProps {
-    id: number;
+    id: string;
     mileage: number;
     price: number;
     description: string;
     enquiries: Enquiry[];
-    car: SellCar;
+    car: CarListing;
     seller: User;
     index: number;
     isHighlight?: boolean;
@@ -152,8 +152,8 @@ declare global {
     children: React.ReactNode;
     navLinks: TNavLink[];
   }
-  interface SellCarFormStepProps {
-    sellCarFormData: TSellCarFormData;
+  interface CarListingFormStepProps {
+    carListingFormData: TCarListingFormData;
     handleFormSubmit?: any;
     cb: (name: string) => void;
   }
@@ -171,7 +171,7 @@ declare global {
     authUser: AppUser;
   }
   interface ContactSellerButtonProps {
-    sellCarId: number;
+    carListingId: string
     offer?: number;
     listPrice: number;
     enquiries: Enquiry[];
@@ -179,7 +179,7 @@ declare global {
 
   interface EnquiryModalProps {
     children: React.ReactNode;
-    sellCarId: number;
+    carListingId: string
     offer?: number;
     listPrice: number;
     authUser?: AppUser;
@@ -187,7 +187,7 @@ declare global {
   }
   interface EnquiryFormProps {
     user: AppUser;
-    sellCarId: number;
+    carListingId: string
     offer?: number;
     listPrice: number;
     cb: () => void;
@@ -200,13 +200,13 @@ declare global {
   interface WithdrawButtonProps {
     cb: () => void;
     referenceCode: string;
-    sellCarId: number;
+    carListingId: string
   }
   interface WithdrawConfirmationModalProps {
     children: React.ReactNode;
     cb: () => void;
     referenceCode: string;
-    sellCarId: number;
+    carListingId: string
   }
   interface AppUser {
     cognitoInfo: AuthUser;

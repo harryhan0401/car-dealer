@@ -35,7 +35,7 @@ const CarCard = ({
       <div
         className={`grid ${isHighlight && "lg:grid-cols-2 lg:gap-10 lg:items-center"}`}
       >
-        <Link href={`/sellCars/${id}`}>
+        <Link href={`/carListings/${id}`}>
           <Image
             // src={`/${photoUrls[0]}`}
             src={
@@ -128,14 +128,14 @@ const CarCard = ({
               className={`flex ${authUser && "gap-5"}`}
             >
               <ContactSellerButton
-                sellCarId={id}
+                carListingId={id}
                 listPrice={price}
                 enquiries={enquiries}
               />
 
               {authUser && (
                 <div>
-                  <FavouriteForm authUser={authUser} sellCarId={id} />
+                  <FavouriteForm authUser={authUser} carListingId={id} />
                 </div>
               )}
             </section>

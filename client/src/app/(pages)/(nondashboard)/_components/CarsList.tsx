@@ -5,7 +5,7 @@ import CarsListGridLayout from "./CarsListGridLayout";
 import CarsListMapLayout from "./CarsListMapLayout";
 import { Button } from "@/components/ui/button";
 import { GridIcon, MapIcon } from "lucide-react";
-import { useGetSellCarsQuery } from "@/state/api";
+import { useGetCarListingsQuery } from "@/state/api";
 import { useAppDispatch, useAppSelector } from "@/state/redux";
 import { useQueryState } from "nuqs";
 import {
@@ -14,9 +14,9 @@ import {
   useSelectParam,
 } from "@/lib/hooks";
 import {
-  setFilteredSellCars,
+  setFilteredCarListings,
   setIsFiltersOpen,
-  setSellCarCount,
+  setCarListingCount,
 } from "@/state";
 
 const CarsList = () => {
@@ -24,7 +24,7 @@ const CarsList = () => {
   const [viewMode, setViewMode] = useState<"grid" | "maps">("grid");
 
   //Fetch Car List
-  const { data: sellCars, isFetching: carFetching } = useGetSellCarsQuery();
+  const { data: carListings, isFetching: carFetching } = useGetCarListingsQuery();
 
   //Redux toolkit
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const CarsList = () => {
 
   //Retrieve all filter query params for car
   const [type] = useQueryState("type");
-  const [makes, models] = useMakeModelsParam("makeModels", sellCars!);
+  const [makes, models] = useMakeModelsParam("makeModels", carListings!);
   const [minPrice, maxPrice] = useAmountRangeParam("price_range");
   const [minMileage, maxMileage] = useAmountRangeParam("mileage_range");
   const fuel = useSelectParam("fuel");
@@ -47,30 +47,30 @@ const CarsList = () => {
      */
 
   const filteredCars = useMemo(() => {
-    if (sellCars) {
-      return sellCars.filter(
-        (sellCar) =>
-          (!type || sellCar.car.type.toLowerCase() === type.toLowerCase()) &&
-          (!makes.length || makes.includes(sellCar.car.make)) &&
-          (!models.length || models.includes(sellCar.car.model)) &&
-          (!minPrice || sellCar.price >= Number(minPrice)) &&
-          (!maxPrice || sellCar.price <= Number(maxPrice)) &&
-          (!minMileage || sellCar.mileage >= Number(minMileage)) &&
-          (!maxMileage || sellCar.mileage <= Number(maxMileage)) &&
-          (!fuel || fuel.includes(sellCar.car.fuel.toLowerCase())) &&
+    if (carListings) {
+      return carListings.filter(
+        (carListing) =>
+          (!type || carListing.car.type.toLowerCase() === type.toLowerCase()) &&
+          (!makes.length || makes.includes(carListing.car.make)) &&
+          (!models.length || models.includes(carListing.car.model)) &&
+          (!minPrice || carListing.price >= Number(minPrice)) &&
+          (!maxPrice || carListing.price <= Number(maxPrice)) &&
+          (!minMileage || carListing.mileage >= Number(minMileage)) &&
+          (!maxMileage || carListing.mileage <= Number(maxMileage)) &&
+          (!fuel || fuel.includes(carListing.car.fuel.toLowerCase())) &&
           (!transmission ||
-            transmission.includes(sellCar.car.transmission.toLowerCase())) &&
+            transmission.includes(carListing.car.transmission.toLowerCase())) &&
           (!drive ||
-            drive.includes(sellCar.car.drive) ||
+            drive.includes(carListing.car.drive) ||
             (drive.includes("4WD") &&
-              sellCar.car.drive.toLowerCase() === "fourwd")) &&
-          (!minYear || sellCar.car.year >= Number(minYear)) &&
-          (!maxYear || sellCar.car.year <= Number(maxYear))
+              carListing.car.drive.toLowerCase() === "fourwd")) &&
+          (!minYear || carListing.car.year >= Number(minYear)) &&
+          (!maxYear || carListing.car.year <= Number(maxYear))
       );
     }
     return []; // Return an empty array instead of undefined
   }, [
-    sellCars, // Ensure sellCars is included in the dependency array
+    carListings, // Ensure carListings is included in the dependency array
     type,
     makes,
     models,
@@ -87,8 +87,8 @@ const CarsList = () => {
 
   useEffect(() => {
     if (!carFetching) {
-      dispatch(setSellCarCount(filteredCars.length));
-      dispatch(setFilteredSellCars(filteredCars));
+      dispatch(setCarListingCount(filteredCars.length));
+      dispatch(setFilteredCarListings(filteredCars));
     }
   }, [filteredCars]);
   return (

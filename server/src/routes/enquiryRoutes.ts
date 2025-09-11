@@ -7,7 +7,7 @@ import {
 const router = express.Router();
 
 router.post("/", getEnquiries)
-router.put("/:sellCarId", upsertEnquiry);
+router.put("/:carListingId", upsertEnquiry);
 router.delete("/:referenceCode", deleteEnquiry);
 
 export default router;

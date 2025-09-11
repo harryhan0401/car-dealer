@@ -33,9 +33,9 @@ CREATE TYPE "PreferredContactMethod" AS ENUM ('Email', 'Phone', 'All');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "cognitoId" TEXT NOT NULL,
-    "locationId" INTEGER,
+    "locationId" TEXT,
     "firstName" TEXT NOT NULL DEFAULT '',
     "lastName" TEXT NOT NULL DEFAULT '',
     "email" TEXT NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Location" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "address" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE "Location" (
 
 -- CreateTable
 CREATE TABLE "Car" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "make" "Make" NOT NULL,
     "model" TEXT NOT NULL,
     "year" INTEGER NOT NULL,
@@ -81,11 +81,12 @@ CREATE TABLE "Car" (
 );
 
 -- CreateTable
-CREATE TABLE "SellCar" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "CarListing" (
+    "id" TEXT NOT NULL,
     "vin" VARCHAR(17) NOT NULL,
     "sellerCognitoId" TEXT NOT NULL,
-    "carId" INTEGER NOT NULL,
+    "carId" TEXT NOT NULL,
+    "lcationId" TEXT,
     "mileage" INTEGER NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "photoUrls" TEXT[],
@@ -94,14 +95,14 @@ CREATE TABLE "SellCar" (
     "dateTimeCreated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "dateTimeUpdated" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "SellCar_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "CarListing_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Enquiry" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "referenceCode" TEXT NOT NULL,
-    "sellCarId" INTEGER NOT NULL,
+    "carListingId" TEXT NOT NULL,
     "buyerCognitoId" TEXT NOT NULL,
     "offer" DOUBLE PRECISION NOT NULL,
     "listPrice" DOUBLE PRECISION NOT NULL,
@@ -115,8 +116,8 @@ CREATE TABLE "Enquiry" (
 
 -- CreateTable
 CREATE TABLE "Order" (
-    "id" SERIAL NOT NULL,
-    "sellCarId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "carListingId" TEXT NOT NULL,
     "buyerCognitoId" TEXT NOT NULL,
     "totalAmount" DOUBLE PRECISION NOT NULL,
     "status" "OrderStatus" NOT NULL DEFAULT 'Pending',
@@ -128,8 +129,8 @@ CREATE TABLE "Order" (
 
 -- CreateTable
 CREATE TABLE "Payment" (
-    "id" SERIAL NOT NULL,
-    "orderId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "orderId" TEXT NOT NULL,
     "paymentMethod" "PaymentMethod" NOT NULL,
     "paymentStatus" "PaymentStatus" NOT NULL DEFAULT 'Pending',
     "amount" DOUBLE PRECISION NOT NULL,
@@ -141,7 +142,7 @@ CREATE TABLE "Payment" (
 
 -- CreateTable
 CREATE TABLE "Review" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "userCognitoId" TEXT NOT NULL,
     "reviewerCognitoId" TEXT NOT NULL,
     "rating" INTEGER NOT NULL DEFAULT 0,
@@ -154,8 +155,8 @@ CREATE TABLE "Review" (
 
 -- CreateTable
 CREATE TABLE "_UserFavourites" (
-    "A" INTEGER NOT NULL,
-    "B" INTEGER NOT NULL,
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL,
 
     CONSTRAINT "_UserFavourites_AB_pkey" PRIMARY KEY ("A","B")
 );
@@ -167,16 +168,16 @@ CREATE UNIQUE INDEX "User_cognitoId_key" ON "User"("cognitoId");
 CREATE UNIQUE INDEX "Car_make_model_year_type_fuel_drive_transmission_key" ON "Car"("make", "model", "year", "type", "fuel", "drive", "transmission");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "SellCar_vin_key" ON "SellCar"("vin");
+CREATE UNIQUE INDEX "CarListing_vin_key" ON "CarListing"("vin");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Enquiry_referenceCode_key" ON "Enquiry"("referenceCode");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Enquiry_sellCarId_buyerCognitoId_key" ON "Enquiry"("sellCarId", "buyerCognitoId");
+CREATE UNIQUE INDEX "Enquiry_carListingId_buyerCognitoId_key" ON "Enquiry"("carListingId", "buyerCognitoId");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Order_sellCarId_key" ON "Order"("sellCarId");
+CREATE UNIQUE INDEX "Order_carListingId_key" ON "Order"("carListingId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Payment_orderId_key" ON "Payment"("orderId");
@@ -188,19 +189,22 @@ CREATE INDEX "_UserFavourites_B_index" ON "_UserFavourites"("B");
 ALTER TABLE "User" ADD CONSTRAINT "User_locationId_fkey" FOREIGN KEY ("locationId") REFERENCES "Location"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SellCar" ADD CONSTRAINT "SellCar_sellerCognitoId_fkey" FOREIGN KEY ("sellerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CarListing" ADD CONSTRAINT "CarListing_sellerCognitoId_fkey" FOREIGN KEY ("sellerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "SellCar" ADD CONSTRAINT "SellCar_carId_fkey" FOREIGN KEY ("carId") REFERENCES "Car"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CarListing" ADD CONSTRAINT "CarListing_carId_fkey" FOREIGN KEY ("carId") REFERENCES "Car"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_sellCarId_fkey" FOREIGN KEY ("sellCarId") REFERENCES "SellCar"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "CarListing" ADD CONSTRAINT "CarListing_lcationId_fkey" FOREIGN KEY ("lcationId") REFERENCES "Location"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_carListingId_fkey" FOREIGN KEY ("carListingId") REFERENCES "CarListing"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Enquiry" ADD CONSTRAINT "Enquiry_buyerCognitoId_fkey" FOREIGN KEY ("buyerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Order" ADD CONSTRAINT "Order_sellCarId_fkey" FOREIGN KEY ("sellCarId") REFERENCES "SellCar"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Order" ADD CONSTRAINT "Order_carListingId_fkey" FOREIGN KEY ("carListingId") REFERENCES "CarListing"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_buyerCognitoId_fkey" FOREIGN KEY ("buyerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -215,7 +219,7 @@ ALTER TABLE "Review" ADD CONSTRAINT "Review_userCognitoId_fkey" FOREIGN KEY ("us
 ALTER TABLE "Review" ADD CONSTRAINT "Review_reviewerCognitoId_fkey" FOREIGN KEY ("reviewerCognitoId") REFERENCES "User"("cognitoId") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "_UserFavourites" ADD CONSTRAINT "_UserFavourites_A_fkey" FOREIGN KEY ("A") REFERENCES "SellCar"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "_UserFavourites" ADD CONSTRAINT "_UserFavourites_A_fkey" FOREIGN KEY ("A") REFERENCES "CarListing"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_UserFavourites" ADD CONSTRAINT "_UserFavourites_B_fkey" FOREIGN KEY ("B") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;

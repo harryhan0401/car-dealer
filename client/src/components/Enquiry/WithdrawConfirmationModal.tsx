@@ -15,13 +15,13 @@ const WithdrawConfirmationModal = ({
   children,
   cb,
   referenceCode,
-  sellCarId,
+  carListingId,
 }: WithdrawConfirmationModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [deleteEnquiry] = useDeleteEnquiryMutation();
 
   const handleWithdraw = async () => {
-    await deleteEnquiry({ referenceCode, sellCarId });
+    await deleteEnquiry({ referenceCode, carListingId });
     cb();
   };
   return (

@@ -1,24 +1,24 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { useDeleteSellCarMutation, useGetAuthUserQuery } from "@/state/api";
+import { useDeleteCarListingMutation, useGetAuthUserQuery } from "@/state/api";
 import { FaCarAlt } from "react-icons/fa";
 import { Edit, Eye, Globe, Lock, Trash } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import SellCarModal from "./SellCarModal";
-import { SellCar } from "@/types/prismaTypes";
+import CarListingModal from "./CarListingModal";
+import { CarListing } from "@/types/prismaTypes";
 
 const YourCars = () => {
   const { data: authUser, isLoading } = useGetAuthUserQuery();
-  const [deleteSellCar] = useDeleteSellCarMutation();
+  const [deleteCarListing] = useDeleteCarListingMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (!authUser) return <p>You are not authorized to view this page!</p>;
 
-  const carSales = authUser.userInfo.carSales as SellCar[];
+  const carSales = authUser.userInfo.carSales as CarListing[];
 
-  const handleDelete = async (id: number) => {
-    await deleteSellCar(id);
+  const handleDelete = async (id: string) => {
+    await deleteCarListing(id);
   };
 
   return (
@@ -29,9 +29,9 @@ const YourCars = () => {
       </h2>
       {carSales.length === 0 ? (
         <div className="w-full">
-          <SellCarModal>
+          <CarListingModal>
             <Button className="w-full">Start adding your car</Button>
-          </SellCarModal>
+          </CarListingModal>
         </div>
       ) : (
         <table className="w-full text-left table-auto">
@@ -82,7 +82,10 @@ const YourCars = () => {
                 <td className="p-4">
                   <div className="flex flex-col items-center gap-2">
                     <Button asChild>
-                      <Link href={`/sellCars/${id}`} className="w-full h-full">
+                      <Link
+                        href={`/carListings/${id}`}
+                        className="w-full h-full"
+                      >
                         <span>
                           <Eye className="w-4 h-4" />
                         </span>

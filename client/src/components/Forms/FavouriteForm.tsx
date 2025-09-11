@@ -1,16 +1,16 @@
 "use client";
-import { useAddSellCarFavouriteMutation } from "@/state/api";
+import { useAddCarListingFavouriteMutation } from "@/state/api";
 import { User } from "@/types/prismaTypes";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
 
-const FavouriteForm = ({ authUser, sellCarId }: FavouriteFormProps) => {
+const FavouriteForm = ({ authUser, carListingId }: FavouriteFormProps) => {
   const [updateUserFavourites, { isLoading }] =
-    useAddSellCarFavouriteMutation();
+    useAddCarListingFavouriteMutation();
 
   const [isFavourite, setIsFavourite] = useState<boolean>(
     authUser.userInfo.favourites.some(
-      (fav: { id: number }) => fav.id === sellCarId
+      (fav: { id: string }) => fav.id === carListingId
     )
   );
 
@@ -19,13 +19,13 @@ const FavouriteForm = ({ authUser, sellCarId }: FavouriteFormProps) => {
       const cognitoId = authUser.cognitoInfo.userId;
       const res: User = await updateUserFavourites({
         cognitoId,
-        sellCarId,
+        carListingId,
       }).unwrap();
       if (res) {
         const favourites = res.user.favourites.map(
-          (fav: { id: number }) => fav.id
+          (fav: { id: string }) => fav.id
         );
-        if (favourites.includes(sellCarId)) {
+        if (favourites.includes(carListingId)) {
           setIsFavourite(true);
         } else {
           setIsFavourite(false);

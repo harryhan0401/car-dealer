@@ -5,9 +5,9 @@ import { wktToGeoJSON } from "@terraformer/wkt";
 const prisma = new PrismaClient();
 
 
-export const getSellCars = async (_req: Request, res: Response): Promise<void> => {
+export const getCarListings = async (_req: Request, res: Response): Promise<void> => {
     try {
-        const sellCars = await prisma.sellCar.findMany({
+        const carListings = await prisma.carListing.findMany({
             where: { "isPublic": true },
             orderBy: { "dateTimeUpdated": "desc" },
             include: {
@@ -21,28 +21,28 @@ export const getSellCars = async (_req: Request, res: Response): Promise<void> =
 
             },
         });
-        // Attach coordinates to each sellCar
-        const sellCarsWithCoordinates = await Promise.all(
-            sellCars.map(async (sellCar) => {
-                if (sellCar.seller && sellCar.seller.location) {
+        // Attach coordinates to each carListing
+        const carListingsWithCoordinates = await Promise.all(
+            carListings.map(async (carListing) => {
+                if (carListing.seller && carListing.seller.location) {
                     const coordinates = await prisma.$queryRaw<{ coordinates: string }[]>(
-                        Prisma.sql`SELECT ST_asText(coordinates) as coordinates from "Location" where id = ${sellCar.seller.location.id}`
+                        Prisma.sql`SELECT ST_asText(coordinates) as coordinates from "Location" where id = ${carListing.seller.location.id}`
                     );
                     if (coordinates.length > 0) {
                         const geoJSON: any = wktToGeoJSON(coordinates[0].coordinates);
                         return {
-                            ...sellCar,
+                            ...carListing,
                             longitude: geoJSON.coordinates[0],
                             latitude: geoJSON.coordinates[1],
                         };
                     }
                 }
-                return sellCar;
+                return carListing;
             })
         );
 
-        if (sellCarsWithCoordinates) {
-            res.json(sellCarsWithCoordinates);
+        if (carListingsWithCoordinates) {
+            res.json(carListingsWithCoordinates);
         } else {
             res.status(404).json({ message: "There is no available sale car" });
         }
@@ -52,11 +52,11 @@ export const getSellCars = async (_req: Request, res: Response): Promise<void> =
     }
 }
 
-export const getSellCarById = async (req: Request, res: Response): Promise<void> => {
+export const getCarListingById = async (req: Request, res: Response): Promise<void> => {
     try {
-        const { sellCarId } = req.params;
-        const sellCar = await prisma.sellCar.findUnique({
-            where: { id: +sellCarId },
+        const { carListingId } = req.params;
+        const carListing = await prisma.carListing.findUnique({
+            where: { id: carListingId },
             include: {
                 car: true,
                 seller: true,
@@ -64,8 +64,8 @@ export const getSellCarById = async (req: Request, res: Response): Promise<void>
             },
         });
 
-        if (sellCar) {
-            res.json(sellCar)
+        if (carListing) {
+            res.json(carListing)
         }
         else {
             res.status(404).json({ message: "Sale car not found" });
@@ -74,10 +74,10 @@ export const getSellCarById = async (req: Request, res: Response): Promise<void>
         res.status(500).json({ message: `Error retrieving sale car: ${error.message}` });
     }
 }
-export const createSellCar = async (req: Request, res: Response): Promise<void> => {
+export const createCarListing = async (req: Request, res: Response): Promise<void> => {
     try {
         const files = req.files as Express.Multer.File[];
-        let carId = -1;
+        let carId;
         const {
             make,
             model,
@@ -123,7 +123,7 @@ export const createSellCar = async (req: Request, res: Response): Promise<void> 
             carId = newCar.id
         }
 
-        const newSellCar = await prisma.sellCar.create({
+        const newCarListing = await prisma.carListing.create({
             data: {
                 vin,
                 sellerCognitoId: cognitoId,
@@ -138,40 +138,40 @@ export const createSellCar = async (req: Request, res: Response): Promise<void> 
                 car: true,
             },
         })
-        res.status(201).json(newSellCar);
+        res.status(201).json(newCarListing);
     } catch (error: any) {
         res.status(500).json({ message: `Error creating sale car: ${error.message}` });
 
     }
 }
 
-export async function deleteSellCar(req: Request, res: Response): Promise<void> {
+export async function deleteCarListing(req: Request, res: Response): Promise<void> {
     try {
-        const { sellCarId } = req.params;
+        const { carListingId } = req.params;
 
         // First check if the sale car exists and belongs to the user
-        const sellCar = await prisma.sellCar.findUnique({
-            where: { id: +sellCarId },
+        const carListing = await prisma.carListing.findUnique({
+            where: { id: carListingId },
             include: { seller: true }
         });
 
-        if (!sellCar) {
+        if (!carListing) {
             res.status(404).json({ message: "Sale car not found" });
             return;
         }
 
-        if (sellCar.sellerCognitoId !== req.user?.id) {
+        if (carListing.sellerCognitoId !== req.user?.id) {
             res.status(403).json({ message: "Unauthorized: You can only delete your own listings" });
             return;
         }
 
         // If checks pass, proceed with deletion
-        const deletedSellCars = await prisma.sellCar.delete({
-            where: { id: +sellCarId },
+        const deletedCarListings = await prisma.carListing.delete({
+            where: { id: carListingId },
             include: { seller: true }
         });
 
-        res.status(200).json(deletedSellCars.seller.id);
+        res.status(200).json(deletedCarListings.seller.id);
     } catch (error: any) {
         console.error("Error deleting sale car:", error);
         res.status(500).json({ message: `Error deleting sale car: ${error.message}` });

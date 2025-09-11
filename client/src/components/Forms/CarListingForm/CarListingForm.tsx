@@ -1,7 +1,6 @@
 "use client";
 import { useCallback, useState } from "react";
-import SellCarFormPartOne from "./SellCarFormPartOne";
-import SellCarFormPartTwo from "./SellCarFormPartTwo";
+
 import {
   Accordion,
   AccordionContent,
@@ -9,19 +8,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import StepDisplay from "@/components/StepDisplay";
-import SellCarFormPartThree from "./SellCarFormPartThree";
-import SellCarFormPartFour from "./SellCarFormPartFour";
 import { AccordionHeader } from "@radix-ui/react-accordion";
 import { useGetAuthUserQuery } from "@/state/api";
 import Authentication from "@/components/Authentication/Authentication";
+import CarListingFormPartOne from "./CarListingFormPartOne";
+import CarListingFormPartTwo from "./CarListingFormPartTwo";
+import CarListingFormPartThree from "./CarListingFormPartThree";
+import CarListingFormPartFour from "./CarListingFormPartFour";
 
-const SellCarForm = () => {
+const CarListingForm = () => {
   const { data: authUser } = useGetAuthUserQuery();
-  const [sellCarFormData, setSellCarFormData] = useState<TSellCarFormData>();
+  const [carListingFormData, setCarListingFormData] =
+    useState<TCarListingFormData>();
   const [openItem, setOpenItem] = useState<string | null>(null);
 
-  const handlCarFormSubmit = useCallback((formData: TSellCarFormData) => {
-    setSellCarFormData(formData); // Set Sell Car Form Data
+  const handlCarFormSubmit = useCallback((formData: TCarListingFormData) => {
+    setCarListingFormData(formData); // Set Sell Car Form Data
   }, []);
 
   const handleAccordionItemFocus = useCallback((itemName: string) => {
@@ -50,21 +52,21 @@ const SellCarForm = () => {
               <StepDisplay stepNumber={1} title="Find your car" />
             </AccordionTrigger>
             <AccordionContent>
-              <SellCarFormPartOne
-                sellCarFormData={sellCarFormData!}
+              <CarListingFormPartOne
+                carListingFormData={carListingFormData!}
                 handleFormSubmit={handlCarFormSubmit}
                 cb={handleAccordionItemFocus}
               />
             </AccordionContent>
           </AccordionItem>
           {/*Sell Car form step 2 */}
-          <AccordionItem value="item-2" disabled={!sellCarFormData}>
+          <AccordionItem value="item-2" disabled={!carListingFormData}>
             <AccordionTrigger style={{ textDecoration: "none" }}>
               <StepDisplay stepNumber={2} title="Enter car details" />
             </AccordionTrigger>
             <AccordionContent>
-              <SellCarFormPartTwo
-                sellCarFormData={sellCarFormData!}
+              <CarListingFormPartTwo
+                carListingFormData={carListingFormData!}
                 handleFormSubmit={handlCarFormSubmit}
                 cb={handleAccordionItemFocus}
               />
@@ -74,18 +76,18 @@ const SellCarForm = () => {
           <AccordionItem
             value="item-3"
             disabled={
-              !sellCarFormData?.vin &&
-              !sellCarFormData?.mileage &&
-              !sellCarFormData?.price &&
-              !sellCarFormData?.description
+              !carListingFormData?.vin &&
+              !carListingFormData?.mileage &&
+              !carListingFormData?.price &&
+              !carListingFormData?.description
             }
           >
             <AccordionTrigger style={{ textDecoration: "none" }}>
               <StepDisplay stepNumber={3} title="Upload car photos" />
             </AccordionTrigger>
             <AccordionContent>
-              <SellCarFormPartThree
-                sellCarFormData={sellCarFormData!}
+              <CarListingFormPartThree
+                carListingFormData={carListingFormData!}
                 handleFormSubmit={handlCarFormSubmit}
                 cb={handleAccordionItemFocus}
               />
@@ -94,14 +96,14 @@ const SellCarForm = () => {
           {/*Sell Car form step 4 */}
           <AccordionItem
             value="item-4"
-            disabled={!sellCarFormData?.photo?.length}
+            disabled={!carListingFormData?.photo?.length}
           >
             <AccordionTrigger style={{ textDecoration: "none" }}>
               <StepDisplay stepNumber={4} title="Review" />
             </AccordionTrigger>
             <AccordionContent>
-              <SellCarFormPartFour
-                sellCarFormData={sellCarFormData!}
+              <CarListingFormPartFour
+                carListingFormData={carListingFormData!}
                 cb={handleAccordionItemFocus}
               />
             </AccordionContent>
@@ -120,4 +122,4 @@ const SellCarForm = () => {
     </div>
   );
 };
-export default SellCarForm;
+export default CarListingForm;

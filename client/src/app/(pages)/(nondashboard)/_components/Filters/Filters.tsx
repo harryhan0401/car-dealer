@@ -1,6 +1,6 @@
 "use client";
 
-import { useGetSellCarsQuery } from "@/state/api";
+import { useGetCarListingsQuery } from "@/state/api";
 import FilterMakesModels from "./FilterMakeModel/FilterMakesModels";
 import FilterMileage from "./FilterRange/FilterMileage";
 import FilterPrice from "./FilterRange/FilterPrice";
@@ -11,18 +11,18 @@ import FilterTransmission from "./FilterSelect/FilterTransmission";
 import ResetAll from "./ResetAll";
 
 const Filters = () => {
-  const { data: sellCars, isFetching: carFetching } = useGetSellCarsQuery();
+  const { data: carListings, isFetching: carFetching } = useGetCarListingsQuery();
   return (
     <>
-      {!carFetching && sellCars && (
+      {!carFetching && carListings && (
         <div className="flex flex-col gap-5">
-          <FilterMakesModels sellCars={sellCars} />
-          <FilterPrice sellCars={sellCars} />
-          <FilterMileage sellCars={sellCars} />
+          <FilterMakesModels carListings={carListings} />
+          <FilterPrice carListings={carListings} />
+          <FilterMileage carListings={carListings} />
           <FilterFuel />
           <FilterTransmission />
           <FilterDrive />
-          <FilterYear sellCars={sellCars} />
+          <FilterYear carListings={carListings} />
           <ResetAll />
         </div>
       )}

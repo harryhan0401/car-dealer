@@ -1,4 +1,4 @@
-import SellCarForm from "@/components/Forms/SellCarForm/SellCarForm";
+import SellCarForm from "@/components/Forms/CarListingForm/CarListingForm";
 
 const Sell = () => {
   return (

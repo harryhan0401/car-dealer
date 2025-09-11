@@ -1,22 +1,24 @@
 "use client";
-import { useGetSellCarByIdQuery } from "@/state/api";
+import { useGetCarListingByIdQuery } from "@/state/api";
 import { useParams } from "next/navigation";
-import SellCarSection from "./_components/SellCarSection";
+import CarListingSection from "./_components/CarListingSection";
 import ImageSlider from "./_components/ImageSlider";
-import SellCarBriefs from "./_components/SellCarBriefs";
-import SellCarSkeleton from "./_components/SellCarSkeleton";
+import CarListingBriefs from "./_components/CarListingBriefs";
+import CarListingSkeleton from "./_components/CarListingSkeleton";
 
-const SellCar = () => {
+const CarListing = () => {
   const { id } = useParams();
-  if (!id || isNaN(Number(id))) return null;
+  if (!id) return null;
 
-  const { data: sellCar, isFetching } = useGetSellCarByIdQuery(+id);
+  const { data: carListing, isFetching } = useGetCarListingByIdQuery(
+    Array.isArray(id) ? id[0] : id
+  );
 
-  if (isFetching) return <SellCarSkeleton />;
-  if (!sellCar) return <div>Sell car not found</div>;
+  if (isFetching) return <CarListingSkeleton />;
+  if (!carListing) return <div>Sell car not found</div>;
 
-  const { photoUrls } = sellCar;
-  const { make, model, year } = sellCar.car;
+  const { photoUrls } = carListing;
+  const { make, model, year } = carListing.car;
   const customMake =
     make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
   const title = customMake + " " + model + " " + year;
@@ -29,12 +31,12 @@ const SellCar = () => {
             <ImageSlider make={make} title={title} photoUrls={photoUrls} />
           </div>
           <div className="flex-1 flex flex-col min-h-[300px] h-[500px]">
-            <SellCarBriefs sellCar={sellCar} />
+            <CarListingBriefs carListing={carListing} />
           </div>
         </div>
       </section>
-      <SellCarSection />
+      <CarListingSection />
     </div>
   );
 };
-export default SellCar;
+export default CarListing;

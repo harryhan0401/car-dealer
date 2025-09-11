@@ -14,15 +14,14 @@ import { CustomFormField } from "../../FormField";
 
 import { useGetAuthUserQuery } from "@/state/api";
 import React, { useCallback } from "react";
-import { SellCarFormStepProps } from "@/lib/types";
 
-const SellCarFormPartOne = React.memo(
-  ({ sellCarFormData, handleFormSubmit, cb }: SellCarFormStepProps) => {
+const CarListingFormPartOne = React.memo(
+  ({ carListingFormData, handleFormSubmit, cb }: CarListingFormStepProps) => {
     const { data: authUser } = useGetAuthUserQuery();
 
     const carForm = useForm<CarData>({
-      defaultValues: sellCarFormData
-        ? sellCarFormData
+      defaultValues: carListingFormData
+        ? carListingFormData
         : {
             model: "",
             year: 2000,
@@ -35,7 +34,7 @@ const SellCarFormPartOne = React.memo(
         if (!authUser?.cognitoInfo?.userId) {
           throw new Error("No seller ID found");
         }
-        handleFormSubmit({ ...sellCarFormData, ...data });
+        handleFormSubmit({ ...carListingFormData, ...data });
         cb("item-2");
       },
       [authUser]
@@ -128,4 +127,4 @@ const SellCarFormPartOne = React.memo(
   }
 );
 
-export default SellCarFormPartOne;
+export default CarListingFormPartOne;

@@ -6,30 +6,30 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useGetAuthUserQuery } from "@/state/api";
 import { Libraries, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "@/state/redux";
-import { SellCar } from "@/types/prismaTypes";
+import { CarListing } from "@/types/prismaTypes";
 import { formatNumber } from "@/lib/utils";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN as string;
 const libraries: Libraries = ["places"];
 
-// Function to create a marker for a SellCar
-function createSellCarMarker(sellCar: SellCar, map: mapboxgl.Map) {
-  const { make, model, year } = sellCar.car;
+// Function to create a marker for a CarListing
+function createCarListingMarker(carListing: CarListing, map: mapboxgl.Map) {
+  const { make, model, year } = carListing.car;
   const displayMake =
     make.toLowerCase() === "mercedesbenz" ? "Mercedes-Benz" : make;
   const title = `${displayMake} ${model} ${year}`;
   return new mapboxgl.Marker()
-    .setLngLat([sellCar.longitude, sellCar.latitude])
+    .setLngLat([carListing.longitude, carListing.latitude])
     .setPopup(
       new mapboxgl.Popup().setHTML(
         `
-        <a href="/sellCars/${sellCar.id}" target="_blank">
+        <a href="/carListings/${carListing.id}" target="_blank">
           <h1 class="font-semibold text-lg">${title}</h1>
           <p class="text-sm text-gray-500">
-            $${formatNumber(sellCar.price)}
+            $${formatNumber(carListing.price)}
           </p>
           <p class="text-sm text-gray-500">
-            ${formatNumber(sellCar.mileage)} km
+            ${formatNumber(carListing.mileage)} km
           </p>
         </a>
         `
@@ -44,9 +44,9 @@ const CarsListMapLayout = () => {
   const isFiltering = useAppSelector(
     ({ global }) => global.isFiltering
   ) as boolean;
-  const filteredSellCars = useAppSelector(
-    ({ global }) => global.filteredSellCars
-  ) as SellCar[];
+  const filteredCarListings = useAppSelector(
+    ({ global }) => global.filteredCarListings
+  ) as CarListing[];
 
   // Default location
   const userLocation = authUser?.userInfo.location;
@@ -133,16 +133,16 @@ const CarsListMapLayout = () => {
     markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
 
-    if (filteredSellCars.length > 0) {
-      filteredSellCars.forEach((sellCar) => {
-        const marker = createSellCarMarker(sellCar, mapRef.current!);
+    if (filteredCarListings.length > 0) {
+      filteredCarListings.forEach((carListing) => {
+        const marker = createCarListingMarker(carListing, mapRef.current!);
         const markerElement = marker.getElement();
         const path = markerElement.querySelector("path[fill='#3FB1CE']");
         if (path) path.setAttribute("fill", "#000000");
         markersRef.current.push(marker);
       });
     }
-  }, [filteredSellCars]);
+  }, [filteredCarListings]);
 
   return (
     <div className="h-[calc(100vh-325px)] w-full basis-5/12 grow relative rounded-xl">

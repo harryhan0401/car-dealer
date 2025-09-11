@@ -1,15 +1,15 @@
 import ContactSellerButton from "@/components/Enquiry/ContactSellerButton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatNumber } from "@/lib/utils";
-import { SellCar } from "@/types/prismaTypes";
+import { CarListing } from "@/types/prismaTypes";
 import { Bolt, Fuel } from "lucide-react";
 import { GiStoneWheel } from "react-icons/gi";
 import { IoSpeedometerOutline } from "react-icons/io5";
 
-const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
-  const { id, price, description, mileage, enquiries } = sellCar;
-  const { fuel, drive } = sellCar.car;
-  const { firstName, lastName, email, phone, avatarUrl } = sellCar.seller;
+const CarListingBriefs = ({ carListing }: { carListing: CarListing }) => {
+  const { id, price, description, mileage, enquiries } = carListing;
+  const { fuel, drive } = carListing.car;
+  const { firstName, lastName, email, phone, avatarUrl } = carListing.seller;
   const sellerName = firstName + " " + lastName;
   return (
     <div className="h-full w-full flex flex-col">
@@ -20,7 +20,7 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
         >
           <div className="font-semibold text-2xl">${formatNumber(price)}</div>
           <ContactSellerButton
-            sellCarId={id}
+            carListingId={id}
             listPrice={price}
             enquiries={enquiries}
           />
@@ -82,4 +82,4 @@ const SellCarBriefs = ({ sellCar }: { sellCar: SellCar }) => {
     </div>
   );
 };
-export default SellCarBriefs;
+export default CarListingBriefs;
