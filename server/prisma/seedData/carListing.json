@@ -1,0 +1,1119 @@
+[
+  {
+    "vin": "YV4952CF9D1223798",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 93776,
+    "price": 65084,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUHF68P96A397682",
+    "sellerCognitoId": "us-east-2:35bfba8e-758a-4aa7-a7e8-7157d32dfd73",
+    "mileage": 47396,
+    "price": 67260,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5UXFE43589L157876",
+    "sellerCognitoId": "us-east-2:6ffedf76-620a-4a5d-a145-ecd164f49ba3",
+    "mileage": 73963,
+    "price": 47317,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5YMGY0C5XBL620913",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 70411,
+    "price": 57362,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+
+  {
+    "vin": "WVGAV7AX4AW395837",
+    "sellerCognitoId": "us-east-2:6580854c-ba8f-4472-a8bf-3ab117face91",
+    "mileage": 3064,
+    "price": 94992,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JN8AZ2KR8DT220724",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 46726,
+    "price": 95642,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3FAHP0CG9BR326640",
+    "sellerCognitoId": "us-east-2:2d243aef-8049-4714-8ccc-d3c9bfbe8ad9",
+    "mileage": 27028,
+    "price": 93439,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1D7CE3GK0AS091290",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 48629,
+    "price": 37991,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBSBL93413J743650",
+    "sellerCognitoId": "us-east-2:6ffedf76-620a-4a5d-a145-ecd164f49ba3",
+    "mileage": 36750,
+    "price": 71603,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "TRUB3AFKXC1208521",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 60067,
+    "price": 71360,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUML64BX4N644134",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 89054,
+    "price": 87712,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WDDHF5KB3FB030593",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 96314,
+    "price": 43629,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1GYS3BEF4BR291555",
+    "sellerCognitoId": "us-east-2:d78507b6-0543-4c6f-9c14-5b5dcf241134",
+    "mileage": 42511,
+    "price": 52528,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1G4HP52K84U590131",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 59162,
+    "price": 59451,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1D7RE5GK2BS612372",
+    "sellerCognitoId": "us-east-2:803dda62-000c-4b32-92c7-ae736407a3c1",
+    "mileage": 83980,
+    "price": 39439,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "2HNYD28837H138175",
+    "sellerCognitoId": "us-east-2:803dda62-000c-4b32-92c7-ae736407a3c1",
+    "mileage": 80088,
+    "price": 75303,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "19XFB2F52DE013252",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 54475,
+    "price": 42759,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "2T3BFREV4FW086496",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 88029,
+    "price": 51741,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5LMCJ1A95FU742191",
+    "sellerCognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "mileage": 33275,
+    "price": 56627,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUVVAFR5CA503442",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 94268,
+    "price": 85379,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "2C3CK6CT2BH240587",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 3075,
+    "price": 21211,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JN1CV6EK4DM403802",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 78007,
+    "price": 96865,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBSBR93452E585982",
+    "sellerCognitoId": "us-east-2:35bfba8e-758a-4aa7-a7e8-7157d32dfd73",
+    "mileage": 3323,
+    "price": 56897,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAU4FAFR2BA814625",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 8322,
+    "price": 74020,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FTEX1CM7BF980605",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 7719,
+    "price": 96453,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBABW53465P805418",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 9285,
+    "price": 99754,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBABS53422J453352",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 13266,
+    "price": 85772,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5TDBK3EHXBS527773",
+    "sellerCognitoId": "us-east-2:4579885b-fdd3-42c0-85c3-3de88e587e8a",
+    "mileage": 47237,
+    "price": 46539,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUDF78E65A144580",
+    "sellerCognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "mileage": 76229,
+    "price": 58010,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUML44E04N378184",
+    "sellerCognitoId": "us-east-2:6580854c-ba8f-4472-a8bf-3ab117face91",
+    "mileage": 84051,
+    "price": 84374,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5N1AR2MM6DC693966",
+    "sellerCognitoId": "us-east-2:2d243aef-8049-4714-8ccc-d3c9bfbe8ad9",
+    "mileage": 80762,
+    "price": 85199,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1GTN1UEH4FZ730541",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 67994,
+    "price": 69535,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "4T1BF3EK5BU137641",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 61719,
+    "price": 69330,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "5GADX23L55D077558",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 19700,
+    "price": 64044,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "VNKJTUD31FA653843",
+    "sellerCognitoId": "us-east-2:6ffedf76-620a-4a5d-a145-ecd164f49ba3",
+    "mileage": 54392,
+    "price": 41862,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3C3CFFAR7CT696878",
+    "sellerCognitoId": "us-east-2:4579885b-fdd3-42c0-85c3-3de88e587e8a",
+    "mileage": 49126,
+    "price": 55741,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FTEX1CM8DF488944",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 55102,
+    "price": 87152,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WUARL48H85K162280",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 21071,
+    "price": 99306,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "YV126MED6F1583763",
+    "sellerCognitoId": "us-east-2:4579885b-fdd3-42c0-85c3-3de88e587e8a",
+    "mileage": 77727,
+    "price": 89929,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JH4CL96968C222498",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 42975,
+    "price": 58107,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUMF98K99A693746",
+    "sellerCognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "mileage": 61213,
+    "price": 26027,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1G6DB1EDXB0806933",
+    "sellerCognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "mileage": 37475,
+    "price": 59771,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WA1DGAFP6EA082173",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 22640,
+    "price": 35595,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1N4AB7AP4EN786243",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 30070,
+    "price": 67686,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JH4KA96513C889163",
+    "sellerCognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "mileage": 13838,
+    "price": 54247,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1G6AM5S35F0130722",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 46489,
+    "price": 99548,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUYGBFC7CN768767",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 63235,
+    "price": 64957,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "SCFLDCFP7EG899723",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 75961,
+    "price": 76804,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "SAJWA4DB1EL442030",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 76730,
+    "price": 31780,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAUC9C53BV690303",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 40162,
+    "price": 50728,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAPM5C56BF314238",
+    "sellerCognitoId": "us-east-2:803dda62-000c-4b32-92c7-ae736407a3c1",
+    "mileage": 63382,
+    "price": 27274,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JH4CU2E69AC972043",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 81085,
+    "price": 62055,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3C63D3CL8CG550790",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 40513,
+    "price": 29155,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3C63DPBLXCG055189",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 96357,
+    "price": 96156,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FTEX1E86AF960182",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 92334,
+    "price": 47836,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "KNAFT4A20A5552298",
+    "sellerCognitoId": "us-east-2:d78507b6-0543-4c6f-9c14-5b5dcf241134",
+    "mileage": 22320,
+    "price": 41777,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3GYFNEEY1AS848299",
+    "sellerCognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "mileage": 62893,
+    "price": 53751,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUEKBFB8BN616486",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 82142,
+    "price": 82397,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1GYFK63858R049754",
+    "sellerCognitoId": "us-east-2:2d243aef-8049-4714-8ccc-d3c9bfbe8ad9",
+    "mileage": 25239,
+    "price": 22188,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1HGCP2F38AA409317",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 82631,
+    "price": 40650,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAKX8C54BC276366",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 82274,
+    "price": 36200,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1N4AL2AP8CC923483",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 22117,
+    "price": 50847,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "SCBDR3ZA7BC417768",
+    "sellerCognitoId": "us-east-2:d78507b6-0543-4c6f-9c14-5b5dcf241134",
+    "mileage": 52981,
+    "price": 57582,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAULC68E25A321981",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 20531,
+    "price": 99777,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAPH53569A200011",
+    "sellerCognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "mileage": 31446,
+    "price": 71858,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAWC7C51AP216012",
+    "sellerCognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "mileage": 89141,
+    "price": 93811,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "SCBFR7ZA7DC644137",
+    "sellerCognitoId": "us-east-2:6580854c-ba8f-4472-a8bf-3ab117face91",
+    "mileage": 95029,
+    "price": 75899,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FTEW1CF4FF946843",
+    "sellerCognitoId": "us-east-2:803dda62-000c-4b32-92c7-ae736407a3c1",
+    "mileage": 22526,
+    "price": 84337,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1N6BF0KM1FN871196",
+    "sellerCognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "mileage": 30051,
+    "price": 68014,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "KNDJT2A51C7257567",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 62,
+    "price": 30957,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUKG74F86N404247",
+    "sellerCognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "mileage": 98307,
+    "price": 65829,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3FA6P0LU5DR389430",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 76658,
+    "price": 43855,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3VWML7AJ1CM290689",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 904,
+    "price": 24825,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JTDKDTB3XD1235057",
+    "sellerCognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "mileage": 36739,
+    "price": 77932,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1D7RW3BK4AS343962",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 92342,
+    "price": 95133,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUVC58E93A819224",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 64264,
+    "price": 25173,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1ZVBP8AM2C5640378",
+    "sellerCognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "mileage": 92394,
+    "price": 99766,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1G6YV36A565702075",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 77509,
+    "price": 68045,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WP0AA2A97FS824763",
+    "sellerCognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "mileage": 887,
+    "price": 50440,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "3TMJU4GN3FM094317",
+    "sellerCognitoId": "us-east-2:35bfba8e-758a-4aa7-a7e8-7157d32dfd73",
+    "mileage": 69931,
+    "price": 57775,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "KNDPB3AC7E7755972",
+    "sellerCognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "mileage": 16471,
+    "price": 26480,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "2G4WS52JX11899913",
+    "sellerCognitoId": "us-east-2:87c304ac-d957-4442-942d-404c4c6280a3",
+    "mileage": 32292,
+    "price": 97154,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WBAGL63534D525226",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 74710,
+    "price": 83571,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FMCU0C71CK688313",
+    "sellerCognitoId": "us-east-2:35bfba8e-758a-4aa7-a7e8-7157d32dfd73",
+    "mileage": 22568,
+    "price": 85275,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JH4CU2F49DC177608",
+    "sellerCognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "mileage": 82029,
+    "price": 42695,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "SCFAB01A17G807216",
+    "sellerCognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "mileage": 38719,
+    "price": 70910,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WAUJT54B44N768798",
+    "sellerCognitoId": "us-east-2:d8c6e5c1-73e3-4e13-9fcb-453273e69cdd",
+    "mileage": 74082,
+    "price": 46524,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JH4KB2F52AC098108",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 70436,
+    "price": 64760,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "WDDEJ7GB6CA386074",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 5574,
+    "price": 69552,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1GYS3JKJ9FR917982",
+    "sellerCognitoId": "us-east-2:2d243aef-8049-4714-8ccc-d3c9bfbe8ad9",
+    "mileage": 71257,
+    "price": 39004,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1G4GC5GR9DF182092",
+    "sellerCognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "mileage": 51460,
+    "price": 83078,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "JM1NC2JF7D0823915",
+    "sellerCognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "mileage": 95284,
+    "price": 22550,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  },
+  {
+    "vin": "1FTWX3A58AE694617",
+    "sellerCognitoId": "us-east-2:6ffedf76-620a-4a5d-a145-ecd164f49ba3",
+    "mileage": 98889,
+    "price": 98630,
+    "photoUrls": [
+      "https://placehold.co/100x100",
+      "https://placehold.co/200x200"
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "isPublic": true
+  }
+]

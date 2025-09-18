@@ -1,0 +1,202 @@
+[
+  {
+    "cognitoId": "us-east-2:5ffeb0d9-9a4d-49e2-a3a0-3523f0188995",
+    "firstName": "Mohammed",
+    "lastName": "Morewood",
+    "email": "mmorewood0@apache.org",
+    "phone": "3065037264",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:d78507b6-0543-4c6f-9c14-5b5dcf241134",
+    "firstName": "Tyler",
+    "lastName": "Furzey",
+    "email": "tfurzey1@privacy.gov.au",
+    "phone": "6677283743",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:6ffedf76-620a-4a5d-a145-ecd164f49ba3",
+    "firstName": "Chaddy",
+    "lastName": "Falconar",
+    "email": "cfalconar2@bravesites.com",
+    "phone": "4422680904",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:f45957a0-8674-458f-87bd-43ffc72a2c1b",
+    "firstName": "Peter",
+    "lastName": "Hexter",
+    "email": "phexter3@usda.gov",
+    "phone": "1704170320",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:2d243aef-8049-4714-8ccc-d3c9bfbe8ad9",
+    "firstName": "Carissa",
+    "lastName": "Pearde",
+    "email": "cpearde4@bravesites.com",
+    "phone": "9946675686",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:87c304ac-d957-4442-942d-404c4c6280a3",
+    "firstName": "Melamie",
+    "lastName": "Churchward",
+    "email": "mchurchward5@4shared.com",
+    "phone": "6687982050",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:803dda62-000c-4b32-92c7-ae736407a3c1",
+    "firstName": "Remus",
+    "lastName": "Mouse",
+    "email": "rmouse6@booking.com",
+    "phone": "8136781085",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:1a5b1428-769b-44ff-b01e-425f2b0fe6c2",
+    "firstName": "Conway",
+    "lastName": "Knowling",
+    "email": "cknowling7@washington.edu",
+    "phone": "9715599177",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:d625d7e6-dd93-4bce-b19a-28b1e290292f",
+    "firstName": "Dal",
+    "lastName": "MacGilrewy",
+    "email": "dmacgilrewy8@trellian.com",
+    "phone": "4594219959",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:4579885b-fdd3-42c0-85c3-3de88e587e8a",
+    "firstName": "Ignaz",
+    "lastName": "Boswell",
+    "email": "iboswell9@bing.com",
+    "phone": "5826536757",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:a12a358a-bccf-4af9-a0b6-59401a469512",
+    "firstName": "Consuelo",
+    "lastName": "McMearty",
+    "email": "cmcmeartya@amazon.com",
+    "phone": "2368091309",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:e104c700-9eec-4a6f-9ac8-2e74a1351b60",
+    "firstName": "Bibbye",
+    "lastName": "Wilman",
+    "email": "bwilmanb@bigcartel.com",
+    "phone": "4392127653",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:d8c6e5c1-73e3-4e13-9fcb-453273e69cdd",
+    "firstName": "Lanie",
+    "lastName": "Leete",
+    "email": "lleetec@indiatimes.com",
+    "phone": "4284916705",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:c72880d0-97ea-41c6-a1d5-c8e196dce754",
+    "firstName": "Monty",
+    "lastName": "Beernt",
+    "email": "mbeerntd@marketwatch.com",
+    "phone": "3174604607",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:20aefe27-4e5a-4bca-afab-04ad017b192a",
+    "firstName": "Bucky",
+    "lastName": "Abrahamovitz",
+    "email": "babrahamovitze@netvibes.com",
+    "phone": "6421947321",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:6580854c-ba8f-4472-a8bf-3ab117face91",
+    "firstName": "Thelma",
+    "lastName": "Pere",
+    "email": "tperef@liveinternet.ru",
+    "phone": "4744887951",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:35bfba8e-758a-4aa7-a7e8-7157d32dfd73",
+    "firstName": "Melamie",
+    "lastName": "Feary",
+    "email": "mfearyg@sogou.com",
+    "phone": "5636120092",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:ef156c85-dfc4-4b1a-b994-c1efc88ed311",
+    "firstName": "Damien",
+    "lastName": "MacKnockiter",
+    "email": "dmacknockiterh@youtube.com",
+    "phone": "9676168404",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:868fb68f-7fd2-4f99-a99d-6f58198a2a2f",
+    "firstName": "Anastasia",
+    "lastName": "Ney",
+    "email": "aneyi@thetimes.co.uk",
+    "phone": "6804628647",
+    "favourites": {
+      "connect": []
+    }
+  },
+  {
+    "cognitoId": "us-east-2:6e4dcfd8-116c-4328-ba58-eec16b5eb7a5",
+    "firstName": "Stefa",
+    "lastName": "Poynor",
+    "email": "spoynorj@zdnet.com",
+    "phone": "6256334435",
+    "favourites": {
+      "connect": []
+    }
+  }
+]

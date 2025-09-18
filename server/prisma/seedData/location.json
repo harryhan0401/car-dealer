@@ -1,0 +1,162 @@
+[
+  {
+    "country": "Australia",
+    "city": "Sydney",
+    "state": "NSW",
+    "address": "123 George St",
+    "postalCode": "2000",
+    "coordinates": "POINT(151.209900 -33.865143)"
+  },
+  {
+    "country": "Australia",
+    "city": "Melbourne",
+    "state": "VIC",
+    "address": "456 Collins St",
+    "postalCode": "3000",
+    "coordinates": "POINT(144.963280 -37.813629)"
+  },
+  {
+    "country": "Australia",
+    "city": "Brisbane",
+    "state": "QLD",
+    "address": "789 Queen St",
+    "postalCode": "4000",
+    "coordinates": "POINT(153.028090 -27.467940)"
+  },
+  {
+    "country": "Australia",
+    "city": "Perth",
+    "state": "WA",
+    "address": "101 St Georges Terrace",
+    "postalCode": "6000",
+    "coordinates": "POINT(115.857480 -31.950527)"
+  },
+  {
+    "country": "Australia",
+    "city": "Adelaide",
+    "state": "SA",
+    "address": "555 King William St",
+    "postalCode": "5000",
+    "coordinates": "POINT(138.600740 -34.928499)"
+  },
+  {
+    "country": "Australia",
+    "city": "Canberra",
+    "state": "ACT",
+    "address": "888 Northbourne Ave",
+    "postalCode": "2601",
+    "coordinates": "POINT(149.128998 -35.282001)"
+  },
+  {
+    "country": "Australia",
+    "city": "Hobart",
+    "state": "TAS",
+    "address": "777 Elizabeth St",
+    "postalCode": "7000",
+    "coordinates": "POINT(147.327194 -42.882137)"
+  },
+  {
+    "country": "Australia",
+    "city": "Darwin",
+    "state": "NT",
+    "address": "555 Mitchell St",
+    "postalCode": "0800",
+    "coordinates": "POINT(130.841770 -12.463440)"
+  },
+  {
+    "country": "Australia",
+    "city": "Gold Coast",
+    "state": "QLD",
+    "address": "123 Surfers Paradise Blvd",
+    "postalCode": "4217",
+    "coordinates": "POINT(153.428280 -28.002740)"
+  },
+  {
+    "country": "Australia",
+    "city": "Newcastle",
+    "state": "NSW",
+    "address": "789 Hunter St",
+    "postalCode": "2300",
+    "coordinates": "POINT(151.776500 -32.926690)"
+  },
+  {
+    "country": "Australia",
+    "city": "Wollongong",
+    "state": "NSW",
+    "address": "101 Crown St",
+    "postalCode": "2500",
+    "coordinates": "POINT(150.893140 -34.427812)"
+  },
+  {
+    "country": "Australia",
+    "city": "Geelong",
+    "state": "VIC",
+    "address": "555 Moorabool St",
+    "postalCode": "3220",
+    "coordinates": "POINT(144.354000 -38.148560)"
+  },
+  {
+    "country": "Australia",
+    "city": "Cairns",
+    "state": "QLD",
+    "address": "888 Sheridan St",
+    "postalCode": "4870",
+    "coordinates": "POINT(145.769000 -16.918550)"
+  },
+  {
+    "country": "Australia",
+    "city": "Toowoomba",
+    "state": "QLD",
+    "address": "777 Ruthven St",
+    "postalCode": "4350",
+    "coordinates": "POINT(151.953860 -27.560560)"
+  },
+  {
+    "country": "Australia",
+    "city": "Ballarat",
+    "state": "VIC",
+    "address": "555 Sturt St",
+    "postalCode": "3350",
+    "coordinates": "POINT(143.850250 -37.562160)"
+  },
+  {
+    "country": "Australia",
+    "city": "Bendigo",
+    "state": "VIC",
+    "address": "123 High St",
+    "postalCode": "3550",
+    "coordinates": "POINT(144.280240 -36.757000)"
+  },
+  {
+    "country": "Australia",
+    "city": "Mackay",
+    "state": "QLD",
+    "address": "456 Victoria St",
+    "postalCode": "4740",
+    "coordinates": "POINT(149.182000 -21.141100)"
+  },
+  {
+    "country": "Australia",
+    "city": "Rockhampton",
+    "state": "QLD",
+    "address": "789 East St",
+    "postalCode": "4700",
+    "coordinates": "POINT(150.511000 -23.380000)"
+  },
+  {
+    "country": "Australia",
+    "city": "Launceston",
+    "state": "TAS",
+    "address": "101 Brisbane St",
+    "postalCode": "7250",
+    "coordinates": "POINT(147.138000 -41.440000)"
+  },
+  {
+    "country": "Australia",
+    "city": "Townsville",
+    "state": "QLD",
+    "address": "555 Flinders St",
+    "postalCode": "4810",
+    "coordinates": "POINT(146.817000 -19.258000)"
+  }
+]

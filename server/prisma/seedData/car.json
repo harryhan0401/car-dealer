@@ -1,0 +1,614 @@
+[
+  {
+    "make": "Audi",
+    "model": "A5",
+    "year": 2022,
+    "type": "Coupe",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "Q5",
+    "year": 2023,
+    "type": "SUV",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "A5",
+    "year": 2023,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "S4",
+    "year": 2022,
+    "type": "Sportscar",
+    "fuel": "Electric",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "Audi",
+    "model": "S4",
+    "year": 2023,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Tiptronic"
+  },
+  {
+    "make": "Audi",
+    "model": "TT",
+    "year": 2001,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "FWD",
+    "transmission": "SemiAutomatic"
+  },
+  {
+    "make": "Audi",
+    "model": "Q7",
+    "year": 2019,
+    "type": "SUV",
+    "fuel": "Hybrid",
+    "drive": "FourWD",
+    "transmission": "SemiAutomatic"
+  },
+  {
+    "make": "Audi",
+    "model": "SQ5",
+    "year": 2023,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Tiptronic"
+  },
+  {
+    "make": "Audi",
+    "model": "RS5",
+    "year": 2023,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Tiptronic"
+  },
+  {
+    "make": "Audi",
+    "model": "Q5",
+    "year": 2018,
+    "type": "SUV",
+    "fuel": "Diesel",
+    "drive": "FourWD",
+    "transmission": "Tiptronic"
+  },
+  {
+    "make": "Audi",
+    "model": "S4",
+    "year": 2013,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "FourWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "Audi",
+    "model": "TT",
+    "year": 2017,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "RS7",
+    "year": 2023,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Tiptronic"
+  },
+  {
+    "make": "Audi",
+    "model": "A6",
+    "year": 2020,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "TT",
+    "year": 2023,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "Audi",
+    "model": "A5",
+    "year": 2015,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "FWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "Audi",
+    "model": "S4",
+    "year": 2015,
+    "type": "Sedan",
+    "fuel": "Diesel",
+    "drive": "FWD",
+    "transmission": "SemiAutomatic"
+  },
+  {
+    "make": "Audi",
+    "model": "A6",
+    "year": 2023,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "STronic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW M5",
+    "year": 2019,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW M5",
+    "year": 2014,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X7",
+    "year": 2019,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 330i",
+    "year": 2004,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW M3",
+    "year": 2001,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X3",
+    "year": 2006,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X3",
+    "year": 2005,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 740i",
+    "year": 2005,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2001,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 330i",
+    "year": 2022,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW i8",
+    "year": 2016,
+    "type": "Sportscar",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 530e",
+    "year": 2018,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2017,
+    "type": "SUV",
+    "fuel": "Diesel",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2017,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW i8",
+    "year": 2020,
+    "type": "Sportscar",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 530d",
+    "year": 2011,
+    "type": "Sedan",
+    "fuel": "Diesel",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2002,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2011,
+    "type": "SUV",
+    "fuel": "Diesel",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X3",
+    "year": 2010,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW M3",
+    "year": 2003,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 330i",
+    "year": 2015,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW M3",
+    "year": 2008,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Manual"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 330i",
+    "year": 2011,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 530e",
+    "year": 2020,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW 330i",
+    "year": 2010,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW X5",
+    "year": 2007,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "BMW",
+    "model": "BMW Z4",
+    "year": 2007,
+    "type": "Sportscar",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "SL-Class",
+    "year": 2006,
+    "type": "Convertible",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "S-Class",
+    "year": 2023,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "GLE",
+    "year": 2015,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "A-Class",
+    "year": 2020,
+    "type": "Hatchback",
+    "fuel": "Petrol",
+    "drive": "FWD",
+    "transmission": "DualClutch"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "SLC",
+    "year": 2020,
+    "type": "Convertible",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "G-Class",
+    "year": 2000,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "GLA",
+    "year": 2019,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "DualClutch"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "G-Class",
+    "year": 2023,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "G-Class",
+    "year": 2007,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "G-Class",
+    "year": 2003,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "S-Class",
+    "year": 2005,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "GLE",
+    "year": 2024,
+    "type": "SUV",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "C-Class",
+    "year": 2023,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "C-Class",
+    "year": 2022,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "G-Class",
+    "year": 2022,
+    "type": "SUV",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "CLA",
+    "year": 2021,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "DualClutch"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "S-Class",
+    "year": 2020,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "C-Class",
+    "year": 2020,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "GLS",
+    "year": 2022,
+    "type": "SUV",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "CLA",
+    "year": 2020,
+    "type": "Coupe",
+    "fuel": "Petrol",
+    "drive": "AWD",
+    "transmission": "DualClutch"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "C-Class",
+    "year": 2018,
+    "type": "Sedan",
+    "fuel": "Petrol",
+    "drive": "RWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "GLE",
+    "year": 2023,
+    "type": "SUV",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  },
+  {
+    "make": "MercedesBenz",
+    "model": "S-Class",
+    "year": 2022,
+    "type": "Sedan",
+    "fuel": "Hybrid",
+    "drive": "AWD",
+    "transmission": "Automatic"
+  }
+]
